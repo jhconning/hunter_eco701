@@ -10,3 +10,6 @@ Welcome to the course repository for ECO 701: Microeconomic Theory. This is an a
 - **Problem Sets:** [`ps/`](ps/)
 
 *Note: Legacy materials from the 2018 iteration of this course can be found in the `legacy/` directory.*
+
+<!-- TOC_START -->
+<!-- TOC_END -->
