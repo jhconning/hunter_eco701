@@ -5,7 +5,7 @@ author: "Jonathan Conning"
 deploy: true
 marp: true
 paginate: true
-theme: gaia
+theme: neobeam
 style: |
   section {font-size: 27px;}
 ---

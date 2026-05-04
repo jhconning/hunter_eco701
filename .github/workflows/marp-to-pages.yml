@@ -80,7 +80,7 @@ jobs:
         if: steps.slides-folder-exists.outputs.has_slides == '0'
         uses: docker://marpteam/marp-cli:v3.0.2
         with:
-          args: -I slides/ -o build/slides/
+          args: -I slides/ -o build/slides/ --theme-set slides/themes/neobeam.css
         env:
           MARP_USER: root:root
 
@@ -88,7 +88,7 @@ jobs:
         if: steps.slides-folder-exists.outputs.has_slides == '0'
         uses: docker://marpteam/marp-cli:v3.0.2
         with:
-          args: -I slides/ -o build/slides/ --pdf --allow-local-files
+          args: -I slides/ -o build/slides/ --pdf --allow-local-files --theme-set slides/themes/neobeam.css
         env:
           MARP_USER: root:root
 
