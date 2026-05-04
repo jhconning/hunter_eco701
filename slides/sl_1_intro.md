@@ -21,6 +21,8 @@ Topic 1: Definitions and Key Tools
 ```
 <br></br>
 Jonathan Conning
+Hunter College
+Dept of Economics
 
 
 ---
@@ -33,3 +35,16 @@ Jonathan Conning
 
 <br></br>
 *Why do we start with games? Because social dilemmas often leave us trapped inefficiently inside the possibility frontiers.*
+
+---
+
+### Production Possibilities
+
+Here is the image from the textbook with a caption beneath it.
+
+
+
+![center width:6000](../slides/attachments/sample_fig.png)
+###### Figure 1: The Production Possibility Frontier showing efficient and inefficient points.
+
+---
