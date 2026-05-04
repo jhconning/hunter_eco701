@@ -1,5 +1,7 @@
-name: marp-to-pages
-concurrency: marp-to-pages
+name: MyST and Marp Deploy
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
 
 on:
   push:
@@ -10,26 +12,25 @@ on:
       - reopened
       - synchronize
       - closed
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pull-requests: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Ensure build dir exists
-        run: mkdir -p build
-
-      - name: Copy images directory (if exists)
-        run: |
-          if [[ -d img ]]; then cp -R img build/img; fi
-          if [[ -d slides/attachments ]]; then mkdir -p build/slides && cp -R slides/attachments build/slides/attachments; fi
 
       - name: Update Table of Contents in README
         run: |
@@ -60,50 +61,55 @@ jobs:
           git add README.md
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update Table of Contents [skip ci]" && git push)
 
-      - name: Copy README to build directory
-        run: cp README.md build/index.md
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+
+      - name: Install MyST
+        run: npm install -g mystmd
+
+      - name: Build MyST Site
+        run: myst build --html
+
+      - name: Prepare Marp Directory
+        run: mkdir -p _build/html/slides
+
+      - name: Copy slide attachments to build
+        run: |
+          if [[ -d slides/attachments ]]; then cp -R slides/attachments _build/html/slides/attachments; fi
+          if [[ -d slides/themes ]]; then cp -R slides/themes _build/html/slides/themes; fi
+
       - name: Check if slides folder exists
         id: slides-folder-exists
         run: bash -c "[[ -d slides ]] ; echo \"has_slides=\$?\" >> \"$GITHUB_OUTPUT\""
 
-      - name: Filter slides for deploy true
-        if: steps.slides-folder-exists.outputs.has_slides == '0'
-        run: |
-          find slides -type f -name "*.md" | while read -r file; do
-            if ! grep -q "^deploy:[[:space:]]*true" "$file"; then
-              echo "Removing $file because it lacks deploy: true"
-              rm "$file"
-            fi
-          done
-
-      - name: Marp Build (slides folder, if exists)
+      - name: Marp Build HTML
         if: steps.slides-folder-exists.outputs.has_slides == '0'
         uses: docker://marpteam/marp-cli:v3.0.2
         with:
-          args: -I slides/ -o build/slides/ --theme-set slides/themes/neobeam.css
+          args: -I slides/ -o _build/html/slides/ --theme-set slides/themes/neobeam.css
         env:
           MARP_USER: root:root
 
-      - name: Marp Build PDFs (slides folder, if exists)
+      - name: Marp Build PDFs
         if: steps.slides-folder-exists.outputs.has_slides == '0'
         uses: docker://marpteam/marp-cli:v3.0.2
         with:
-          args: -I slides/ -o build/slides/ --pdf --allow-local-files --theme-set slides/themes/neobeam.css
+          args: -I slides/ -o _build/html/slides/ --pdf --allow-local-files --theme-set slides/themes/neobeam.css
         env:
           MARP_USER: root:root
 
-      - name: Deploy preview
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: rossjrw/pr-preview-action@v1
-        with:
-          source-dir: ./build/
-          preview-branch: gh-pages
-          umbrella-dir: pr-preview
-
-      - name: Deploy production
+      - name: Upload artifact
         if: ${{ github.event_name == 'push' }}
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          branch: gh-pages
-          folder: ./build/
-          clean-exclude: pr-preview/
+          path: './_build/html'
+
+      - name: Deploy to GitHub Pages
+        if: ${{ github.event_name == 'push' }}
+        id: deployment
+        uses: actions/deploy-pages@v4

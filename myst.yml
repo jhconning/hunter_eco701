@@ -1,0 +1,12 @@
+version: 1
+project:
+  title: "ECO 701: Microeconomic Theory"
+  authors:
+    - name: "Jonathan Conning"
+  github: jhconning/hunter_eco701
+  toc:
+    - file: README.md
+site:
+  options:
+    folders: true
+  template: book-theme
