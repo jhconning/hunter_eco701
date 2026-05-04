@@ -3,6 +3,8 @@
 
 Welcome to the course repository for ECO 701: Microeconomic Theory. This is an advanced undergraduate and Master's level course emphasizing constrained optimization, modern microeconomic theory, and interactive computational methods using Python and Jupyter Notebooks.
 
+🌐 **Live Course Site & Slides:** [https://jhconning.github.io/hunter_eco701/](https://jhconning.github.io/hunter_eco701/)
+
 ## Course Structure
 - **Syllabus & Ideas:** [`syllabus/`](syllabus/)
 - **Lectures & Slides (Marp):** [`slides/`](slides/)
@@ -13,7 +15,7 @@ Welcome to the course repository for ECO 701: Microeconomic Theory. This is an a
 
 <!-- TOC_START -->
 
-*Last Deployed: 2026-05-03 18:21 EST*
+*Last Deployed: 2026-05-03 20:18 EST*
 
 ## Deployed Presentations
 
