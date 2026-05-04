@@ -73,6 +73,8 @@ jobs:
         run: npm install -g mystmd
 
       - name: Build MyST Site
+        env:
+          BASE_URL: '/hunter_eco701'
         run: myst build --html
 
       - name: Prepare Marp Directory
