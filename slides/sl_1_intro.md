@@ -10,7 +10,9 @@ style: |
   section {font-size: 27px;}
 ---
 
-<!-- footer: "" -->
+<!-- _class: title -->
+<!-- footer: "**ECO 701** **Microeconomic Theory** **Definitions and Key Tools**" -->
+<!-- _paginate: false -->
 
 ## ECO 701
 # Microeconomic Theory
