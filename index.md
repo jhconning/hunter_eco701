@@ -15,9 +15,9 @@ Welcome to the course repository for ECO 701: Microeconomic Theory. This is an a
 
 <!-- TOC_START -->
 
-*Last Deployed: 2026-05-03 20:20 EST*
+*Last Deployed: 2026-05-03 21:04 EST*
 
 ## Deployed Presentations
 
-- [ECO 701 Topic 1: Definitions and Key Tools](https://jhconning.github.io/hunter_eco701/slides/sl_1_intro.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/sl_1_intro.pdf)) *(Last edit: 2026-05-03 20:20)*
+- [ECO 701 Topic 1: Definitions and Key Tools](https://jhconning.github.io/hunter_eco701/slides/sl_1_intro.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/sl_1_intro.pdf)) *(Last edit: 2026-05-03 21:04)*
 <!-- TOC_END -->
