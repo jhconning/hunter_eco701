@@ -15,7 +15,7 @@ Welcome to the course repository for ECO 701: Microeconomic Theory. This is an a
 
 <!-- TOC_START -->
 
-*Last Deployed: 2026-05-03 18:21 EST*
+*Last Deployed: 2026-05-03 20:18 EST*
 
 ## Deployed Presentations
 
