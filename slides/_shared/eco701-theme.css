@@ -1,0 +1,85 @@
+/* @theme eco701 */
+
+section {
+  font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  background: #fdfdfb;
+  color: #1c2430;
+  font-size: 26px;
+  padding: 46px 68px;
+}
+h1, h2, h3 {
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  color: #24325c;
+}
+h2 {
+  font-size: 1.45em;
+  border-bottom: 3px solid #b8842a;
+  padding-bottom: 0.18em;
+  margin-bottom: 0.55em;
+  width: fit-content;
+}
+ul { margin-top: 0.3em; }
+li { margin-bottom: 0.3em; line-height: 1.35; }
+li li { font-size: 0.92em; }
+
+section.lead {
+  background: #24325c;
+  color: #fdfdfb;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+section.lead h1 { color: #fdfdfb; font-size: 2.2em; margin-bottom: 0.1em; }
+section.lead h3 { color: #d9c08f; font-weight: 400; font-size: 1.05em; margin-top: 0; }
+section.lead p { font-size: 0.85em; line-height: 1.7; }
+
+section.divider {
+  background: #24325c;
+  color: #fdfdfb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+section.divider h1 { color: #f4e3bd; font-size: 1.8em; border: none; }
+section.divider p { color: #cdd6e8; font-size: 0.8em; }
+
+section.compact { font-size: 22px; }
+
+table {
+  border-collapse: collapse;
+  margin: 0.5em auto 0.5em 0;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95em;
+}
+th, td {
+  border: 1px solid #c7ccd6;
+  padding: 0.32em 0.85em;
+  text-align: center;
+}
+th {
+  background: #eef1f6;
+  font-weight: 600;
+}
+td strong {
+  color: #a5680f;
+  background: #fbeed9;
+  padding: 0.08em 0.4em;
+  border-radius: 4px;
+}
+
+.aside {
+  font-size: 0.68em;
+  color: #5b6472;
+  font-style: italic;
+  margin-top: 1em;
+}
+.people-row {
+  display: flex;
+  gap: 1.3em;
+  align-items: flex-end;
+  margin-top: 0.5em;
+}
+.people-row img.portrait { height: 230px; border-radius: 6px; }
+.people-row img.thumb { height: 165px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
+.credit { font-size: 0.6em; color: #8992a1; text-align: center; margin-top: 0.3em; }

@@ -1,0 +1,102 @@
+
+---
+
+## Slide 1
+
+- Eco 701:Microeconomic TheoryFall 2018
+- Jonathan Conning
+- Office Hours: HW1504A, Tue & Th 11-12 and by appt.jconning@hunter.cuny.edu
+- Teaching Assistant: Chuxin Liu
+- This is Slide Deck I.      (Click here for slide deck II)
+
+---
+
+## Slide 2
+
+- Materials
+  - Nicholson & Snyder, Microeconomic Theory: Basic Principles and Extensions. 11th edition.
+    - 10th edition is acceptable. Another similar textbook?  Maybe as I distribute detailed notes and handouts.
+  - Bowles/Foley/Halliday Coordination, Conflcit & Competition, 2018 draft  (link to pdf)
+    - Selected chapters. More modern, interesting, philosophical, but simpler math than we'll use.
+  - Syllabus and slides online. Announcements on Blackboard.
+  -  notebooks.azure.com/jhconning/libraries/eco701
+    - Landing page with links to the mix of notes and python/jupyter notebooks I use to create visualizations and simulations.
+
+---
+
+## Slide 3
+
+- Slides
+- I draw from a large collection of slides associated with this course
+- Link via blackboard (links to ppt on google drive)
+- I will post large chunks of deck ahead of time but often cut, add or shuffle in day or two before class
+
+---
+
+## Slide 4
+
+- Jupyter notebooks
+    - I use jupyter notebooks and python to prepare many visualizations and simulations. Small but evolving collection.
+    - I encourage you to explore open source scientific python (useful tools to learn for research and industry). Tools like these increasingly important in modern applied research.
+    - Not required for this course but if you are motivated these tools might help you learn.
+    - See lectures.quantecon.org/py/ for good guide to setting up and learning scientific python.
+
+---
+
+## Slide 5
+
+- Grading
+- 25% Problem sets/participation	(+, , -)
+- 45% higher of midterm or final
+- 30% lower of midterm or final
+- There are only 13 lectures so problem sets are important and will take a good chunk of your time.You may work on problem sets in groups to arrive at shared understandings but you must write up and submit answers individually.
+
+---
+
+## Slide 6
+
+- Reading & Problem Sets
+- Reading
+  - Topics follow schedule (but check online)
+  - Readings and handouts and links.
+  - Come to class prepared
+- 4 problem sets
+  - 1st due on 3rd class Tue 9/25  (I will release in a few days)
+  - Graded by TA. I will post solutions and return.
+- You are welcome and encouraged to form study groups,   but please make sure you understand and write up solutions separately.
+
+---
+
+## Slide 7
+
+- Read for next class:
+- BFH. Ch 1 'Society: Coordination  Problems and Institutions.'
+- NS. Ch 2 'Mathematics for Micro'
+  - to p55 (though 2nd order conditions)
+  - Dense if you haven't seen before…but not to worry we'll be reinforcing.
+- NS. Ch 3 'Preferences and Utility'
+  - short
+
+---
+
+## Slide 8
+
+- Introductions (please fill out index cards)
+- FRONT:
+  - Name (preferred name/pronounciation):
+  - Program/year:
+  - Recent econ/math:
+- BACK:
+  - Brief about yourself: background, job/experience, plans…
+  - return card at end of class.
+
+---
+
+## Slide 9
+
+- Today
+- Introductions
+- Some simple game theory
+  - Strategies and equilibrium concepts
+  - Social dilemmas vs. invisible hand games
+- Constrained optimization problems

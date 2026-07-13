@@ -1,0 +1,228 @@
+
+---
+
+## Slide 1
+
+- Eco 701:Microeconomic TheoryFall 2018
+- Jonathan Conning
+- Office Hours: HW1504A, Tue & Th 11-12 and by appt.jconning@hunter.cuny.edu
+- Teaching Assistant: Chuxin Liu
+- This is Slide Deck I.      (Click here for slide deck II)
+
+---
+
+## Slide 2
+
+- Materials
+  - Nicholson & Snyder, Microeconomic Theory: Basic Principles and Extensions. 11th edition.
+    - 10th edition is acceptable. Another similar textbook?  Maybe as I distribute detailed notes and handouts.
+  - Bowles/Foley/Halliday Coordination, Conflcit & Competition, 2018 draft  (link to pdf)
+    - Selected chapters. More modern, interesting, philosophical, but simpler math than we’ll use.
+  - Syllabus and slides online. Announcements on Blackboard. 
+  -  notebooks.azure.com/jhconning/libraries/eco701
+    - Landing page with links to the mix of notes and python/jupyter notebooks I use to create visualizations and simulations.
+
+---
+
+## Slide 3
+
+- Slides
+- I draw from a large collection of slides associated with this course
+- Link via blackboard (links to ppt on google drive)
+- I will post large chunks of deck ahead of time but often cut, add or shuffle in day or two before class
+
+---
+
+## Slide 4
+
+- Jupyter notebooks
+    - I use jupyter notebooks and python to prepare many visualizations and simulations. Small but evolving collection.
+    - I encourage you to explore open source scientific python (useful tools to learn for research and industry). Tools like these increasingly important in modern applied research.
+    - Not required for this course but if you are motivated these tools might help you learn.
+    - See lectures.quantecon.org/py/ for good guide to setting up and learning scientific python.
+
+---
+
+## Slide 5
+
+- Grading 
+- 25% Problem sets/participation	(+, , -)
+- 45% higher of midterm or final
+- 30% lower of midterm or final
+- There are only 13 lectures so problem sets are important and will take a good chunk of your time.You may work on problem sets in groups to arrive at shared understandings but you must write up and submit answers individually. 
+
+---
+
+## Slide 6
+
+- Reading & Problem Sets
+- Reading
+  - Topics follow schedule (but check online)
+  - Readings and handouts and links. 
+  - Come to class prepared
+- 4 problem sets
+  - 1st due on 3rd class Tue 9/25  (I will release in a few days)
+  - Graded by TA. I will post solutions and return.
+- You are welcome and encouraged to form study groups,   but please make sure you understand and write up solutions separately.
+
+---
+
+## Slide 7
+
+- Read for next class:
+- BFH. Ch 1 ‘Society: Coordination  Problems and Institutions.’
+- NS. Ch 2 ‘Mathematics for Micro’
+  - to p55 (though 2nd order conditions)
+  - Dense if you haven’t seen before…but not to worry we’ll be reinforcing.
+- NS. Ch 3 ‘Preferences and Utility’
+  - short
+
+---
+
+## Slide 8
+
+- Introductions (please fill out index cards)
+- FRONT: 
+  - Name (preferred name/pronounciation):
+  - Program/year:
+  - Recent econ/math:
+- BACK:
+  - Brief about yourself: background, job/experience, plans…
+  - return card at end of class.
+
+---
+
+## Slide 9
+
+- Today
+- Introductions 
+- Some simple game theory
+  - Strategies and equilibrium concepts
+  - Social dilemmas vs. invisible hand games
+- Constrained optimization problems
+
+---
+
+## Slide 10
+
+- What are the questions?
+- How do individuals and societies allocate resources?
+  - Far broader than study of markets.
+  - how agents (individuals, households, firms, groups) might choose to associate and contract and the rules of the game they play by 
+  - strategies, contracts, organizations, property rights, institutions and policy.
+  - Outcomes: Conflict or cooperation.  Efficient, equitable?
+  - Mechanism design: getting incentives right to get better outcomes.
+- Methods and Assumptions
+    - Methodological individualism  and instrumental rationality
+    - optimization subject to constraints and marginal analysis
+  - Feedback, interactions, and equilibrium.
+  - Ceteribus paribus and comparative statics
+- Challenges on behavioral and other grounds
+
+---
+
+## Slide 11
+
+- Game Theory I
+- Defining a ‘game.’
+  - Who (players)
+  - What (strategies available)
+  - When (order of moves)
+  - How Much (payoffs)
+- Two Player Games
+  - Normal Form
+  - Later in the course:
+  - Extensive Form
+  - Repeated Games
+- Predicting the Outcome of games
+  - Equilibrium Concepts
+  - Multiple equilibria and equilibrium selection (or refinements) 
+- Mechanism Design or Implementation Theory
+  - Designing rules of games to lead to desired equilibrium outcomes
+    - Principal Agent problems (contracts, hierarchies)
+    - Auctions, voting mechanisms, constitutions, etc.
+    - Cooperative and non-cooperative (strategic interaction) 
+
+---
+
+## Slide 12
+
+- Representation of a game (in normal form):
+![Equation (Equation.DSMT4) - LaTeX TBD via Mathpix](media/slide012_eq_shape10243.png)
+![Equation (Equation.DSMT4) - LaTeX TBD via Mathpix](media/slide012_eq_shape10260.png)
+![Equation (Equation.DSMT4) - LaTeX TBD via Mathpix](media/slide012_eq_shape10261.png)
+
+---
+
+## Slide 13
+
+- Best Response
+![Equation (Equation.DSMT4) - LaTeX TBD via Mathpix](media/slide013_eq_shape9.png)
+
+---
+
+## Slide 14
+
+- Finding Nash Equilibria
+- Player 2 (column)
+- Player 1(row)
+-  This game has no equilibrium in dominant strategies.  
+-  Arrows indicate each player’s best responses. 
+-  A Nash Equilibrium in pure strategies is found where horizontal and vertical arrows point to the same cell.
+-  In this game the two Nash eqa. in pure strategies are (O,O) and (F,F). 
+
+---
+
+## Slide 15
+
+- Nash Equilibrium
+- Prisoner’s Dilemma
+- Player 2 (col)
+- Player 1(row)
+- The Equilibrium in Dominant Strategies (Fink, Fink) is also a Nash Equilibrium (since each player is playing a best response).
+- The Prisoner’s Dilemma (PD) is ubiquitous (e.g. free-rider problems).
+
+---
+
+## Slide 16
+
+- Nash Equilibria
+-  Existence: A Nash Equilibrium in pure strategies may not exist.  However, every game has at least one Nash equilibrium (possibly in mixed strategies).
+- Uniqueness:  Many games have many multiple Nash equilibria.
+- More on mixed strategies later..
+
+---
+
+## Slide 17
+
+![Image](media/slide017_pic0001.png)
+- John Nash’s (1950) PhD dissertation  (just 28 pages) defined a mixed-strategy Nash equilibrium for any game with a finite set of actions. Proved at least one (mixed-strategy) Nash equilibrium must exist in such a game. 
+- Cournot (1838) had used a version of the idea, but not stated in general form.
+- John von Neumann and Oskar Morgenstern Theory of Games and Economic Behavior 
+- Had not been able to frame the problem to pin down useful equilibrium concepts in general games (beyond obvious ones like in dominant strategies). Minimax theorem gave Nash eqn but only works for zero-sum games.
+
+---
+
+## Slide 18
+
+![Image](media/slide018_pic0002.png)
+![Image](media/slide018_pic0003.jpeg)
+
+---
+
+## Slide 19
+
+![Image](media/slide019_pic0004.png)
+- Fisherman’s Dilemma
+- F12 is a dominant strategy (F10 is a ‘dominated strategy’): F12 gives a higher payoff, regardless of what opponent does.
+- This game has an equilibrium in dominant strategies (F12, F12). 
+- It is an inefficient outcome --  (F10, F10) Pareto dominates:   both could be made better off.
+
+---
+
+## Slide 20
+
+- Equilibrium Concepts
+- We’ve seen equilibrium in dominant strategies
+- Not every game will have such an eqn.
+- Weaker Nash equilibrium concept.  Every game guaranteed to have at least one Nash equilibrium (possibly in mixed strategies).
