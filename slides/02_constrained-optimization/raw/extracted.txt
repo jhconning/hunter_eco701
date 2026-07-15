@@ -1,0 +1,666 @@
+
+---
+
+## Slide 43
+
+- Mathematical preliminaries
+
+---
+
+## Slide 44
+
+- Math for Optimization  (MC1)
+[EQUATION shape 53258 (Mathcad): run render_equations.py]
+[EQUATION shape 53260 (Mathcad): run render_equations.py]
+- First-order necessary condition for a maximum.
+- q - output
+
+---
+
+## Slide 45
+
+- f ’(x)=0 is a necessary but not sufficient condition for a maximum (MC2)
+[EQUATION shape 57351 (Mathcad): run render_equations.py]
+[EQUATION shape 57353 (Equation.DSMT4): run render_equations.py]
+- A minimumnot a maximum at x=5.
+
+---
+
+## Slide 46
+
+- Necessary vs. Sufficient
+- f(x*) is a maximum   f’(x*) = 0
+  - f’(x*) is a necessary condition for a max
+  - It does not follow that 
+    - f’(x*) = 0  f(x*) is a maximum 
+    - It is a necessary but not sufficient condition
+- Necessary and sufficient conditions
+  - f(x*) is a maximum   ( f’(x) = 0 and f’’(x)<0 )
+
+---
+
+## Slide 47
+
+- Necessary and sufficient conditions for a minimum or maximum, respectively (MC3)
+[EQUATION shape 64516 (Mathcad): run render_equations.py]
+[EQUATION shape 64519 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 64522 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 48
+
+[EQUATION shape 60425 (Mathcad): run render_equations.py]
+[EQUATION shape 60427 (Equation.DSMT4): run render_equations.py]
+- Inflection point (MC4)
+
+---
+
+## Slide 49
+
+- Multivariable functions (MC5)
+![Image](media/pic/s049_pic01.png) [check diagram_candidates.json before treating as final]
+
+---
+
+## Slide 50
+
+[EQUATION shape 68612 (Mathcad): run render_equations.py]
+[EQUATION shape 68615 (Mathcad): run render_equations.py]
+- Surface and Contour Plots (MC5)
+
+---
+
+## Slide 51
+
+- Multivariable functions and Partial derivatives (MC6)
+[EQUATION shape 63492 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 63493 (Equation.DSMT4): run render_equations.py]
+- fx shows how objective function z changes with a marginal increase in x, holding y constant.
+[EQUATION shape 63495 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 63503 (Mathcad): run render_equations.py]
+[EQUATION shape 63505 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 63506 (Equation.DSMT4): run render_equations.py]
+- Note this is an unbounded function (no unconstrained maximum).  
+
+---
+
+## Slide 52
+
+[EQUATION shape 71702 (Equation.DSMT4): run render_equations.py]
+![Image](media/pic/s052_pic02.emf) [check diagram_candidates.json before treating as final]
+- MC
+- Unconstrained maximization
+
+---
+
+## Slide 53
+
+- Unconstrained maximum
+[EQUATION shape 72708 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 72709 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 72710 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 72711 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 72712 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 54
+
+[EQUATION shape 74754 (Equation.DSMT4): run render_equations.py]
+- Implicit Functions
+[EQUATION shape 74761 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 11 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 55
+
+- Calculus chain rule
+[EQUATION shape 5 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 6 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 56
+
+- Chain rule and Total differentiation
+[EQUATION shape 75780 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 6 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 8 (Equation.DSMT4): run render_equations.py]
+- Example:
+
+---
+
+## Slide 57
+
+- Contour linesand total differentiation
+[EQUATION shape 5 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 6 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 7 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 8 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 58
+
+- Contour lines
+[EQUATION shape 5 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 6 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 7 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 8 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 59
+
+- Iso-level or contour lines. 
+![Image](media/pic/s059_pic03.emf) [check diagram_candidates.json before treating as final]
+[EQUATION shape 16 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 18 (Equation.DSMT4): run render_equations.py]
+- MRTS = Marginal Rate of Technical Substitution
+
+---
+
+## Slide 60
+
+- Implicit Functions
+[EQUATION shape 74761 (Equation.DSMT4): run render_equations.py]
+- Implicit differentiation of
+[EQUATION shape 74763 (Equation.DSMT4): run render_equations.py]
+- Or think of x and y as functions of t:
+[EQUATION shape 10 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 3 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 61
+
+[EQUATION shape 71702 (Equation.DSMT4): run render_equations.py]
+![Image](media/pic/s061_pic04.emf) [check diagram_candidates.json before treating as final]
+- MC
+- Unconstrained Optimization
+
+---
+
+## Slide 62
+
+- Unconstrained Optimization
+![Image](media/pic/s062_pic05.png) [check diagram_candidates.json before treating as final]
+![Image](media/pic/s062_pic06.png) [check diagram_candidates.json before treating as final]
+- 2 equations in 2 unknowns:
+
+---
+
+## Slide 63
+
+- Utility function
+[EQUATION shape 92165 (Equation.DSMT4): run render_equations.py]
+![Image](media/pic/s063_pic07.png) [check diagram_candidates.json before treating as final]
+
+---
+
+## Slide 64
+
+- Constrained Maximization
+[EQUATION shape 93187 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 93194 (Mathcad): run render_equations.py]
+[EQUATION shape 93198 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 93201 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 65
+
+- Substitution method (constraint into objective)
+[EQUATION shape 100355 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 100364 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 100367 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 100369 (Equation.DSMT4): run render_equations.py]
+- We’ve solved for Marshallian demand as a function of prices and income.
+[EQUATION shape 10 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 66
+
+- Utility function
+[EQUATION shape 92165 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 92168 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 92169 (Mathcad): run render_equations.py]
+[EQUATION shape 92171 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 92172 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 92173 (Equation.DSMT4): run render_equations.py]
+- Think of units… MRS: units of good 2 willing to give up for 1 unit of good 1
+
+---
+
+## Slide 67
+
+- Tangency Method
+[EQUATION shape 98308 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 98311 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 6 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 68
+
+- Tangency method
+[EQUATION shape 99331 (Mathcad): run render_equations.py]
+[EQUATION shape 99335 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 99336 (Equation.DSMT4): run render_equations.py]
+- A
+- At A:                             or                       
+-        (MU per dollar on good 1 > MU per dollar on good 2)
+[EQUATION shape 4, inside GROUP 5: see diagram_candidates.json - whole group will be rendered as one image, not cropped individually]
+[EQUATION shape 15, inside GROUP 5: see diagram_candidates.json - whole group will be rendered as one image, not cropped individually]
+- Utility will increase by shifting consumption from good 2 to good 1.
+[EQUATION shape 17 (Equation.DSMT4): run render_equations.py]
+- E
+
+---
+
+## Slide 69
+
+- Tangency method
+[EQUATION shape 95236 (Mathcad): run render_equations.py]
+[EQUATION shape 95240 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 95241 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 95245 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 95246 (Equation.DSMT4): run render_equations.py]
+- Necessary condition: Marginal utility per dollar spent must be equalized:
+- Slope of indifference curve
+- Slope of budget line
+- =
+- Implies: Marginal utility per dollar spent equalized:
+
+---
+
+## Slide 70
+
+- The arbitrage argument
+[EQUATION shape 5 (Equation.DSMT4): run render_equations.py]
+- Marginal utility per dollar spent on good one exceeds that on good 2. Cannot be optimal.
+- Reallocate income to spend more on good 1.
+[EQUATION shape 8 (Equation.DSMT4): run render_equations.py]
+- Marginal utility per dollar spent on good two exceeds that on good 1. Cannot be optimal.
+- Reallocate income to spend more on good 2.
+[EQUATION shape 10 (Equation.DSMT4): run render_equations.py]
+- Necessary condition for an optimum.
+- Interpreted as marginal utility of income.
+- by how much utility is raised by slightly relaxing the income constraint.
+
+---
+
+## Slide 71
+
+- Tangency Method
+[EQUATION shape 103431 (Equation.DSMT4): run render_equations.py]
+- Two equations in two unknowns (c1,c2)
+- (a tangency along the given budget line) 
+[EQUATION shape 103433 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 103434 (Equation.DSMT4): run render_equations.py]
+- Marshallian demands
+
+---
+
+## Slide 72
+
+- Method of Lagrange
+- (a way to remember and generalize the tangency method) 
+[EQUATION shape 104455 (Equation.DSMT4): run render_equations.py]
+- Unconstrained maximization of a new function L:
+- First Order Conditions (FOC) for a maximum:
+[EQUATION shape 104460 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 104461 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 104462 (Equation.DSMT4): run render_equations.py]
+- (Tangency condition & budget constraint)
+
+---
+
+## Slide 73
+
+- Method of Lagrange in Mathcad
+![Image](media/pic/s073_pic08.png) [check diagram_candidates.json before treating as final]
+![Image](media/pic/s073_pic09.png) [check diagram_candidates.json before treating as final]
+
+---
+
+## Slide 74
+
+- See online notebook
+- Arbitrage argument  tangency method
+  - Intuition for the utility max example
+  - Then adapt to more general problem
+  -            max f(x,y) s.t. g(x,y)=c
+- The arbitrage argument
+
+---
+
+## Slide 75
+
+- Arbitrage Argument  (tangency method)(search for improvements moving along constraint)
+![Image](media/pic/s075_pic10.png) [check diagram_candidates.json before treating as final]
+![Image](media/pic/s075_pic11.png) [check diagram_candidates.json before treating as final]
+![Image](media/pic/s075_pic12.png) [check diagram_candidates.json before treating as final]
+![Image](media/pic/s075_pic13.png) [check diagram_candidates.json before treating as final]
+
+---
+
+## Slide 76
+
+- Arbitrage argument in more general case
+![Image](media/pic/s076_pic14.png) [check diagram_candidates.json before treating as final]
+![Image](media/pic/s076_pic15.png) [check diagram_candidates.json before treating as final]
+![Image](media/pic/s076_pic16.png) [check diagram_candidates.json before treating as final]
+- -g2
+
+---
+
+## Slide 77
+
+- Method of Lagrange
+- (way to remember the necessary conditions) 
+[EQUATION shape 104455 (Equation.DSMT4): run render_equations.py]
+- Create a new function L:
+- First Order Conditions (FOC) for a maximum:
+[EQUATION shape 104460 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 104461 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 104462 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 78
+
+- Max welfare subject to a PPF
+[EQUATION shape 5 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 6, inside GROUP 9: see diagram_candidates.json - whole group will be rendered as one image, not cropped individually]
+- Linear technologies (Ricardo)  
+[EQUATION shape 8, inside GROUP 9: see diagram_candidates.json - whole group will be rendered as one image, not cropped individually]
+[EQUATION shape 10 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 11 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 15 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 79
+
+- Constrained Maximization
+[EQUATION shape 93194 (Mathcad): run render_equations.py]
+[EQUATION shape 93198 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 93201 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 2 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 93187 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 7 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 80
+
+- Lagrangian
+[EQUATION shape 104455 (Equation.DSMT4): run render_equations.py]
+- First Order Conditions (FOC) for a maximum:
+[EQUATION shape 104460 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 104462 (Equation.DSMT4): run render_equations.py]
+- (Tangency condition 
+-            & PPF)
+[EQUATION shape 3 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 81
+
+- Problems with n variables and 1 constraint
+[EQUATION shape 171011 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 171012 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 6, inside GROUP 4: see diagram_candidates.json - whole group will be rendered as one image, not cropped individually]
+- Lagrangian multiplier as benefit-cost ratio  (from                             )
+[EQUATION shape 2 (Equation.DSMT4): run render_equations.py]
+- By how much f() increases from a slight relaxation of constraint (increase in c)
+
+---
+
+## Slide 82
+
+- Problems with n variables and M constraints
+[EQUATION shape 171011 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 171012 (Equation.DSMT4): run render_equations.py]
+- Each constraint has its own multiplier
+
+---
+
+## Slide 83
+
+- Corner solutions and non-binding constraints
+- So far we’ve implicitly made assumptions to guarantee an ‘interior solution’ and a binding resource constraint.
+  - First-order constraints were met as equalities
+  - Second order conditions (Hessian matrices)Implicitly made assumptions sufficient to insure a max.
+- Most examples in this course will ‘rigged’ like this
+- But we’d like to generalize the Lagrange method to allow for ‘corner solutions’ and non-binding constraints
+
+---
+
+## Slide 84
+
+- Example of corner solution 
+[EQUATION shape 168964 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 168974 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 168975 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 168976 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 168977 (Equation.DSMT4): run render_equations.py]
+- Along budget line, marginal utility per dollar spent is everywhere higher on c2 so makes sense to spend all on that and none on c1.
+- In most examples we avoid corners by making assumptions about the concavity of objective functions so as to rule them out (one reason why the book spends so much time on those definitions!). 
+
+---
+
+## Slide 85
+
+- Mathematically   -- non-negativity constraints
+[EQUATION shape 100355 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 86
+
+- Method of Lagrange(restated to allow for corners, but assuming budget binds)
+[EQUATION shape 104455 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 2 (Equation.DSMT4): run render_equations.py]
+- FOC for choice variables.  For every i
+- This says we have                    either:
+[EQUATION shape 8 (Equation.DSMT4): run render_equations.py]
+- This ‘complementary slackness’ relationship can be summarized by:
+[EQUATION shape 10 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 87
+
+- Similarly with a constraint(we want to allow the possibility that a constraint may not bind).
+[EQUATION shape 5 (Equation.DSMT4): run render_equations.py]
+- This says we must have either:
+[EQUATION shape 7 (Equation.DSMT4): run render_equations.py]
+- ‘complementary slackness’ relationship summarized :
+[EQUATION shape 9 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 88
+
+- As a practical matter
+- We often make enough assumptions to know we’ll find an interior solution. Then use Lagrange with equality constraints.
+- If you’re not sure this is the case you’ll have to approach problem more carefully
+  - Specify different possible cases
+    - Use economic logic to identify and focus on most likely cases
+    - When constraints don’t bind they can be ignored. Solve using remaining equalities (FOC and/or binding constraints).
+    - Compare objective value at different candidate solutions to find the best.
+  - Alternative method of slack variables (described in book).
+
+---
+
+## Slide 89
+
+- Multiple constraints:Earthquake Relief Example (on PS1)
+  - You form a non-profit group to fundraise to buy food and water.  
+    - You’ve raised I = $100K
+      - Ton of food costs, PF = $1K / ton
+      - Ton of (vitamin enriched) water, PW = $2K / ton
+    - the only available boat has capacity for T=80 tons
+    - Preferences: 
+[EQUATION shape 159748 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 159749 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 159750 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 90
+
+- ‘Complementary Slackness’ in two-constraint problemquestion 3 in problem set 1
+- multiplier l>0 when constraint binds:
+- multiplier l=0 when constraint is slack.
+[EQUATION shape 166916 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 166917 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 166918 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 166919 (Equation.DSMT4): run render_equations.py]
+- Summarized as:
+- Similarly
+[EQUATION shape 166921 (Equation.DSMT4): run render_equations.py]
+- One or the other.
+[EQUATION shape 2 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 91
+
+[EQUATION shape 147460 (Mathcad): run render_equations.py]
+[EQUATION shape 147466 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 147467 (Equation.DSMT4): run render_equations.py]
+- Feasible region
+- Two constraints
+[EQUATION shape 147475 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 147476 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 92
+
+[EQUATION shape 150530 (Mathcad): run render_equations.py]
+- Three primary types of possible solution…
+[EQUATION shape 150534 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 150535 (Equation.DSMT4): run render_equations.py]
+- … depending on preferences and which constraints bind (one or the other or both), i.e.
+- 0, =0
+- =0, >0
+- 0, >0
+- The diagrams that follow show different possibilities.
+
+---
+
+## Slide 93
+
+- Important in order to avoid confusion:
+  - In the diagrams that follow we study three distinct possibilities that depend on shape of consumer preferences.
+  - NOT the same person (preferences) in eachdepiction.
+  - For given preferences 
+    - indifference curve map stays in place
+    - only one of these scenarios can hold.
+    - Indifference curves can never cross(that would violate fundamental axiom of consistency).
+
+---
+
+## Slide 94
+
+[EQUATION shape 149520 (Mathcad): run render_equations.py]
+- Transport constraint binds, budget slack
+[EQUATION shape 149515 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 149523 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 149524 (Equation.DSMT4): run render_equations.py]
+- Food is highly valuedTransport space fills upbefore all budget is spent
+
+---
+
+## Slide 95
+
+[EQUATION shape 151554 (Mathcad): run render_equations.py]
+- Budget constraint binds, transport slack
+[EQUATION shape 151556 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 151558 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 151559 (Equation.DSMT4): run render_equations.py]
+- Water is highly valuedBudget is exhaustedbefore all transport space is filled
+
+---
+
+## Slide 96
+
+[EQUATION shape 154626 (Mathcad): run render_equations.py]
+- Both constraints bind
+[EQUATION shape 154628 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 154630 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 154631 (Equation.DSMT4): run render_equations.py]
+
+---
+
+## Slide 97
+
+- Lagrangian
+[EQUATION shape 8 (Equation.DSMT4): run render_equations.py]
+[EQUATION shape 9 (Equation.DSMT4): run render_equations.py]
+- Note: we’ve used economic logic to conclude we’ll have non-negativity of choice variables met.
+- The above allows for either or both constraints to bind or not bind.
+
+---
+
+## Slide 98
+
+- Solving problems with multiple constraints
+- Work out solution for each possible constraint set.
+  - i.e. separately solve under assumptions:
+    - >0, =0
+    - =0, >0
+    - >0, >0
+    - You get a solution from each, but not all feasible (e.g. setting a multiplier to zero ignores that constraint, but solution you then get may in fact violate that constraint, and is hence infeasible).
+  - Choose feasible candidate solution that gives highest value.
+
+---
+
+## Slide 99
+
+- example
+[EQUATION shape 5 (Equation.DSMT4): run render_equations.py]
+![Image](media/pic/s099_pic17.emf) [check diagram_candidates.json before treating as final]
+- Method:
+- Try each of the three possibilities (≥0, ≥0)  
+- Solve for (cW*, cF*) and u(cW*, cF*) in each case.
+- Choose one with highest value.
+
+---
+
+## Slide 100
+
+- Close up:
+![Image](media/pic/s100_pic18.emf) [check diagram_candidates.json before treating as final]
+- Method:
+- Try each of the three possibilities (≥0, ≥0)  
+- Solve for (cW*, cF*) and u(cW*, cF*) in each case.
+- Choose one with highest value.
+
+---
+
+## Slide 101
+
+- The art of the solve…Whatever method works
+- Setting up a Lagrangian is often more work than needed or wanted..
+- Look for easy substitutions
+  - to reduce number of constraints
+  - transform objective function if scaling is irrelevant and it’s helpful
+- Use intuition/economic reasoning
+- Learn to identify family patterns
+- Other tricks..
+
+---
+
+## Slide 102
+
+- 9/25
+- PS 1 …
+  - Can turn in by Friday noon
