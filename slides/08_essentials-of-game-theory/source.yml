@@ -9,6 +9,9 @@ notes: >
   Dilemma, Opera/Football coordination game, Fisherman's Dilemma). Original
   slides 1-9 (course logistics) were split out into ../00_logistics/ instead,
   since they aren't part of the 11-topic sequence in ../../syllabus/IDEAS.md.
-  NOT yet covered: slidesI slides 32-42 (mixed strategies, N-player
-  generalization) - more game-theory material that logically continues this
-  topic but hasn't been reviewed yet. See ../../TOPIC_PLAN.md.
+  NOT yet extracted: slidesI slides 32-42 (mixed strategies, N-player
+  generalization) - confirmed by Jonathan on 2026-07-13 as a continuation of
+  this topic, not yet run through the extraction pipeline. A further,
+  separate "Topic 8b" (Game Theory II: extensive form, repeated games,
+  oligopoly - slidesIIb ~15-80) is deliberately kept isolated rather than
+  folded in here. See ../../TOPIC_PLAN.md.
