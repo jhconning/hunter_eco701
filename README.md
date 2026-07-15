@@ -42,7 +42,7 @@ up cold, read [`HANDOFF.md`](HANDOFF.md) first.
 
 <!-- TOC_START -->
 
-*Last Deployed: 2026-07-15 12:52 EST*
+*Last Deployed: 2026-07-15 13:04 EST*
 
 ## Deployed Presentations
 
