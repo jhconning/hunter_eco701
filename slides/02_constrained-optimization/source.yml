@@ -1,0 +1,26 @@
+topic: "Constrained Optimization"
+ideas_md_topic_number: 2
+source_file: "E701_F18 _slidesI.pptx"
+source_slides: [43, 102]
+status: in_progress
+notes: >
+  Large topic (60 slides, 152 top-level equations) - being converted in
+  sub-chunks per Jonathan's 2026-07-15 decision. This pass covers only
+  slides 43-63 ("Mathematical Preliminaries": unconstrained optimization,
+  multivariable calculus, implicit differentiation - the toolkit behind
+  the Method of Lagrange). Remaining sub-chunks: ~64-90 (Lagrange method,
+  corner solutions - includes the approved Tier 3 treatment demo for
+  slides 78-79, not yet folded into deck.md), ~91-102 (applications).
+
+  Consolidated slides 52 and 61 into one ("Unconstrained Maximization: An
+  Example") - identical shape structure/content in the original, an
+  apparent accidental duplicate.
+
+  Real gotcha hit here: "Mathcad" OLE objects (18 of them, vs. 134
+  "Equation.DSMT4") are often actual plotted graphs, not symbolic
+  equations - Mathpix correctly returned "(no result)" for these since
+  there's no LaTeX equivalent of a rendered curve. Also several
+  Equation.DSMT4 shapes that ARE pure text/equations came back
+  "(no result)" too (real Mathpix misses, not graphs) - manually
+  transcribed those by viewing the crop directly. Rule of thumb: treat
+  "(no result)" as "go look at the image," not just "retry the OCR."

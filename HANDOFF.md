@@ -164,6 +164,16 @@ this handoff.
   (crisp, since it's PowerPoint's own renderer) then Mathpix OCR — both
   came back near-perfect in testing. Don't waste time on WMF/EMF decoding;
   ImageMagick's WMF support was unreliable on this machine.
+- **"Mathcad" OLE objects are frequently actual plotted graphs, not
+  symbolic equations** (found in `02_constrained-optimization`, 18 of
+  them). Mathpix correctly returns `(no result)` for these — there's no
+  LaTeX equivalent of a rendered curve, so this isn't a Mathpix failure to
+  retry, it's a signal the content is graphical and belongs in `media/`
+  as an image, not converted to KaTeX. That said, plenty of genuine
+  Equation.DSMT4 text/equations *also* came back `(no result)` (real
+  OCR misses, not graphs) — the only reliable way to tell the two apart
+  is to open the crop and look. **Treat every Mathpix `(no result)` as
+  "go view the image," never just "OCR failed, move on."**
 - **PowerPoint COM automation safety:** `win32com.client.Dispatch` attaches
   to an *already-running* PowerPoint instance rather than starting a new
   one. Always check with `GetActiveObject` first and only call
