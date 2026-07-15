@@ -1,18 +1,16 @@
 ---
-title: sl_1_intro
+title: deck
 description: "ECO 701 Topic 1: Definitions and Key Tools"
 author: "Jonathan Conning"
 deploy: true
 marp: true
 paginate: true
-theme: neobeam
-style: |
-  section {font-size: 27px;}
+theme: eco701
+size: 16:9
+footer: 'Eco 701 · Microeconomic Theory · Fall 2018'
 ---
 
-<!-- _class: title -->
-<!-- footer: "**ECO 701** **Microeconomic Theory** **Definitions and Key Tools**" -->
-<!-- _paginate: false -->
+<!-- _class: lead -->
 
 ## ECO 701
 # Microeconomic Theory
@@ -23,7 +21,6 @@ Topic 1: Definitions and Key Tools
 Jonathan Conning
 Hunter College
 Dept of Economics
-
 
 ---
 
@@ -42,9 +39,5 @@ Dept of Economics
 
 Here is the image from the textbook with a caption beneath it.
 
-
-
-![center width:6000](../slides/attachments/sample_fig.png)
+![center width:600](media/sample_fig.png)
 ###### Figure 1: The Production Possibility Frontier showing efficient and inefficient points.
-
----

@@ -1,0 +1,14 @@
+topic: "Definitions and Key Tools"
+ideas_md_topic_number: 1
+source_file: unknown
+source_slides: null
+status: pre-existing (built before this reorganization; content not yet re-verified against a specific source pptx)
+notes: >
+  This deck already existed as slides/sl_1_intro.md before the 2026-07-13
+  topic reorg - only moved into the new folder convention and re-themed
+  (neobeam -> eco701) here, content untouched except fixing an oversized
+  image width (was width:6000, now width:600). Likely source material is
+  E701_F18 _slidesI.pptx slides ~20-31 (Pareto Criterion, Gains to Trade,
+  Utility Possibility Frontier, "Other types of Games", "An invisible hand
+  game") based on the title scan, but this is an inference, not verified -
+  worth confirming before expanding this topic further. See TOPIC_PLAN.md.

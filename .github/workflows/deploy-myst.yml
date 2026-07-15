@@ -21,10 +21,11 @@ permissions:
   id-token: write
 
 jobs:
-  build-and-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
+    # No `environment:` binding here - that's what let PRs actually validate
+    # a build. The `github-pages` environment's protection rules reject any
+    # non-main ref from entering a job bound to it, which used to block the
+    # whole job (including these harmless build-only steps) on every PR.
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -33,6 +34,7 @@ jobs:
           fetch-depth: 0
 
       - name: Update Table of Contents in README
+        if: ${{ github.event_name == 'push' }}
         run: |
           deploy_date=$(TZ='America/New_York' date '+%Y-%m-%d %H:%M')
           echo -e "\n*Last Deployed: $deploy_date EST*\n" > toc.tmp
@@ -40,14 +42,15 @@ jobs:
           if [[ -d slides ]]; then
             find slides -type f -name "*.md" | sort | while read -r file; do
               if grep -q "^deploy:[[:space:]]*true" "$file"; then
-                filename=$(basename "$file")
+                relpath="${file#slides/}"
+                relpath="${relpath%.md}"
                 title=$(grep -m 1 "^description:[[:space:]]*" "$file" | sed 's/^description:[[:space:]]*//' | sed 's/^"//;s/"$//' | sed "s/^'//;s/'$//" | tr -d '\r')
                 if [ -z "$title" ]; then
-                  title=$(grep -m 1 "^# " "$file" | sed 's/^# //' | tr -d '\r' || echo "${filename%.md}")
+                  title=$(grep -m 1 "^# " "$file" | sed 's/^# //' | tr -d '\r' || echo "$relpath")
                 fi
                 edit_date=$(TZ='America/New_York' git log -1 --format="%cd" --date=format:"%Y-%m-%d %H:%M" -- "$file")
                 if [ -z "$edit_date" ]; then edit_date="Unknown"; fi
-                echo "- [$title](https://jhconning.github.io/hunter_eco701/slides/${filename%.md}.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/${filename%.md}.pdf)) *(Last edit: $edit_date)*" >> toc.tmp
+                echo "- [$title](https://jhconning.github.io/hunter_eco701/slides/${relpath}.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/${relpath}.pdf)) *(Last edit: $edit_date)*" >> toc.tmp
               fi
             done
           fi
@@ -55,14 +58,12 @@ jobs:
           mv README.new README.md
 
       - name: Commit and Push README
+        if: ${{ github.event_name == 'push' }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add README.md
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update Table of Contents [skip ci]" && git push)
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -80,10 +81,16 @@ jobs:
       - name: Prepare Marp Directory
         run: mkdir -p _build/html/slides
 
-      - name: Copy slide attachments to build
+      - name: Copy topic media folders to build
         run: |
-          if [[ -d slides/attachments ]]; then cp -R slides/attachments _build/html/slides/attachments; fi
-          if [[ -d slides/themes ]]; then cp -R slides/themes _build/html/slides/themes; fi
+          # Each topic folder (slides/<topic>/media/) gets mirrored into the build output
+          # at the same relative path. Nested raw/media/ folders are intentionally excluded -
+          # those are extraction intermediates, not deployable assets.
+          find slides -mindepth 2 -maxdepth 2 -type d -name media | while read -r dir; do
+            dest="_build/html/${dir}"
+            mkdir -p "$dest"
+            cp -R "$dir"/. "$dest"/
+          done
 
       - name: Check if slides folder exists
         id: slides-folder-exists
@@ -93,7 +100,7 @@ jobs:
         if: steps.slides-folder-exists.outputs.has_slides == '0'
         uses: docker://marpteam/marp-cli:v3.0.2
         with:
-          args: -I slides/ -o _build/html/slides/ --theme-set slides/themes/neobeam.css
+          args: -I slides/ -o _build/html/slides/ --theme-set slides/_shared/eco701-theme.css
         env:
           MARP_USER: root:root
 
@@ -101,9 +108,13 @@ jobs:
         if: steps.slides-folder-exists.outputs.has_slides == '0'
         uses: docker://marpteam/marp-cli:v3.0.2
         with:
-          args: -I slides/ -o _build/html/slides/ --pdf --allow-local-files --theme-set slides/themes/neobeam.css
+          args: -I slides/ -o _build/html/slides/ --pdf --allow-local-files --theme-set slides/_shared/eco701-theme.css
         env:
           MARP_USER: root:root
+
+      - name: Setup Pages
+        if: ${{ github.event_name == 'push' }}
+        uses: actions/configure-pages@v4
 
       - name: Upload artifact
         if: ${{ github.event_name == 'push' }}
@@ -111,7 +122,14 @@ jobs:
         with:
           path: './_build/html'
 
+  deploy:
+    needs: build
+    if: ${{ github.event_name == 'push' }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
-        if: ${{ github.event_name == 'push' }}
         id: deployment
         uses: actions/deploy-pages@v4

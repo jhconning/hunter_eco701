@@ -1,0 +1,10 @@
+topic: "Welcome & Course Logistics"
+ideas_md_topic_number: null
+source_file: "E701_F18 _slidesI.pptx"
+source_slides: [1, 9]
+status: redesigned
+notes: >
+  Not one of the 11 content topics in ../../syllabus/IDEAS.md - this is
+  front-matter (office hours, grading, readings, intro agenda) that applies
+  regardless of topic order. Redesigned and approved 2026-07-13, split out
+  from what was originally one combined deck with 08_essentials-of-game-theory.

@@ -1,0 +1,22 @@
+{
+  "source_file": "E701_F18 _slidesI.pptx",
+  "slide_range": [1, 20],
+  "purpose": "Completeness check run after extraction - counts every shape by type so nothing silently gets skipped. This is what caught the 3 TABLE shapes the first extraction pass missed.",
+  "shape_type_counts": {
+    "PLACEHOLDER": 45,
+    "TEXT_BOX": 10,
+    "AUTO_SHAPE": 13,
+    "EMBEDDED_OLE_OBJECT": 4,
+    "TABLE": 3,
+    "LINE": 8,
+    "PICTURE": 4
+  },
+  "ole_prog_ids": {
+    "Equation.DSMT4": 4
+  },
+  "images_extracted": 8,
+  "known_gaps_at_time_of_writing": [
+    "LINE shapes (8) are decorative best-response arrows overlaid on slide 14's table - not extracted, described in prose instead in the redesigned deck.",
+    "AUTO_SHAPE (13) were checked and are just text-bearing shapes (callouts etc.) already covered by the has_text_frame text extraction - no separate handling needed."
+  ]
+}

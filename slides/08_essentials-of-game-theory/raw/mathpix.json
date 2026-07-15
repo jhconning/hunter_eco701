@@ -1,0 +1,58 @@
+{
+  "slide012_eq_shape10243.png": {
+    "request_id": "450bbc01-a31e-4611-9b2b-bc0275877850",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 158,
+    "image_width": 1176,
+    "confidence": 0.8814718723297119,
+    "confidence_rate": 0.9976663903230648,
+    "latex_styled": "\\text { payoff to player 1: } \\pi_{1}\\left(s_{1}, s_{2}\\right)",
+    "text": "payoff to player 1: \\( \\pi_{1}\\left(s_{1}, s_{2}\\right) \\)"
+  },
+  "slide012_eq_shape10260.png": {
+    "request_id": "1e25bccb-d81d-4c1a-935d-ad77dad68317",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 145,
+    "image_width": 1517,
+    "confidence": 0.7946333885192871,
+    "confidence_rate": 0.9958291872418682,
+    "latex_styled": "\\text { e.g. } \\quad \\pi_{1}(F, C)=7, \\quad \\pi_{2}(F, F)=-2, \\text { etc. }",
+    "text": "e.g. \\( \\quad \\pi_{1}(F, C)=7, \\quad \\pi_{2}(F, F)=-2 \\), etc."
+  },
+  "slide012_eq_shape10261.png": {
+    "request_id": "153ed784-0dca-4459-931a-9bc34c10c739",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 158,
+    "image_width": 1936,
+    "confidence": 0.987321138381958,
+    "confidence_rate": 0.9998006460564316,
+    "latex_styled": "\\text { Player 1's (pure)strategies } s_{1} \\in\\{\\text { cooperate, fink }\\}",
+    "text": "Player 1's (pure)strategies \\( s_{1} \\in\\{ \\) cooperate, fink \\( \\} \\)"
+  },
+  "slide013_eq_shape9.png": {
+    "request_id": "7a476060-6679-48d8-8b90-0c69bc44e3f9",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 176,
+    "image_width": 1481,
+    "confidence": 0.98388671875,
+    "confidence_rate": 0.9998290197579605,
+    "latex_styled": "\\pi_{i}\\left(s_{i}, s_{-i}\\right) \\geq \\pi_{i}\\left(s_{i}^{\\prime}, s_{-i}\\right) \\text { for all } s_{i} \\in S_{i}",
+    "text": "\\( \\pi_{i}\\left(s_{i}, s_{-i}\\right) \\geq \\pi_{i}\\left(s_{i}^{\\prime}, s_{-i}\\right) \\) for all \\( s_{i} \\in S_{i} \\)"
+  }
+}
