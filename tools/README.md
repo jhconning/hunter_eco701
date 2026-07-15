@@ -11,6 +11,9 @@ Run in this order for a new topic:
    regular pictures for a slide range. Always check the printed shape
    census against what you expect before moving on - this is what catches
    silently-skipped content (it caught 3 missed tables during the pilot).
+   It also writes `diagram_candidates.json` and prints a loud warning if it
+   finds any table/picture with annotation shapes (arrows, ovals) layered
+   on top - **treat that warning as a required step, not an FYI.**
 
 3. **`render_equations.py`** — only if the shape census shows
    `EMBEDDED_OLE_OBJECT` shapes (legacy MathType/Equation Editor equations).
@@ -22,15 +25,16 @@ Run in this order for a new topic:
    (small real cost per call, against Jonathan's own Mathpix account).
    Needs `.env` at the repo root with `MATHPIX_APP_ID` / `MATHPIX_APP_KEY`.
 
-5. **`render_diagram.py`** — for tables/pictures with hand-drawn annotation
-   (best-response arrows, circled equilibria) layered on top as separate
-   PowerPoint shapes. A native Markdown table recreation loses exactly this
-   annotation - see HANDOFF.md's "Table vs. diagram" note for the decision
-   rule on when to reach for this instead of a plain table. Use `--list` on
-   the slide first to find the shape IDs of the table/picture AND every
-   arrow/oval/line drawn over it, then render their union as one high-res
-   crop. Same COM-automation approach and safety behavior as
-   `render_equations.py`.
+5. **`render_diagram.py --candidates raw/diagram_candidates.json --out-dir
+   raw/media/diagrams`** — **run this by default whenever step 2 reported
+   any candidates, not just when one looks obviously important.** A native
+   Markdown table recreation silently drops exactly the hand-drawn
+   annotation (best-response arrows, circled equilibria) that usually IS
+   the pedagogical point - see HANDOFF.md's "Table vs. diagram" note.
+   Batch mode processes every candidate in one PowerPoint session. Use
+   `--slide N --list` + `--shape-ids ... --out ...` (manual single-slide
+   mode) only to hand-trim a crop the batch heuristic got too wide, or to
+   capture a diagram the heuristic missed entirely.
 
 None of these touch `slides/<topic>/deck.md` or `slides/<topic>/media/`
 directly - those are hand-authored once the raw material has been reviewed.

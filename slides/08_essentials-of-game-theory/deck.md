@@ -88,10 +88,7 @@ A **Nash Equilibrium** is a strategy profile where every player is playing a bes
 
 ## Example: The Prisoner's Dilemma
 
-|  | Cooperate | Fink |
-|---|---|---|
-| Cooperate | 5, 5 | −4, 7 |
-| Fink | 7, −4 | **−2, −2** |
+![center width:700](media/prisoners-dilemma-diagram.png)
 
 - **Fink** is a dominant strategy for both players
 - The dominant-strategy equilibrium **(Fink, Fink)** is also a Nash equilibrium

@@ -27,3 +27,17 @@ notes: >
   overflow caused by the bg-image column, and fixed the Nash portrait
   being cropped by Marp's cover-fill default (needed explicit w: sizing,
   not fit:contain - see HANDOFF.md gotchas).
+
+  2026-07-15 (same day, follow-up): extract_topic.py now auto-detects
+  diagram candidates (table/picture + line/oval annotation shapes).
+  Re-running it against this topic's slide range found a THIRD case that
+  had shipped unnoticed: slide 15 (the revisited Prisoner's Dilemma table,
+  "Example: The Prisoner's Dilemma" in deck.md) also has best-response
+  arrows and a circled equilibrium as separate shapes - missed originally
+  because slide 12's copy of the same table (no annotation there) had
+  already been reviewed and nobody thought to check the second occurrence.
+  Fixed the same way; see raw/diagram_candidates.json for all three cases'
+  exact shape IDs. Default policy going forward: capture every detected
+  candidate, full fidelity, by default - simplifying to a plain table is a
+  deliberate per-slide exception now, not something that happens by
+  default omission.

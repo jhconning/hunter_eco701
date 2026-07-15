@@ -105,18 +105,36 @@ this handoff.
   case and prints a shape-type census every run — always look at that
   census before trusting the extraction is complete.
 - **Table vs. diagram — a native Markdown table isn't always the right
-  recreation.** Converting a payoff matrix to a clean Markdown table (as
-  done for most of `08_essentials-of-game-theory`) is genuinely better when
-  the original is pure data. But the Opera/Football and Fisherman's Dilemma
-  slides had hand-drawn best-response arrows and a circled equilibrium
-  layered on top as *separate* PowerPoint shapes (lines, an oval) — Jonathan
-  caught that recreating those as bare tables silently dropped exactly the
-  pedagogical content the diagram existed to show. **Decision rule:** if
-  `extract_topic.py`'s shape census shows `LINE`/oval `AUTO_SHAPE` shapes
-  on the same slide as a `TABLE` or `PICTURE`, don't reduce it to a plain
-  table — use `render_diagram.py` to capture the whole annotated region as
-  one image instead (see tools/README.md). Do this check for every topic
-  going forward, not just when someone happens to notice.
+  recreation, and the default policy is now "capture everything."**
+  Converting a payoff matrix to a clean Markdown table is genuinely better
+  when the original is pure data. But three slides in
+  `08_essentials-of-game-theory` (Opera/Football, the revisited Prisoner's
+  Dilemma, Fisherman's Dilemma) had hand-drawn best-response arrows and a
+  circled equilibrium layered on top as *separate* PowerPoint shapes (lines,
+  an oval) — recreating those as bare tables silently dropped exactly the
+  pedagogical content the diagram existed to show. One of the three (slide
+  15) shipped to the live site unnoticed at first, because slide 12's copy
+  of the same table (genuinely unannotated) had already been reviewed and
+  nobody thought to check the second occurrence — that's precisely the
+  failure mode automatic detection exists to close.
+
+  **As of 2026-07-15, `extract_topic.py` detects this automatically**: any
+  slide with a `TABLE`/`PICTURE` plus a `LINE` shape or a text-less
+  `AUTO_SHAPE` gets written to `diagram_candidates.json`, and the script
+  prints a loud warning listing which slides. Jonathan's explicit policy:
+  **capture everything at full fidelity by default** — simplifying to a
+  plain table/dropping annotation is a deliberate, individual exception you
+  choose to make for a specific slide, never something that happens by
+  default omission. Run `render_diagram.py --candidates
+  raw/diagram_candidates.json --out-dir raw/media/diagrams` (batch mode,
+  one PowerPoint session for all of them) as a normal part of converting
+  every topic — don't skip it because the console output "looks done"
+  after `extract_topic.py` alone. The detection heuristic is deliberately
+  inclusive (a false positive just costs one extra render; a false
+  negative silently ships lost content) — expect it to occasionally flag
+  a decorative divider line alongside real annotation; trim the shape-id
+  list by hand via `--slide N --list` if a batch-rendered crop comes out
+  needlessly wide.
 - **Marp `bg` images default to cover-fill (crop-to-fill), not
   letterbox/contain.** A wide/landscape image (e.g. a 2.3:1 aspect banner)
   placed in a narrow `bg right:40%` column gets its sides cropped off
