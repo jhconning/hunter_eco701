@@ -42,11 +42,11 @@ up cold, read [`HANDOFF.md`](HANDOFF.md) first.
 
 <!-- TOC_START -->
 
-*Last Deployed: 2026-07-15 12:41 EST*
+*Last Deployed: 2026-07-15 12:52 EST*
 
 ## Deployed Presentations
 
 - [ECO 701: Welcome & Course Logistics](https://jhconning.github.io/hunter_eco701/slides/00_logistics/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/00_logistics/deck.pdf)) *(Last edit: 2026-07-15 11:25)*
 - [ECO 701 Topic 1: Definitions and Key Tools](https://jhconning.github.io/hunter_eco701/slides/01_definitions-and-key-tools/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/01_definitions-and-key-tools/deck.pdf)) *(Last edit: 2026-07-15 11:25)*
-- [ECO 701 Topic 8: Essentials of Game Theory](https://jhconning.github.io/hunter_eco701/slides/08_essentials-of-game-theory/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/08_essentials-of-game-theory/deck.pdf)) *(Last edit: 2026-07-15 12:40)*
+- [ECO 701 Topic 8: Essentials of Game Theory](https://jhconning.github.io/hunter_eco701/slides/08_essentials-of-game-theory/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/08_essentials-of-game-theory/deck.pdf)) *(Last edit: 2026-07-15 12:51)*
 <!-- TOC_END -->
