@@ -78,13 +78,10 @@ A **Nash Equilibrium** is a strategy profile where every player is playing a bes
 
 ## Example: Coordination Games (Opera vs. Football)
 
-|  | Opera | Football |
-|---|---|---|
-| **Opera** | **3, 2** | 1, 0 |
-| **Football** | 0, 1 | **2, 3** |
+![center width:750](media/opera-football-diagram.png)
 
 - This game has **no equilibrium in dominant strategies**
-- A pure-strategy Nash equilibrium is a cell where both players' best responses coincide
+- Follow the arrows: a pure-strategy Nash equilibrium is a cell where both players' best responses coincide
 - Two of them here: **(Opera, Opera)** and **(Football, Football)**
 
 ---
@@ -113,8 +110,7 @@ A **Nash Equilibrium** is a strategy profile where every player is playing a bes
 
 ## Aside: Who Was John Nash?
 
-![bg right vertical w:500](media/nash-portrait.png)
-![bg right w:500](media/beautiful-mind-poster.png)
+![bg right:40% w:480](media/nash-portrait.png)
 
 - Nash's 1950 PhD dissertation — just 28 pages — proved every finite game has at least one (possibly mixed-strategy) Nash equilibrium
 - Cournot (1838) had used a version of the idea, but never stated it in general form
@@ -122,12 +118,17 @@ A **Nash Equilibrium** is a strategy profile where every player is playing a bes
 
 ---
 
+## Aside: Nash in Popular Culture
+
+![bg right:40%](media/beautiful-mind-poster.png)
+
+Nash's story was popularized by Sylvia Nasar's 1998 biography *A Beautiful Mind* and Ron Howard's 2001 film adaptation starring Russell Crowe.
+
+---
+
 ## Example: The Fisherman's Dilemma
 
-|  | Bob: fish 10h | Bob: fish 12h |
-|---|---|---|
-| **Alfredo: fish 10h** | 3, 3 | 1, 4 |
-| **Alfredo: fish 12h** | 4, 1 | **2, 2** |
+![center width:650](media/fishermans-dilemma-diagram.png)
 
 - **Fishing 12 hours dominates fishing 10**: it pays more no matter what the other does
 - Equilibrium in dominant strategies: **(12h, 12h)**, payoff (2, 2)

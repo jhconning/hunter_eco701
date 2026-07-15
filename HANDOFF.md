@@ -104,6 +104,42 @@ this handoff.
   explicitly. This is why `extract_topic.py` handles tables as a distinct
   case and prints a shape-type census every run — always look at that
   census before trusting the extraction is complete.
+- **Table vs. diagram — a native Markdown table isn't always the right
+  recreation.** Converting a payoff matrix to a clean Markdown table (as
+  done for most of `08_essentials-of-game-theory`) is genuinely better when
+  the original is pure data. But the Opera/Football and Fisherman's Dilemma
+  slides had hand-drawn best-response arrows and a circled equilibrium
+  layered on top as *separate* PowerPoint shapes (lines, an oval) — Jonathan
+  caught that recreating those as bare tables silently dropped exactly the
+  pedagogical content the diagram existed to show. **Decision rule:** if
+  `extract_topic.py`'s shape census shows `LINE`/oval `AUTO_SHAPE` shapes
+  on the same slide as a `TABLE` or `PICTURE`, don't reduce it to a plain
+  table — use `render_diagram.py` to capture the whole annotated region as
+  one image instead (see tools/README.md). Do this check for every topic
+  going forward, not just when someone happens to notice.
+- **Marp `bg` images default to cover-fill (crop-to-fill), not
+  letterbox/contain.** A wide/landscape image (e.g. a 2.3:1 aspect banner)
+  placed in a narrow `bg right:40%` column gets its sides cropped off
+  unless you constrain it. The `fit:contain` directive did NOT work on the
+  CI-pinned marp-core v3.9.1 (silently ignored — possibly a newer-Marp-only
+  feature); what actually worked was an explicit `w:` (e.g.
+  `w:480`), which overrides the cover-fill default. Always check a `bg`
+  image's real aspect ratio (`PIL.Image.open(...).size`) before choosing
+  between relying on the column's default fill vs. giving it an explicit
+  width.
+- **`bg`-image slides overflow more easily than plain bullet slides** —
+  the image column eats horizontal space, narrowing the text column and
+  wrapping lines into more vertical space than expected. Jonathan's own
+  fix for this (`08_essentials-of-game-theory`'s Nash-bio slide) was
+  instructive: rather than shrinking font size or cramming, **split into
+  two slides** when a `bg`-image slide's text doesn't comfortably fit —
+  it's usually a sign the slide was doing two things anyway (e.g. "Nash's
+  own contribution" vs. "Nash in popular culture"). Prefer that over
+  `right:40%`-style width tweaks as the primary fix, though sizing the
+  image column down is a reasonable secondary lever. Re-render and check
+  the *specific* slide you just edited after every change — don't rely on
+  a sample of other pages as proof the one you touched is fine; that gap
+  is exactly what let this overflow ship in the first place.
 - **Legacy equations are MathType/Equation Editor OLE objects
   (`Equation.DSMT4`), not modern OOXML math** — no free LaTeX conversion
   exists. The working solution is rendering via PowerPoint COM automation

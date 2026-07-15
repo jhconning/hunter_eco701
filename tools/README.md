@@ -22,6 +22,16 @@ Run in this order for a new topic:
    (small real cost per call, against Jonathan's own Mathpix account).
    Needs `.env` at the repo root with `MATHPIX_APP_ID` / `MATHPIX_APP_KEY`.
 
+5. **`render_diagram.py`** — for tables/pictures with hand-drawn annotation
+   (best-response arrows, circled equilibria) layered on top as separate
+   PowerPoint shapes. A native Markdown table recreation loses exactly this
+   annotation - see HANDOFF.md's "Table vs. diagram" note for the decision
+   rule on when to reach for this instead of a plain table. Use `--list` on
+   the slide first to find the shape IDs of the table/picture AND every
+   arrow/oval/line drawn over it, then render their union as one high-res
+   crop. Same COM-automation approach and safety behavior as
+   `render_equations.py`.
+
 None of these touch `slides/<topic>/deck.md` or `slides/<topic>/media/`
 directly - those are hand-authored once the raw material has been reviewed.
 See the root `HANDOFF.md` for the full redesign workflow (not just

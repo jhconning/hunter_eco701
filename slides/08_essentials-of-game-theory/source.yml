@@ -15,3 +15,15 @@ notes: >
   separate "Topic 8b" (Game Theory II: extensive form, repeated games,
   oligopoly - slidesIIb ~15-80) is deliberately kept isolated rather than
   folded in here. See ../../TOPIC_PLAN.md.
+
+  2026-07-15: Opera/Football and Fisherman's Dilemma originally recreated
+  as plain Markdown tables, which silently dropped the original slides'
+  hand-drawn best-response arrows and circled equilibrium (Jonathan caught
+  this). Fixed by rendering the table+annotation as one image via the new
+  tools/render_diagram.py (raw/media/diagrams/s014_diagram.png and
+  s019_diagram.png, copied into media/ as opera-football-diagram.png and
+  fishermans-dilemma-diagram.png). Also split the Nash-bio slide into two
+  (Nash's own contribution vs. Nash in popular culture) to fix text
+  overflow caused by the bg-image column, and fixed the Nash portrait
+  being cropped by Marp's cover-fill default (needed explicit w: sizing,
+  not fit:contain - see HANDOFF.md gotchas).
