@@ -133,8 +133,25 @@ this handoff.
   failing instantly (~3s) with an environment-protection annotation, this
   is the failure mode to check for.
 - **Local marp-cli here is v4.2.3; CI's Docker image pins v3.0.2.** Don't
-  fully trust a local build as proof the CI build will pass — open a PR and
-  check the actual `build` job (it will validate, not deploy).
+  fully trust a local build as proof the CI build will pass. Rather than
+  install Docker (daemon wasn't running when needed), `npx --yes
+  @marp-team/marp-cli@3.0.2 ...` runs the *exact* pinned version locally in
+  seconds — use this to verify against the real toolchain instead of the
+  newer globally-installed `marp` command.
+- **Raw HTML in deck.md is NOT rendered by marp-core v3.9.1 (the version
+  behind CI's pinned v3.0.2) unless `html: true` is set in frontmatter** —
+  without it, literal `<div>`/`<p>`/`<br>` tags print as escaped visible
+  text instead of becoming real elements. This bit us for real: a
+  `<div class="people-row"><img ...>` block for a bio-aside slide rendered
+  as broken text under the real CI toolchain despite looking fine locally
+  on v4.2.3 (which is more lenient). **Prefer Marp's native syntax over raw
+  HTML wherever one exists** — `![bg right w:500](path)` for background/
+  layout images instead of `<img>` + flexbox, `> text` (blockquote) instead
+  of `<p class="...">` for styled asides, plain paragraphs instead of
+  `<br>` for spacing. Marp's image directives (`bg`, `left`/`right`,
+  `vertical`, `w:`/`h:`) are core parser features, not raw HTML, so they
+  don't have this problem. Only reach for `html: true` if there's truly no
+  native equivalent.
 
 ## What doesn't scale (don't try to automate this part)
 

@@ -37,6 +37,7 @@ section.divider {
   background: #24325c;
   color: #fdfdfb;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -68,18 +69,14 @@ td strong {
   border-radius: 4px;
 }
 
-.aside {
+/* Used for asides/forward-pointers via native markdown blockquote (> text),
+   not raw HTML - see HANDOFF.md's note on why raw HTML is avoided here. */
+blockquote {
   font-size: 0.68em;
   color: #5b6472;
   font-style: italic;
-  margin-top: 1em;
+  margin: 1em 0 0;
+  border: none;
+  padding: 0;
 }
-.people-row {
-  display: flex;
-  gap: 1.3em;
-  align-items: flex-end;
-  margin-top: 0.5em;
-}
-.people-row img.portrait { height: 230px; border-radius: 6px; }
-.people-row img.thumb { height: 165px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
-.credit { font-size: 0.6em; color: #8992a1; text-align: center; margin-top: 0.3em; }
+blockquote p { margin: 0; }

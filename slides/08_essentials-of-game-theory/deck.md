@@ -8,7 +8,7 @@ math: katex
 paginate: true
 theme: eco701
 size: 16:9
-footer: 'Eco 701 · Microeconomic Theory · Fall 2018'
+footer: 'Eco 701 - Micro Theory'
 ---
 
 <!-- _class: divider -->
@@ -16,7 +16,7 @@ footer: 'Eco 701 · Microeconomic Theory · Fall 2018'
 # Part I
 # Strategic Behavior and Game Theory
 
-<p>From "what is a game?" to Nash equilibrium, in two worked examples</p>
+From "what is a game?" to Nash equilibrium, in two worked examples
 
 ---
 
@@ -36,7 +36,7 @@ footer: 'Eco 701 · Microeconomic Theory · Fall 2018'
 - Feedback, interaction, and equilibrium
 - *Ceteris paribus* and comparative statics
 
-<p class="aside">These assumptions face real challenges — behavioral and otherwise — that we'll return to throughout the course.</p>
+> *These assumptions face real challenges — behavioral and otherwise — that we'll return to throughout the course.*
 
 ---
 
@@ -49,7 +49,7 @@ Four things define a game:
 - **When** — the order of moves
 - **How much** — the payoffs
 
-<p class="aside">Later in the course: extensive-form and repeated games, equilibrium refinements, and mechanism design (auctions, contracts, voting rules).</p>
+> *Later in the course: extensive-form and repeated games, equilibrium refinements, and mechanism design (auctions, contracts, voting rules).*
 
 ---
 
@@ -107,17 +107,14 @@ A **Nash Equilibrium** is a strategy profile where every player is playing a bes
 - **Existence:** a pure-strategy Nash equilibrium may not exist — but every game has *at least one* Nash equilibrium, possibly in mixed strategies
 - **Uniqueness:** many games have *multiple* Nash equilibria, as the Opera/Football game just showed
 
-<p class="aside">More on mixed strategies later.</p>
+> *More on mixed strategies later.*
 
 ---
 
 ## Aside: Who Was John Nash?
 
-<div class="people-row">
-<img class="portrait" src="media/nash-portrait.png">
-<img class="thumb" src="media/beautiful-mind-poster.png">
-<img class="thumb" src="media/beautiful-mind-book-cover.png">
-</div>
+![bg right vertical w:500](media/nash-portrait.png)
+![bg right w:500](media/beautiful-mind-poster.png)
 
 - Nash's 1950 PhD dissertation — just 28 pages — proved every finite game has at least one (possibly mixed-strategy) Nash equilibrium
 - Cournot (1838) had used a version of the idea, but never stated it in general form
@@ -145,4 +142,4 @@ A **Nash Equilibrium** is a strategy profile where every player is playing a bes
 - Not every game has one — but every game has at least one Nash equilibrium, possibly in mixed strategies
 - The Prisoner's Dilemma and the Fisherman's Dilemma both show how individually rational choices can produce collectively inefficient outcomes
 
-<p class="aside">Next: constrained optimization — the mathematical toolkit behind individual choice.</p>
+> *Next: constrained optimization — the mathematical toolkit behind individual choice.*

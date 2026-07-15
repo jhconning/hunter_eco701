@@ -7,7 +7,7 @@ marp: true
 paginate: true
 theme: eco701
 size: 16:9
-footer: 'Eco 701 · Microeconomic Theory · Fall 2018'
+footer: 'Eco 701 - Micro Theory'
 ---
 
 <!-- _class: lead -->
@@ -17,7 +17,7 @@ footer: 'Eco 701 · Microeconomic Theory · Fall 2018'
 ```text
 Topic 1: Definitions and Key Tools
 ```
-<br></br>
+
 Jonathan Conning
 Hunter College
 Dept of Economics
@@ -30,7 +30,6 @@ Dept of Economics
 - **Utility Possibility Frontiers (UPF)**
 - **Basic Coordination Games**
 
-<br></br>
 *Why do we start with games? Because social dilemmas often leave us trapped inefficiently inside the possibility frontiers.*
 
 ---

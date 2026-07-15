@@ -7,7 +7,7 @@ marp: true
 paginate: true
 theme: eco701
 size: 16:9
-footer: 'Eco 701 · Microeconomic Theory · Fall 2018'
+footer: 'Eco 701 - Micro Theory'
 ---
 
 <!-- _class: lead -->
@@ -19,7 +19,7 @@ Jonathan Conning
 Office Hours: HW 1504A, Tue & Thu 11–12, and by appointment — jconning@hunter.cuny.edu
 Teaching Assistant: Chuxin Liu
 
-<p style="margin-top:2em;">Slide Deck II continues where this leaves off.</p>
+> Slide Deck II continues where this leaves off.
 
 ---
 
