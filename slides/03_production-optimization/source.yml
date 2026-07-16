@@ -1,0 +1,37 @@
+topic: "Production Optimization"
+ideas_md_topic_number: 3
+source_file: "E701_F18 _slidesIIb.pptx"
+source_slides: [162, 202]
+status: in_progress
+notes: >
+  Confirmed clean, contiguous, well-titled block via title_scan.py before
+  extracting (slides 162-202, ending right before General Equilibrium
+  content starts at 204 with "Firms"/Edgeworth Box).
+
+  Very different content profile from Topic 2: only 40 top-level equations
+  but 28 GROUP shapes / 82 AUTO_SHAPE / 22 FREEFORM - isoquant maps, cost
+  curves, and the expansion path are native PowerPoint vector drawings, not
+  Mathcad-rendered graphs or picture+annotation composites. extract_topic.py's
+  diagram_candidates.json heuristic (built for TABLE/PICTURE + annotation)
+  found zero candidates here - it's blind to this pattern entirely. Used
+  the new tools/export_slide_pngs.py (added this session) to export every
+  slide 162-202 as a full PNG unconditionally, then hand-picked crop
+  regions per slide instead of relying on automatic diagram detection.
+
+  A few slides (176) have professor-typed equations using lambda/partial
+  symbols that didn't survive extract_topic.py's text extraction (rendered
+  as blank "L/L = w - (F/L) = 0" instead of "dL/dL = w - lambda(dF/dL) = 0")
+  - re-keyed by viewing the full-slide PNG directly rather than trusting the
+  extracted text.
+
+  Sub-chunk 1 (slides 162-186: production function, MPP, isoquants, RTS,
+  cost minimization via Lagrangian, derived demand, average/marginal cost,
+  Cobb-Douglas cost function) done as of 2026-07-16. Remaining: ~187-202
+  (CRS/DRS cases, AC/MC with fixed costs, factor prices and optimum
+  technique, short-run vs. long-run costs, profit maximization).
+
+  Three Mathcad-generated graphs found in the 187-202 range (CRS Cost
+  Function, AC/MC flat line for CRS, DRS Cost Function) plus one rich
+  Mathcad symbolic-solve-and-plot panel for the profit-maximization worked
+  example (p(q)=10-q, etc.) - all confirmed genuine graphs/panels by
+  viewing directly, not "(no result)" OCR failures.
