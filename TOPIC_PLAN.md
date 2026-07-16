@@ -38,7 +38,7 @@ uncertainty is now just about exact slide boundaries, not about what to do.
 |---|---|---|---|---|
 | 1 | Definitions and key tools | **Done** (`01_definitions-and-key-tools/`) | `slidesI` ~20-31 (inferred, not verified) | Low — verify against source |
 | 2 | Constrained optimization (Lagrange, Kuhn-Tucker) | **Done** (`02_constrained-optimization/`) | `slidesI` 43-102 | High — clean, contiguous, well-titled block |
-| 3 | Production optimization (cost min, profit max, duality) | Not started | `slidesIIb` ~162-202 | Medium — confirm exact boundary |
+| 3 | Production optimization (cost min, profit max, duality) | **Done** (`03_production-optimization/`) | `slidesIIb` 162-202 | High — confirmed via title_scan.py |
 | 4 | Consumption optimization | Not started | `slidesI` 114-209 (utility max/demand) **+** 241-251 (labor supply, non-contiguous) | Medium |
 | 5 | Consumption over time and uncertainty | Not started | `slidesI` 313-337 (intertemporal) **+** `slidesIIb` ~88-117 (risk/uncertainty, non-contiguous, different file) | Medium |
 | 6 | Household Economics (farm household) | Not started | `slidesI` 252-267 | High — clean, contiguous, matches description closely |

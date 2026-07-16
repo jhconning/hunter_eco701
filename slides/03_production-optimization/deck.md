@@ -195,3 +195,157 @@ Substituting back:
 $$C(v,w,q) = B\, q^{\frac{1}{\alpha+\beta}} v^{\frac{\alpha}{\alpha+\beta}} w^{\frac{\beta}{\alpha+\beta}}, \qquad B = (\alpha+\beta)\,\alpha^{-\alpha/(\alpha+\beta)}\beta^{-\beta/(\alpha+\beta)}$$
 
 - With $\alpha+\beta=1$ (constant returns to scale), cost is exactly **linear** in $q$ — the case examined next
+
+---
+
+<!-- _class: divider -->
+
+# Part II
+# Returns to Scale, Cost Curves, and Profit Maximization
+
+Constant vs. decreasing returns to scale, the profit-maximization/cost-minimization duality, short-run vs. long-run costs, and the firm's output choice
+
+---
+
+## Constant Returns to Scale: The Cost Function
+
+With $\alpha=\tfrac12,\ \beta=1-\alpha=\tfrac12$ (so $\alpha+\beta=1$), the Cobb-Douglas cost formula collapses to $B=2$ and $C(v,w,q) = 2\,q\,v^{1/2}w^{1/2}$ — **linear** in $q$:
+
+![center width:340](media/crs-cost-function.png)
+
+- Doubling output exactly doubles cost — the hallmark of constant returns to scale
+
+---
+
+## Constant Returns to Scale: AC and MC
+
+![center width:340](media/crs-ac-mc.png)
+
+- Since cost is linear in $q$, both average and marginal cost are **constant** — $AC(v,w,q) = MC(v,w,q)$ at every output level
+
+---
+
+## Decreasing Returns to Scale: The Cost Function
+
+With $\alpha=\tfrac18,\ \beta=\tfrac14$ (so $\alpha+\beta=\tfrac38<1$), the same formula gives a cost function that's **convex** in $q$:
+
+![center width:340](media/drs-cost-function.png)
+
+- Costs rise faster than output — marginal cost is increasing
+
+---
+
+## Understanding Decreasing Returns to Scale
+
+$$\hat f(k,l,z) = k^\alpha l^\beta z^{1-\alpha-\beta} \qquad\qquad f(k,l) = \hat f(k,l,\bar z) = A\,k^\alpha l^\beta, \quad A = \bar z^{\,1-\alpha-\beta}$$
+
+- One way to think of DRS: the underlying technology is really **constant** returns to scale in *three* inputs, but one factor (here $z$, e.g. "managerial skill") is fixed and non-traded
+- As $q$ rises, the fixed factor is spread more and more thinly — this is exactly why DRS implies rising marginal cost
+
+---
+
+## Average and Marginal Cost, With Fixed Costs
+
+![center width:520](media/ac-mc-fixed-costs.png)
+
+- $MC$ is the slope of the $C$ curve; $AC$ is the slope of a ray from the origin to the $C$ curve
+- If $AC > MC$, $AC$ must be falling; if $AC < MC$, $AC$ must be rising — so $MC$ crosses $AC$ exactly at $AC$'s minimum
+
+---
+
+## Profit Maximization and Cost Minimization: The Same Tangency
+
+$$\max_{K,L} \; pF(K,L) - rK - wL - \text{FC} \qquad\Longrightarrow\qquad pF_L(K^*,L^*) = w, \quad pF_K(K^*,L^*) = r$$
+
+$$\min_{K,L} \; rK + wL + \text{FC} \quad\text{s.t.}\quad F(K,L) = \bar q$$
+
+$$\Longrightarrow\qquad \lambda F_L(K^*,L^*) = w, \quad \lambda F_K(K^*,L^*) = r$$
+
+- Both give the same tangency condition $\frac{F_L}{F_K} = \frac{w}{r}$ — a profit-maximizing firm's input choice is automatically cost-minimizing for whatever output it ends up producing
+
+---
+
+## Conditional vs. Unconditional Input Demand
+
+The profit-maximization FOCs can in principle be solved directly for **input demand functions**:
+
+$$\text{Capital demand} = K(p,v,w) \qquad\qquad \text{Labor demand} = L(p,v,w)$$
+
+- These are **unconditional** — they implicitly let the firm adjust its output as prices change
+- The cost-minimization problem's derived demands $K^*(w,v,q)$, $L^*(w,v,q)$ are **conditional** on a chosen output $q$
+
+---
+
+## Short-Run Total Costs
+
+![center width:460](media/short-run-costs.png)
+
+$$\max_{l} \; pF(k_0,l) - rk_0 - wl - \text{FC} \quad\text{s.t.}\quad k = k_0$$
+
+- With capital fixed at $k_0$, the firm can't equate the RTS to the ratio of input prices — it can only adjust $l$, tracing out a *short-run* cost curve for each level of $k$
+
+---
+
+## Short-Run and Long-Run Costs
+
+![center width:520](media/short-run-long-run-costs.png)
+
+- Each $SC(k_i)$ curve is the short-run cost curve for a fixed capital level $k_i$
+- The **long-run** cost curve is the lower envelope of all the short-run curves — derived by letting $k$ vary optimally with $q$
+
+---
+
+## Profit Maximization
+
+Total revenue: $R(q) = p(q)\cdot q$. Economic profit:
+
+$$\pi(q) = R(q) - C(q) = p(q)\cdot q - C(q)$$
+
+---
+
+## Checking It Numerically
+
+$$p(q) = 10-q \qquad R(q) = p(q)\cdot q \qquad c(q) = \tfrac12 q^2$$
+
+![center width:400](media/profit-max-numeric-panel.png)
+
+- $\Pi(q) = R(q)-c(q)$; solving $\frac{d}{dq}\Pi(q)=0$ gives $q^*=\frac{10}{3}$ — the graph confirms $\Pi$ peaks exactly where $R$ and $c$ have the same slope
+
+---
+
+## The First-Order Condition: MR = MC
+
+$$\frac{d\pi}{dq} = \pi'(q) = \frac{dR}{dq} - \frac{dC}{dq} = 0 \qquad\Longrightarrow\qquad \frac{dR}{dq} = \frac{dC}{dq} \qquad\Longrightarrow\qquad MR = MC$$
+
+- Profit is maximized where marginal revenue equals marginal cost — the slope of the revenue curve equals the slope of the cost curve
+
+---
+
+## Why the Second-Order Condition Matters
+
+![center width:520](media/profit-max-graph-soc.png)
+
+- $R$ and $C$ can have equal slopes at more than one point — here at $q_0$ *and* $q^*$
+- Without checking curvature, $q_0$ could wrongly be mistaken for a maximum — it's actually an inflection-like point, not the profit peak
+
+---
+
+## The Second-Order Condition
+
+$$\left.\frac{d^2\pi}{dq^2}\right|_{q=q^*} = \left.\frac{d\pi'(q)}{dq}\right|_{q=q^*} < 0$$
+
+- The SOC is exactly what rules out mistaking a point like $q_0$ on the previous slide for a maximum — it confirms $\pi$ is genuinely peaking, not just momentarily flat
+
+---
+
+## Average and Marginal Revenue
+
+$$AR(q) = \frac{R(q)}{q} = \frac{p(q)\cdot q}{q} = p(q)$$
+
+- Average revenue is always just the price — by definition
+
+**Example:** linear inverse demand $p(q) = A - bq$:
+
+$$R(q) = Aq - bq^2 \qquad\qquad AR(q) = A - bq \qquad\qquad MR(q) = A - 2bq$$
+
+- For linear demand, marginal revenue falls **twice as fast** as price — a standard result worth remembering

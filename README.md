@@ -38,10 +38,11 @@ more per-file theme copies.
 
 **Topics done so far:** `00_logistics` (front-matter, not part of the
 11-topic sequence), `01_definitions-and-key-tools`,
-`08_essentials-of-game-theory`, and `02_constrained-optimization` (all three
-sub-chunks, complete end to end). See [`TOPIC_PLAN.md`](TOPIC_PLAN.md) for
-the mapping of the remaining topics to the legacy slide decks. If you're
-picking this work up cold, read [`HANDOFF.md`](HANDOFF.md) first.
+`08_essentials-of-game-theory`, `02_constrained-optimization`, and
+`03_production-optimization` — the last two complete end to end across all
+sub-chunks. See [`TOPIC_PLAN.md`](TOPIC_PLAN.md) for the mapping of the
+remaining topics to the legacy slide decks. If you're picking this work up
+cold, read [`HANDOFF.md`](HANDOFF.md) first.
 
 ## `notebooks/`
 

@@ -2,7 +2,7 @@ topic: "Production Optimization"
 ideas_md_topic_number: 3
 source_file: "E701_F18 _slidesIIb.pptx"
 source_slides: [162, 202]
-status: in_progress
+status: done
 notes: >
   Confirmed clean, contiguous, well-titled block via title_scan.py before
   extracting (slides 162-202, ending right before General Equilibrium
@@ -24,14 +24,27 @@ notes: >
   - re-keyed by viewing the full-slide PNG directly rather than trusting the
   extracted text.
 
-  Sub-chunk 1 (slides 162-186: production function, MPP, isoquants, RTS,
-  cost minimization via Lagrangian, derived demand, average/marginal cost,
-  Cobb-Douglas cost function) done as of 2026-07-16. Remaining: ~187-202
-  (CRS/DRS cases, AC/MC with fixed costs, factor prices and optimum
-  technique, short-run vs. long-run costs, profit maximization).
+  Both sub-chunks done as of 2026-07-16, deck.md complete end to end (35
+  slides): sub-chunk 1 (slides 162-186 - production function, MPP,
+  isoquants, RTS, cost minimization via Lagrangian, derived demand,
+  average/marginal cost, Cobb-Douglas cost function) and sub-chunk 2
+  (slides 187-202 - CRS/DRS cases, AC/MC with fixed costs, the profit-max/
+  cost-min duality, conditional vs. unconditional input demand, short-run
+  vs. long-run costs, profit maximization and its FOC/SOC, average/
+  marginal revenue).
 
   Three Mathcad-generated graphs found in the 187-202 range (CRS Cost
   Function, AC/MC flat line for CRS, DRS Cost Function) plus one rich
   Mathcad symbolic-solve-and-plot panel for the profit-maximization worked
   example (p(q)=10-q, etc.) - all confirmed genuine graphs/panels by
   viewing directly, not "(no result)" OCR failures.
+
+  Recurring lesson from this topic's native-diagram slides: the original
+  deck's title varies between 1-line and 2-line depending on title length,
+  so a single fixed crop offset doesn't work across slides - several
+  needed 2-3 rounds of increasing the top-crop margin (checked via
+  rasterization each time) before the leftover title text was fully
+  excluded. Also hit two horizontal equation overflows from cramming both
+  a problem statement and its FOCs onto one display-math line - same
+  "always rasterize and look" discipline as Topic 2, just a different
+  overflow direction (horizontal, not vertical).

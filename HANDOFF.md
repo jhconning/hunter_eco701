@@ -95,17 +95,32 @@ this handoff.
    than transcribed: slide 102 (a bare "PS1 due Friday" logistics note) and
    slide 97 (a Lagrangian recap that duplicated content already given at the
    end of sub-chunk 2).
-3. For each new topic: run the pipeline, review the raw output *including
+3. **Topic 3 (Production Optimization, `slidesIIb` 162-202) is done**,
+   converted in two sub-chunks (35 Marp slides across `deck.md`). Very
+   different content profile from Topic 2 — mostly native PowerPoint
+   drawing shapes (isoquant maps, cost curves) rather than Mathcad graphs,
+   which needed a new tool (`tools/export_slide_pngs.py`, unconditional
+   full-slide export) since `extract_topic.py`'s diagram-candidate
+   heuristic doesn't catch this pattern at all. See `source.yml` in
+   `03_production-optimization/` for the full history, including a
+   recurring variable-title-height crop issue (fixed empirically per
+   slide, not with one fixed offset).
+4. For each new topic: run the pipeline, review the raw output *including
    the shape census* (don't skip this — it's what caught 3 missed tables
-   during the pilot), redesign into `deck.md` with real pedagogical judgment
-   (split overflowing slides, merge redundant ones, write real titles — see
-   the git history of `08_essentials-of-game-theory/deck.md`'s predecessor
-   pilot, or `02_constrained-optimization/deck.md`, for what "good" looks
-   like), verify locally with `marp` CLI + PDF rasterization (PyMuPDF works
-   fine if `pdftoppm` isn't installed — see the gotchas below on the exact
-   image-overflow failure mode to check for), then commit to a branch and
-   open a PR.
-4. Remaining topics (3-7, 8b, 9-11 in `TOPIC_PLAN.md`) haven't been started
+   during the pilot), check whether the diagrams are Mathcad graphs/
+   picture+annotation (caught by `extract_topic.py`'s heuristic) or native
+   PowerPoint drawing shapes (not caught — use `export_slide_pngs.py` and
+   hand-pick crops instead, per Topic 3's `source.yml`), redesign into
+   `deck.md` with real pedagogical judgment (split overflowing slides,
+   merge redundant ones, write real titles — see the git history of
+   `08_essentials-of-game-theory/deck.md`'s predecessor pilot, or either
+   `02_constrained-optimization/deck.md` or
+   `03_production-optimization/deck.md`, for what "good" looks like),
+   verify locally with `marp` CLI + PDF rasterization (PyMuPDF works fine
+   if `pdftoppm` isn't installed — see the gotchas below on the exact
+   image-overflow failure modes, both vertical and horizontal, to check
+   for), then commit to a branch and open a PR.
+5. Remaining topics (4-7, 8b, 9-11 in `TOPIC_PLAN.md`) haven't been started
    at all.
 
 ## Code-generated figures (`notebooks/`, started 2026-07-15)
