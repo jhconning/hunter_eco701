@@ -104,6 +104,7 @@ ENV/
 canvas/
 grades/
 legacy/
+BH/
 syllabus/IDEAS.md
 _verify/
 _build/
