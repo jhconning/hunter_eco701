@@ -7,9 +7,12 @@ Written 2026-07-13.
 
 Jonathan is modernizing Eco 701 (Master's Microeconomic Theory) from old
 PowerPoint slides into Marp markdown slides, organized around the 11-topic
-course sequence in [`syllabus/IDEAS.md`](syllabus/IDEAS.md). The end goal is
-a live course site (GitHub Pages) with slides, notes, and problem sets all
-built from the same markdown source.
+course sequence (originally drafted in `syllabus/IDEAS.md` — that file is
+gitignored/private by deliberate choice as of 2026-07-16, so don't link to
+it from anything public-facing; [`TOPIC_PLAN.md`](TOPIC_PLAN.md) is the
+tracked, public equivalent). The end goal is a live course site (GitHub
+Pages) with slides, notes, and problem sets all built from the same
+markdown source.
 
 **This is NOT a fresh project** — a real repo (`jhconning/hunter_eco701`)
 already existed with a working GitHub Pages deploy pipeline and one topic
@@ -56,6 +59,9 @@ slides/
       media/eq/, media/pic/, media/slide_png/
     source.yml                    <- provenance: which pptx, which slide range, confidence level
     new_ideas.md                  <- backlog of expansion ideas (new slides, viz, problem sets) - not a plan
+    figs/                         <- notebook-generated candidate figures, staged for review (optional,
+                                      only exists for topics with a companion notebook) - see
+                                      "Code-generated figures" below for the promotion procedure
 ```
 
 Read the actual `source.yml` and `deck.md` in `01_definitions-and-key-tools/`
@@ -131,23 +137,58 @@ so slides stay static/Marp for now, but a companion Jupyter notebook
 regenerates every figure from code, and doubles as a live-demo tool for
 class (`ipywidgets` sliders, rotatable `plotly` 3-D surfaces).
 
+### The `figs/` convention (2026-07-16)
+
+Every topic folder can have a **`slides/<topic>/figs/`** directory — a
+sibling of `media/`, `raw/`, `source.yml` — that holds notebook-generated
+*candidate* figures. It is git-tracked (so a diff shows exactly what a
+regenerated figure would change) but is deliberately **not** where `deck.md`
+points its `![](...)` references. Think of it the same way as `raw/`:
+regeneratable from code, safe to overwrite by re-running the notebook, never
+hand-edited — except `figs/`'s generator is a notebook rather than the
+extraction pipeline, and its purpose is "candidate for `media/`" rather than
+"mechanical extraction intermediate."
+
+Each topic's notebook(s) target this folder via a `FIGDIR` path at the top,
+e.g. (from `topic02_constrained_optimization_figures.ipynb`):
+```python
+FIGDIR = Path("../slides/02_constrained-optimization/figs")
+```
+
+**Promotion procedure — how a generated figure becomes a live slide image:**
+1. Notebook cell calls `savefig(fig, "name.png")` → lands in `figs/`,
+   git-tracked, reviewable in a normal diff.
+2. Jonathan reviews it against what's currently live in `media/` for that
+   slide. **Never swap automatically — this is always a deliberate,
+   individual decision**, the same policy as everything else in this repo
+   that touches what's actually deployed.
+3. If approved: copy into `media/` under the **same filename** `deck.md`
+   already references (no deck edit needed) — `cp figs/x.png media/x.png`.
+   If renaming, update the one `![](media/...)` reference in `deck.md` too.
+4. Rebuild + verify before committing — use `tools/verify_deck.py
+   <topic-folder>` (added 2026-07-16; wraps the manual "build with the
+   CI-pinned marp-cli, rasterize every slide, eyeball/flag overflow" loop
+   used throughout this project into one command).
+5. Commit the `media/` swap and, if the notebook changed, the regenerated
+   `figs/` file together.
+
 - **Proof of concept:** `notebooks/topic02_constrained_optimization_figures.ipynb`
   regenerates all 12 static figures used in `02_constrained-optimization/deck.md`
   (sub-chunk 1, slides 43-63) from the exact formulas already written in that
-  `deck.md`, saving output to `notebooks/figures/topic02/` — **not** written
-  into the deck's own `media/` folder, so nothing in the live deck has
-  changed yet. Also includes 3 interactive demos (profit maximization,
-  isoquant/MRTS, a rotatable Cobb-Douglas-style surface).
+  `deck.md`, saving output to `slides/02_constrained-optimization/figs/` —
+  **not** written into the deck's own `media/` folder, so nothing in the live
+  deck has changed yet. Also includes 3 interactive demos (profit
+  maximization, isoquant/MRTS, a rotatable Cobb-Douglas-style surface).
 - Verified end-to-end via `jupyter nbconvert --to notebook --execute
   --inplace` (uses the `ecopy` kernel) — all cells run clean, all 12 PNGs
   generated, output spot-checked visually.
-- **Not yet decided:** whether to actually swap these generated images into
-  `02_constrained-optimization/media/` in place of the current ones, or keep
-  the notebook as a separate supplementary artifact. Ask Jonathan before
+- **Not yet decided:** whether to actually promote these generated images
+  into `02_constrained-optimization/media/` in place of the current ones, or
+  keep the notebook as a separate supplementary artifact. Ask Jonathan before
   doing the swap — it'd change what's live on the deployed site.
 - If this proves out, the same pattern (one notebook per topic, regenerating
-  that topic's figures from the formulas already in `deck.md`) is the
-  template to extend to later topics.
+  that topic's figures from the formulas already in `deck.md`, saving to that
+  topic's `figs/`) is the template to extend to later topics.
 
 **Second notebook (2026-07-16):**
 `notebooks/topic02_constrained_optimization_numerical.ipynb` is a different

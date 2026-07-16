@@ -24,7 +24,7 @@ Unconstrained optimization, multivariable calculus, and implicit differentiation
 
 A profit-maximizing quantity choice, $\pi(q) = P \cdot q - C(q)$ with $P = 10$, $C(q) = 10 + q^2$:
 
-![center width:400](media/profit-max-graph.png)
+![center width:320](media/profit-max-graph.png)
 
 $$\pi(q) = 10q - 10 - q^2 \qquad \frac{d\pi(q)}{dq} = 0 \;\Longrightarrow\; q = 5$$
 
@@ -86,6 +86,7 @@ $$f(x,y) = \sqrt{x} \cdot \sqrt{y}$$
 ![width:290](media/surface-sqrt-3d.png) ![width:290](media/contour-sqrt-2d.png)
 
 - The 3-D surface and its contour map are two views of the same function
+- *(Rotate this surface yourself — see [`topic02_constrained_optimization_figures.ipynb`](../../notebooks/topic02_constrained_optimization_figures.ipynb))*
 
 ---
 
@@ -102,7 +103,7 @@ $$f_x = \frac{\partial f(x,y)}{\partial x} = \frac{1}{4} x^{-3/4} y^{3/4} \qquad
 
 ## Partial Derivatives: A Graphical View
 
-![center width:290](media/partial-derivatives-3panel.png)
+![center width:220](media/partial-derivatives-3panel.png)
 
 > *Both cross-sections keep rising without bound — confirming this function is unbounded, with no unconstrained maximum.*
 
@@ -183,6 +184,10 @@ $$\frac{dy}{dx} = -\frac{f_x}{f_y} = -\frac{y}{x}$$
 - At $(x,y) = (10,10)$: $\dfrac{dy}{dx} = -1$
 - At $(x,y) = (20,5)$: $\dfrac{dy}{dx} = -\dfrac{5}{20} = -\dfrac{1}{4}$
 
+---
+
+## Isoquants
+
 $q = f(x,y)$ is an **isoquant** — $x, y$ are inputs, $q$ the quantity produced; $f(x,y)=100$ defines the $q=100$ isoquant.
 
 ---
@@ -192,6 +197,7 @@ $q = f(x,y)$ is an **isoquant** — $x, y$ are inputs, $q$ the quantity produced
 ![center width:460](media/isoquant-mrts-diagram.png)
 
 - The tangent line's slope *flattens* as you move along the curve — a declining **MRTS** (Marginal Rate of Technical Substitution)
+- *(Try different output levels and evaluation points interactively — see [`topic02_constrained_optimization_figures.ipynb`](../../notebooks/topic02_constrained_optimization_figures.ipynb))*
 
 ---
 
@@ -300,6 +306,10 @@ $$\frac{u_1}{u_2} = \frac{p_1}{p_2} \qquad\Longleftrightarrow\qquad \frac{u_1}{p
 - Symmetrically, if $\dfrac{u_1}{p_1} < \dfrac{u_2}{p_2}$, reallocate the other way
 - Only when $\dfrac{u_1}{p_1} = \dfrac{u_2}{p_2}$ are there no more utility-improving reallocations left
 
+---
+
+## The Marginal Utility of Income
+
 $$\lambda := \frac{u_1}{p_1} = \frac{u_2}{p_2}$$
 
 - $\lambda$ is the common MU-per-dollar at the optimum — interpreted as the **marginal utility of income**: how much utility rises from slightly relaxing the budget constraint
@@ -367,7 +377,7 @@ $$\Longrightarrow \qquad \frac{f_1}{g_1} = \frac{f_2}{g_2} = \lambda, \qquad g(x
 
 ## Application: Labor Allocation and a PPF
 
-![center width:600](media/ppf-welfare-max-derivation.png)
+![center width:500](media/ppf-welfare-max-derivation.png)
 
 - With linear technologies (constant $MPL_1$, $MPL_2$ — a Ricardian production possibility frontier), labor requirements $L_1, L_2$ can be written directly in terms of outputs $x_1, x_2$, turning the resource constraint $L_1+L_2=\bar L$ into a constraint on $(x_1,x_2)$ directly
 
@@ -388,6 +398,7 @@ $$L(x_1,x_2,\lambda) = u(x_1,x_2) + \lambda\left(\bar L - \frac{x_1}{MPL_1} - \f
 $$\frac{u_1}{u_2} = \frac{MPL_2}{MPL_1} \qquad\qquad \frac{x_1}{MPL_1}+\frac{x_2}{MPL_2} = \bar L$$
 
 - $\lambda = u_1 \cdot MPL_1 = u_2 \cdot MPL_2$ — the value, in utility, of one more unit of labor
+- *(Solved symbolically and checked numerically — see [`topic02_constrained_optimization_numerical.ipynb`](../../notebooks/topic02_constrained_optimization_numerical.ipynb))*
 
 ---
 
@@ -421,6 +432,7 @@ $$\frac{MU_1}{MU_2} < \frac{p_1}{p_2} \quad \text{everywhere along the budget li
 
 - Good 2 delivers higher marginal utility per dollar than good 1 at *every* affordable bundle — so it's optimal to spend nothing on good 1: $c_1 = 0$
 - At the corner, the FOC becomes an inequality rather than an equality: $\dfrac{\partial u}{\partial c_1} - \lambda p_1 < 0$
+- *(A genuine corner, solved numerically — `scipy` lands on it directly — see [`topic02_constrained_optimization_numerical.ipynb`](../../notebooks/topic02_constrained_optimization_numerical.ipynb))*
 
 ---
 
@@ -546,6 +558,7 @@ $$U(c_F,c_W) = c_F \cdot c_W \qquad p_F=1,\ p_W=2,\ I=100,\ T=80$$
 | Transport binds only | $(40, 40)$ | **No** — violates budget ($40+80=120>100$) | 1600 |
 
 - Discarding the infeasible candidate, the winner is **budget-binds-only**: $(c_W^*,c_F^*)=(25,50)$, $U^*=1250$
+- *(Solved two ways — case-by-case and in one `scipy` call — plus a numerical check of $\lambda$ as a shadow price: see [`topic02_constrained_optimization_numerical.ipynb`](../../notebooks/topic02_constrained_optimization_numerical.ipynb))*
 
 ---
 

@@ -9,4 +9,5 @@ project:
 site:
   options:
     folders: true
+    logo_text: Hunter Eco 701
   template: book-theme
