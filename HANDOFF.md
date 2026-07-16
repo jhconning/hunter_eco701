@@ -83,24 +83,27 @@ this handoff.
    over slidesII, slides 32-42 continue Topic 8, ~70 unmapped slides become
    an isolated optional Topic 8b, Topic 9 is deferred (slides not yet
    written).
-2. **Topic 2 (Constrained Optimization, `slidesI` 43-102) is in progress**,
-   converted in sub-chunks because it's much larger than other topics (60
-   slides, 152 top-level equations). Done so far: sub-chunk 1, slides 43-63
-   ("Mathematical Preliminaries" — unconstrained optimization, multivariable
-   calculus, implicit differentiation). See `source.yml` in
-   `02_constrained-optimization/` for exactly which sub-chunks remain
-   (~64-90 Lagrange method/corner solutions, ~91-102 applications) — it
-   already has the approved Tier-3 demo images for slides 78-79 rendered
-   (`media/ppf-welfare-max-derivation.png`, `media/constrained-max-graph.png`)
-   but not yet folded into `deck.md`.
+2. **Topic 2 (Constrained Optimization, `slidesI` 43-102) is done**, converted
+   in three sub-chunks because it's much larger than other topics (60 slides,
+   152 top-level equations, now 52 Marp slides across `deck.md`). See
+   `source.yml` in `02_constrained-optimization/` for the full history —
+   worth reading before touching this topic again, since it documents real
+   gotchas (the Mathcad-graph-vs-OCR-miss distinction, a shape-bounding-box
+   crop bug in `render_equations.py`'s output for 4 of the sub-chunk-3
+   diagrams). Two pieces of legacy content were deliberately dropped rather
+   than transcribed: slide 102 (a bare "PS1 due Friday" logistics note) and
+   slide 97 (a Lagrangian recap that duplicated content already given at the
+   end of sub-chunk 2).
 3. For each new topic: run the pipeline, review the raw output *including
    the shape census* (don't skip this — it's what caught 3 missed tables
    during the pilot), redesign into `deck.md` with real pedagogical judgment
    (split overflowing slides, merge redundant ones, write real titles — see
    the git history of `08_essentials-of-game-theory/deck.md`'s predecessor
-   pilot for what "good" looks like), verify locally with `marp` CLI +
-   `pdftoppm` rasterization (see "Verifying a build" below), then commit to
-   a branch and open a PR.
+   pilot, or `02_constrained-optimization/deck.md`, for what "good" looks
+   like), verify locally with `marp` CLI + PDF rasterization (PyMuPDF works
+   fine if `pdftoppm` isn't installed — see the gotchas below on the exact
+   image-overflow failure mode to check for), then commit to a branch and
+   open a PR.
 4. Remaining topics (3-7, 8b, 9-11 in `TOPIC_PLAN.md`) haven't been started
    at all.
 
@@ -128,7 +131,22 @@ class (`ipywidgets` sliders, rotatable `plotly` 3-D surfaces).
   doing the swap — it'd change what's live on the deployed site.
 - If this proves out, the same pattern (one notebook per topic, regenerating
   that topic's figures from the formulas already in `deck.md`) is the
-  template to extend to Topic 2's remaining sub-chunks and to later topics.
+  template to extend to later topics.
+
+**Second notebook (2026-07-16):**
+`notebooks/topic02_constrained_optimization_numerical.ipynb` is a different
+kind of companion — not figure replication, but actually *setting up and
+solving* the deck's constrained-optimization examples as code: a reusable
+symbolic Lagrangian solver (`sympy`), numerical cross-checks
+(`scipy.optimize`), a genuine corner-solution example, the multi-constraint
+Earthquake Relief problem solved both by hand-checking cases (as the deck
+teaches) and by a single `scipy` call with inequality constraints, and a
+numerical verification of the shadow-price interpretation of $\lambda$ (the
+envelope theorem — relax a binding constraint by 1 unit, confirm $\Delta U
+\approx \lambda$; relax a slack one, confirm $\Delta U \approx 0$). Verified
+end-to-end the same way as the figures notebook. Every numeric/symbolic
+result was hand-checked against the deck's own worked numbers before
+committing.
 
 ## Gotchas discovered the hard way (don't rediscover these)
 
@@ -209,6 +227,25 @@ class (`ipywidgets` sliders, rotatable `plotly` 3-D surfaces).
   OCR misses, not graphs) — the only reliable way to tell the two apart
   is to open the crop and look. **Treat every Mathpix `(no result)` as
   "go view the image," never just "OCR failed, move on."**
+- **`render_equations.py`'s per-shape crop can clip content that visually
+  overflows the OLE shape's declared bounding box** — found on 4 Mathcad
+  diagrams in `02_constrained-optimization` sub-chunk 3 (slides 91, 94-96):
+  labels/equations positioned by the original author to sit just outside
+  the shape's nominal frame got cut off in the auto-crop (only `PAD=8px` of
+  margin). The crop looked fine at native resolution when spot-checked
+  quickly, but text near the edge was already truncated — only obvious once
+  rendered small in the actual Marp slide. Fix: re-crop from the full-slide
+  PNG in `raw/media/slide_png/` (already exported by the same script) with
+  a hand-picked bounding box, instead of trusting the per-shape crop in
+  `raw/media/eq/` for anything with labels near the shape's edge.
+- **Image width tuning is genuinely iterative — always rasterize and look,
+  don't estimate from aspect ratio alone.** Multiple slides in
+  `02_constrained-optimization` needed 2-3 rounds of shrinking (or splitting
+  into two slides) before an image + surrounding text actually fit the
+  16:9 canvas without pushing the footer off the bottom edge. A slide that
+  "looks probably fine" from the markdown alone routinely wasn't — build the
+  PDF and rasterize every new/changed slide (PyMuPDF's `get_pixmap` if
+  `pdftoppm` isn't installed) before considering a topic done.
 - **PowerPoint COM automation safety:** `win32com.client.Dispatch` attaches
   to an *already-running* PowerPoint instance rather than starting a new
   one. Always check with `GetActiveObject` first and only call
