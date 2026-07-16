@@ -281,10 +281,12 @@ committing.
 - **Marp `bg` images default to cover-fill (crop-to-fill), not
   letterbox/contain.** A wide/landscape image (e.g. a 2.3:1 aspect banner)
   placed in a narrow `bg right:40%` column gets its sides cropped off
-  unless you constrain it. The `fit:contain` directive did NOT work on the
-  CI-pinned marp-core v3.9.1 (silently ignored — possibly a newer-Marp-only
-  feature); what actually worked was an explicit `w:` (e.g.
-  `w:480`), which overrides the cover-fill default. Always check a `bg`
+  unless you constrain it. The `fit:contain` directive did NOT work under
+  the original marp-core v3.9.1 pin (silently ignored; the 2026-07-16
+  upgrade to marp-cli v4.2.3 may have changed this — retest on a scratch
+  slide before relying on it); what has always worked is an explicit `w:`
+  (e.g. `w:480`), which overrides the cover-fill default and remains the
+  proven convention across these decks. Always check a `bg`
   image's real aspect ratio (`PIL.Image.open(...).size`) before choosing
   between relying on the column's default fill vs. giving it an explicit
   width.
@@ -358,20 +360,26 @@ committing.
   (environment-gated, push-to-main only) jobs. If you see PR CI runs
   failing instantly (~3s) with an environment-protection annotation, this
   is the failure mode to check for.
-- **Local marp-cli here is v4.2.3; CI's Docker image pins v3.0.2.** Don't
-  fully trust a local build as proof the CI build will pass. Rather than
-  install Docker (daemon wasn't running when needed), `npx --yes
-  @marp-team/marp-cli@3.0.2 ...` runs the *exact* pinned version locally in
-  seconds — use this to verify against the real toolchain instead of the
-  newer globally-installed `marp` command.
-- **Raw HTML in deck.md is NOT rendered by marp-core v3.9.1 (the version
-  behind CI's pinned v3.0.2) unless `html: true` is set in frontmatter** —
-  without it, literal `<div>`/`<p>`/`<br>` tags print as escaped visible
-  text instead of becoming real elements. This bit us for real: a
-  `<div class="people-row"><img ...>` block for a bio-aside slide rendered
-  as broken text under the real CI toolchain despite looking fine locally
-  on v4.2.3 (which is more lenient). **Prefer Marp's native syntax over raw
-  HTML wherever one exists** — `![bg right w:500](path)` for background/
+- **The marp-cli pin is v4.2.3 everywhere as of 2026-07-16** — CI's Docker
+  image, `tools/verify_deck.py`'s `MARP_VERSION`, and (coincidentally) the
+  locally-installed `marp` are all aligned at 4.2.3. It was upgraded from
+  the original v3.0.2 pin (marp-core v3.9.1) after re-verifying every
+  deployed deck under the new version. The version stays *pinned* on
+  purpose: the site only changes when we change it, and upgrades are a
+  deliberate bump-rebuild-reverify chore (like this one), never automatic.
+  If versions ever drift again, don't trust an unpinned local build as
+  proof CI will agree — `npx --yes @marp-team/marp-cli@4.2.3 ...` (or just
+  `tools/verify_deck.py`, which pins internally) runs the exact CI version
+  without Docker. Keep `MARP_VERSION` and the two `docker://` lines in
+  `.github/workflows/deploy-myst.yml` in sync.
+- **Raw HTML in deck.md was NOT rendered under the original marp-core
+  v3.9.1 pin unless `html: true` was set in frontmatter** — literal
+  `<div>`/`<p>`/`<br>` tags printed as escaped visible text. This bit us
+  for real: a `<div class="people-row"><img ...>` block for a bio-aside
+  slide rendered as broken text on the live site despite looking fine on
+  a newer local marp. The current v4.2.3 pin is more lenient about HTML,
+  but the policy is unchanged and version-independent: **prefer Marp's
+  native syntax over raw HTML wherever one exists** — `![bg right w:500](path)` for background/
   layout images instead of `<img>` + flexbox, `> text` (blockquote) instead
   of `<p class="...">` for styled asides, plain paragraphs instead of
   `<br>` for spacing. Marp's image directives (`bg`, `left`/`right`,

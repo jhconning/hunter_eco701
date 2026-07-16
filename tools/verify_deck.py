@@ -37,7 +37,7 @@ import fitz  # PyMuPDF
 from PIL import Image
 
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-MARP_VERSION = "3.0.2"  # keep in sync with .github/workflows/deploy-myst.yml
+MARP_VERSION = "4.2.3"  # keep in sync with .github/workflows/deploy-myst.yml
 EDGE_FRACTION = 0.012  # fraction of width/height treated as "the margin band"
 BG_SAMPLE_SIZE = 6  # px square sampled from each corner to determine background
 DEVIATION_THRESHOLD = 40  # per-channel RGB distance from background to count as "content"
