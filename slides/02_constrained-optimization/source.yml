@@ -5,12 +5,21 @@ source_slides: [43, 102]
 status: in_progress
 notes: >
   Large topic (60 slides, 152 top-level equations) - being converted in
-  sub-chunks per Jonathan's 2026-07-15 decision. This pass covers only
-  slides 43-63 ("Mathematical Preliminaries": unconstrained optimization,
-  multivariable calculus, implicit differentiation - the toolkit behind
-  the Method of Lagrange). Remaining sub-chunks: ~64-90 (Lagrange method,
-  corner solutions - includes the approved Tier 3 treatment demo for
-  slides 78-79, not yet folded into deck.md), ~91-102 (applications).
+  sub-chunks per Jonathan's 2026-07-15 decision. Sub-chunk 1 (slides
+  43-63, "Mathematical Preliminaries") and sub-chunk 2 (slides 64-90,
+  "The Tangency and Lagrange Methods" - substitution/tangency/arbitrage,
+  Method of Lagrange, the PPF application using the approved Tier 3
+  demo images, corner solutions, complementary slackness) are both done
+  and folded into deck.md as of 2026-07-16. Remaining: ~91-102
+  (applications - resolves the Earthquake Relief / PS1 Q3 example
+  introduced at the end of sub-chunk 2).
+
+  Sub-chunk 2 needed render_equations.py + mathpix_ocr.py run for the
+  first time on slides 64-90 (sub-chunk 1 already had this done) - see
+  raw/mathpix.json (merged) and raw/media/eq/. Also ran
+  render_diagram.py to pick up two GROUP-shape diagram candidates
+  (slides 68, 81) that extract_topic.py had flagged but nobody had
+  rendered yet, alongside re-confirming slides 59/78/99/100.
 
   Consolidated slides 52 and 61 into one ("Unconstrained Maximization: An
   Example") - identical shape structure/content in the original, an

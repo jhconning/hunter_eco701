@@ -234,3 +234,239 @@ $$u(c_1,c_2) = c_1 c_2$$
 ![center width:300](media/utility-surface.png)
 
 - The same calculus toolkit — partial derivatives, the chain rule, total differentiation — applies directly to utility maximization, which is where we're headed next
+
+---
+
+<!-- _class: divider -->
+
+# Part II
+# The Tangency and Lagrange Methods
+
+Solving constrained optimization problems: substitution, tangency, arbitrage, and the Method of Lagrange
+
+---
+
+## A Motivating Example
+
+$$\max_{c_1,c_2} \; u(c_1,c_2) = c_1 c_2 \qquad \text{s.t.} \quad p_1 c_1 + p_2 c_2 \le I$$
+
+![center width:270](media/tangency-graph.png)
+
+- Each curve is an indifference curve; the line is the budget line — we want the highest indifference curve still touching it
+
+---
+
+## The Substitution Method
+
+Solve the constraint for $c_2$ as a function of $c_1$, then substitute into the objective:
+
+$$c_2(c_1) = \frac{I}{p_2} - \frac{p_1}{p_2}c_1 \qquad\Longrightarrow\qquad \max_{c_1} \; c_1\left(\frac{I}{p_2} - \frac{p_1}{p_2}c_1\right)$$
+
+$$\frac{du}{dc_1} = \frac{I}{p_2} - 2\frac{p_1}{p_2}c_1 = 0 \qquad\Longrightarrow\qquad c_1 = \frac{I}{2p_1}, \qquad p_1 c_1 = \frac{I}{2}$$
+
+- Turns a 2-variable constrained problem into a 1-variable unconstrained one — works, but doesn't generalize well once constraints get more complicated
+
+---
+
+## Indifference Curves and the MRS
+
+$$u(c_1,c_2) = c_1 c_2$$
+
+Along an indifference curve $u(c_1,c_2) = \bar u$, totally differentiating gives $u_1\,dc_1 + u_2\,dc_2 = 0$, so
+
+$$\frac{dc_2}{dc_1} = -\frac{u_1}{u_2} = MRS \qquad \text{where} \quad u_1 = \frac{\partial u}{\partial c_1} = MU_1, \quad u_2 = \frac{\partial u}{\partial c_2} = MU_2$$
+
+- The **MRS** is the slope of the indifference curve — how much $c_2$ the consumer would give up for one more unit of $c_1$, staying equally happy
+
+---
+
+## The Tangency Method
+
+Budget constraint $p_1c_1 + p_2c_2 = I$ has slope $\dfrac{dc_2}{dc_1} = -\dfrac{p_1}{p_2}$.
+
+At an optimum, the indifference curve must be tangent to the budget line — the two slopes match:
+
+$$\frac{u_1}{u_2} = \frac{p_1}{p_2} \qquad\Longleftrightarrow\qquad \frac{u_1}{p_1} = \frac{u_2}{p_2}$$
+
+- Necessary condition for a maximum: **marginal utility per dollar spent must be equalized** across goods
+
+---
+
+## The Arbitrage Argument
+
+*Why* must MU per dollar be equalized? Suppose instead $\dfrac{u_1}{p_1} > \dfrac{u_2}{p_2}$ — good 1 delivers more utility per dollar than good 2:
+
+- Reallocating income toward good 1 (and away from good 2) raises utility — so this **cannot** be optimal
+- Symmetrically, if $\dfrac{u_1}{p_1} < \dfrac{u_2}{p_2}$, reallocate the other way
+- Only when $\dfrac{u_1}{p_1} = \dfrac{u_2}{p_2}$ are there no more utility-improving reallocations left
+
+$$\lambda := \frac{u_1}{p_1} = \frac{u_2}{p_2}$$
+
+- $\lambda$ is the common MU-per-dollar at the optimum — interpreted as the **marginal utility of income**: how much utility rises from slightly relaxing the budget constraint
+
+---
+
+## Solving the Cobb-Douglas Example
+
+Two equations, two unknowns — tangency condition plus budget constraint. For $u(c_1,c_2) = c_1 c_2$: $u_1 = c_2$, $u_2 = c_1$, so
+
+$$\frac{c_2}{c_1} = \frac{p_1}{p_2} \;\Rightarrow\; p_1 c_1 = p_2 c_2 \qquad\qquad p_1c_1 + p_2c_2 = I \;\Rightarrow\; p_1c_1 + p_1c_1 = I$$
+
+$$\Longrightarrow \qquad c_1 = \frac{I}{2p_1}, \qquad c_2 = \frac{I}{2p_2}$$
+
+- Same answer as the substitution method — the tangency condition is just a more general route to it
+
+---
+
+## The Method of Lagrange
+
+A way to remember — and generalize — the tangency method. Build a new function $L$ combining the objective and the constraint:
+
+$$L(c_1,c_2,\lambda) = u(c_1,c_2) + \lambda\big(I - p_1c_1 - p_2c_2\big)$$
+
+First-order conditions for an unconstrained maximum of $L$:
+
+$$\frac{\partial L}{\partial c_1} = u_1 - \lambda p_1 = 0 \qquad \frac{\partial L}{\partial c_2} = u_2 - \lambda p_2 = 0 \qquad \frac{\partial L}{\partial \lambda} = I - p_1c_1 - p_2c_2 = 0$$
+
+- The first two FOCs together give exactly the tangency condition $\frac{u_1}{u_2} = \frac{p_1}{p_2}$; the third just restates the budget constraint
+
+---
+
+## Checking the Answer Symbolically
+
+![width:260](media/lagrangian-mathcad-symbolic.png) ![width:260](media/lagrangian-mathcad-numeric.png)
+
+- A computer algebra system confirms the closed form solved by hand: $c_1 = \frac{I}{2p_1}$, $c_2 = \frac{I}{2p_2}$, $\lambda = \frac{I}{2 p_1 p_2}$
+- *(The companion notebook rebuilds this exact check with Python/SymPy — see [`notebooks/`](../../notebooks/))*
+
+---
+
+## The Arbitrage Argument, Generalized
+
+The same reallocation logic applies to **any** problem $\max f(x_1,x_2)$ s.t. $g(x_1,x_2) = c$, not just utility maximization:
+
+- Start from a candidate $(x_1,x_2)$ satisfying the constraint exactly, and consider a small reallocation along it: $g_1\,dx_1 + g_2\,dx_2 = 0$, so a move of $dx_1 = dc/g_1$ requires $dx_2 = -dc/g_2$
+- Marginal benefit from more $x_1$: $\;dx_1 \cdot f_1 = \frac{dc}{g_1}f_1\qquad$ Marginal cost from less $x_2$: $\;dx_2 \cdot f_2 = -\frac{dc}{g_2}f_2$
+- Worthwhile whenever $\left(\dfrac{f_1}{g_1} - \dfrac{f_2}{g_2}\right)dc > 0$ — so at an optimum, with no further improving reallocations:
+
+$$\frac{f_1}{g_1} = \frac{f_2}{g_2} \qquad \Big(\text{each} = \lambda,\ \text{the benefit-cost ratio}\Big)$$
+
+---
+
+## Method of Lagrange: General Form
+
+$$L(x_1,x_2,\lambda) = f(x_1,x_2) + \lambda\big(c - g(x_1,x_2)\big)$$
+
+$$\frac{\partial L}{\partial x_1} = f_1 - \lambda g_1 = 0 \qquad \frac{\partial L}{\partial x_2} = f_2 - \lambda g_2 = 0 \qquad \frac{\partial L}{\partial \lambda} = c - g(x_1,x_2) = 0$$
+
+$$\Longrightarrow \qquad \frac{f_1}{g_1} = \frac{f_2}{g_2} = \lambda, \qquad g(x_1,x_2) = c$$
+
+- Exactly the utility-maximization Lagrangian, with $f \to u$ and $g \to$ the budget constraint — the method doesn't care what $f$ and $g$ *mean*
+
+---
+
+## Application: Labor Allocation and a PPF
+
+![center width:600](media/ppf-welfare-max-derivation.png)
+
+- With linear technologies (constant $MPL_1$, $MPL_2$ — a Ricardian production possibility frontier), labor requirements $L_1, L_2$ can be written directly in terms of outputs $x_1, x_2$, turning the resource constraint $L_1+L_2=\bar L$ into a constraint on $(x_1,x_2)$ directly
+
+---
+
+## Solving It: Welfare Maximization Along the PPF
+
+$$\max_{x_1,x_2} \; U(x_1,x_2) \quad\text{s.t.}\quad \frac{x_1}{MPL_1}+\frac{x_2}{MPL_2} = \bar L$$
+
+![center width:520](media/constrained-max-graph.png)
+
+---
+
+## The PPF Lagrangian
+
+$$L(x_1,x_2,\lambda) = u(x_1,x_2) + \lambda\left(\bar L - \frac{x_1}{MPL_1} - \frac{x_2}{MPL_2}\right)$$
+
+$$\frac{u_1}{u_2} = \frac{MPL_2}{MPL_1} \qquad\qquad \frac{x_1}{MPL_1}+\frac{x_2}{MPL_2} = \bar L$$
+
+- $\lambda = u_1 \cdot MPL_1 = u_2 \cdot MPL_2$ — the value, in utility, of one more unit of labor
+
+---
+
+## Generalizing: $n$ Variables, $M$ Constraints
+
+One constraint, $n$ choice variables:
+
+$$L = f(x_1,\dots,x_n) + \lambda\big(c - g(x_1,\dots,x_n)\big) \qquad\qquad \frac{\partial L}{\partial x_i} = f_i - \lambda g_i = 0 \;\; \forall i$$
+
+$$\lambda = \frac{f_1}{g_1} = \frac{f_2}{g_2} = \cdots = \frac{f_n}{g_n}$$
+
+$M$ constraints, one multiplier per constraint:
+
+$$L = f(x_1,\dots,x_n) + \sum_{m=1}^{M} \lambda_m\big(c_m - g^m(x_1,\dots,x_n)\big)$$
+
+- $\lambda$ is always a **benefit-cost ratio**: how much the objective improves per unit of relaxing a constraint
+
+---
+
+## Corner Solutions and Non-Binding Constraints
+
+So far we've implicitly assumed an **interior** solution and a **binding** constraint — FOCs hold as equalities, second-order conditions (concavity) guarantee a max. Most examples in this course are set up this way.
+
+- But a full treatment of the Method of Lagrange needs to allow for **corner solutions** (some $x_i = 0$) and **non-binding constraints** too
+
+---
+
+## Example: A Corner Solution
+
+$$\frac{MU_1}{MU_2} < \frac{p_1}{p_2} \quad \text{everywhere along the budget line}$$
+
+- Good 2 delivers higher marginal utility per dollar than good 1 at *every* affordable bundle — so it's optimal to spend nothing on good 1: $c_1 = 0$
+- At the corner, the FOC becomes an inequality rather than an equality: $\dfrac{\partial u}{\partial c_1} - \lambda p_1 < 0$
+
+---
+
+## Complementary Slackness
+
+Restating the Lagrangian FOCs to allow for corners (with $L = u(c_1,c_2)+\lambda(I-p_1c_1-p_2c_2)$), for each choice variable $c_i$:
+
+$$\frac{\partial L}{\partial c_i} = u_i - \lambda p_i = 0, \; c_i > 0 \quad\text{(interior)} \qquad\text{or}\qquad \frac{\partial L}{\partial c_i} = u_i - \lambda p_i \le 0, \; c_i = 0 \quad\text{(corner)}$$
+
+Similarly, the constraint itself may or may not bind:
+
+$$\frac{\partial L}{\partial \lambda} = I - p_1c_1 - p_2c_2 = 0, \; \lambda > 0 \quad\text{(binds)} \qquad\text{or}\qquad \frac{\partial L}{\partial \lambda} > 0, \; \lambda = 0 \quad\text{(slack)}$$
+
+- Each pair summarized as a single **complementary slackness** condition: $\dfrac{\partial L}{\partial c_i}\cdot c_i = 0$ and $\dfrac{\partial L}{\partial \lambda}\cdot \lambda = 0$
+
+---
+
+## As a Practical Matter
+
+- Often we make enough assumptions up front to know the solution is interior — then Lagrange with equality constraints (as in Part I) is all that's needed
+- When you're *not* sure:
+  - Specify the different possible cases and use economic logic to narrow down the likely ones
+  - A non-binding constraint can simply be dropped — solve using the remaining equalities
+  - Compare the objective across candidate solutions to find the best one
+  - *(An alternative method using slack variables is described in the textbook)*
+
+---
+
+## Application: Multiple Constraints
+
+**Earthquake relief (Problem Set 1, Q3).** A non-profit has raised $I = \$100K$ to buy food and water for delivery by boat:
+
+$$p_F = \$1K/\text{ton} \qquad p_W = \$2K/\text{ton} \qquad \text{boat capacity } T = 80 \text{ tons}$$
+
+$$\max_{c_F,c_W} u(c_F,c_W) \quad\text{s.t.}\quad p_F c_F + p_W c_W \le I \qquad\qquad c_F + c_W \le T$$
+
+- Two constraints — budget **and** boat capacity — so two multipliers, $\lambda$ and $\mu$
+
+---
+
+## Complementary Slackness with Two Constraints
+
+$$L(c_F,c_W,\lambda,\mu) = u(c_F,c_W) + \lambda(I - p_Fc_F - p_Wc_W) + \mu(T - c_F - c_W)$$
+
+$$\frac{\partial L}{\partial \lambda}\cdot\lambda = 0: \qquad \frac{\partial L}{\partial\lambda} = I - p_Fc_F - p_Wc_W = 0 \text{ if } \lambda>0, \qquad {}>0 \text{ if } \lambda = 0$$
+
+$$\frac{\partial L}{\partial \mu}\cdot\mu = 0 \qquad \text{(same logic for the capacity constraint)}$$
+
+- Each constraint binds ($\lambda,\mu>0$) or is slack ($\lambda,\mu=0$) independently — solving the earthquake problem itself means working out *which* case applies here, continued next
