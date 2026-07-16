@@ -85,6 +85,39 @@ this handoff.
 
 ## What to do next
 
+**Immediate next task (queued 2026-07-16):** Jonathan wants to rework
+`01_definitions-and-key-tools/deck.md` — it's currently a 4-slide stub (course
+outline + one PPF figure) — bringing in framing from the assigned supplementary
+text, Bowles/Foley/Halliday's *Coordination, Conflict & Competition*.
+
+Use the **2022 final edition**, not the old 2016 draft:
+- PDF: `Y:\E\ebooks\economics\bowleshalliday_final_2022.pdf` (1072 pages;
+  a shortcut also lives at `BH\bowleshalliday_final_2022.lnk`, but resolve
+  the `.lnk` or just use the real path directly — `fitz`/PyMuPDF can't open
+  a Windows shortcut)
+- **Chapter 1, "Society: Coordination Problems and Economic Institutions" is
+  PDF pages 35-85** (1-indexed; verified by locating the "CHAPTER" opener
+  pages directly, since the embedded PDF outline's page numbers are broken/
+  non-monotonic — don't trust `doc.get_toc()` for this file, search page
+  text instead). Sections include the Tragedy of the Commons, Nash
+  equilibrium, Pareto comparisons/efficiency, Prisoners' Dilemma, Invisible
+  Hand games, Assurance games, and segregation-as-Nash-equilibrium — a
+  superset of the fishermen's-dilemma/Pareto-efficiency framing the 2016
+  draft covered, and still lines up with the deck's existing outline
+  (Pareto Efficiency, PPF, UPF, Basic Coordination Games).
+- **Already extracted to `BH\chapter1_raw_extracted.txt`** (raw PyMuPDF text
+  dump, ~140KB, pages 35-85) — read that directly rather than re-extracting.
+- Old notes from a prior course iteration are at `BH\BowlesNotes.md` (moved
+  there from `legacy/Bowles/` — read those first, they're a head start).
+- `legacy/Bowles/` (the 2016 draft PDF + old notes) and the rest of `BH/`
+  (old 2018 PowerPoint chapters, syllabus, worksheets — unrelated leftover
+  course material) should be **ignored**, not used as source material.
+
+This is a **brainstorming/rewrite task, not a pipeline-conversion task** —
+don't run it through `extract_topic.py` or treat it like the Topic 2/3
+mechanical-extraction workflow below. `00_logistics/deck.md` already lists
+this book as the course's supplementary text, for context.
+
 1. **All of TOPIC_PLAN.md's open questions are now resolved** (see its
    "Resolved decisions (2026-07-13)" section) — slidesIIb is authoritative
    over slidesII, slides 32-42 continue Topic 8, ~70 unmapped slides become
