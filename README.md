@@ -35,10 +35,20 @@ more per-file theme copies.
 
 **Topics done so far:** `00_logistics` (front-matter, not part of the
 11-topic sequence), `01_definitions-and-key-tools`,
-`08_essentials-of-game-theory`. See [`TOPIC_PLAN.md`](TOPIC_PLAN.md) for the
-proposed mapping of the remaining topics to the legacy slide decks — it's a
-draft with open questions, not a finished plan. If you're picking this work
-up cold, read [`HANDOFF.md`](HANDOFF.md) first.
+`08_essentials-of-game-theory`, and sub-chunk 1 (slides 43-63) of
+`02_constrained-optimization`. See [`TOPIC_PLAN.md`](TOPIC_PLAN.md) for the
+mapping of the remaining topics to the legacy slide decks. If you're picking
+this work up cold, read [`HANDOFF.md`](HANDOFF.md) first.
+
+## `notebooks/`
+
+Companion Jupyter notebooks that regenerate a topic's slide figures directly
+from their underlying formulas (matplotlib), plus interactive `ipywidgets`/
+`plotly` versions for live in-class demos. See
+[`notebooks/topic02_constrained_optimization_figures.ipynb`](notebooks/topic02_constrained_optimization_figures.ipynb)
+for the first one, covering `02_constrained-optimization`'s sub-chunk 1.
+Proof-of-concept status — see `HANDOFF.md` for what's decided vs. still
+open.
 
 <!-- TOC_START -->
 

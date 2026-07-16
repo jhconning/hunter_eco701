@@ -78,14 +78,21 @@ this handoff.
 
 ## What to do next
 
-1. **Get Jonathan's answers to the open questions in
-   [`TOPIC_PLAN.md`](TOPIC_PLAN.md)** before converting more topics — the
-   slidesII/IIb overlap especially, since it affects which file to treat as
-   the source for ~5 of the remaining 9 topics.
-2. Topic 2 (Constrained Optimization, `slidesI` 43-102) has the highest
-   confidence mapping and is a clean contiguous range — a reasonable next
-   pick if Jonathan wants to keep moving before all TOPIC_PLAN.md questions
-   are resolved.
+1. **All of TOPIC_PLAN.md's open questions are now resolved** (see its
+   "Resolved decisions (2026-07-13)" section) — slidesIIb is authoritative
+   over slidesII, slides 32-42 continue Topic 8, ~70 unmapped slides become
+   an isolated optional Topic 8b, Topic 9 is deferred (slides not yet
+   written).
+2. **Topic 2 (Constrained Optimization, `slidesI` 43-102) is in progress**,
+   converted in sub-chunks because it's much larger than other topics (60
+   slides, 152 top-level equations). Done so far: sub-chunk 1, slides 43-63
+   ("Mathematical Preliminaries" — unconstrained optimization, multivariable
+   calculus, implicit differentiation). See `source.yml` in
+   `02_constrained-optimization/` for exactly which sub-chunks remain
+   (~64-90 Lagrange method/corner solutions, ~91-102 applications) — it
+   already has the approved Tier-3 demo images for slides 78-79 rendered
+   (`media/ppf-welfare-max-derivation.png`, `media/constrained-max-graph.png`)
+   but not yet folded into `deck.md`.
 3. For each new topic: run the pipeline, review the raw output *including
    the shape census* (don't skip this — it's what caught 3 missed tables
    during the pilot), redesign into `deck.md` with real pedagogical judgment
@@ -94,6 +101,34 @@ this handoff.
    pilot for what "good" looks like), verify locally with `marp` CLI +
    `pdftoppm` rasterization (see "Verifying a build" below), then commit to
    a branch and open a PR.
+4. Remaining topics (3-7, 8b, 9-11 in `TOPIC_PLAN.md`) haven't been started
+   at all.
+
+## Code-generated figures (`notebooks/`, started 2026-07-15)
+
+Jonathan asked about replacing static PNGs (extracted/hand-drawn from the
+original PowerPoint) with figures generated directly from their formulas —
+so slides stay static/Marp for now, but a companion Jupyter notebook
+regenerates every figure from code, and doubles as a live-demo tool for
+class (`ipywidgets` sliders, rotatable `plotly` 3-D surfaces).
+
+- **Proof of concept:** `notebooks/topic02_constrained_optimization_figures.ipynb`
+  regenerates all 12 static figures used in `02_constrained-optimization/deck.md`
+  (sub-chunk 1, slides 43-63) from the exact formulas already written in that
+  `deck.md`, saving output to `notebooks/figures/topic02/` — **not** written
+  into the deck's own `media/` folder, so nothing in the live deck has
+  changed yet. Also includes 3 interactive demos (profit maximization,
+  isoquant/MRTS, a rotatable Cobb-Douglas-style surface).
+- Verified end-to-end via `jupyter nbconvert --to notebook --execute
+  --inplace` (uses the `ecopy` kernel) — all cells run clean, all 12 PNGs
+  generated, output spot-checked visually.
+- **Not yet decided:** whether to actually swap these generated images into
+  `02_constrained-optimization/media/` in place of the current ones, or keep
+  the notebook as a separate supplementary artifact. Ask Jonathan before
+  doing the swap — it'd change what's live on the deployed site.
+- If this proves out, the same pattern (one notebook per topic, regenerating
+  that topic's figures from the formulas already in `deck.md`) is the
+  template to extend to Topic 2's remaining sub-chunks and to later topics.
 
 ## Gotchas discovered the hard way (don't rediscover these)
 
