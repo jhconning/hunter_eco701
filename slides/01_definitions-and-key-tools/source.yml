@@ -1,14 +1,42 @@
 topic: "Definitions and Key Tools"
 ideas_md_topic_number: 1
-source_file: unknown
+source_file: none (hand-authored rework)
 source_slides: null
-status: pre-existing (built before this reorganization; content not yet re-verified against a specific source pptx)
+status: hand-authored (2026-07-16 rework replacing the pre-reorg 4-slide stub)
 notes: >
-  This deck already existed as slides/sl_1_intro.md before the 2026-07-13
-  topic reorg - only moved into the new folder convention and re-themed
-  (neobeam -> eco701) here, content untouched except fixing an oversized
-  image width (was width:6000, now width:600). Likely source material is
-  E701_F18 _slidesI.pptx slides ~20-31 (Pareto Criterion, Gains to Trade,
-  Utility Possibility Frontier, "Other types of Games", "An invisible hand
-  game") based on the title scan, but this is an inference, not verified -
-  worth confirming before expanding this topic further. See TOPIC_PLAN.md.
+  Complete rewrite around Bowles & Halliday, "Microeconomics: Competition,
+  Conflict, and Coordination" (OUP, 2022 final edition), Chapter 1 "Society:
+  Coordination Problems and Economic Institutions" (PDF pages 35-85 of
+  Y:\E\ebooks\economics\bowleshalliday_final_2022.pdf; raw text extraction at
+  BH\chapter1_raw_extracted.txt). Note the published edition is Bowles &
+  Halliday only (Foley co-authored earlier drafts) and its title differs from
+  the 2016/2018 draft's "Coordination, Conflict and Competition" - update
+  citations accordingly. Payoff matrices (Corn-Tomatoes Fig 1.15, Palanpur
+  Fig 1.16, Language Fig 1.17) were verified visually against rendered PDF
+  pages 64/66/68 because PyMuPDF's text-dump ordering inside matrix figures
+  is unreliable.
+
+  Secondary sources: legacy "E701_F18 _slidesI.pptx" slides ~20-31 (Pareto
+  criterion, gains to trade, UPF, invisible hand, classical constitutional
+  conundrum) absorbed conceptually rather than extracted; BH\BowlesNotes.md
+  (2018 course notes) supplied the continuous-effort fisherman model
+  u_A = (15 - (1/4) e_B) e_A - (1/2) e_A^2, whose symmetric Nash (e* = 12)
+  and planner (e^P = 10) solutions generate the deck's 2x2 payoffs
+  (78 > 75 > 72 > 70) exactly. The deck's numbers are derived, not copied;
+  notebooks/topic01_definitions_key_tools_figures.ipynb asserts them and
+  regenerates every figure (figs/ holds candidates, media/ the live copies
+  under identical names). No BFH images are reproduced anywhere (the deck
+  deploys publicly; the extraction is local reference only) - the stub's
+  textbook-scan sample_fig.png was deleted for the same reason.
+
+  Deliberate scope cuts from BFH Ch. 1, agreed with Jonathan 2026-07-16 for
+  the 13-14-lecture budget: Schelling segregation (sec 1.15) cut - parked in
+  new_ideas.md as a notebook simulation; Disagreement game (sec 1.13)
+  compressed to a taxonomy-table row; marble-in-bowl equilibrium epistemology
+  reduced to a blockquote aside; Hardin/tragedy-of-the-commons naming and the
+  N-player/public-goods generalization deferred to Topic 9 per the
+  consolidation plan sketched in new_ideas.md; repeated-games PD-to-Assurance
+  transformation deferred to Topic 8b material. The optimization/calculus
+  review embedded in the deck's middle part (FOC/SOC, reaction curves,
+  planner-vs-Nash) is deliberately Lecture-1-level; Topic 2 re-derives and
+  generalizes it.
