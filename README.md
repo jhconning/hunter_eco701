@@ -61,7 +61,7 @@ Companion Jupyter notebooks, two per topic so far:
 
 <!-- TOC_START -->
 
-*Last Deployed: 2026-07-16 09:18 EST*
+*Last Deployed: 2026-07-16 09:23 EST*
 
 ## Deployed Presentations
 
