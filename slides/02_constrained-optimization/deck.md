@@ -470,3 +470,88 @@ $$\frac{\partial L}{\partial \lambda}\cdot\lambda = 0: \qquad \frac{\partial L}{
 $$\frac{\partial L}{\partial \mu}\cdot\mu = 0 \qquad \text{(same logic for the capacity constraint)}$$
 
 - Each constraint binds ($\lambda,\mu>0$) or is slack ($\lambda,\mu=0$) independently — solving the earthquake problem itself means working out *which* case applies here, continued next
+
+---
+
+## The Feasible Region
+
+![center width:400](media/feasible-region-two-constraints.png)
+
+- The budget line and the transport-capacity line each cut off part of the plane; only bundles below **both** are affordable *and* shippable
+
+---
+
+## Three Possible Cases
+
+Depending on preferences — which constraint(s) actually bind — the optimum falls into one of three cases:
+
+1. $\lambda > 0,\ \mu = 0$ — budget binds, transport capacity has room to spare
+2. $\lambda = 0,\ \mu > 0$ — transport capacity binds, budget has money to spare
+3. $\lambda > 0,\ \mu > 0$ — both bind at once (the kink point)
+
+- These are **three different possible preference maps**, not three indifference curves for one consumer — indifference curves can never cross, so for any *given* set of preferences only one case actually holds
+
+---
+
+## Case: Transport Binds, Budget Slack
+
+![center width:380](media/case-transport-binds.png)
+
+- Food ($c_F$) is highly valued relative to its cost — the consumer fills up the boat's capacity before spending the whole budget
+
+---
+
+## Case: Budget Binds, Transport Slack
+
+![center width:380](media/case-budget-binds.png)
+
+- Water ($c_W$) is highly valued relative to its cost — the consumer exhausts the budget while the boat still has room left
+
+---
+
+## Case: Both Constraints Bind
+
+![center width:380](media/case-both-bind.png)
+
+- Preferences are balanced enough that the optimum sits exactly at the corner where the budget and capacity lines cross
+
+---
+
+## Solving Problems with Multiple Constraints
+
+Work out the solution under each possible combination of binding/non-binding constraints separately:
+
+- Solve assuming $(\lambda>0,\mu=0)$, then $(\lambda=0,\mu>0)$, then $(\lambda>0,\mu>0)$
+- Each case hands you *a* candidate solution — but setting a multiplier to zero ignores that constraint, so the resulting candidate may violate it and turn out **infeasible**
+- Discard infeasible candidates, then choose whichever feasible candidate gives the **highest objective value**
+
+---
+
+## Worked Example: The Earthquake Relief Problem
+
+$$U(c_F,c_W) = c_F \cdot c_W \qquad p_F=1,\ p_W=2,\ I=100,\ T=80$$
+
+![center width:330](media/earthquake-three-candidates.png)
+
+- Solving each of the three cases gives three candidate bundles, marked above
+
+---
+
+## Worked Example: Choosing the Winner
+
+| Case | $(c_W^*, c_F^*)$ | Feasible? | $U$ |
+|---|---|---|---|
+| Budget binds only | $(25, 50)$ | Yes (transport slack: $75 \le 80$) | $\mathbf{1250}$ |
+| Both bind | $(20, 60)$ | Yes | $1200$ |
+| Transport binds only | $(40, 40)$ | **No** — violates budget ($40+80=120>100$) | 1600 |
+
+- Discarding the infeasible candidate, the winner is **budget-binds-only**: $(c_W^*,c_F^*)=(25,50)$, $U^*=1250$
+
+---
+
+## The Art of the Solve
+
+- Setting up a full Lagrangian is often more work than needed
+- Look for easy substitutions to reduce the number of constraints, or rescale the objective when the scale itself doesn't matter
+- Use economic intuition to rule out unlikely cases before grinding through the algebra
+- Learn to recognize familiar problem "families" — once you've solved one Cobb-Douglas budget problem, you've essentially solved them all

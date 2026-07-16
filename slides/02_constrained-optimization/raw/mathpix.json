@@ -1976,5 +1976,479 @@
     "confidence_rate": 1,
     "latex_styled": "\\frac{\\partial L}{\\partial \\mu} \\cdot \\mu=0",
     "text": "\\( \\frac{\\partial L}{\\partial \\mu} \\cdot \\mu=0 \\)"
+  },
+  "s091_eq_shape147460.png": {
+    "request_id": "dff13b02-07a6-488f-b4cc-490f0460e7bc",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 1456,
+    "image_width": 1796,
+    "error": "Content not found",
+    "error_info": {
+      "id": "image_no_content",
+      "message": "Content not found"
+    },
+    "line_data": [
+      {
+        "type": "chart",
+        "cnt": [
+          [
+            22,
+            85
+          ],
+          [
+            1790,
+            85
+          ],
+          [
+            1790,
+            1382
+          ],
+          [
+            22,
+            1382
+          ]
+        ],
+        "included": false,
+        "conversion_output": false,
+        "is_printed": true,
+        "is_handwritten": false,
+        "id": "23331b6c163b4c7b9e2ff93fb9a50136",
+        "subtype": "analytical",
+        "error_id": "image_not_supported"
+      }
+    ]
+  },
+  "s091_eq_shape147466.png": {
+    "request_id": "ca073611-03df-4510-86d3-a8b08088b28a",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 280,
+    "image_width": 681,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "latex_styled": "\\begin{array}{l}\n\\text { Budget constraint }\\\\\nc_{f}=\\frac{I}{p_{f}}-\\frac{p_{w}}{p_{f}} c_{w}=100-2 c_{w}\n\\end{array}",
+    "text": "Budget constraint\n\\[\nc_{f}=\\frac{I}{p_{f}}-\\frac{p_{w}}{p_{f}} c_{w}=100-2 c_{w}\n\\]"
+  },
+  "s091_eq_shape147467.png": {
+    "request_id": "6ba78ed3-b70b-4b2a-8907-56b805ba8068",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 193,
+    "image_width": 510,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "latex_styled": "\\begin{array}{l}\n\\text { Transport constraint }\\\\\nc_{f}=T-c_{w}=80-c_{w}\n\\end{array}",
+    "text": "Transport constraint\n\\[\nc_{f}=T-c_{w}=80-c_{w}\n\\]"
+  },
+  "s091_eq_shape147475.png": {
+    "request_id": "8d7d6303-900c-41d1-bd0a-1f033c4c3f77",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 2.3841852225814364e-07,
+    "auto_rotate_degrees": 0,
+    "image_height": 108,
+    "image_width": 84,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "latex_styled": "c_{f}",
+    "text": "\\[\nc_{f}\n\\]"
+  },
+  "s091_eq_shape147476.png": {
+    "request_id": "9a3b350c-a528-4e4e-814a-5bb6d6cd34f7",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 104,
+    "image_width": 84,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "latex_styled": "c_{w}",
+    "text": "\\( c_{w} \\)"
+  },
+  "s092_eq_shape150530.png": {
+    "request_id": "d0359561-afbb-4e15-968b-4421860cfd11",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 1584,
+    "image_width": 1856,
+    "error": "Content not found",
+    "error_info": {
+      "id": "image_no_content",
+      "message": "Content not found"
+    },
+    "line_data": [
+      {
+        "type": "chart",
+        "cnt": [
+          [
+            10,
+            20
+          ],
+          [
+            1853,
+            20
+          ],
+          [
+            1853,
+            1530
+          ],
+          [
+            10,
+            1530
+          ]
+        ],
+        "included": false,
+        "conversion_output": false,
+        "is_printed": true,
+        "is_handwritten": false,
+        "id": "c0bbb3acaab64ce0b84ba021f5cec652",
+        "subtype": "line",
+        "error_id": "image_not_supported"
+      }
+    ]
+  },
+  "s092_eq_shape150534.png": {
+    "request_id": "72da6332-d4e3-442f-9314-96d6f6009cf1",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 2.3841852225814364e-07,
+    "auto_rotate_degrees": 0,
+    "image_height": 147,
+    "image_width": 112,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "latex_styled": "c_{f}",
+    "text": "\\( c_{f} \\)"
+  },
+  "s092_eq_shape150535.png": {
+    "request_id": "e4ab205d-0746-449f-a2be-0db20ba08f03",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 156,
+    "image_width": 124,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "latex_styled": "c_{w}",
+    "text": "\\( c_{w} \\)"
+  },
+  "s094_eq_shape149515.png": {
+    "request_id": "c8eca54e-89f4-4db8-9d1b-40b77c29ff19",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 393,
+    "image_width": 1353,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "text": "\\( \\lambda=0 \\) (budget slack)\n\\( \\mu>0 \\) (transport binding)\n\\[\nL\\left(c_{f}, c_{f}, \\lambda, \\mu\\right)=u\\left(c_{f}, c_{w}\\right)+\\mu\\left(T-w_{f} c_{f}-w_{w} c_{w}\\right)\n\\]"
+  },
+  "s094_eq_shape149520.png": {
+    "request_id": "cf2097e6-d429-48ae-97b4-b47e55ebfd64",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 1584,
+    "image_width": 1856,
+    "error": "Content not found",
+    "error_info": {
+      "id": "image_no_content",
+      "message": "Content not found"
+    },
+    "line_data": [
+      {
+        "type": "chart",
+        "cnt": [
+          [
+            0,
+            72
+          ],
+          [
+            1856,
+            72
+          ],
+          [
+            1856,
+            1511
+          ],
+          [
+            0,
+            1511
+          ]
+        ],
+        "included": false,
+        "conversion_output": false,
+        "is_printed": true,
+        "is_handwritten": false,
+        "id": "d1bb443a039742d48f193c044e9eb366",
+        "subtype": "analytical",
+        "error_id": "image_not_supported"
+      }
+    ]
+  },
+  "s094_eq_shape149523.png": {
+    "request_id": "8fe7d363-1475-4cda-a7cf-d84f8f209203",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 2.3841852225814364e-07,
+    "auto_rotate_degrees": 0,
+    "image_height": 147,
+    "image_width": 112,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "latex_styled": "c_{f}",
+    "text": "\\( c_{f} \\)"
+  },
+  "s094_eq_shape149524.png": {
+    "request_id": "d85a3e96-123d-4a04-91e2-f1e16b2cea21",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 156,
+    "image_width": 124,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "latex_styled": "c_{w}",
+    "text": "\\( c_{w} \\)"
+  },
+  "s095_eq_shape151554.png": {
+    "request_id": "56ac254e-e6fe-42d2-b65b-204d29b8ddd2",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 1584,
+    "image_width": 1856,
+    "error": "Content not found",
+    "error_info": {
+      "id": "image_no_content",
+      "message": "Content not found"
+    },
+    "line_data": [
+      {
+        "type": "chart",
+        "cnt": [
+          [
+            0,
+            1500
+          ],
+          [
+            2,
+            72
+          ],
+          [
+            1856,
+            75
+          ],
+          [
+            1853,
+            1503
+          ]
+        ],
+        "included": false,
+        "conversion_output": false,
+        "is_printed": true,
+        "is_handwritten": false,
+        "id": "37937f2667514a5c9fb4978e404de4a7",
+        "subtype": "analytical",
+        "error_id": "image_not_supported"
+      }
+    ]
+  },
+  "s095_eq_shape151556.png": {
+    "request_id": "4f15d30a-0044-4fb2-ab94-4669fc21e643",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 393,
+    "image_width": 1186,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "text": "\\( \\lambda>0 \\) (budget binding)\n\\( \\mu=0 \\) (transport slack)\n\\[\nL\\left(c_{f}, c_{f}, \\lambda, \\mu\\right)=u\\left(c_{f}, c_{w}\\right)+\\lambda\\left(I-p_{f} c_{f}-p_{w} c_{w}\\right)\n\\]"
+  },
+  "s095_eq_shape151558.png": {
+    "request_id": "e01c78e3-a7c4-4e05-9c9c-bb8e452fb379",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 2.3841852225814364e-07,
+    "auto_rotate_degrees": 0,
+    "image_height": 147,
+    "image_width": 112,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "latex_styled": "c_{f}",
+    "text": "\\( c_{f} \\)"
+  },
+  "s095_eq_shape151559.png": {
+    "request_id": "a7f1a5c0-cdea-47bd-bb7c-afd8f45ed08c",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 156,
+    "image_width": 124,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "latex_styled": "c_{w}",
+    "text": "\\( c_{w} \\)"
+  },
+  "s096_eq_shape154626.png": {
+    "request_id": "1468441f-1ab9-45f5-b394-3b66c04d4a60",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 1584,
+    "image_width": 1856,
+    "error": "Content not found",
+    "error_info": {
+      "id": "image_no_content",
+      "message": "Content not found"
+    },
+    "line_data": [
+      {
+        "type": "chart",
+        "cnt": [
+          [
+            0,
+            72
+          ],
+          [
+            1852,
+            72
+          ],
+          [
+            1852,
+            1508
+          ],
+          [
+            0,
+            1508
+          ]
+        ],
+        "included": false,
+        "conversion_output": false,
+        "is_printed": true,
+        "is_handwritten": false,
+        "id": "54ac8f49513b4184beab2ad2ae2c84b9",
+        "subtype": "line",
+        "error_id": "image_not_supported"
+      }
+    ]
+  },
+  "s096_eq_shape154628.png": {
+    "request_id": "9950a377-9bb7-459d-8657-1a0f58c2c81f",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 498,
+    "image_width": 1189,
+    "confidence": 0.9975600242614746,
+    "confidence_rate": 0.999981769141331,
+    "text": "\\( \\lambda>0 \\) (budget binding)\n\\( \\mu>0 \\) (transport binding)\n\\[\n\\begin{aligned}\nL\\left(c_{f}, c_{w}, \\lambda, \\mu\\right)=u\\left(c_{f}, c_{w}\\right) & +\\lambda\\left(I-p_{f} c_{f}-p_{w} c_{w}\\right) \\\\\n& +\\mu\\left(T-c_{f}-c_{w}\\right)\n\\end{aligned}\n\\]"
+  },
+  "s096_eq_shape154630.png": {
+    "request_id": "075d03a5-b1a1-46c1-abb2-fdf6c4b237ca",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 2.3841852225814364e-07,
+    "auto_rotate_degrees": 0,
+    "image_height": 147,
+    "image_width": 112,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "latex_styled": "c_{f}",
+    "text": "\\( c_{f} \\)"
+  },
+  "s096_eq_shape154631.png": {
+    "request_id": "a43049dc-236c-4278-806e-6809ea19ae8e",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 156,
+    "image_width": 124,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "latex_styled": "c_{w}",
+    "text": "\\( c_{w} \\)"
+  },
+  "s097_eq_shape8.png": {
+    "request_id": "c9e5c68b-a617-4573-ab34-918365fca674",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 268,
+    "image_width": 2201,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "latex_styled": "L\\left(c_{W}, c_{F}, \\lambda, \\mu\\right)=u\\left(c_{W}, c_{F}\\right)+\\lambda\\left(I-p_{W} c_{W}-p_{F} c_{F}\\right)+\\mu\\left(T-c_{W}+c_{F}\\right)",
+    "text": "\\( L\\left(c_{W}, c_{F}, \\lambda, \\mu\\right)=u\\left(c_{W}, c_{F}\\right)+\\lambda\\left(I-p_{W} c_{W}-p_{F} c_{F}\\right)+\\mu\\left(T-c_{W}+c_{F}\\right) \\)"
+  },
+  "s097_eq_shape9.png": {
+    "request_id": "3e876573-6fce-4905-adfe-6194c1b20bec",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 1138,
+    "image_width": 1661,
+    "confidence": 0.6921944618225098,
+    "confidence_rate": 0.9983589892337,
+    "latex_styled": "\\begin{array}{l}\n\\frac{\\partial L}{\\partial c_{W}}=u_{W}-\\lambda p_{W}-\\mu=0 \\\\\n\\frac{\\partial L}{\\partial c_{F}}=u_{F}-\\lambda p_{F}-\\mu=0 \\\\\n\\frac{\\partial L}{\\partial \\lambda}=I-p_{W} c_{W}-p_{F} c_{F} \\geq 0, \\quad \\lambda \\geq 0, \\quad \\frac{\\partial L}{\\partial \\lambda} \\cdot \\lambda=0 \\\\\n\\frac{\\partial L}{\\partial \\mu}=T-c_{W}-c_{F} \\geq 0, \\quad \\mu \\geq 0, \\quad \\frac{\\partial L}{\\partial \\mu} \\cdot \\mu=0\n\\end{array}",
+    "text": "\\( \\begin{array}{l}\\frac{\\partial L}{\\partial c_{W}}=u_{W}-\\lambda p_{W}-\\mu=0 \\\\ \\frac{\\partial L}{\\partial c_{F}}=u_{F}-\\lambda p_{F}-\\mu=0 \\\\ \\frac{\\partial L}{\\partial \\lambda}=I-p_{W} c_{W}-p_{F} c_{F} \\geq 0, \\quad \\lambda \\geq 0, \\quad \\frac{\\partial L}{\\partial \\lambda} \\cdot \\lambda=0 \\\\ \\frac{\\partial L}{\\partial \\mu}=T-c_{W}-c_{F} \\geq 0, \\quad \\mu \\geq 0, \\quad \\frac{\\partial L}{\\partial \\mu} \\cdot \\mu=0\\end{array} \\)"
+  },
+  "s099_eq_shape5.png": {
+    "request_id": "b9ee3c72-8591-407a-aff8-d11d9712b6b9",
+    "version": "SuperNet-109p4",
+    "is_printed": true,
+    "is_handwritten": false,
+    "auto_rotate_confidence": 0,
+    "auto_rotate_degrees": 0,
+    "image_height": 139,
+    "image_width": 641,
+    "confidence": 1,
+    "confidence_rate": 1,
+    "latex_styled": "U\\left(c_{F}, c_{W}\\right)=c_{W} \\cdot c_{F}",
+    "text": "\\( U\\left(c_{F}, c_{W}\\right)=c_{W} \\cdot c_{F} \\)"
   }
 }
