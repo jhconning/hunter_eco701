@@ -55,6 +55,7 @@ slides/
       mathpix.json
       media/eq/, media/pic/, media/slide_png/
     source.yml                    <- provenance: which pptx, which slide range, confidence level
+    new_ideas.md                  <- backlog of expansion ideas (new slides, viz, problem sets) - not a plan
 ```
 
 Read the actual `source.yml` and `deck.md` in `01_definitions-and-key-tools/`

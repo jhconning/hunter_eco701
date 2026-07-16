@@ -28,6 +28,9 @@ sequence, e.g. `slides/08_essentials-of-game-theory/`. Inside each topic:
   hand-edited.
 - **`source.yml`** — which original `.pptx` file and slide range this topic
   came from, and how confident that mapping is.
+- **`new_ideas.md`** — a backlog of expansion ideas for this topic (new
+  slides, new visualizations, problem set ideas) — not a plan, just a place
+  to capture things worth coming back to.
 
 A shared Marp theme lives in `slides/_shared/eco701-theme.css` (registered
 via `--theme-set` in the CI workflow) so every topic looks consistent — no
