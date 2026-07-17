@@ -397,6 +397,41 @@ committing.
   `vertical`, `w:`/`h:`) are core parser features, not raw HTML, so they
   don't have this problem. Only reach for `html: true` if there's truly no
   native equivalent.
+- **VS Code's GitHub Pull Requests extension can show perpetual "Loading…"
+  in this repo with a session that looks valid** (2026-07-16). Two things
+  were observed tangled together and are recorded separately since which
+  one actually mattered isn't fully settled:
+  1. The extension's own log (`%APPDATA%\Code\logs\<session>\window1\exthost\GitHub.vscode-pull-request-github\GitHub Pull Request.log`)
+     repeatedly showed `No remotes found. The following remotes are
+     missing: origin, upstream`, never once trying `hunter_eco701`, even
+     after adding `githubPullRequests.remotes: ["origin", "upstream",
+     "hunter_eco701"]` to `.vscode/settings.json` and reloading the window
+     twice - the custom-remotes setting appeared to not be honored.
+     Adding a second git remote literally named `origin` (pointing at the
+     identical URL: `git remote add origin
+     https://github.com/jhconning/hunter_eco701.git`, purely additive,
+     doesn't disturb the documented `hunter_eco701` name used everywhere
+     else in this handoff) was tried as a fix.
+  2. **What actually resolved it, per Jonathan: signing out of GitHub and
+     back in inside VS Code** (Accounts icon, bottom of the activity bar).
+     The auth log corroborates this as the real cause: right before the
+     extension started working, `Getting sessions for repo...` returned
+     `Got 0 sessions for repo` (down from 1 moments earlier) and the total
+     session count dropped 4 → 3 - a session being invalidated, consistent
+     with a sign-out, immediately followed by success once a fresh one was
+     created. Best explanation: the old session was likely authorized
+     under a restricted grant that didn't cover this specific (private)
+     repo - plausible if the repo was created/made-private after the
+     original VS Code sign-in - and re-authorizing fixed that, independent
+     of remote naming.
+
+  **So: if this recurs, try sign-out/sign-in first** (Accounts icon →
+  github.com account → sign out → trigger sign-in again from the Pull
+  Requests panel) - that's the change with actual evidence behind it. The
+  `origin` remote alias is harmless to keep either way but wasn't isolated
+  as necessary. Doesn't apply to the Antigravity fork at all - there the
+  extension can't activate ("no data provider registered"), a different,
+  unfixable failure mode; this whole entry is real-VS-Code-only.
 
 ## What doesn't scale (don't try to automate this part)
 
