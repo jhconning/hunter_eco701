@@ -98,7 +98,7 @@ jobs:
 
       - name: Marp Build HTML
         if: steps.slides-folder-exists.outputs.has_slides == '0'
-        uses: docker://marpteam/marp-cli:v3.0.2
+        uses: docker://marpteam/marp-cli:v4.2.3
         with:
           args: -I slides/ -o _build/html/slides/ --theme-set slides/_shared/eco701-theme.css
         env:
@@ -106,7 +106,7 @@ jobs:
 
       - name: Marp Build PDFs
         if: steps.slides-folder-exists.outputs.has_slides == '0'
-        uses: docker://marpteam/marp-cli:v3.0.2
+        uses: docker://marpteam/marp-cli:v4.2.3
         with:
           args: -I slides/ -o _build/html/slides/ --pdf --allow-local-files --theme-set slides/_shared/eco701-theme.css
         env:

@@ -292,10 +292,12 @@ committing.
 - **Marp `bg` images default to cover-fill (crop-to-fill), not
   letterbox/contain.** A wide/landscape image (e.g. a 2.3:1 aspect banner)
   placed in a narrow `bg right:40%` column gets its sides cropped off
-  unless you constrain it. The `fit:contain` directive did NOT work on the
-  CI-pinned marp-core v3.9.1 (silently ignored — possibly a newer-Marp-only
-  feature); what actually worked was an explicit `w:` (e.g.
-  `w:480`), which overrides the cover-fill default. Always check a `bg`
+  unless you constrain it. The `fit:contain` directive did NOT work under
+  the original marp-core v3.9.1 pin (silently ignored; the 2026-07-16
+  upgrade to marp-cli v4.2.3 may have changed this — retest on a scratch
+  slide before relying on it); what has always worked is an explicit `w:`
+  (e.g. `w:480`), which overrides the cover-fill default and remains the
+  proven convention across these decks. Always check a `bg`
   image's real aspect ratio (`PIL.Image.open(...).size`) before choosing
   between relying on the column's default fill vs. giving it an explicit
   width.
@@ -369,26 +371,67 @@ committing.
   (environment-gated, push-to-main only) jobs. If you see PR CI runs
   failing instantly (~3s) with an environment-protection annotation, this
   is the failure mode to check for.
-- **Local marp-cli here is v4.2.3; CI's Docker image pins v3.0.2.** Don't
-  fully trust a local build as proof the CI build will pass. Rather than
-  install Docker (daemon wasn't running when needed), `npx --yes
-  @marp-team/marp-cli@3.0.2 ...` runs the *exact* pinned version locally in
-  seconds — use this to verify against the real toolchain instead of the
-  newer globally-installed `marp` command.
-- **Raw HTML in deck.md is NOT rendered by marp-core v3.9.1 (the version
-  behind CI's pinned v3.0.2) unless `html: true` is set in frontmatter** —
-  without it, literal `<div>`/`<p>`/`<br>` tags print as escaped visible
-  text instead of becoming real elements. This bit us for real: a
-  `<div class="people-row"><img ...>` block for a bio-aside slide rendered
-  as broken text under the real CI toolchain despite looking fine locally
-  on v4.2.3 (which is more lenient). **Prefer Marp's native syntax over raw
-  HTML wherever one exists** — `![bg right w:500](path)` for background/
+- **The marp-cli pin is v4.2.3 everywhere as of 2026-07-16** — CI's Docker
+  image, `tools/verify_deck.py`'s `MARP_VERSION`, and (coincidentally) the
+  locally-installed `marp` are all aligned at 4.2.3. It was upgraded from
+  the original v3.0.2 pin (marp-core v3.9.1) after re-verifying every
+  deployed deck under the new version. The version stays *pinned* on
+  purpose: the site only changes when we change it, and upgrades are a
+  deliberate bump-rebuild-reverify chore (like this one), never automatic.
+  If versions ever drift again, don't trust an unpinned local build as
+  proof CI will agree — `npx --yes @marp-team/marp-cli@4.2.3 ...` (or just
+  `tools/verify_deck.py`, which pins internally) runs the exact CI version
+  without Docker. Keep `MARP_VERSION` and the two `docker://` lines in
+  `.github/workflows/deploy-myst.yml` in sync.
+- **Raw HTML in deck.md was NOT rendered under the original marp-core
+  v3.9.1 pin unless `html: true` was set in frontmatter** — literal
+  `<div>`/`<p>`/`<br>` tags printed as escaped visible text. This bit us
+  for real: a `<div class="people-row"><img ...>` block for a bio-aside
+  slide rendered as broken text on the live site despite looking fine on
+  a newer local marp. The current v4.2.3 pin is more lenient about HTML,
+  but the policy is unchanged and version-independent: **prefer Marp's
+  native syntax over raw HTML wherever one exists** — `![bg right w:500](path)` for background/
   layout images instead of `<img>` + flexbox, `> text` (blockquote) instead
   of `<p class="...">` for styled asides, plain paragraphs instead of
   `<br>` for spacing. Marp's image directives (`bg`, `left`/`right`,
   `vertical`, `w:`/`h:`) are core parser features, not raw HTML, so they
   don't have this problem. Only reach for `html: true` if there's truly no
   native equivalent.
+- **VS Code's GitHub Pull Requests extension can show perpetual "Loading…"
+  in this repo with a session that looks valid** (2026-07-16). Two things
+  were observed tangled together and are recorded separately since which
+  one actually mattered isn't fully settled:
+  1. The extension's own log (`%APPDATA%\Code\logs\<session>\window1\exthost\GitHub.vscode-pull-request-github\GitHub Pull Request.log`)
+     repeatedly showed `No remotes found. The following remotes are
+     missing: origin, upstream`, never once trying `hunter_eco701`, even
+     after adding `githubPullRequests.remotes: ["origin", "upstream",
+     "hunter_eco701"]` to `.vscode/settings.json` and reloading the window
+     twice - the custom-remotes setting appeared to not be honored.
+     Adding a second git remote literally named `origin` (pointing at the
+     identical URL: `git remote add origin
+     https://github.com/jhconning/hunter_eco701.git`, purely additive,
+     doesn't disturb the documented `hunter_eco701` name used everywhere
+     else in this handoff) was tried as a fix.
+  2. **What actually resolved it, per Jonathan: signing out of GitHub and
+     back in inside VS Code** (Accounts icon, bottom of the activity bar).
+     The auth log corroborates this as the real cause: right before the
+     extension started working, `Getting sessions for repo...` returned
+     `Got 0 sessions for repo` (down from 1 moments earlier) and the total
+     session count dropped 4 → 3 - a session being invalidated, consistent
+     with a sign-out, immediately followed by success once a fresh one was
+     created. Best explanation: the old session was likely authorized
+     under a restricted grant that didn't cover this specific (private)
+     repo - plausible if the repo was created/made-private after the
+     original VS Code sign-in - and re-authorizing fixed that, independent
+     of remote naming.
+
+  **So: if this recurs, try sign-out/sign-in first** (Accounts icon →
+  github.com account → sign out → trigger sign-in again from the Pull
+  Requests panel) - that's the change with actual evidence behind it. The
+  `origin` remote alias is harmless to keep either way but wasn't isolated
+  as necessary. Doesn't apply to the Antigravity fork at all - there the
+  extension can't activate ("no data provider registered"), a different,
+  unfixable failure mode; this whole entry is real-VS-Code-only.
 
 ## What doesn't scale (don't try to automate this part)
 
