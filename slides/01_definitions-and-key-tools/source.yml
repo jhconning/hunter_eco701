@@ -18,7 +18,12 @@ notes: >
 
   Secondary sources: legacy "E701_F18 _slidesI.pptx" slides ~20-31 (Pareto
   criterion, gains to trade, UPF, invisible hand, classical constitutional
-  conundrum) absorbed conceptually rather than extracted; BH\BowlesNotes.md
+  conundrum) absorbed conceptually rather than extracted; the "Aside: Who
+  Was John Nash?" slide's text is cannibalized (2026-07-18) from
+  slides/08_essentials-of-game-theory/deck.md's two Nash-bio asides
+  (Topic 8 dissolved per TOPIC_PLAN.md) - text only, both bg images
+  deliberately dropped for unverified/likely-copyrighted provenance, see
+  new_ideas.md; BH\BowlesNotes.md
   (2018 course notes) supplied the continuous-effort fisherman model
   u_A = (15 - (1/4) e_B) e_A - (1/2) e_A^2, whose symmetric Nash (e* = 12)
   and planner (e^P = 10) solutions generate the deck's 2x2 payoffs
@@ -30,8 +35,11 @@ notes: >
   textbook-scan sample_fig.png was deleted for the same reason.
 
   Deliberate scope cuts from BFH Ch. 1, agreed with Jonathan 2026-07-16 for
-  the 13-14-lecture budget: Schelling segregation (sec 1.15) cut - parked in
-  new_ideas.md as a notebook simulation; Disagreement game (sec 1.13)
+  the 13-14-lecture budget: Schelling segregation (sec 1.15) reinstated
+  2026-07-18 as a single "postcard" slide only (no multi-panel cascade) -
+  notebooks/topic01_schelling_segregation.ipynb has the full walkthrough,
+  verified against the book's own 12-household/3-swap example by assertion,
+  plus a general random-matching simulator and sensitivity widget. Disagreement game (sec 1.13)
   compressed to a taxonomy-table row; marble-in-bowl equilibrium epistemology
   reduced to a blockquote aside; Hardin/tragedy-of-the-commons naming and the
   N-player/public-goods generalization deferred to Topic 9 per the

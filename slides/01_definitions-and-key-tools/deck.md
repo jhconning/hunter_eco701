@@ -27,16 +27,38 @@ Dept of Economics
 
 ## What Is This Course About?
 
-- How societies allocate scarce resources — through **markets**, and through much else: firms, contracts, families, common-property rules, government policy
-- Each of these is a **mechanism**: a set of *rules of the game* determining who decides what, who knows what, and who gets what
-- Given the rules, optimizing players settle into an **equilibrium**
-- We evaluate equilibria twice: **efficiency** — are all gains from cooperation realized? — and **distribution** — who captures them?
+- **Resource allocation**: how societies decide who gets what
+- The result of **strategic action** — individuals acting alone, or in concert through organizations (firms, governments, contract arrangements) 
+- A **mechanism**: what participants can do or report — a bid, a contract, a vote — and a rule mapping those choices to an outcome
+  - markets, auctions, and screening contracts are all mechanisms
+- Add **payoffs** and a mechanism becomes a **game**; play settles into an **equilibrium** — reverse the logic and that's **mechanism design**
+- **Evaluate:** 
+  - **Efficiency** — are all gains from cooperation realized? 
+  - **Distribution** — who captures them?
 
-**rules of the game → optimizing play → equilibrium → efficiency & distribution**
+<!-- Framing per BFH Ch. 1's institutions-first approach; "mechanism" is used in the mechanism-design sense (message space + outcome function, Hurwicz/Myerson/Maskin) rather than loosely equated with "rules of the game" - so auctions and screening contracts fit as cleanly as markets do. -->
+
+---
+
+
+##### **mechanism  → strategic play → equilibrium → efficiency & distribution**
 
 > *The competitive market is one remarkable mechanism among many — not the only one, and not always available. Today builds the vocabulary; the rest of the course builds the machinery.*
 
-<!-- Framing per BFH Ch. 1's institutions-first approach; "mechanism" language is ours. -->
+<!-- Distilled restatement + the quote, given its own slide for emphasis before moving into Hume vs. Smith. -->
+
+---
+
+## Before We Begin: Why Not Start With Optimization?
+
+- **You've already put in the work**: intermediate micro's toolkit — constrained optimization, competitive equilibrium, the efficiency theorems
+- Those results are genuinely powerful — and **conditional**, on assumptions (price-taking, no externalities, self-correcting feedback) that rarely get named out loud
+- This course **widens the lens** first (today: games, institutions, the many ways coordination can succeed or fail), then **returns you to that same toolkit** (Topics 2–7) asking what's actually doing the work
+- Same machinery, by the end — held with a more critical eye about when it delivers the clean answer, and when it doesn't
+
+> *This isn't abandoning what you learned — it's learning when it's true.*
+
+<!-- Not from BFH - addresses this course's specific audience (MA students fresh from a neoclassical intermediate micro sequence) per Jonathan's course-framing note, 2026-07-18: widen the lens now, return to the same toolkit in Topics 2-7 with the assumptions made explicit. Topic 7's GE existence/uniqueness treatment is the concrete payoff of this promise - see slides/07_general-equilibrium/new_ideas.md. -->
 
 ---
 
@@ -133,6 +155,17 @@ Alfredo and Bob fish the same lake. Each independently chooses to fish **10 or 1
 > *Why insist on equilibrium? A prediction the players themselves would immediately overturn falsifies itself — like predicting a marble will rest halfway up the side of a bowl.*
 
 <!-- BFH §1.7. The bowl-of-honey variant (out-of-equilibrium dynamics) is a caveat to raise verbally; it returns in Topics 9 and 14 contexts. -->
+
+---
+
+## Aside: Who Was John Nash?
+
+- Nash's 1950 PhD dissertation — just 27 pages — proved that *every* finite game has at least one Nash equilibrium, possibly in mixed strategies
+- Cournot (1838) had used a version of the same idea nearly a century earlier, in a model of duopoly competition — but never stated it in general form (we meet Cournot's own model again in Topic 2)
+- Von Neumann & Morgenstern's *Theory of Games and Economic Behavior* (1944) couldn't pin down equilibrium beyond special cases like dominant strategies — their minimax theorem only works for zero-sum games
+- His story reached far beyond economics via Sylvia Nasar's 1998 biography *A Beautiful Mind* and Ron Howard's 2001 film adaptation
+
+<!-- Cannibalized (2026-07-18) from slides/08_essentials-of-game-theory/deck.md's two Nash-bio asides, text-only. Dropped both bg images (nash-portrait.png, beautiful-mind-poster.png): neither has documented licensing in that topic's source.yml, the portrait looks like an uncredited tribute-banner image pulled from a news site, and the poster/book-cover are near-certainly copyrighted commercial art - inconsistent with this deck's no-uncleared-images policy elsewhere. Combining into one text-only slide also drops the need for the original two-slide split, which existed specifically to fix a bg-image overflow bug that doesn't apply without an image. -->
 
 ---
 
@@ -319,7 +352,20 @@ Aram and Bina choose to plant **early or late**. Early gives the best harvest �
 - No conflict of interest — everyone prefers (Early, Early) — yet the village can stay **stuck** at (Late, Late): reaching the good equilibrium takes *assurance* about what others will do
 - **History selects equilibria**: last season's expectations carry forward (path dependence). Palanpur's late planting is a **poverty trap** — same people, same technology, poorer history
 
-<!-- BFH §1.12 (Fig 1.16 verified), §1.14. Schelling segregation (§1.15) cut for lecture time — parked in new_ideas.md as a notebook simulation. -->
+<!-- BFH §1.12 (Fig 1.16 verified), §1.14. -->
+
+---
+
+## Postcard: Segregation as a Nash Equilibrium
+
+![bg right:40% w:460](media/schelling_before_after.png)
+
+- Households on a circle, two groups — everyone's stated ideal is **one neighbor of each type**
+- Satisfied unless **both** neighbors are the other type — tolerant of integration, intolerant of isolation
+- From maximum mixing, small individually sensible moves can cascade into **complete segregation** — shown at right
+- Segregated *and* integrated arrangements are both Nash equilibria — same preferences, different societies; which one occurs is a matter of history, not preference
+
+<!-- BFH §1.15 (model due to Schelling, 1971). Full walkthrough, verified against the book's own swap sequence, plus an interactive sensitivity widget: notebooks/topic01_schelling_segregation.ipynb -->
 
 ---
 
@@ -365,13 +411,13 @@ Every topic in this course runs the same loop:
 
 - **Topics 2–3:** the machinery of optimization — Lagrange, Kuhn–Tucker, duality (we re-derive today's 10 vs. 12 from first principles, then generalize)
 - **Topics 4–6:** consumers; choices over time and risk; households that produce *and* consume
-- **Topic 7:** general equilibrium — when is Smith's conjecture a theorem?
+- **Topic 7:** general equilibrium — when is Smith's conjecture a theorem? *(promise kept)*
 - **Topics 9–10:** when mechanisms fail — externalities and public goods; information, contracts, and power
 - **Reading:** Bowles & Halliday, *Microeconomics: Competition, Conflict, and Coordination*, Ch. 1 (this lecture); Nicholson & Snyder Ch. 2 for next week
 
 > *"Better outcomes require better rules of the game" — Bowles & Halliday's closing line, and this course's thesis.*
 
-<!-- BFH §1.17's three caveats (collective best responses, equilibrium selection, out-of-equilibrium dynamics) — raise verbally here. -->
+<!-- BFH §1.17's three caveats (collective best responses, equilibrium selection, out-of-equilibrium dynamics) — raise verbally here. The Topic 7 bullet's "redeemed" callback bookends the "Before We Begin" slide's framing (2026-07-18) - see slides/07_general-equilibrium/new_ideas.md for the SMD/uniqueness payoff this sets up. -->
 
 ---
 
