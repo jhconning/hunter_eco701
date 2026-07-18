@@ -5,12 +5,15 @@ here into the deck, the notebook, or a problem set by deliberate decision.
 
 ## New slides / asides
 
-- **Schelling segregation as a Nash equilibrium** (BFH sec 1.15) — cut from the
-  lecture for time. Strongest candidate for reinstatement if a slot opens, or
-  as a Topic 9 aside: uncoordinated moves by integration-preferring households
-  reach a fully segregated Nash equilibrium; both segregated *and* integrated
-  allocations are equilibria (multiple equilibria + path dependence in one
-  story).
+- **Schelling segregation as a Nash equilibrium** (BFH sec 1.15) — DONE
+  (2026-07-18) as a one-slide "postcard" (households on a circle, satisfied
+  unless both neighbors are the other type, cascade to segregation, both
+  segregated and integrated allocations are Nash) rather than the full
+  multi-panel treatment — see `notebooks/topic01_schelling_segregation.ipynb`
+  for the full walkthrough. The fuller treatment (step-by-step cascade,
+  the random-matching results below, the sensitivity widget) is still a
+  strong candidate for a dedicated Topic 9 slot if one opens, rather than
+  squeezing more of it into Lecture 1.
 - Nash biography aside — `slides/08_essentials-of-game-theory/media/`
   already has `nash-portrait.png` and a two-slide bio if ever wanted here.
 - Equilibrium-selection caveats slide (BFH sec 1.17's three caveats:
@@ -19,10 +22,24 @@ here into the deck, the notebook, or a problem set by deliberate decision.
 
 ## Notebook / interactive
 
-- **Schelling circle simulation** — 12 households on a clock face, random
-  dissatisfied-pair swaps, watch integration collapse to segregation;
-  ipywidgets "step" button. Natural companion to the existing
-  `topic01_definitions_key_tools_figures.ipynb`.
+- **Schelling circle simulation** — DONE (2026-07-18):
+  `notebooks/topic01_schelling_segregation.ipynb`. Exactly reconstructs BFH's
+  own 12-household, 3-swap example (verified by assertion against the
+  book's specific swap sequence and named individuals), then goes further:
+  a general random-matching simulator, classified by cluster count (not a
+  segregation-index cutoff — an earlier pass used index > 1.8 as "full
+  segregation" and got 0%, which was simply wrong: the book's own exact
+  outcome has index 1.667, not near the theoretical max of 2, because a
+  circle split into two same-type arcs always has four k_i=1 "boundary"
+  households). Corrected, verified finding (300 random runs from the
+  checkerboard, n=12): **27% land on exactly full segregation** (matching
+  the book's outcome), **5% land on exactly the integrated ideal**, and the
+  modal outcome (68%) is a *milder* version of the same phenomenon — two or
+  three separate same-type neighborhoods per group rather than one giant
+  one. Full segregation is common, not rare; full integration is the one
+  that's genuinely hard to reach by chance. Interactive ipywidget (n, group
+  share, tolerance threshold, seed) included for exploring this live in
+  class.
 - The **externality knob** demo (already prototyped as the notebook's last
   cell): slider on alpha in u_A = (15 - alpha*e_B)e_A - e_A^2/2 morphs
   commons over-use (alpha > 0) through invisible hand (alpha = 0) to
@@ -32,6 +49,39 @@ here into the deck, the notebook, or a problem set by deliberate decision.
   best-response dots, showing the PD -> Assurance -> Invisible Hand
   boundaries as inequalities flip (BFH sec 1.16's transformation logic,
   generalized).
+
+## Conceptual notes (bigger-picture connections)
+
+- **Uniqueness/efficiency vs. multiplicity/path-dependence — the
+  feedback-sign lesson** (surfaced 2026-07-18, discussing why Schelling's
+  equilibria are so sensitive to history compared to the "clean"
+  unique-efficient outcomes competitive-market treatments usually deliver).
+  Full note, including the Sonnenschein-Mantel-Debreu caveat and a
+  suggested use, saved in `slides/07_general-equilibrium/new_ideas.md`
+  (Topic 7 doesn't exist yet — that file holds it until it does). Summary:
+  - Three claims worth keeping separate: **multiple equilibria** (more than
+    one resting point exists) vs. **sensitivity to initial conditions**
+    (different starts → different ends) vs. **path dependence** (the
+    sharpest — even the *same* start can lead to different ends, purely
+    from the random order people happened to move; this is what the
+    Schelling notebook's 300-run experiment actually demonstrates).
+  - The mechanism: **strategic substitutes + negative feedback**
+    (competitive markets, self-correcting) buys uniqueness and stability;
+    **strategic complements + positive feedback** (Assurance/Palanpur,
+    Schelling) produces multiplicity and path dependence instead. Topic 1
+    already half-builds this contrast in (Invisible Hand = unique/efficient;
+    Assurance is explicitly labeled "strategic complements" on the Palanpur
+    slide) — Schelling is the same logic scaled to N players.
+  - One-line student version: *uniqueness and efficiency aren't generic
+    properties of "the economy" - they're properties of models with
+    self-correcting feedback and no externalities. Introduce complementarity
+    or an externality and you can trade a single good answer for a landscape
+    of possible ones, some of which nobody would have chosen.*
+  - Where it could land: a light one-or-two-sentence closing remark on "The
+    Lecture in One Table" tying Invisible Hand -> Assurance -> Schelling
+    together, **or** (leaning this way, Lecture 1 is already dense) held
+    back entirely for Topic 7's GE existence/uniqueness treatment, where the
+    SMD caveat can be stated with actual rigor instead of a hand-wave.
 
 ## Problem set ideas (PS1 candidates)
 
@@ -52,8 +102,9 @@ here into the deck, the notebook, or a problem set by deliberate decision.
   2x2 payoffs; verify the liability rule restores efficiency. (The figures
   notebook contains the full solution — don't hand that out.)
 - Prove both the fully segregated and the ideal integrated allocations of
-  the Schelling circle are Nash equilibria (if segregation gets a slot
-  anywhere).
+  the Schelling circle are Nash equilibria (the postcard slide asserts
+  both; a PS question could ask students to verify k_i for each position
+  by hand, or extend to the random-matching patchwork case).
 
 ## Course-level consolidation (pending decisions — affects TOPIC_PLAN.md)
 
