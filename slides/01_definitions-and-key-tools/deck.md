@@ -158,6 +158,17 @@ Alfredo and Bob fish the same lake. Each independently chooses to fish **10 or 1
 
 ---
 
+## Aside: Who Was John Nash?
+
+- Nash's 1950 PhD dissertation — just 27 pages — proved that *every* finite game has at least one Nash equilibrium, possibly in mixed strategies
+- Cournot (1838) had used a version of the same idea nearly a century earlier, in a model of duopoly competition — but never stated it in general form (we meet Cournot's own model again in Topic 2)
+- Von Neumann & Morgenstern's *Theory of Games and Economic Behavior* (1944) couldn't pin down equilibrium beyond special cases like dominant strategies — their minimax theorem only works for zero-sum games
+- His story reached far beyond economics via Sylvia Nasar's 1998 biography *A Beautiful Mind* and Ron Howard's 2001 film adaptation
+
+<!-- Cannibalized (2026-07-18) from slides/08_essentials-of-game-theory/deck.md's two Nash-bio asides, text-only. Dropped both bg images (nash-portrait.png, beautiful-mind-poster.png): neither has documented licensing in that topic's source.yml, the portrait looks like an uncredited tribute-banner image pulled from a news site, and the poster/book-cover are near-certainly copyrighted commercial art - inconsistent with this deck's no-uncleared-images policy elsewhere. Combining into one text-only slide also drops the need for the original two-slide split, which existed specifically to fix a bg-image overflow bug that doesn't apply without an image. -->
+
+---
+
 ## The Verdict: A Social Dilemma
 
 - Both prefer **(10, 10)** with payoffs **(75, 75)** — yet individually rational play lands at **(72, 72)**: the famous **Prisoners' Dilemma** structure

@@ -14,8 +14,18 @@ here into the deck, the notebook, or a problem set by deliberate decision.
   the random-matching results below, the sensitivity widget) is still a
   strong candidate for a dedicated Topic 9 slot if one opens, rather than
   squeezing more of it into Lecture 1.
-- Nash biography aside — `slides/08_essentials-of-game-theory/media/`
-  already has `nash-portrait.png` and a two-slide bio if ever wanted here.
+- **Nash biography aside** — DONE (2026-07-18): cannibalized from Topic 8
+  (dissolved per TOPIC_PLAN.md) as a single text-only "Aside: Who Was John
+  Nash?" slide, right after "Nash Equilibrium." Deliberately dropped both
+  bg images (`nash-portrait.png`, `beautiful-mind-poster.png`) rather than
+  reuse them — neither has documented licensing in Topic 8's `source.yml`,
+  the portrait looks like an uncredited tribute-banner pulled from a news
+  site, and the poster/book-cover are near-certainly copyrighted commercial
+  art. **Flagged, not yet fixed: these same three images are still live on
+  the currently-deployed `08_essentials-of-game-theory` deck** — worth
+  addressing regardless of that topic's undecided archive/keep/cannibalize
+  fate (see TOPIC_PLAN.md resolved decision 5), since it's a live-site
+  copyright exposure independent of that question.
 - Equilibrium-selection caveats slide (BFH sec 1.17's three caveats:
   collective best responses, equilibrium selection, out-of-equilibrium
   dynamics) — currently presenter-notes only on the wrap slide.

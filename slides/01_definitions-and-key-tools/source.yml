@@ -18,7 +18,12 @@ notes: >
 
   Secondary sources: legacy "E701_F18 _slidesI.pptx" slides ~20-31 (Pareto
   criterion, gains to trade, UPF, invisible hand, classical constitutional
-  conundrum) absorbed conceptually rather than extracted; BH\BowlesNotes.md
+  conundrum) absorbed conceptually rather than extracted; the "Aside: Who
+  Was John Nash?" slide's text is cannibalized (2026-07-18) from
+  slides/08_essentials-of-game-theory/deck.md's two Nash-bio asides
+  (Topic 8 dissolved per TOPIC_PLAN.md) - text only, both bg images
+  deliberately dropped for unverified/likely-copyrighted provenance, see
+  new_ideas.md; BH\BowlesNotes.md
   (2018 course notes) supplied the continuous-effort fisherman model
   u_A = (15 - (1/4) e_B) e_A - (1/2) e_A^2, whose symmetric Nash (e* = 12)
   and planner (e^P = 10) solutions generate the deck's 2x2 payoffs
