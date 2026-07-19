@@ -404,6 +404,21 @@ Aram and Bina choose to plant **early or late**. Early gives the best harvest �
 
 ---
 
+## A Coordination Game With Conflict: Opera or Football?
+
+![](media/opera-football-diagram.png){width="55%" fig-align="center"}
+
+::: {.incremental}
+- Both players prefer coordinating to not — but **disagree on which equilibrium**: Player 1's best outcome is (Opera, Opera), Player 2's is (Football, Football)
+- Two Nash equilibria, but **not Pareto-ranked** the way Palanpur's were — unlike an assurance game, no outcome is best for both
+- Echoes the Fishermen's lesson from a different angle: **common interest** in coordinating at all, **conflicting interest** in which equilibrium
+- This catalog has now shown both a **unique** equilibrium (Corn/Tomatoes) and **multiple** (Palanpur, here) — existence is guaranteed in every finite game; uniqueness is not
+:::
+
+<!-- Salvaged (2026-07-19) from slides/08_essentials-of-game-theory/deck.md's "Example: Coordination Games (Opera vs. Football)" ahead of archiving that topic (dissolved per TOPIC_PLAN.md, 2026-07-18) - the one example there not otherwise duplicated in this deck: Palanpur is multiple-equilibria-without-conflict (assurance game), this is multiple-equilibria-with-conflict, completing the taxonomy. Diagram (with its hand-drawn best-response arrows/circled equilibria) copied verbatim from the source topic's media/ - see that topic's source.yml for the render_diagram.py provenance. Folded in a brief existence/uniqueness closing line rather than reviving Topic 8's separate abstract theorem-statement slide, to stay consistent with this deck's applied/example-first style. -->
+
+---
+
 ## Postcard: Segregation as a Nash Equilibrium
 
 ::: {.columns}

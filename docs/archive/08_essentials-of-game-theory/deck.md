@@ -2,7 +2,7 @@
 title: deck
 description: "ECO 701 Topic 8: Essentials of Game Theory"
 author: "Jonathan Conning"
-deploy: true
+deploy: false
 marp: true
 math: katex
 paginate: true
@@ -10,6 +10,24 @@ theme: eco701
 size: 16:9
 footer: 'Eco 701 - Micro Theory'
 ---
+
+> **ARCHIVED (2026-07-19).** Topic 8's dedicated lecture slot was dissolved
+> on 2026-07-18 (see `TOPIC_PLAN.md`): once Topic 1 was reworked around BFH
+> Ch. 1, it absorbed essentially all of this deck's core content (best
+> response, Nash equilibrium, Prisoner's Dilemma, dominant strategies)
+> informally and earlier in the sequence. Before archiving, one genuinely
+> non-duplicated example — the Opera/Football coordination game below,
+> the only game in this deck with *conflicting* interests over which of
+> multiple equilibria to reach — was salvaged into Topic 1's own deck as
+> "A Coordination Game With Conflict: Opera or Football?", right after its
+> Palanpur assurance-game example. `deploy: false` above so this can never
+> accidentally get built again even if it's later moved back under
+> `slides/`; it now lives under `docs/archive/` specifically so the CI
+> build (which scans `slides/` wholesale) never touches it. Kept for
+> historical accuracy and in case any of its other content (the formal
+> game/Nash definitions, the classic Cooperate/Fink Prisoner's Dilemma, the
+> Nash biography now itself absorbed into Topic 1, the simpler two-choice
+> Fisherman's Dilemma) is ever useful again.
 
 <!-- _class: divider -->
 
