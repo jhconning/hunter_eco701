@@ -36,10 +36,12 @@ Run in this order for a new topic:
    mode) only to hand-trim a crop the batch heuristic got too wide, or to
    capture a diagram the heuristic missed entirely.
 
-None of these touch `slides/<topic>/deck.md` or `slides/<topic>/media/`
+None of these touch `slides/<topic>/deck.qmd` or `slides/<topic>/media/`
 directly - those are hand-authored once the raw material has been reviewed.
-See the root `HANDOFF.md` for the full redesign workflow (not just
-extraction).
+See the root `HANDOFF.md` for the full redesign and Quarto-authoring
+workflow (not just extraction) - this pipeline is unaffected by the
+Marp-to-Quarto slide-engine move, since it only pulls raw content out of
+the legacy pptx files.
 
 ## Setup
 

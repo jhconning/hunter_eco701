@@ -1,24 +1,43 @@
 # Handoff: Eco 701 slide modernization
 
 Read this first if you're picking up this work in a fresh conversation.
-Written 2026-07-13.
+Originally written 2026-07-13; rewritten 2026-07-19 for the move from Marp
+to Quarto + revealjs. The Marp-era version of this file (extraction-pipeline
+gotchas for Topics 1/2/3/8, the original Marp theme/CI details) is archived
+at [`docs/archive/HANDOFF-marp.md`](docs/archive/HANDOFF-marp.md) — still
+worth reading for the *why* behind existing content, but not the live
+workflow anymore.
 
 ## What this project is
 
 Jonathan is modernizing Eco 701 (Master's Microeconomic Theory) from old
-PowerPoint slides into Marp markdown slides, organized around the 11-topic
-course sequence (originally drafted in `syllabus/IDEAS.md` — that file is
-gitignored/private by deliberate choice as of 2026-07-16, so don't link to
-it from anything public-facing; [`TOPIC_PLAN.md`](TOPIC_PLAN.md) is the
-tracked, public equivalent). The end goal is a live course site (GitHub
-Pages) with slides, notes, and problem sets all built from the same
-markdown source.
+PowerPoint slides into Quarto/revealjs markdown slides, organized around the
+11-topic course sequence (originally drafted in `syllabus/IDEAS.md` — that
+file is gitignored/private by deliberate choice, so don't link to it from
+anything public-facing; [`TOPIC_PLAN.md`](TOPIC_PLAN.md) is the tracked,
+public equivalent). The end goal is a live course site (GitHub Pages) with
+slides, notes, and problem sets all built from the same markdown source.
 
 **This is NOT a fresh project** — a real repo (`jhconning/hunter_eco701`)
-already existed with a working GitHub Pages deploy pipeline and one topic
-built (using a "Neobeam" Marp theme) before this reorganization started. If
-you're exploring this repo cold, don't assume the `git log` before
-2026-07-13 reflects this conversation's work — it doesn't.
+already existed with a working GitHub Pages deploy pipeline before this
+reorganization started, and 5 topics were fully built and deployed *in
+Marp* before the move to Quarto (see "Migration status" below).
+
+## Migration status (2026-07-19)
+
+The slide engine is moving from Marp to Quarto + revealjs — better fragment
+support (any element, not just bullet lists — see "Fragments" below),
+richer layout primitives (columns, tabsets, `.r-stack`), and native
+interactive Python (Plotly) embedding. The evaluation that led to this
+decision (a full trial port of Topic 1, a feature-showcase deck, and a
+working theme) lived in `slides/quarto-test/` and has been folded into this
+document and `slides/_shared/eco701-revealjs.scss`.
+
+**As of this writing, migration is in progress.** Check each topic's
+`source.yml` for its actual current format (`deck.md` = still Marp,
+`deck.qmd` = migrated). Topics 4-7, 8b, 9-11 have no source material
+converted yet at all (per `TOPIC_PLAN.md`) — those get authored directly in
+Quarto from the start, no migration involved.
 
 ## Where everything is
 
@@ -30,14 +49,10 @@ you're exploring this repo cold, don't assume the `git log` before
 - **Live site:** https://jhconning.github.io/hunter_eco701/ — deploys ONLY on
   push to `main`. Never push to `main` directly without Jonathan's explicit
   go-ahead; work on a branch and open a PR (PRs build via CI but don't
-  deploy — see the CI section below).
+  deploy).
 - **Legacy source pptx files:** `legacy/slides/E701_F18 _slidesI.pptx` (337
   slides), `_slidesII.pptx` (258 slides), `_slidesIIb.pptx` (224 slides).
   This folder is gitignored — it's reference material, not tracked.
-- **Current branch as of this handoff:** `topic-reorg`, open as
-  [PR #1](https://github.com/jhconning/hunter_eco701/pull/1), CI green, not
-  yet merged. Check `git log`/`gh pr view 1` to see if it's since been
-  merged or changed.
 
 ## Architecture
 
@@ -45,399 +60,225 @@ Each topic is a folder under `slides/`, numbered to match `IDEAS.md`:
 
 ```
 slides/
-  _shared/eco701-theme.css       <- the one shared Marp theme (navy/serif/amber)
+  _shared/eco701-revealjs.scss   <- the one shared Quarto theme (navy/serif/amber)
+  _shared/eco701-theme.css       <- the old Marp theme - remove once every deck is migrated
   00_logistics/                   <- front-matter, not one of the 11 numbered topics
   01_definitions-and-key-tools/   <- IDEAS.md Topic 1
   08_essentials-of-game-theory/   <- IDEAS.md Topic 8
-    deck.md                       <- hand-authored Marp deck. THE deliverable. Never auto-overwritten.
-    media/                        <- final images actually used in deck.md, meaningfully named
+    deck.qmd                      <- hand-authored Quarto deck. THE deliverable. Never auto-overwritten.
+    media/                        <- final images actually used in deck.qmd, meaningfully named
     raw/                          <- mechanical extraction output. Regeneratable. Never hand-edit.
-      extracted.txt                  (NOT .md - marp-cli would otherwise try to build it as a deck)
-      tables.json
-      shape_census.json
-      mathpix.json
-      media/eq/, media/pic/, media/slide_png/
-    source.yml                    <- provenance: which pptx, which slide range, confidence level
+    source.yml                    <- provenance: which pptx, which slide range, confidence level, current format
     new_ideas.md                  <- backlog of expansion ideas (new slides, viz, problem sets) - not a plan
-    figs/                         <- notebook-generated candidate figures, staged for review (optional,
-                                      only exists for topics with a companion notebook) - see
-                                      "Code-generated figures" below for the promotion procedure
+    figs/                         <- notebook-generated candidate figures, staged for review (optional) -
+                                      see "Code-generated figures" below for the promotion procedure
 ```
 
-Read the actual `source.yml` and `deck.md` in `01_definitions-and-key-tools/`
-and `08_essentials-of-game-theory/` for concrete examples before building a
-new topic — they show the pattern better than more prose here.
+Read the actual `source.yml` and `deck.qmd` in `01_definitions-and-key-tools/`
+for a concrete, fully-migrated example before building or converting a new
+topic — it shows the pattern better than more prose here.
 
-## The conversion pipeline (`tools/`)
+## The extraction pipeline (`tools/`) — unchanged by the Quarto move
 
-See [`tools/README.md`](tools/README.md) for the authoritative step order.
-Summary: `title_scan.py` (planning, optional) → `extract_topic.py` (text/
-tables/pictures, free/fast) → `render_equations.py` (PowerPoint COM, only if
-there are OLE equations) → `mathpix_ocr.py` (paid API, only after you know
-the equation count). Then a human (you) reads the raw output, catches gaps,
-and hand-writes `deck.md` — that step is NOT automated and shouldn't be;
-see "What doesn't scale" below.
+Pulling raw content out of the legacy pptx files is completely independent
+of which slide engine the output targets. See
+[`tools/README.md`](tools/README.md) for the authoritative step order (same
+as always: `title_scan.py` → `extract_topic.py` → `render_equations.py` (if
+needed) → `mathpix_ocr.py` (if needed) → `render_diagram.py` (if the shape
+census flagged candidates)). Then a human (you) reads the raw output, catches
+gaps, and hand-writes `deck.qmd` — that step is not automated and shouldn't
+be; see "What doesn't scale" at the end of this file.
 
 Setup: `mamba install -n ecopy -c conda-forge python-pptx pillow requests
-pywin32`. Mathpix credentials live in `.env` at the repo root
-(`MATHPIX_APP_ID`, `MATHPIX_APP_KEY`) — gitignored, already populated as of
-this handoff.
+pywin32`. Mathpix credentials live in `.env` at the repo root (gitignored).
 
-## What to do next
+## Authoring a deck.qmd
 
-**Topic 1 rework: DONE (2026-07-16, branch `topic01-bfh-rework`).** The
-4-slide stub became a 28-page framing lecture built on Bowles & Halliday
-(2022) Ch. 1 — mechanism framing → Fishermen's Dilemma (cardinal payoffs
-78/75/72/70 derived from the continuous-effort model, Nash e*=12 vs planner
-e*=10) → embedded FOC/SOC calculus review → Pareto/UPF/PPF → game taxonomy →
-liability rule. All figures code-generated by
-`notebooks/topic01_definitions_key_tools_figures.ipynb` (asserts the payoff
-numbers; figs/ → media/ promotion done); payoff matrices verified against
-rendered PDF pages (the text dump's ordering inside matrix figures is
-unreliable). Scope cuts + PS ideas + the **pending course-level decisions**
-(dissolve vs. rescope Topic 8; Topic 2 continuous-games block; 00_logistics
-citation) are recorded in `slides/01_definitions-and-key-tools/new_ideas.md` —
-TOPIC_PLAN.md deliberately untouched until Jonathan rules on those. NOTE: the
-published 2022 edition is **Bowles & Halliday, "Microeconomics: Competition,
-Conflict, and Coordination"** (no Foley; different title than the draft).
+### Structural conventions (Marp → Quarto, if porting existing content)
 
-Book location details (still valid for later chapters):
-- PDF: `Y:\E\ebooks\economics\bowleshalliday_final_2022.pdf` (1072 pages;
-  a shortcut also lives at `BH\bowleshalliday_final_2022.lnk`, but resolve
-  the `.lnk` or just use the real path directly — `fitz`/PyMuPDF can't open
-  a Windows shortcut)
-- **Chapter 1, "Society: Coordination Problems and Economic Institutions" is
-  PDF pages 35-85** (1-indexed; verified by locating the "CHAPTER" opener
-  pages directly, since the embedded PDF outline's page numbers are broken/
-  non-monotonic — don't trust `doc.get_toc()` for this file, search page
-  text instead). Sections include the Tragedy of the Commons, Nash
-  equilibrium, Pareto comparisons/efficiency, Prisoners' Dilemma, Invisible
-  Hand games, Assurance games, and segregation-as-Nash-equilibrium — a
-  superset of the fishermen's-dilemma/Pareto-efficiency framing the 2016
-  draft covered, and still lines up with the deck's existing outline
-  (Pareto Efficiency, PPF, UPF, Basic Coordination Games).
-- **Already extracted to `BH\chapter1_raw_extracted.txt`** (raw PyMuPDF text
-  dump, ~140KB, pages 35-85) — read that directly rather than re-extracting.
-- Old notes from a prior course iteration are at `BH\BowlesNotes.md` (moved
-  there from `legacy/Bowles/` — read those first, they're a head start).
-- `legacy/Bowles/` (the 2016 draft PDF + old notes) and the rest of `BH/`
-  (old 2018 PowerPoint chapters, syllabus, worksheets — unrelated leftover
-  course material) should be **ignored**, not used as source material.
+- One `##` heading per slide, always paired with an explicit `---`
+  separator (both together, not relying on heading-level slide-breaking
+  alone) — mirrors Marp's own one-`---`-per-slide shape, so a port stays
+  close to mechanical.
+- Marp `<!-- _class: lead/divider/compact -->` → Quarto heading attribute
+  `## Heading {.divider}` / `{.compact}`, styled in
+  `eco701-revealjs.scss`'s `scss:rules` block. Marp's title/lead slide →
+  Quarto's auto-generated title slide (from `title:`/`subtitle:`/
+  `author:`/`institute:` YAML) rather than hand-building a replica — not
+  pixel-identical but close, and much less work.
+- Marp `![bg right:NN% wNNN](img)` (split background-image layout) → Quarto
+  `::: {.columns}` / `::: {.column width="X%"}` with a plain `![](img)` in
+  one column. Not a mechanical copy — needs a per-slide judgment call on
+  the split, but the visual result is a close match.
+- A slide can have **no heading at all** — Pandoc is fine with heading-less
+  content between `---` markers (useful for a bold-statement/pull-quote
+  style slide that isn't really a new topic heading).
+- HTML comments (`<!-- ... -->`) carry over unchanged — Pandoc treats them
+  as real comments, same as Marp. Keep using them for provenance/rationale
+  notes that shouldn't render.
+- Math (`$...$`/`$$...$$`) carries over unchanged. Set `html-math-method:
+  katex` explicitly in the YAML (Quarto defaults to MathJax otherwise).
 
-This is a **brainstorming/rewrite task, not a pipeline-conversion task** —
-don't run it through `extract_topic.py` or treat it like the Topic 2/3
-mechanical-extraction workflow below. `00_logistics/deck.md` already lists
-this book as the course's supplementary text, for context.
+### Fragments (the whole reason for the Quarto move)
 
-1. **All of TOPIC_PLAN.md's open questions are now resolved** (see its
-   "Resolved decisions (2026-07-13)" section) — slidesIIb is authoritative
-   over slidesII, slides 32-42 continue Topic 8, ~70 unmapped slides become
-   an isolated optional Topic 8b, Topic 9 is deferred (slides not yet
-   written).
-2. **Topic 2 (Constrained Optimization, `slidesI` 43-102) is done**, converted
-   in three sub-chunks because it's much larger than other topics (60 slides,
-   152 top-level equations, now 52 Marp slides across `deck.md`). See
-   `source.yml` in `02_constrained-optimization/` for the full history —
-   worth reading before touching this topic again, since it documents real
-   gotchas (the Mathcad-graph-vs-OCR-miss distinction, a shape-bounding-box
-   crop bug in `render_equations.py`'s output for 4 of the sub-chunk-3
-   diagrams). Two pieces of legacy content were deliberately dropped rather
-   than transcribed: slide 102 (a bare "PS1 due Friday" logistics note) and
-   slide 97 (a Lagrangian recap that duplicated content already given at the
-   end of sub-chunk 2).
-3. **Topic 3 (Production Optimization, `slidesIIb` 162-202) is done**,
-   converted in two sub-chunks (35 Marp slides across `deck.md`). Very
-   different content profile from Topic 2 — mostly native PowerPoint
-   drawing shapes (isoquant maps, cost curves) rather than Mathcad graphs,
-   which needed a new tool (`tools/export_slide_pngs.py`, unconditional
-   full-slide export) since `extract_topic.py`'s diagram-candidate
-   heuristic doesn't catch this pattern at all. See `source.yml` in
-   `03_production-optimization/` for the full history, including a
-   recurring variable-title-height crop issue (fixed empirically per
-   slide, not with one fixed offset).
-4. For each new topic: run the pipeline, review the raw output *including
-   the shape census* (don't skip this — it's what caught 3 missed tables
-   during the pilot), check whether the diagrams are Mathcad graphs/
-   picture+annotation (caught by `extract_topic.py`'s heuristic) or native
-   PowerPoint drawing shapes (not caught — use `export_slide_pngs.py` and
-   hand-pick crops instead, per Topic 3's `source.yml`), redesign into
-   `deck.md` with real pedagogical judgment (split overflowing slides,
-   merge redundant ones, write real titles — see the git history of
-   `08_essentials-of-game-theory/deck.md`'s predecessor pilot, or either
-   `02_constrained-optimization/deck.md` or
-   `03_production-optimization/deck.md`, for what "good" looks like),
-   verify locally with `marp` CLI + PDF rasterization (PyMuPDF works fine
-   if `pdftoppm` isn't installed — see the gotchas below on the exact
-   image-overflow failure modes, both vertical and horizontal, to check
-   for), then commit to a branch and open a PR.
-5. Remaining topics (4-7, 8b, 9-11 in `TOPIC_PLAN.md`) haven't been started
-   at all.
+- `::: {.incremental}` around a list ≈ Marp's `*`-bullet trick, but works
+  regardless of what follows on the slide (Marp's version broke if a
+  non-bulleted element, like a blockquote, came after the list).
+- `::: {.fragment}` around **any** block (blockquote, image, equation, div)
+  is the real upgrade — wrap a closing blockquote in its own `.fragment` and
+  it arrives last, after an `.incremental` list finishes, which Marp could
+  never do.
+- reveal.js ships fragment *styles* beyond plain fade-in:
+  `[text]{.fragment .highlight-red}` / `-green` / `-blue` — click to color a
+  specific phrase, no custom CSS needed.
 
-## Code-generated figures (`notebooks/`, started 2026-07-15)
+### Tabsets — use sequential slides instead, not `.panel-tabset`
 
-Jonathan asked about replacing static PNGs (extracted/hand-drawn from the
-original PowerPoint) with figures generated directly from their formulas —
-so slides stay static/Marp for now, but a companion Jupyter notebook
-regenerates every figure from code, and doubles as a live-demo tool for
-class (`ipywidgets` sliders, rotatable `plotly` 3-D surfaces).
+`.panel-tabset` only exports its default tab to the PDF — Tabby.js (the tab
+library) hides every non-active panel via inline style on page load, and
+this is not fixable via CSS (a `@media print` override to force all panels
+visible was tested and had zero effect; decktape doesn't evaluate print
+media here, and the same limitation likely applies to Quarto's own
+documented manual-print method too, since it doesn't touch Tabby's JS state
+either). **Standing convention: if the "show A, then B, then C" content
+needs to survive to a printed PDF, use three separate sequential slides
+instead of a tabset.** Reserve tabsets (if ever) for genuinely
+live-presentation-only content, same category as speaker notes.
 
-### The `figs/` convention (2026-07-16)
+### Executable Python cells (Plotly, etc.)
 
-Every topic folder can have a **`slides/<topic>/figs/`** directory — a
-sibling of `media/`, `raw/`, `source.yml` — that holds notebook-generated
-*candidate* figures. It is git-tracked (so a diff shows exactly what a
-regenerated figure would change) but is deliberately **not** where `deck.md`
-points its `![](...)` references. Think of it the same way as `raw/`:
-regeneratable from code, safe to overwrite by re-running the notebook, never
-hand-edited — except `figs/`'s generator is a notebook rather than the
-extraction pipeline, and its purpose is "candidate for `media/`" rather than
-"mechanical extraction intermediate."
+A `.qmd` can mix pre-generated static images (the existing `figs/` → review
+→ `media/` promotion workflow below, unchanged) with live executable code
+cells (` ```{python} `) that run at render time via the `ecopy` Jupyter
+kernel (`jupyter: ecopy` in the YAML). Use live cells selectively, where
+interactivity is itself the pedagogical point (e.g. a hoverable/zoomable
+Plotly reaction-curve graph, or a Plotly slider with precomputed frames as
+the static-export-safe stand-in for `ipywidgets.interact` — true
+`ipywidgets` interactivity needs a live kernel and does not survive to the
+deployed static site, so that pattern stays in the companion Jupyter
+notebooks, same as it already does today). Default to static images for
+everything else.
 
-Each topic's notebook(s) target this folder via a `FIGDIR` path at the top,
-e.g. (from `topic02_constrained_optimization_figures.ipynb`):
-```python
-FIGDIR = Path("../slides/02_constrained-optimization/figs")
+## Rendering and verification
+
+```
+quarto render deck.qmd     # -> deck.html + deck_files/
 ```
 
-**Promotion procedure — how a generated figure becomes a live slide image:**
-1. Notebook cell calls `savefig(fig, "name.png")` → lands in `figs/`,
-   git-tracked, reviewable in a normal diff.
-2. Jonathan reviews it against what's currently live in `media/` for that
-   slide. **Never swap automatically — this is always a deliberate,
-   individual decision**, the same policy as everything else in this repo
-   that touches what's actually deployed.
-3. If approved: copy into `media/` under the **same filename** `deck.md`
-   already references (no deck edit needed) — `cp figs/x.png media/x.png`.
-   If renaming, update the one `![](media/...)` reference in `deck.md` too.
-4. Rebuild + verify before committing — use `tools/verify_deck.py
-   <topic-folder>` (added 2026-07-16; wraps the manual "build with the
-   CI-pinned marp-cli, rasterize every slide, eyeball/flag overflow" loop
-   used throughout this project into one command).
+Quarto has **no built-in PDF export for revealjs** (confirmed via its own
+docs and an open, unresolved upstream GitHub issue asking for one). The tool
+that fills this gap — and the one CI uses — is **decktape**, a
+Puppeteer-based headless-Chrome exporter built for reveal.js presentations
+generally (not Quarto-specific; it also has an adapter for bespoke.js, the
+engine Marp's own compiled output uses under the hood):
+
+```
+npx -y decktape reveal --size "1280x720" deck.html deck.pdf
+```
+
+To re-check a single slide after a small fix (much cheaper than re-reading
+a whole deck), extract just that page as a PNG with PyMuPDF (`fitz`,
+already in `ecopy`):
+
+```python
+import fitz
+doc = fitz.open("deck.pdf")
+doc[page_num - 1].get_pixmap(dpi=150).save("check.png")
+```
+
+Caveats:
+- decktape captures each slide's fully-revealed end state (all fragments
+  "clicked through") — fine for checking layout/overflow, useless for
+  confirming fragment *order* is right. Cross-check the compiled HTML
+  directly for that (`grep` for `data-fragment-index`, `class="notes"` for
+  speaker notes, `data-auto-animate`/`data-id="..."` for auto-animate,
+  `data-code-line-numbers="..."` for progressive code reveal — all things a
+  static PDF capture can't show visually).
+- `pdftoppm`/poppler isn't installed here, so the Read tool's `pages=`
+  parameter won't work on these PDFs — read the whole PDF at once for a
+  small deck, or use the PyMuPDF single-page trick above for anything
+  larger.
+
+## `.columns` gotcha — read before touching column layout
+
+Quarto's base revealjs theme sets `div.column { display: inline-block;
+width: 50% }` with **no logic for more than two columns**, and
+`.columns { display: initial }`, which resets `display` to CSS's real
+initial value — `inline`, not `block`. Combined with this theme's own
+`h2 { display: inline-block }` rule (needed so the amber underline hugs the
+heading text), a `.columns` block can end up sharing one inline formatting
+context with the heading above it: content crowds the title instead of
+starting a new line, and `margin-top` on `.columns` silently does nothing
+(vertical margins are specified to have no effect on `display: inline`
+elements — this isn't a bug, it's spec behavior). The fix, already applied
+in `eco701-revealjs.scss`:
+
+```scss
+.reveal .columns {
+  display: flex;
+  margin-top: 0.8em;
+}
+```
+
+If `.columns` ever looks wrong again, check `display` on `.columns` and any
+`display: inline-block` ancestor/sibling (especially a heading rule) before
+assuming it's a width or spacing problem — width/spacing were both
+plausible-looking wrong guesses before the real cause was found.
+
+## Known content-fidelity gaps (Quarto vs. Marp)
+
+1. **`\underbrace{X}_{\text{label}}` loses its label text** under Quarto's
+   KaTeX setup here, unlike Marp's KaTeX. Likely a macro/version
+   difference; not chased down further. Avoid this construct, or verify the
+   rendered slide directly if used.
+2. **Content fit is not free when porting.** Font-size/layout numbers don't
+   transfer 1:1 from the old Marp theme — budget a real re-verification
+   pass per slide (same discipline as the `tools/verify_deck.py` overflow
+   check, just against Quarto's layout model instead of Marp's).
+3. **matplotlib's own mathtext parser is stricter than KaTeX** — `\frac14`
+   (no braces) works in KaTeX-rendered slide text but throws inside a
+   matplotlib figure label; use the fully-braced `\frac{1}{4}` in any
+   code-generated figure with embedded math.
+4. **`.r-stack` needs a blank line between each stacked image/element.**
+   Adjacent `![](...)` lines with no blank line between them get merged by
+   Pandoc into one `<p>` with inline `<img>`s — `.r-stack`'s
+   absolute-positioning CSS never applies, since there's only one child to
+   stack. Always separate stacked elements with a blank line.
+
+## Code-generated figures (`notebooks/`) — unchanged by the Quarto move
+
+Every topic folder can have a `slides/<topic>/figs/` directory — a sibling
+of `media/`, `raw/`, `source.yml` — holding notebook-generated *candidate*
+figures. Git-tracked (so a diff shows exactly what a regenerated figure
+would change) but not where `deck.qmd` points its `![](...)` references.
+
+**Promotion procedure:**
+1. Notebook cell calls `savefig(fig, "name.png")` → lands in `figs/`.
+2. Jonathan reviews it against what's currently live in `media/`. **Never
+   swap automatically** — always a deliberate, individual decision.
+3. If approved: copy into `media/` under the same filename `deck.qmd`
+   already references — `cp figs/x.png media/x.png`.
+4. Rebuild + verify before committing.
 5. Commit the `media/` swap and, if the notebook changed, the regenerated
    `figs/` file together.
 
-- **Proof of concept:** `notebooks/topic02_constrained_optimization_figures.ipynb`
-  regenerates all 12 static figures used in `02_constrained-optimization/deck.md`
-  (sub-chunk 1, slides 43-63) from the exact formulas already written in that
-  `deck.md`, saving output to `slides/02_constrained-optimization/figs/` —
-  **not** written into the deck's own `media/` folder, so nothing in the live
-  deck has changed yet. Also includes 3 interactive demos (profit
-  maximization, isoquant/MRTS, a rotatable Cobb-Douglas-style surface).
-- Verified end-to-end via `jupyter nbconvert --to notebook --execute
-  --inplace` (uses the `ecopy` kernel) — all cells run clean, all 12 PNGs
-  generated, output spot-checked visually.
-- **Not yet decided:** whether to actually promote these generated images
-  into `02_constrained-optimization/media/` in place of the current ones, or
-  keep the notebook as a separate supplementary artifact. Ask Jonathan before
-  doing the swap — it'd change what's live on the deployed site.
-- If this proves out, the same pattern (one notebook per topic, regenerating
-  that topic's figures from the formulas already in `deck.md`, saving to that
-  topic's `figs/`) is the template to extend to later topics.
+## Source material for future topics (unaffected by the slide-engine move)
 
-**Second notebook (2026-07-16):**
-`notebooks/topic02_constrained_optimization_numerical.ipynb` is a different
-kind of companion — not figure replication, but actually *setting up and
-solving* the deck's constrained-optimization examples as code: a reusable
-symbolic Lagrangian solver (`sympy`), numerical cross-checks
-(`scipy.optimize`), a genuine corner-solution example, the multi-constraint
-Earthquake Relief problem solved both by hand-checking cases (as the deck
-teaches) and by a single `scipy` call with inequality constraints, and a
-numerical verification of the shadow-price interpretation of $\lambda$ (the
-envelope theorem — relax a binding constraint by 1 unit, confirm $\Delta U
-\approx \lambda$; relax a slack one, confirm $\Delta U \approx 0$). Verified
-end-to-end the same way as the figures notebook. Every numeric/symbolic
-result was hand-checked against the deck's own worked numbers before
-committing.
-
-## Gotchas discovered the hard way (don't rediscover these)
-
-- **Pandoc cannot read `.pptx`** — only writes it. Don't reach for it as a
-  pptx extraction tool.
-- **python-pptx's `shape.has_text_frame`/image-blip walk silently skips
-  native PowerPoint tables** (`shape.has_table`) unless you check for them
-  explicitly. This is why `extract_topic.py` handles tables as a distinct
-  case and prints a shape-type census every run — always look at that
-  census before trusting the extraction is complete.
-- **Table vs. diagram — a native Markdown table isn't always the right
-  recreation, and the default policy is now "capture everything."**
-  Converting a payoff matrix to a clean Markdown table is genuinely better
-  when the original is pure data. But three slides in
-  `08_essentials-of-game-theory` (Opera/Football, the revisited Prisoner's
-  Dilemma, Fisherman's Dilemma) had hand-drawn best-response arrows and a
-  circled equilibrium layered on top as *separate* PowerPoint shapes (lines,
-  an oval) — recreating those as bare tables silently dropped exactly the
-  pedagogical content the diagram existed to show. One of the three (slide
-  15) shipped to the live site unnoticed at first, because slide 12's copy
-  of the same table (genuinely unannotated) had already been reviewed and
-  nobody thought to check the second occurrence — that's precisely the
-  failure mode automatic detection exists to close.
-
-  **As of 2026-07-15, `extract_topic.py` detects this automatically**: any
-  slide with a `TABLE`/`PICTURE` plus a `LINE` shape or a text-less
-  `AUTO_SHAPE` gets written to `diagram_candidates.json`, and the script
-  prints a loud warning listing which slides. Jonathan's explicit policy:
-  **capture everything at full fidelity by default** — simplifying to a
-  plain table/dropping annotation is a deliberate, individual exception you
-  choose to make for a specific slide, never something that happens by
-  default omission. Run `render_diagram.py --candidates
-  raw/diagram_candidates.json --out-dir raw/media/diagrams` (batch mode,
-  one PowerPoint session for all of them) as a normal part of converting
-  every topic — don't skip it because the console output "looks done"
-  after `extract_topic.py` alone. The detection heuristic is deliberately
-  inclusive (a false positive just costs one extra render; a false
-  negative silently ships lost content) — expect it to occasionally flag
-  a decorative divider line alongside real annotation; trim the shape-id
-  list by hand via `--slide N --list` if a batch-rendered crop comes out
-  needlessly wide.
-- **Marp `bg` images default to cover-fill (crop-to-fill), not
-  letterbox/contain.** A wide/landscape image (e.g. a 2.3:1 aspect banner)
-  placed in a narrow `bg right:40%` column gets its sides cropped off
-  unless you constrain it. The `fit:contain` directive did NOT work under
-  the original marp-core v3.9.1 pin (silently ignored; the 2026-07-16
-  upgrade to marp-cli v4.2.3 may have changed this — retest on a scratch
-  slide before relying on it); what has always worked is an explicit `w:`
-  (e.g. `w:480`), which overrides the cover-fill default and remains the
-  proven convention across these decks. Always check a `bg`
-  image's real aspect ratio (`PIL.Image.open(...).size`) before choosing
-  between relying on the column's default fill vs. giving it an explicit
-  width.
-- **`bg`-image slides overflow more easily than plain bullet slides** —
-  the image column eats horizontal space, narrowing the text column and
-  wrapping lines into more vertical space than expected. Jonathan's own
-  fix for this (`08_essentials-of-game-theory`'s Nash-bio slide) was
-  instructive: rather than shrinking font size or cramming, **split into
-  two slides** when a `bg`-image slide's text doesn't comfortably fit —
-  it's usually a sign the slide was doing two things anyway (e.g. "Nash's
-  own contribution" vs. "Nash in popular culture"). Prefer that over
-  `right:40%`-style width tweaks as the primary fix, though sizing the
-  image column down is a reasonable secondary lever. Re-render and check
-  the *specific* slide you just edited after every change — don't rely on
-  a sample of other pages as proof the one you touched is fine; that gap
-  is exactly what let this overflow ship in the first place.
-- **Legacy equations are MathType/Equation Editor OLE objects
-  (`Equation.DSMT4`), not modern OOXML math** — no free LaTeX conversion
-  exists. The working solution is rendering via PowerPoint COM automation
-  (crisp, since it's PowerPoint's own renderer) then Mathpix OCR — both
-  came back near-perfect in testing. Don't waste time on WMF/EMF decoding;
-  ImageMagick's WMF support was unreliable on this machine.
-- **"Mathcad" OLE objects are frequently actual plotted graphs, not
-  symbolic equations** (found in `02_constrained-optimization`, 18 of
-  them). Mathpix correctly returns `(no result)` for these — there's no
-  LaTeX equivalent of a rendered curve, so this isn't a Mathpix failure to
-  retry, it's a signal the content is graphical and belongs in `media/`
-  as an image, not converted to KaTeX. That said, plenty of genuine
-  Equation.DSMT4 text/equations *also* came back `(no result)` (real
-  OCR misses, not graphs) — the only reliable way to tell the two apart
-  is to open the crop and look. **Treat every Mathpix `(no result)` as
-  "go view the image," never just "OCR failed, move on."**
-- **`render_equations.py`'s per-shape crop can clip content that visually
-  overflows the OLE shape's declared bounding box** — found on 4 Mathcad
-  diagrams in `02_constrained-optimization` sub-chunk 3 (slides 91, 94-96):
-  labels/equations positioned by the original author to sit just outside
-  the shape's nominal frame got cut off in the auto-crop (only `PAD=8px` of
-  margin). The crop looked fine at native resolution when spot-checked
-  quickly, but text near the edge was already truncated — only obvious once
-  rendered small in the actual Marp slide. Fix: re-crop from the full-slide
-  PNG in `raw/media/slide_png/` (already exported by the same script) with
-  a hand-picked bounding box, instead of trusting the per-shape crop in
-  `raw/media/eq/` for anything with labels near the shape's edge.
-- **Image width tuning is genuinely iterative — always rasterize and look,
-  don't estimate from aspect ratio alone.** Multiple slides in
-  `02_constrained-optimization` needed 2-3 rounds of shrinking (or splitting
-  into two slides) before an image + surrounding text actually fit the
-  16:9 canvas without pushing the footer off the bottom edge. A slide that
-  "looks probably fine" from the markdown alone routinely wasn't — build the
-  PDF and rasterize every new/changed slide (PyMuPDF's `get_pixmap` if
-  `pdftoppm` isn't installed) before considering a topic done.
-- **PowerPoint COM automation safety:** `win32com.client.Dispatch` attaches
-  to an *already-running* PowerPoint instance rather than starting a new
-  one. Always check with `GetActiveObject` first and only call
-  `app.Quit()` if you started it yourself — see `render_equations.py`'s
-  safety check. Getting this wrong could close Jonathan's other unsaved
-  PowerPoint work.
-- **marp-cli's directory-mode build does not copy referenced local images
-  into its output** — it only transforms `.md` → `.html`/`.pdf`, leaving
-  relative `<img>` paths that break once deployed unless something
-  separately copies the media folders. The CI workflow's "Copy topic media
-  folders to build" step handles this generically for any topic folder.
-- **marp-cli will try to build *any* `.md` file it finds under `slides/`**,
-  including non-deck files. This is why raw extraction text is saved as
-  `.txt`, not `.md`.
-- **The CI's `environment: github-pages` binding was on the whole
-  build-and-deploy job**, which caused GitHub's environment protection
-  rules to reject the entire job (not just deploy steps) on every PR —
-  meaning PRs could never actually validate a build before this handoff's
-  fix split it into separate `build` (unrestricted) and `deploy`
-  (environment-gated, push-to-main only) jobs. If you see PR CI runs
-  failing instantly (~3s) with an environment-protection annotation, this
-  is the failure mode to check for.
-- **The marp-cli pin is v4.2.3 everywhere as of 2026-07-16** — CI's Docker
-  image, `tools/verify_deck.py`'s `MARP_VERSION`, and (coincidentally) the
-  locally-installed `marp` are all aligned at 4.2.3. It was upgraded from
-  the original v3.0.2 pin (marp-core v3.9.1) after re-verifying every
-  deployed deck under the new version. The version stays *pinned* on
-  purpose: the site only changes when we change it, and upgrades are a
-  deliberate bump-rebuild-reverify chore (like this one), never automatic.
-  If versions ever drift again, don't trust an unpinned local build as
-  proof CI will agree — `npx --yes @marp-team/marp-cli@4.2.3 ...` (or just
-  `tools/verify_deck.py`, which pins internally) runs the exact CI version
-  without Docker. Keep `MARP_VERSION` and the two `docker://` lines in
-  `.github/workflows/deploy-myst.yml` in sync.
-- **Raw HTML in deck.md was NOT rendered under the original marp-core
-  v3.9.1 pin unless `html: true` was set in frontmatter** — literal
-  `<div>`/`<p>`/`<br>` tags printed as escaped visible text. This bit us
-  for real: a `<div class="people-row"><img ...>` block for a bio-aside
-  slide rendered as broken text on the live site despite looking fine on
-  a newer local marp. The current v4.2.3 pin is more lenient about HTML,
-  but the policy is unchanged and version-independent: **prefer Marp's
-  native syntax over raw HTML wherever one exists** — `![bg right w:500](path)` for background/
-  layout images instead of `<img>` + flexbox, `> text` (blockquote) instead
-  of `<p class="...">` for styled asides, plain paragraphs instead of
-  `<br>` for spacing. Marp's image directives (`bg`, `left`/`right`,
-  `vertical`, `w:`/`h:`) are core parser features, not raw HTML, so they
-  don't have this problem. Only reach for `html: true` if there's truly no
-  native equivalent.
-- **VS Code's GitHub Pull Requests extension can show perpetual "Loading…"
-  in this repo with a session that looks valid** (2026-07-16). Two things
-  were observed tangled together and are recorded separately since which
-  one actually mattered isn't fully settled:
-  1. The extension's own log (`%APPDATA%\Code\logs\<session>\window1\exthost\GitHub.vscode-pull-request-github\GitHub Pull Request.log`)
-     repeatedly showed `No remotes found. The following remotes are
-     missing: origin, upstream`, never once trying `hunter_eco701`, even
-     after adding `githubPullRequests.remotes: ["origin", "upstream",
-     "hunter_eco701"]` to `.vscode/settings.json` and reloading the window
-     twice - the custom-remotes setting appeared to not be honored.
-     Adding a second git remote literally named `origin` (pointing at the
-     identical URL: `git remote add origin
-     https://github.com/jhconning/hunter_eco701.git`, purely additive,
-     doesn't disturb the documented `hunter_eco701` name used everywhere
-     else in this handoff) was tried as a fix.
-  2. **What actually resolved it, per Jonathan: signing out of GitHub and
-     back in inside VS Code** (Accounts icon, bottom of the activity bar).
-     The auth log corroborates this as the real cause: right before the
-     extension started working, `Getting sessions for repo...` returned
-     `Got 0 sessions for repo` (down from 1 moments earlier) and the total
-     session count dropped 4 → 3 - a session being invalidated, consistent
-     with a sign-out, immediately followed by success once a fresh one was
-     created. Best explanation: the old session was likely authorized
-     under a restricted grant that didn't cover this specific (private)
-     repo - plausible if the repo was created/made-private after the
-     original VS Code sign-in - and re-authorizing fixed that, independent
-     of remote naming.
-
-  **So: if this recurs, try sign-out/sign-in first** (Accounts icon →
-  github.com account → sign out → trigger sign-in again from the Pull
-  Requests panel) - that's the change with actual evidence behind it. The
-  `origin` remote alias is harmless to keep either way but wasn't isolated
-  as necessary. Doesn't apply to the Antigravity fork at all - there the
-  extension can't activate ("no data provider registered"), a different,
-  unfixable failure mode; this whole entry is real-VS-Code-only.
+- **Bowles & Halliday (2022), "Microeconomics: Competition, Conflict, and
+  Coordination"** — PDF at `Y:\E\ebooks\economics\bowleshalliday_final_2022.pdf`
+  (1072 pages). Chapter 1 (used for Topic 1) is pages 35-85 — the embedded
+  PDF outline's page numbers are broken/non-monotonic, so search page text
+  directly rather than trusting `doc.get_toc()`.
+- `BH\BowlesNotes.md` — old notes from a prior course iteration, a useful
+  head start for later chapters.
+- `legacy/Bowles/` (2016 draft) and the rest of `BH/` (old 2018 PowerPoint
+  chapters, syllabus, worksheets) are unrelated leftover material — ignore.
 
 ## What doesn't scale (don't try to automate this part)
 
 The mechanical extraction pipeline is fully scriptable and should just run.
-The *redesign* — reorganizing content, writing real titles, catching that
-slide 14 was actually a different game than slides 12/15, verifying payoff
-matrices by hand, deciding what to split/merge/cut — is judgment applied
-slide-by-slide. Budget real time for this per topic; don't try to template
-it away.
+The *redesign* — reorganizing content, writing real titles, verifying
+payoff matrices by hand, deciding what to split/merge/cut, choosing which
+lists become `.incremental` and which images become `.columns` splits — is
+judgment applied slide-by-slide. Budget real time for this per topic; don't
+try to template it away.
