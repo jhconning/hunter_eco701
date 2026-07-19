@@ -70,11 +70,10 @@ Companion Jupyter notebooks, two per topic so far:
 
 <!-- TOC_START -->
 
-*Last Deployed: 2026-07-19 13:17 EST*
+*Last Deployed: 2026-07-19 14:25 EST*
 
 ## Deployed Presentations
 
 - [ECO 701 Topic 2: Constrained Optimization](https://jhconning.github.io/hunter_eco701/slides/02_constrained-optimization/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/02_constrained-optimization/deck.pdf)) *(Last edit: 2026-07-16 12:50)*
 - [ECO 701 Topic 3: Production Optimization](https://jhconning.github.io/hunter_eco701/slides/03_production-optimization/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/03_production-optimization/deck.pdf)) *(Last edit: 2026-07-16 11:28)*
-- [ECO 701 Topic 8: Essentials of Game Theory](https://jhconning.github.io/hunter_eco701/slides/08_essentials-of-game-theory/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/08_essentials-of-game-theory/deck.pdf)) *(Last edit: 2026-07-15 12:51)*
 <!-- TOC_END -->
