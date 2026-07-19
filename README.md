@@ -70,7 +70,7 @@ Companion Jupyter notebooks, two per topic so far:
 
 <!-- TOC_START -->
 
-*Last Deployed: 2026-07-19 14:25 EST*
+*Last Deployed: 2026-07-19 14:32 EST*
 
 ## Deployed Presentations
 
