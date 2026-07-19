@@ -14,9 +14,8 @@ Read `HANDOFF.md` first — it's the living doc for this whole project
 Read `TOPIC_PLAN.md` for the topic sequence and mapping to legacy slides.
 Then come back to this file for what's specific to Phase 4.
 
-**Before writing any slides, raise the fold-in-Part-III decision below with
-Jonathan explicitly** — it's a real scope call, not something to assume
-either way.
+The fold-in-Part-III decision below is **already resolved** (2026-07-19,
+confirmed directly with Jonathan) — no need to re-raise it, just execute it.
 
 ## Status: Phases 0-3 done, merged, live
 
@@ -48,32 +47,32 @@ during the original Marp authoring (Mathcad OLE objects that are plots, not
 equations; a duplicate-slide consolidation) — none of that needs redoing,
 just carried forward faithfully into the port.
 
-### Open decision: fold in the shelved Part III now, or not?
+### Resolved: fold in the shelved Part III
 
-A branch called `topic2-continuous-games` still exists on the remote
-(confirmed present as of this handoff), containing a fully-built,
-previously-reviewed extension: continuous-action games via constrained
-optimization (Cournot duopoly + a continuous-effort fisherman's-dilemma
-redux, both with FOC/SOC derivations and new reaction-curve figures). It
-was built, PR'd (#5), then **closed without merging** on Jonathan's explicit
-instruction — its future was left undecided, not rejected.
+**Decided 2026-07-19: fold it in.** A branch called `topic2-continuous-games`
+exists on the remote, containing a fully-built, previously-reviewed
+extension: continuous-action games via constrained optimization (Cournot
+duopoly + a continuous-effort fisherman's-dilemma redux, both with FOC/SOC
+derivations and new reaction-curve figures). It was built, PR'd (#5), then
+closed without merging on Jonathan's explicit instruction at the time — its
+future was left undecided, not rejected. Re-confirmed directly with
+Jonathan on 2026-07-19 that it should be folded into this Quarto port
+rather than abandoned (his call, not just the migration plan's original
+recommendation carried through by default).
 
-- Confirmed as of this handoff: the branch's diff against Topic 2's
-  `deck.md` is a clean 136-line addition, and zero commits have touched that
-  file on `main` since the branch diverged — folding it in should be
-  conflict-free, not a manual re-merge.
-- The original migration plan recommended folding it in now ("doing this
-  twice costs strictly more total effort than once") but this was never
-  explicitly reconfirmed with Jonathan in conversation — unlike Topic 8's
-  archive-vs-port decision, which *was* explicitly surfaced and answered.
-  Ask him directly before proceeding, the same way Topic 8's decision was
-  surfaced (a short multiple-choice question beats assuming).
-- If folded in: apply the same sequential-slides-not-tabsets convention,
-  and treat the branch's content as source material to port to Quarto
-  fragments/columns, not to copy verbatim (its `.md` bullets need the same
-  `- ` → `::: {.incremental}` treatment as everything else).
-- If not: close the branch for real (delete it) rather than leaving it in
-  limbo a third time.
+- As of 2026-07-19: the branch's diff against Topic 2's `deck.md` was a
+  clean 136-line addition, and zero commits had touched that file on `main`
+  since the branch diverged — should still be conflict-free, but re-check
+  this (`git diff main hunter_eco701/topic2-continuous-games --stat --
+  slides/02_constrained-optimization/`) since real time has passed and
+  something could have changed.
+- Treat the branch's content as source material to port to Quarto
+  fragments/columns, not to copy verbatim — its `.md` bullets need the same
+  `- ` → `::: {.incremental}` treatment as everything else, and apply the
+  sequential-slides-not-tabsets convention throughout.
+- Once folded in and the Quarto port is merged, delete the
+  `topic2-continuous-games` branch for good — its content will have found
+  a permanent home, nothing left to preserve it for.
 
 ## Established conventions (from Phases 1-3 — read `HANDOFF.md` for full detail)
 

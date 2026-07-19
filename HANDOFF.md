@@ -30,8 +30,15 @@ support (any element, not just bullet lists — see "Fragments" below),
 richer layout primitives (columns, tabsets, `.r-stack`), and native
 interactive Python (Plotly) embedding. The evaluation that led to this
 decision (a full trial port of Topic 1, a feature-showcase deck, and a
-working theme) lived in `slides/quarto-test/` and has been folded into this
-document and `slides/_shared/eco701-revealjs.scss`.
+working theme) originally lived in the scratch folder `slides/quarto-test/`;
+its real output (the theme, this document's own gotchas section) was
+folded in here and at `slides/_shared/eco701-revealjs.scss` back when the
+migration was first evaluated, and the scratch folder itself was deleted
+2026-07-19 once every finding was captured. The one part of it worth
+keeping as an ongoing reference — `quarto_demo.qmd`, a grab-bag demo of
+revealjs features (columns, callouts, fragments, tabsets, live Plotly,
+etc.), not course content — now lives at
+[`docs/quarto-feature-demo/quarto_demo.qmd`](docs/quarto-feature-demo/quarto_demo.qmd).
 
 **As of this writing, migration is in progress.** Check each topic's
 `source.yml` for its actual current format (`deck.md` = still Marp,

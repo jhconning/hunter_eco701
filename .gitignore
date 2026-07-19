@@ -116,3 +116,10 @@ _build/
 slides/*/deck.html
 slides/*/deck_files/
 slides/*/deck.quarto_ipynb
+
+# Same in-place render output, but for the standalone Quarto feature-demo
+# reference deck (not a course topic, so it isn't under slides/)
+docs/quarto-feature-demo/quarto_demo.html
+docs/quarto-feature-demo/quarto_demo_files/
+docs/quarto-feature-demo/quarto_demo.quarto_ipynb
+docs/quarto-feature-demo/rstack_*.png
