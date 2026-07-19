@@ -147,7 +147,11 @@ jobs:
             fi
 
             echo "Exporting PDF for ${qmd} via decktape"
-            npx -y decktape reveal --size "1280x720" "${topic_dir}/deck.html" "${dest}/deck.pdf"
+            # --no-sandbox: this runner's container has no working setuid
+            # sandbox helper for Chromium (a standard constraint on hosted
+            # CI, unrelated to this project) - without it decktape's bundled
+            # Chrome aborts at launch ("No usable sandbox!").
+            npx -y decktape reveal --size "1280x720" --chrome-arg="--no-sandbox" "${topic_dir}/deck.html" "${dest}/deck.pdf"
 
             rm -f "${topic_dir}/deck.html"
             rm -rf "${topic_dir}/deck_files"
