@@ -108,3 +108,11 @@ BH/
 syllabus/IDEAS.md
 _verify/
 _build/
+
+# Quarto's in-place render output (tools/verify_deck.py renders deck.qmd
+# in its own topic folder, then cleans up - this is a safety net in case
+# that cleanup doesn't run promptly, e.g. a lingering OS-level file lock
+# from Drive sync/Search indexing/antivirus on the just-written directory)
+slides/*/deck.html
+slides/*/deck_files/
+slides/*/deck.quarto_ipynb

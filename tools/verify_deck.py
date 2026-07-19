@@ -89,22 +89,26 @@ def _run_via_git_bash_on_windows(shell_cmd, cwd):
     return subprocess.run([bash_exe, "-lc", shell_cmd], cwd=cwd, capture_output=True, text=True)
 
 
-def _rmtree_robust(path, attempts=15, delay=2.0):
+def _rmtree_robust(path, attempts=30, delay=2.0):
     """Quarto's bundled reveal.js assets (font files under deck_files/) can
     land read-only on Windows, which makes a plain shutil.rmtree fail with
     WinError 5 (Access is denied) - clear every file's read-only bit first
     (shutil.rmtree's onerror/onexc callback param is version-dependent
     across Python releases - a manual pre-pass avoids relying on either).
-    Separately - and this took a few tries to pin down - even an emptied,
-    otherwise-unremarkable directory can transiently fail to rmdir with the
-    identical WinError 5 for several seconds afterward. Likely candidates:
-    this repo lives inside a Google Drive-synced folder (the sync daemon
-    can briefly lock a just-written path while scanning it), and/or
-    decktape's own headless-Chrome process doesn't release its file handles
-    on deck_files/ the instant its subprocess.run() call returns. Whichever
-    it is, both are transient and neither is a lock we hold - retry rather
-    than fail the verify run over it (seen clearing anywhere from ~2s to
-    several times that; the attempts/delay defaults give real headroom)."""
+
+    Separately - confirmed the hard way, after a Puppeteer/Chrome-shutdown
+    theory turned out wrong (checked: zero node/chrome/quarto processes were
+    running at the moment a "still locked" failure reproduced) - even an
+    already-empty directory can transiently fail to rmdir with the identical
+    WinError 5. This machine has Google Drive (GoogleDriveFS), Windows
+    Search (SearchIndexer/SearchFilterHost), and Defender (MsMpEng) all
+    running, any of which routinely locks a freshly-written directory tree
+    of many small files (deck_files/libs/... has dozens) while it scans or
+    indexes it - a well-known class of Windows dev-environment friction, not
+    a lock this script holds. Observed durations varied widely (cleared in
+    under a second in some runs, needed closer to a minute in others under
+    load) - retry with real headroom rather than fail the verify run over a
+    lock that isn't ours and isn't permanent."""
     for root, dirs, files in os.walk(path):
         for name in files + dirs:
             try:
@@ -121,12 +125,66 @@ def _rmtree_robust(path, attempts=15, delay=2.0):
             time.sleep(delay)
 
 
+def _cleanup_quarto_artifacts(deck_dir, label="cleanup"):
+    """Remove Quarto's own known in-place build-output naming pattern
+    (deck.html, deck_files/, deck.quarto_ipynb) - never sweep up arbitrary
+    files, since a deck.qmd's own executable cells may legitimately write
+    other named assets into this folder.
+
+    This repo lives inside a Google Drive-synced folder ("My Drive\\..."),
+    and the failure signature confirms that matters: shutil.rmtree gets all
+    the way through removing every file *inside* deck_files/, then the
+    final rmdir of the now-empty directory itself fails with WinError 5
+    (Access is denied) - not a locked file, a locked directory handle. That
+    is the classic symptom of a cloud-sync client (here, GoogleDriveFS)
+    holding a directory-change-notification watch on the folder to detect
+    edits; the same failure mode is long-reported for build tools writing
+    into node_modules/ under Dropbox/OneDrive on Windows. It is NOT
+    Puppeteer/Chrome (checked: reproduces with zero node/chrome/quarto
+    processes running), and empirically it can outlast even a 60+ second
+    retry budget - confirmed by hitting this exact error on a supposedly
+    "opportunistic, maximal-elapsed-time" cleanup pass at the top of a
+    later, unrelated run.
+
+    Given a lock that can legitimately outlast any wait this script could
+    reasonably afford, cleanup here is always best-effort: try briefly (to
+    catch the genuinely-transient case), and if it's still locked, log a
+    note and move on rather than fail the run over it. The directory is
+    gitignored and harmless to leave behind - it is not a precondition
+    `quarto render` needs (it overwrites deck_files/ contents as needed),
+    only tidiness for the tracked topic folder."""
+    deck_html = os.path.join(deck_dir, "deck.html")
+    deck_files = os.path.join(deck_dir, "deck_files")
+
+    if os.path.isfile(deck_html):
+        try:
+            os.remove(deck_html)
+        except OSError as e:
+            print(f"  (note: couldn't remove stray deck.html during {label} - {e}; harmless, gitignored)")
+    if os.path.isdir(deck_files):
+        try:
+            _rmtree_robust(deck_files, attempts=5, delay=1.0)
+        except OSError as e:
+            print(f"  (note: couldn't remove stray {os.path.relpath(deck_files, REPO_ROOT)} "
+                  f"during {label} - {e}; harmless, gitignored, will retry opportunistically next run)")
+    for stray in glob.glob(os.path.join(deck_dir, "deck.quarto_ipynb")):
+        try:
+            os.remove(stray)
+        except OSError:
+            pass
+
+
 def build_pdf_quarto(deck_dir, out_pdf):
     """Render deck.qmd in place (Quarto's natural mode - it writes deck.html
     and deck_files/ next to the source so relative media/ references
     resolve), decktape the result to PDF in out_pdf, then clean up the
     in-place render artifacts so the tracked topic folder isn't left with
     build output."""
+    # Opportunistic: if a previous run left artifacts behind, this is a
+    # good moment to try clearing them - but never fatal, see
+    # _cleanup_quarto_artifacts's docstring.
+    _cleanup_quarto_artifacts(deck_dir, label="pre-render cleanup")
+
     deck_qmd = os.path.join(deck_dir, "deck.qmd")
     print(f"Rendering with Quarto: {os.path.relpath(deck_qmd, REPO_ROOT)}")
 
@@ -138,7 +196,6 @@ def build_pdf_quarto(deck_dir, out_pdf):
         raise SystemExit(f"quarto render failed (exit {result.returncode})")
 
     deck_html = os.path.join(deck_dir, "deck.html")
-    deck_files = os.path.join(deck_dir, "deck_files")
     if not os.path.isfile(deck_html):
         raise SystemExit("quarto render reported success but deck.html was not produced")
 
@@ -159,15 +216,7 @@ def build_pdf_quarto(deck_dir, out_pdf):
         if not os.path.isfile(out_pdf):
             raise SystemExit("decktape reported success but no PDF was produced")
     finally:
-        # Clean up only Quarto's own known build-output naming pattern -
-        # never sweep up arbitrary files, since a deck.qmd's own executable
-        # cells may legitimately write other named assets into this folder.
-        if os.path.isfile(deck_html):
-            os.remove(deck_html)
-        if os.path.isdir(deck_files):
-            _rmtree_robust(deck_files)
-        for stray in glob.glob(os.path.join(deck_dir, "deck.quarto_ipynb")):
-            os.remove(stray)
+        _cleanup_quarto_artifacts(deck_dir, label="post-render cleanup")
 
 
 def build_pdf_marp(deck_dir, out_pdf):
