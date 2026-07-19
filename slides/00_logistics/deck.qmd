@@ -1,25 +1,29 @@
 ---
-title: deck
-description: "ECO 701: Welcome & Course Logistics"
+title: "Microeconomic Theory"
+subtitle: "Welcome & Course Logistics"
 author: "Jonathan Conning"
-deploy: true
-marp: true
-paginate: true
-theme: eco701
-size: 16:9
-footer: 'Eco 701 - Micro Theory'
+institute: "Hunter College, Dept. of Economics"
+format:
+  revealjs:
+    theme: [default, ../_shared/eco701-revealjs.scss]
+    slide-number: true
+    footer: "Eco 701 - Micro Theory"
+    html-math-method: katex
+    width: 1280
+    height: 720
 ---
 
-<!-- _class: lead -->
+## Welcome
 
-# Eco 701: Microeconomic Theory
-### Fall 2018 — Slide Deck I
+*Fall 2018 — Slide Deck I*
 
 Jonathan Conning
+
 Office Hours: HW 1504A, Tue & Thu 11–12, and by appointment — jconning@hunter.cuny.edu
+
 Teaching Assistant: Chuxin Liu
 
-> Slide Deck II continues where this leaves off.
+> *Slide Deck II continues where this leaves off.*
 
 ---
 
@@ -83,9 +87,11 @@ Teaching Assistant: Chuxin Liu
 
 Please fill out an index card:
 
+::: {.incremental}
 - **Front:** name (preferred name / pronunciation), program & year, recent econ/math coursework
 - **Back:** a bit about yourself — background, job/experience, plans
 - Return the card at the end of class
+:::
 
 ---
 
