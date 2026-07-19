@@ -8,3 +8,25 @@ notes: >
   front-matter (office hours, grading, readings, intro agenda) that applies
   regardless of topic order. Redesigned and approved 2026-07-13, split out
   from what was originally one combined deck with 08_essentials-of-game-theory.
+
+  Ported from Marp (deck.md) to Quarto+revealjs (deck.qmd) 2026-07-19, Phase 2
+  of the migration in HANDOFF.md - pure text content, no images/tables needing
+  conversion judgment, so this was a mechanical port with zero content edits.
+  Quarto's auto-generated title slide only holds title/subtitle/author/
+  institute, so the original lead slide's extra lines (office hours, TA name,
+  the "Slide Deck II" pointer) moved to a new first content slide ("Welcome")
+  - a structural change forced by the title-slide mechanism, not a content
+  edit. Per the established fragment convention (see the marp-fragments PR
+  and HANDOFF.md), left nearly every list static: this deck is almost
+  entirely reference/logistics material (reading lists, grading, an agenda),
+  the exact categories already called out as not benefiting from staged
+  reveal - only "Introductions" (literal step-by-step instructions) got
+  `.incremental`.
+
+  Flagging, not fixing (out of scope for a content-preserving port): three
+  details already read as stale before this port and were carried forward
+  verbatim since Jonathan approved this exact text on 2026-07-13 - "Fall
+  2018 - Slide Deck I" and "Slide Deck II continues where this leaves off"
+  both predate the current 00-11 topic-numbered structure, and
+  notebooks.azure.com (Azure Notebooks) was discontinued by Microsoft years
+  ago. Worth a content refresh whenever this deck is next taught.
