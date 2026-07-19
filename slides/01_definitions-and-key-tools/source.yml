@@ -2,7 +2,7 @@ topic: "Definitions and Key Tools"
 ideas_md_topic_number: 1
 source_file: none (hand-authored rework)
 source_slides: null
-status: hand-authored (2026-07-16 rework replacing the pre-reorg 4-slide stub)
+status: hand-authored (2026-07-16 rework replacing the pre-reorg 4-slide stub); ported from Marp (deck.md) to Quarto+revealjs (deck.qmd) 2026-07-19, first topic migrated under the plan in HANDOFF.md - no content changes, only the engine/theme (slides/_shared/eco701-revealjs.scss) and the "Production Possibility Frontier" slide gaining {.compact} to fix a footer collision the port introduced (four incremental bullets + image + closing blockquote no longer fit the base font size once laid out via Quarto's .columns instead of Marp's ![bg] shorthand)
 notes: >
   Complete rewrite around Bowles & Halliday, "Microeconomics: Competition,
   Conflict, and Coordination" (OUP, 2022 final edition), Chapter 1 "Society:
