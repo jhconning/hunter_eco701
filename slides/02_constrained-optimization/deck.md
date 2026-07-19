@@ -583,20 +583,25 @@ Same first-order conditions, but now two agents optimize at once
 
 ## Remember the Fisherman's Dilemma?
 
-Topic 1 met Alfredo and Bob: $u_A(e_A,e_B) = \left(15-\tfrac14 e_B\right)e_A - \tfrac12 e_A^2$, and symmetrically for Bob.
+Alfredo: $u_A(e_A,e_B) = \left(15-\tfrac14 e_B\right)e_A - \tfrac12 e_A^2$, and symmetrically for Bob.
 
-- Setting the FOC to zero gave a best response, $e_A^{BR}(e_B)=15-\tfrac14 e_B$ — but only informally, for the symmetric case, without checking the second-order condition
-- Nash equilibrium **(12, 12)**; planner's optimum **(10, 10)** — asserted there, not derived as a general system
-- Now that Lagrange and Kuhn–Tucker are fully in hand, we come back and do it properly
+
+
+- Symmetric Nash Equilibrium had fish catches of $(e_A, e_B)=(12, 12)$
+- Overfishing, versus planner's optimum $(10, 10)$ 
+- Lets solve with the Lagrange and Kuhn–Tucker machinery
 
 ---
 
 ## A Game Is a System of Optimization Problems
 
-- A single-agent problem: **one** objective, one or more choice variables — everything Part II has been about
-- A **game**: *each* player solves their own optimization problem — but the objective depends on a variable *someone else* chooses
-- Player A's problem: $\max_{e_A} u_A(e_A, e_B)$, treating $e_B$ as **given**, not chosen
-- Solving each player's FOC alone gives a **best-response function**; a Nash equilibrium is where every player's best response holds *simultaneously* — a system of equations, not a single optimization
+- A single-agent problem: **one** objective, one or more choice variables 
+- A **game**: *each* player solves their own optimization problem — but each player's objective depends on variable(s) *other players* choose
+- Player A's problem: 
+  - $\max_{e_A} u_A(e_A, e_B)$, treating $e_B$ as **given**, not chosen
+- Solving each player's FOC gives their **best-response function**
+- A Nash equilibrium is where every player's best response holds *simultaneously*
+  - we solve a system of equations (simultaneous FOCs), not a single optimization.
 
 ---
 
@@ -632,7 +637,7 @@ Symmetry was never assumed — it fell out of the algebra, because the underlyin
 
 ---
 
-## The Planner's Problem, Fully
+## The Planner's Problem 
 
 The planner controls **both** efforts at once — one decision-maker, two choice variables — an unconstrained optimization, solved by the same method with zero constraints:
 
