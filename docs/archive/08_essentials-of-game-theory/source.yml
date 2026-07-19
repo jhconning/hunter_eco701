@@ -2,8 +2,22 @@ topic: "Essentials of Game Theory"
 ideas_md_topic_number: 8
 source_file: "E701_F18 _slidesI.pptx"
 source_slides: [10, 20]
-status: redesigned
+status: redesigned; archived 2026-07-19
 notes: >
+  ARCHIVED 2026-07-19: Topic 8's lecture slot was dissolved 2026-07-18 once
+  Topic 1's BFH-based rework absorbed essentially all of this deck's core
+  content. Nash bio text already cannibalized into Topic 1 on 2026-07-18;
+  the Opera/Football coordination-game example (the one game here with
+  conflicting, not just coordination, interest over multiple equilibria -
+  not duplicated anywhere else in the course) was salvaged into Topic 1 as
+  well on 2026-07-19, right after its Palanpur assurance-game slide - see
+  slides/01_definitions-and-key-tools/source.yml for that side of the
+  provenance. Moved from slides/ to docs/archive/ so the CI build (which
+  scans slides/ wholesale) never touches it; deck.md's deploy flag also
+  set to false as a second safeguard. Everything below this note is the
+  original, unedited history of this deck while it was still live.
+
+
   Pilot conversion, redesigned and approved 2026-07-13. Covers formal Nash
   equilibrium / best-response definitions and three worked games (Prisoner's
   Dilemma, Opera/Football coordination game, Fisherman's Dilemma). Original

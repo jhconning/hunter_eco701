@@ -64,7 +64,6 @@ slides/
   _shared/eco701-theme.css       <- the old Marp theme - remove once every deck is migrated
   00_logistics/                   <- front-matter, not one of the 11 numbered topics
   01_definitions-and-key-tools/   <- IDEAS.md Topic 1
-  08_essentials-of-game-theory/   <- IDEAS.md Topic 8
     deck.qmd                      <- hand-authored Quarto deck. THE deliverable. Never auto-overwritten.
     media/                        <- final images actually used in deck.qmd, meaningfully named
     raw/                          <- mechanical extraction output. Regeneratable. Never hand-edit.
@@ -73,6 +72,10 @@ slides/
     figs/                         <- notebook-generated candidate figures, staged for review (optional) -
                                       see "Code-generated figures" below for the promotion procedure
 ```
+
+Retired topics move to `docs/archive/<topic-folder>/` rather than staying
+under `slides/` (which the CI build scans wholesale) - see Topic 8's own
+archival note there for the pattern and the reasoning behind it.
 
 Read the actual `source.yml` and `deck.qmd` in `01_definitions-and-key-tools/`
 for a concrete, fully-migrated example before building or converting a new

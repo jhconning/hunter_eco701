@@ -17,7 +17,7 @@ Welcome to the course repository for ECO 701: Microeconomic Theory. This is an a
 
 Each topic gets its own numbered folder matching the 11-topic course
 sequence (see [`TOPIC_PLAN.md`](TOPIC_PLAN.md)), e.g.
-`slides/08_essentials-of-game-theory/`. Inside each topic:
+`slides/01_definitions-and-key-tools/`. Inside each topic:
 
 - **`deck.md`** — the actual Marp slide deck. Hand-authored/redesigned,
   never auto-overwritten.
@@ -42,9 +42,13 @@ more per-file theme copies.
 
 **Topics done so far:** `00_logistics` (front-matter, not part of the
 11-topic sequence), `01_definitions-and-key-tools`,
-`08_essentials-of-game-theory`, `02_constrained-optimization`, and
-`03_production-optimization` — the last two complete end to end across all
-sub-chunks. See [`TOPIC_PLAN.md`](TOPIC_PLAN.md) for the mapping of the
+`02_constrained-optimization`, and `03_production-optimization` — the last
+two complete end to end across all sub-chunks. (Topic 8, "Essentials of
+Game Theory," was retired 2026-07-19 — its lecture slot was dissolved once
+Topic 1 absorbed its core content, and its one non-duplicated example was
+salvaged into Topic 1 before archiving the rest; see
+[`docs/archive/08_essentials-of-game-theory/`](docs/archive/08_essentials-of-game-theory/).)
+See [`TOPIC_PLAN.md`](TOPIC_PLAN.md) for the mapping of the
 remaining topics to the legacy slide decks. If you're picking this work up
 cold, read [`HANDOFF.md`](HANDOFF.md) first.
 
