@@ -568,3 +568,134 @@ $$U(c_F,c_W) = c_F \cdot c_W \qquad p_F=1,\ p_W=2,\ I=100,\ T=80$$
 - Look for easy substitutions to reduce the number of constraints, or rescale the objective when the scale itself doesn't matter
 - Use economic intuition to rule out unlikely cases before grinding through the algebra
 - Learn to recognize familiar problem "families" — once you've solved one Cobb-Douglas budget problem, you've essentially solved them all
+- One more family worth recognizing: the same first-order-condition logic, run for two agents at once, is exactly how you solve a **game** — Part III
+
+---
+
+<!-- _class: divider -->
+
+# Part III
+# Optimization Meets Strategy
+
+Same first-order conditions, but now two agents optimize at once
+
+---
+
+## Remember the Fisherman's Dilemma?
+
+Topic 1 met Alfredo and Bob: $u_A(e_A,e_B) = \left(15-\tfrac14 e_B\right)e_A - \tfrac12 e_A^2$, and symmetrically for Bob.
+
+- Setting the FOC to zero gave a best response, $e_A^{BR}(e_B)=15-\tfrac14 e_B$ — but only informally, for the symmetric case, without checking the second-order condition
+- Nash equilibrium **(12, 12)**; planner's optimum **(10, 10)** — asserted there, not derived as a general system
+- Now that Lagrange and Kuhn–Tucker are fully in hand, we come back and do it properly
+
+---
+
+## A Game Is a System of Optimization Problems
+
+- A single-agent problem: **one** objective, one or more choice variables — everything Part II has been about
+- A **game**: *each* player solves their own optimization problem — but the objective depends on a variable *someone else* chooses
+- Player A's problem: $\max_{e_A} u_A(e_A, e_B)$, treating $e_B$ as **given**, not chosen
+- Solving each player's FOC alone gives a **best-response function**; a Nash equilibrium is where every player's best response holds *simultaneously* — a system of equations, not a single optimization
+
+---
+
+## Deriving the Best Response, Properly
+
+First-order condition for Alfredo, holding $e_B$ fixed:
+
+$$\frac{\partial u_A}{\partial e_A} = \left(15-\tfrac14 e_B\right) - e_A = 0 \quad\Longrightarrow\quad e_A^{BR}(e_B) = 15-\tfrac14 e_B$$
+
+Second-order condition — this time actually checked, not waved at:
+
+$$\frac{\partial^2 u_A}{\partial e_A^2} = -1 < 0 \qquad\checkmark\ \text{concave: a genuine maximum}$$
+
+By symmetry, Bob's best response is $e_B^{BR}(e_A)=15-\tfrac14 e_A$
+
+<!-- Verified symbolically (sympy diff + solve) in topic02_constrained_optimization_numerical.ipynb, Worked Example 5. -->
+
+---
+
+## Solving the System: Nash as Simultaneous Equations
+
+Two first-order conditions, two unknowns — solved together, not assumed symmetric:
+
+$$e_A = 15-\tfrac14 e_B \qquad\qquad e_B = 15-\tfrac14 e_A$$
+
+Substituting: $e_A = 15-\tfrac14\left(15-\tfrac14 e_A\right) \;\Rightarrow\; \tfrac{15}{16}e_A = \tfrac{45}{4} \;\Rightarrow\; e_A^*=12$
+
+$$\boxed{(e_A^*,e_B^*) = (12,12)}$$
+
+Symmetry was never assumed — it fell out of the algebra, because the underlying model is itself symmetric. Matches Topic 1 exactly.
+
+![bg right:38% w:440](media/fisherman-reaction-curves-topic2.png)
+
+---
+
+## The Planner's Problem, Fully
+
+The planner controls **both** efforts at once — one decision-maker, two choice variables — an unconstrained optimization, solved by the same method with zero constraints:
+
+$$W(e_A,e_B) = u_A+u_B = 15e_A+15e_B-\tfrac12 e_Ae_B - \tfrac12e_A^2-\tfrac12e_B^2$$
+
+$$\frac{\partial W}{\partial e_A}=15-\tfrac12 e_B - e_A = 0 \qquad\qquad \frac{\partial W}{\partial e_B}=15-\tfrac12 e_A - e_B=0$$
+
+Symmetric solution: $e^P=10$. Both second partials are $-1$ and the cross partial is $-\tfrac12$ — negative definite, a genuine maximum, confirmed rather than assumed
+
+**Nash overprovides effort relative to the planner** ($12>10$) precisely because each player ignores the $-\tfrac14 e_B$ (or $-\tfrac14 e_A$) term in the *other's* payoff — the externality, made visible as a missing term in a first-order condition
+
+---
+
+## What If Effort Can't Go Negative?
+
+Every solution so far assumed an **interior** optimum — but effort must satisfy $e\ge 0$, a constraint quietly ignored until now
+
+- Could a strong externality push a best response negative? Worth *checking*, not assuming — the same complementary-slackness logic as "Corner Solutions and Non-Binding Constraints"
+- Alfredo's best response hits zero when $15-\tfrac14 e_B=0 \;\Rightarrow\; e_B=60$
+- Actual $e_B$ in this game never exceeds 12 — far below 60 — so $e_A\ge0$ never binds
+- The interior solution is the *genuine* optimum: a fact confirmed, not an assumption that happened to get away with it
+
+---
+
+## A Second Game, Same Math: Cournot Duopoly
+
+Two firms choose **quantities** $q_1,q_2$. Price is set by a linear inverse demand curve; both share a constant marginal cost $c$:
+
+$$P = a-b(q_1+q_2) \qquad\qquad \pi_i = (P-c)\,q_i$$
+
+- Same skeleton as the fisherman's game: each firm's profit depends on a choice *someone else* makes
+- Best response, from the FOC: $\dfrac{\partial \pi_1}{\partial q_1} = (a-c)-2bq_1-bq_2=0 \;\Rightarrow\; q_1^{BR}(q_2)=\dfrac{a-c}{2b}-\dfrac{q_2}{2}$
+- With $a=20,\ b=1,\ c=2$: $q_1^{BR}(q_2) = 9-\tfrac12 q_2$ — a linear reaction function, exactly like the fisherman's
+
+---
+
+## Solving Cournot
+
+$$q_1=9-\tfrac12 q_2 \qquad q_2=9-\tfrac12 q_1 \quad\Longrightarrow\quad \boxed{q_1^*=q_2^*=6}$$
+
+| | Cournot-Nash | Collusive (joint-profit max) |
+|---|---|---|
+| Total quantity | $Q^*=12$ | $Q^m=9$ |
+| Price | $P^*=8$ | $P^m=11$ |
+| Profit **per firm** | $36$ | $40.5$ |
+
+![bg right:38% w:440](media/cournot-reaction-curves.png)
+
+---
+
+## Same Story, New Market
+
+- Individually rational competition produces **more** of the strategic variable than the jointly optimal level, in *both* games — effort in the fishery, quantity here
+- Total surplus left on the table: $72$ vs. $81$ under collusion
+- Competition dissipates rents exactly the way overfishing dissipates the fishery's rent — market power is just the externality wearing a different economic costume
+
+---
+
+## Wrap-Up: The Same Toolkit, Two New Uses
+
+- A game is a **system** of optimization problems — solve each player's FOC, then solve the system simultaneously; a Nash equilibrium is nothing more exotic than that
+- Two examples, one underlying mathematical skeleton: linear reaction functions crossing at a unique equilibrium, generically *short of* the jointly efficient outcome
+- **Ahead:** the *N*-player generalization — commons and public goods with many players, not just two — waits properly in Topic 9; contest games and other variants are candidates for problem sets
+
+<!-- New Part III, added 2026-07-18 - not from the legacy pptx (Topic 2's original source material has no game-theory content). Reuses Topic 1's fisherman model exactly (Nash 12,12 / planner 10,10) and introduces Cournot duopoly as a twin example. Every number verified symbolically + numerically in topic02_constrained_optimization_numerical.ipynb (Worked Examples 5-6, including a new nash_solve helper generalizing the deck's existing lagrangian_solve); figures from topic02_constrained_optimization_figures.ipynb. See new_ideas.md for the original proposal and TOPIC_PLAN.md context. -->
+

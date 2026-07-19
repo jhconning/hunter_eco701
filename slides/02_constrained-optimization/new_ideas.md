@@ -5,6 +5,12 @@ full slide conversion (all three sub-chunks) and the numerical companion
 notebook ([`notebooks/topic02_constrained_optimization_numerical.ipynb`](../../notebooks/topic02_constrained_optimization_numerical.ipynb)).
 Nothing here is committed to — this is a backlog to pull from, not a plan.
 
+**2026-07-18: Part III ("Optimization Meets Strategy") is now DONE** — see
+`source.yml` for the full note. It sits right after "The Art of the Solve"
+and *before* the two Python-tools items below, per Jonathan's explicit
+ordering call — so "near the end of the deck" in those two items now means
+"after Part III," not immediately after "The Art of the Solve."
+
 ## New slides
 
 - **"Solving It With Python"** — a short slide near the end of the deck
@@ -12,11 +18,14 @@ Nothing here is committed to — this is a backlog to pull from, not a plan.
   `SLSQP`) as the modern counterpart to the legacy Mathcad screenshot on
   "Checking the Answer Symbolically." Could either replace that screenshot
   outright or sit right after it as an explicit old-tool/new-tool contrast.
+  Could also show `scipy.optimize` cross-checking the new Cournot example
+  (Worked Example 6 in the numerical notebook doesn't currently do this —
+  only the symbolic route was used there, unlike Worked Examples 1-4).
 - **"Why Economists Still Solve This by Hand"** — a slide built around the
   notebook's own punchline: 3 hand-checked cases vs. 1 `scipy` call for a
   2-constraint problem, and why that ratio flips once you have more than a
-  couple of constraints. Natural bridge from "The Art of the Solve" into
-  the Python-tools material above.
+  couple of constraints. Natural bridge from Part III into the Python-tools
+  material above.
 - **A visual for "Example: A Corner Solution"** (current slide 84-equivalent
   has no image) — cheap to add now since the notebook already has a working,
   verified corner example (quasi-linear utility, $u=c_1+\sqrt{c_2}$) with a
@@ -47,6 +56,17 @@ Nothing here is committed to — this is a backlog to pull from, not a plan.
 
 ## Problem set ideas
 
+- **Asymmetric Cournot** — give the two firms different marginal costs
+  $c_1\neq c_2$ and ask students to `nash_solve` the resulting system by
+  hand (or reuse the notebook's helper) - the closed-form answer no longer
+  collapses to a single symmetric $q^*$, a genuine step beyond the deck's
+  worked (symmetric) case.
+- **A contest/rent-seeking game** — continuous effort $e_i$, win probability
+  $e_i/(e_1+e_2)$, a prize $V$: `nash_solve` applies unmodified, but the
+  reaction functions are no longer linear - a good test of whether students
+  actually understood the method or just pattern-matched linear algebra.
+  Ties to the wrap-up slide's explicit promise of "problem sets" for
+  variants beyond the fisherman/Cournot pair.
 - **Third constraint on Earthquake Relief** (e.g., a food-spoilage/capacity
   limit) — pushes the case-count to $2^3=8$, past what's comfortable by
   hand, motivating `scipy.optimize` directly rather than just asserting

@@ -45,3 +45,22 @@ notes: >
   "(no result)" too (real Mathpix misses, not graphs) - manually
   transcribed those by viewing the crop directly. Rule of thumb: treat
   "(no result)" as "go look at the image," not just "retry the OCR."
+
+  2026-07-18: added Part III, "Optimization Meets Strategy" (11 slides:
+  10 planned + 1 split off "Solving Cournot" during verification to fix a
+  bottom overflow) - hand-authored, NOT from the legacy pptx (Topic 2's
+  original source material has no game-theory content). Reuses Topic 1's
+  fisherman model exactly (u_A=(15-e_B/4)e_A-e_A^2/2, Nash (12,12),
+  planner (10,10)) and generalizes to it properly: FOC+SOC checked, Nash
+  solved as a genuine 2-equation system rather than assumed symmetric, a
+  KKT/corner-solution remark tying back to Part II's complementary-
+  slackness material, then Cournot duopoly (a=20,b=1,c=2 -> Nash q*=6 each,
+  collusive Q^m=9) as a twin example with the identical rent-dissipation
+  punchline. Every number verified symbolically (sympy) and cross-checked
+  in topic02_constrained_optimization_numerical.ipynb, Worked Examples 5-6
+  - including a new `nash_solve` helper that generalizes the notebook's
+  existing `lagrangian_solve` from one agent to N simultaneous optimizers.
+  Two new figures (fisherman-reaction-curves-topic2.png,
+  cournot-reaction-curves.png) from topic02_constrained_optimization_figures.ipynb.
+  Placed before the not-yet-built "Solving It With Python" backlog item
+  (new_ideas.md) per Jonathan's explicit ordering call.
