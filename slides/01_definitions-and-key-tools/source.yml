@@ -1,0 +1,50 @@
+topic: "Definitions and Key Tools"
+ideas_md_topic_number: 1
+source_file: none (hand-authored rework)
+source_slides: null
+status: hand-authored (2026-07-16 rework replacing the pre-reorg 4-slide stub)
+notes: >
+  Complete rewrite around Bowles & Halliday, "Microeconomics: Competition,
+  Conflict, and Coordination" (OUP, 2022 final edition), Chapter 1 "Society:
+  Coordination Problems and Economic Institutions" (PDF pages 35-85 of
+  Y:\E\ebooks\economics\bowleshalliday_final_2022.pdf; raw text extraction at
+  BH\chapter1_raw_extracted.txt). Note the published edition is Bowles &
+  Halliday only (Foley co-authored earlier drafts) and its title differs from
+  the 2016/2018 draft's "Coordination, Conflict and Competition" - update
+  citations accordingly. Payoff matrices (Corn-Tomatoes Fig 1.15, Palanpur
+  Fig 1.16, Language Fig 1.17) were verified visually against rendered PDF
+  pages 64/66/68 because PyMuPDF's text-dump ordering inside matrix figures
+  is unreliable.
+
+  Secondary sources: legacy "E701_F18 _slidesI.pptx" slides ~20-31 (Pareto
+  criterion, gains to trade, UPF, invisible hand, classical constitutional
+  conundrum) absorbed conceptually rather than extracted; the "Aside: Who
+  Was John Nash?" slide's text is cannibalized (2026-07-18) from
+  slides/08_essentials-of-game-theory/deck.md's two Nash-bio asides
+  (Topic 8 dissolved per TOPIC_PLAN.md) - text only, both bg images
+  deliberately dropped for unverified/likely-copyrighted provenance, see
+  new_ideas.md; BH\BowlesNotes.md
+  (2018 course notes) supplied the continuous-effort fisherman model
+  u_A = (15 - (1/4) e_B) e_A - (1/2) e_A^2, whose symmetric Nash (e* = 12)
+  and planner (e^P = 10) solutions generate the deck's 2x2 payoffs
+  (78 > 75 > 72 > 70) exactly. The deck's numbers are derived, not copied;
+  notebooks/topic01_definitions_key_tools_figures.ipynb asserts them and
+  regenerates every figure (figs/ holds candidates, media/ the live copies
+  under identical names). No BFH images are reproduced anywhere (the deck
+  deploys publicly; the extraction is local reference only) - the stub's
+  textbook-scan sample_fig.png was deleted for the same reason.
+
+  Deliberate scope cuts from BFH Ch. 1, agreed with Jonathan 2026-07-16 for
+  the 13-14-lecture budget: Schelling segregation (sec 1.15) reinstated
+  2026-07-18 as a single "postcard" slide only (no multi-panel cascade) -
+  notebooks/topic01_schelling_segregation.ipynb has the full walkthrough,
+  verified against the book's own 12-household/3-swap example by assertion,
+  plus a general random-matching simulator and sensitivity widget. Disagreement game (sec 1.13)
+  compressed to a taxonomy-table row; marble-in-bowl equilibrium epistemology
+  reduced to a blockquote aside; Hardin/tragedy-of-the-commons naming and the
+  N-player/public-goods generalization deferred to Topic 9 per the
+  consolidation plan sketched in new_ideas.md; repeated-games PD-to-Assurance
+  transformation deferred to Topic 8b material. The optimization/calculus
+  review embedded in the deck's middle part (FOC/SOC, reaction curves,
+  planner-vs-Nash) is deliberately Lecture-1-level; Topic 2 re-derives and
+  generalizes it.

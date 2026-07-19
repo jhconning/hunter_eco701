@@ -1,0 +1,153 @@
+/*-- scss:defaults --*/
+
+$body-bg: #fdfdfb;
+$body-color: #1c2430;
+$link-color: #24325c;
+$presentation-heading-font: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+$presentation-heading-color: #24325c;
+$presentation-font-size-root: 32px;
+$presentation-line-height: 1.35;
+
+/*-- scss:rules --*/
+
+// Port of the Marp eco701-theme.css (see the archived HANDOFF-marp.md /
+// git history) to Quarto revealjs. See HANDOFF.md's Quarto gotchas section
+// for the reasoning behind the less-obvious rules below (.columns in
+// particular).
+
+.reveal {
+  font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  color: #24325c;
+}
+
+.reveal h2 {
+  font-size: 1.35em;
+  border-bottom: 3px solid #b8842a;
+  padding-bottom: 0.18em;
+  margin-bottom: 0.5em;
+  display: inline-block;
+}
+
+.reveal ul,
+.reveal ol {
+  margin-top: 0.3em;
+}
+
+// Quarto's base theme sets div.columns { display: initial }, which resets
+// `display` to CSS's real initial value - inline, not block. Combined with
+// h2 { display: inline-block } just above, the heading and the columns
+// content end up sharing one inline formatting context: the columns'
+// content flows right up against the heading rather than starting a new
+// block below it. margin-top is *specified* to have no effect on
+// display:inline elements, which is why just adding margin here didn't
+// help. Forcing a real block/flex context fixes both problems: it gives
+// the columns their own layout box (properly laying .column children out
+// side by side instead of relying on inline text flow), and makes
+// margin-top actually apply.
+.reveal .columns {
+  display: flex;
+  margin-top: 0.8em;
+}
+
+.reveal li {
+  margin-bottom: 0.3em;
+  line-height: 1.35;
+}
+
+.reveal li li {
+  font-size: 0.92em;
+}
+
+// Title slide (Quarto auto-generates this from title/subtitle/author/institute).
+// Real markup is <section id="title-slide" class="quarto-title-block">, not
+// class="title-slide" - and the author is .quarto-title-author-name, not p.author.
+.reveal .slides section#title-slide {
+  background: #24325c;
+  color: #fdfdfb;
+}
+
+.reveal .slides section#title-slide h1.title {
+  color: #fdfdfb;
+  font-size: 1.8em;
+  border: none;
+}
+
+.reveal .slides section#title-slide p.subtitle {
+  color: #d9c08f;
+  font-weight: 400;
+}
+
+.reveal .slides section#title-slide .quarto-title-author-name,
+.reveal .slides section#title-slide .quarto-title-author {
+  color: #fdfdfb;
+}
+
+// Part-divider slides: ## Heading {.divider}
+.reveal .slides section.divider {
+  background: #24325c;
+  color: #fdfdfb;
+  text-align: center;
+}
+
+.reveal .slides section.divider h1,
+.reveal .slides section.divider h2 {
+  color: #f4e3bd;
+  border: none;
+  display: block;
+}
+
+.reveal .slides section.divider p {
+  color: #cdd6e8;
+}
+
+// Dense-table slides: ## Heading {.compact}
+.reveal .slides section.compact {
+  font-size: 0.75em;
+}
+
+.reveal table {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.7em;
+  margin: 0.5em auto;
+}
+
+.reveal th,
+.reveal td {
+  border: 1px solid #c7ccd6;
+  padding: 0.32em 0.85em;
+  text-align: center;
+}
+
+.reveal th {
+  background: #eef1f6;
+  font-weight: 600;
+}
+
+.reveal td strong {
+  color: #a5680f;
+  background: #fbeed9;
+  padding: 0.08em 0.4em;
+  border-radius: 4px;
+}
+
+.reveal blockquote {
+  font-size: 0.7em;
+  color: #5b6472;
+  font-style: italic;
+  border: none;
+  background: none;
+  box-shadow: none;
+  width: 100%;
+  margin: 0.6em 0 0;
+}
+
+.reveal blockquote p {
+  margin: 0;
+}

@@ -1,0 +1,22 @@
+{
+  "source_file": "E701_F18 _slidesI.pptx",
+  "slide_range": [
+    43,
+    102
+  ],
+  "shape_type_counts": {
+    "PLACEHOLDER (14)": 128,
+    "EMBEDDED_OLE_OBJECT (7)": 157,
+    "TEXT_BOX (17)": 61,
+    "AUTO_SHAPE (1)": 50,
+    "PICTURE (13)": 19,
+    "LINE (9)": 6,
+    "GROUP (6)": 5,
+    "FREEFORM (5)": 7
+  },
+  "ole_prog_ids": {
+    "Mathcad": 18,
+    "Equation.DSMT4": 134
+  },
+  "images_extracted": 18
+}

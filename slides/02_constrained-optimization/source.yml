@@ -1,0 +1,47 @@
+topic: "Constrained Optimization"
+ideas_md_topic_number: 2
+source_file: "E701_F18 _slidesI.pptx"
+source_slides: [43, 102]
+status: done
+notes: >
+  Large topic (60 slides, 152 top-level equations) - converted in three
+  sub-chunks per Jonathan's 2026-07-15 decision, all folded into
+  deck.md as of 2026-07-16: sub-chunk 1 (slides 43-63, "Mathematical
+  Preliminaries"), sub-chunk 2 (slides 64-90, "The Tangency and
+  Lagrange Methods" - substitution/tangency/arbitrage, Method of
+  Lagrange, the PPF application using the approved Tier 3 demo images,
+  corner solutions, complementary slackness), sub-chunk 3 (slides
+  91-102, "Applications" - the three qualitative binding/non-binding
+  cases for a two-constraint problem, then a fully resolved worked
+  numeric example, the Earthquake Relief / PS1 Q3 problem, with all
+  three candidate solutions checked for feasibility). Slide 102
+  (a bare "PS1 due Friday" logistics note) and the redundant recap on
+  slide 97 (same Lagrangian already given at the end of sub-chunk 2)
+  were deliberately dropped rather than transcribed.
+
+  Sub-chunk 3's four Mathcad case-diagram crops (slides 91, 94-96) were
+  initially cropped too tightly by render_equations.py's shape-bounding-
+  box logic, cutting off labels/equations that visually overflow the
+  OLE shape's declared frame - fixed by re-cropping from the full-slide
+  PNG exports in raw/media/slide_png/ instead of the per-shape crops in
+  raw/media/eq/.
+
+  Sub-chunk 2 needed render_equations.py + mathpix_ocr.py run for the
+  first time on slides 64-90 (sub-chunk 1 already had this done) - see
+  raw/mathpix.json (merged) and raw/media/eq/. Also ran
+  render_diagram.py to pick up two GROUP-shape diagram candidates
+  (slides 68, 81) that extract_topic.py had flagged but nobody had
+  rendered yet, alongside re-confirming slides 59/78/99/100.
+
+  Consolidated slides 52 and 61 into one ("Unconstrained Maximization: An
+  Example") - identical shape structure/content in the original, an
+  apparent accidental duplicate.
+
+  Real gotcha hit here: "Mathcad" OLE objects (18 of them, vs. 134
+  "Equation.DSMT4") are often actual plotted graphs, not symbolic
+  equations - Mathpix correctly returned "(no result)" for these since
+  there's no LaTeX equivalent of a rendered curve. Also several
+  Equation.DSMT4 shapes that ARE pure text/equations came back
+  "(no result)" too (real Mathpix misses, not graphs) - manually
+  transcribed those by viewing the crop directly. Rule of thumb: treat
+  "(no result)" as "go look at the image," not just "retry the OCR."

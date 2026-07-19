@@ -1,0 +1,10 @@
+{
+    "markdown.marp.themes": [
+        "./slides/_shared/eco701-theme.css"
+    ],
+    "githubPullRequests.remotes": [
+        "origin",
+        "upstream",
+        "hunter_eco701"
+    ]
+}
