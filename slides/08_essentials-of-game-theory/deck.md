@@ -22,10 +22,10 @@ From "what is a game?" to Nash equilibrium, in two worked examples
 
 ## The Big Questions
 
-- How do individuals and societies allocate resources? Far broader than the study of markets alone
-- How do agents — individuals, households, firms, groups — choose to associate, contract, and set the rules of the games they play: strategies, contracts, organizations, property rights, institutions, policy
-- Outcomes: conflict or cooperation? Efficient? Equitable?
-- **Mechanism design:** getting incentives right to produce better outcomes
+* How do individuals and societies allocate resources? Far broader than the study of markets alone
+* How do agents — individuals, households, firms, groups — choose to associate, contract, and set the rules of the games they play: strategies, contracts, organizations, property rights, institutions, policy
+* Outcomes: conflict or cooperation? Efficient? Equitable?
+* **Mechanism design:** getting incentives right to produce better outcomes
 
 ---
 
@@ -80,9 +80,9 @@ A **Nash Equilibrium** is a strategy profile where every player is playing a bes
 
 ![center width:750](media/opera-football-diagram.png)
 
-- This game has **no equilibrium in dominant strategies**
-- Follow the arrows: a pure-strategy Nash equilibrium is a cell where both players' best responses coincide
-- Two of them here: **(Opera, Opera)** and **(Football, Football)**
+* This game has **no equilibrium in dominant strategies**
+* Follow the arrows: a pure-strategy Nash equilibrium is a cell where both players' best responses coincide
+* Two of them here: **(Opera, Opera)** and **(Football, Football)**
 
 ---
 
@@ -90,9 +90,9 @@ A **Nash Equilibrium** is a strategy profile where every player is playing a bes
 
 ![center width:700](media/prisoners-dilemma-diagram.png)
 
-- **Fink** is a dominant strategy for both players
-- The dominant-strategy equilibrium **(Fink, Fink)** is also a Nash equilibrium
-- The Prisoner's Dilemma is ubiquitous in economics — e.g., free-rider problems
+* **Fink** is a dominant strategy for both players
+* The dominant-strategy equilibrium **(Fink, Fink)** is also a Nash equilibrium
+* The Prisoner's Dilemma is ubiquitous in economics — e.g., free-rider problems
 
 ---
 
@@ -109,9 +109,9 @@ A **Nash Equilibrium** is a strategy profile where every player is playing a bes
 
 ![bg right:40% w:480](media/nash-portrait.png)
 
-- Nash's 1950 PhD dissertation — just 28 pages — proved every finite game has at least one (possibly mixed-strategy) Nash equilibrium
-- Cournot (1838) had used a version of the idea, but never stated it in general form
-- Von Neumann & Morgenstern's *Theory of Games and Economic Behavior* couldn't pin down equilibrium concepts beyond obvious cases like dominant strategies — their minimax theorem only works for zero-sum games
+* Nash's 1950 PhD dissertation — just 28 pages — proved every finite game has at least one (possibly mixed-strategy) Nash equilibrium
+* Cournot (1838) had used a version of the idea, but never stated it in general form
+* Von Neumann & Morgenstern's *Theory of Games and Economic Behavior* couldn't pin down equilibrium concepts beyond obvious cases like dominant strategies — their minimax theorem only works for zero-sum games
 
 ---
 
@@ -127,10 +127,10 @@ Nash's story was popularized by Sylvia Nasar's 1998 biography *A Beautiful Mind*
 
 ![center width:650](media/fishermans-dilemma-diagram.png)
 
-- **Fishing 12 hours dominates fishing 10**: it pays more no matter what the other does
-- Equilibrium in dominant strategies: **(12h, 12h)**, payoff (2, 2)
-- But it's **inefficient** — (10h, 10h) Pareto-dominates it: both would be strictly better off at (3, 3)
-- A classic common-pool-resource dilemma: individually rational overfishing, collectively wasteful
+* **Fishing 12 hours dominates fishing 10**: it pays more no matter what the other does
+* Equilibrium in dominant strategies: **(12h, 12h)**, payoff (2, 2)
+* But it's **inefficient** — (10h, 10h) Pareto-dominates it: both would be strictly better off at (3, 3)
+* A classic common-pool-resource dilemma: individually rational overfishing, collectively wasteful
 
 ---
 

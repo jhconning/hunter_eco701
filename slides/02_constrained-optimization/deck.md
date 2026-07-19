@@ -38,18 +38,18 @@ $$\pi(q) = 10q - 10 - q^2 \qquad \frac{d\pi(q)}{dq} = 0 \;\Longrightarrow\; q = 
 
 $$f(x) = x^2 - 10x + 20, \qquad \frac{d^2f(x)}{dx^2} = 2 > 0$$
 
-- $f'(x)=0$ alone doesn't tell you whether you've found a max or a min — here it's a **minimum**, not a maximum, at $x=5$
-- The sign of the second derivative is what distinguishes them
+* $f'(x)=0$ alone doesn't tell you whether you've found a max or a min — here it's a **minimum**, not a maximum, at $x=5$
+* The sign of the second derivative is what distinguishes them
 
 ---
 
 ## Necessary vs. Sufficient
 
-- $f(x^*)$ is a maximum $\Rightarrow$ $f'(x^*) = 0$
-  - $f'(x^*)=0$ is a *necessary* condition for a max
-  - It does **not** follow that $f'(x^*)=0 \Rightarrow f(x^*)$ is a maximum — necessary is not sufficient
-- $f(x^*)$ is a maximum $\Leftarrow$ $f'(x^*) = 0$ **and** $f''(x^*) < 0$
-  - Together, these are necessary *and* sufficient
+* $f(x^*)$ is a maximum $\Rightarrow$ $f'(x^*) = 0$
+  * $f'(x^*)=0$ is a *necessary* condition for a max
+  * It does **not** follow that $f'(x^*)=0 \Rightarrow f(x^*)$ is a maximum — necessary is not sufficient
+* $f(x^*)$ is a maximum $\Leftarrow$ $f'(x^*) = 0$ **and** $f''(x^*) < 0$
+  * Together, these are necessary *and* sufficient
 
 ---
 
@@ -96,8 +96,8 @@ $$f(x,y) = x^{1/4} y^{3/4}$$
 
 $$f_x = \frac{\partial f(x,y)}{\partial x} = \frac{1}{4} x^{-3/4} y^{3/4} \qquad f_y = \frac{\partial f(x,y)}{\partial y} = \frac{3}{4} x^{1/4} y^{-1/4}$$
 
-- $f_x$ shows how the objective changes with a marginal increase in $x$, holding $y$ constant
-- Evaluated at $(10,10)$: $f_x(10,10) = \frac{1}{4}$, $\quad f_y(10,10) = \frac{3}{4}$
+* $f_x$ shows how the objective changes with a marginal increase in $x$, holding $y$ constant
+* Evaluated at $(10,10)$: $f_x(10,10) = \frac{1}{4}$, $\quad f_y(10,10) = \frac{3}{4}$
 
 ---
 
@@ -181,8 +181,8 @@ $$f_y \, dy = -f_x \, dx \qquad\Longrightarrow\qquad \frac{dy}{dx} = -\frac{f_x}
 
 $$\frac{dy}{dx} = -\frac{f_x}{f_y} = -\frac{y}{x}$$
 
-- At $(x,y) = (10,10)$: $\dfrac{dy}{dx} = -1$
-- At $(x,y) = (20,5)$: $\dfrac{dy}{dx} = -\dfrac{5}{20} = -\dfrac{1}{4}$
+* At $(x,y) = (10,10)$: $\dfrac{dy}{dx} = -1$
+* At $(x,y) = (20,5)$: $\dfrac{dy}{dx} = -\dfrac{5}{20} = -\dfrac{1}{4}$
 
 ---
 
@@ -302,9 +302,9 @@ $$\frac{u_1}{u_2} = \frac{p_1}{p_2} \qquad\Longleftrightarrow\qquad \frac{u_1}{p
 
 *Why* must MU per dollar be equalized? Suppose instead $\dfrac{u_1}{p_1} > \dfrac{u_2}{p_2}$ — good 1 delivers more utility per dollar than good 2:
 
-- Reallocating income toward good 1 (and away from good 2) raises utility — so this **cannot** be optimal
-- Symmetrically, if $\dfrac{u_1}{p_1} < \dfrac{u_2}{p_2}$, reallocate the other way
-- Only when $\dfrac{u_1}{p_1} = \dfrac{u_2}{p_2}$ are there no more utility-improving reallocations left
+* Reallocating income toward good 1 (and away from good 2) raises utility — so this **cannot** be optimal
+* Symmetrically, if $\dfrac{u_1}{p_1} < \dfrac{u_2}{p_2}$, reallocate the other way
+* Only when $\dfrac{u_1}{p_1} = \dfrac{u_2}{p_2}$ are there no more utility-improving reallocations left
 
 ---
 
@@ -355,6 +355,7 @@ $$\frac{\partial L}{\partial c_1} = u_1 - \lambda p_1 = 0 \qquad \frac{\partial 
 
 The same reallocation logic applies to **any** problem $\max f(x_1,x_2)$ s.t. $g(x_1,x_2) = c$, not just utility maximization:
 
+<!-- Fragment candidate (3-step sequential argument) but left as `-`: the payoff is the boxed equation right after the list, which would show immediately rather than waiting for the fragments to finish. Could work if the equation were folded into the third bullet instead. -->
 - Start from a candidate $(x_1,x_2)$ satisfying the constraint exactly, and consider a small reallocation along it: $g_1\,dx_1 + g_2\,dx_2 = 0$, so a move of $dx_1 = dc/g_1$ requires $dx_2 = -dc/g_2$
 - Marginal benefit from more $x_1$: $\;dx_1 \cdot f_1 = \frac{dc}{g_1}f_1\qquad$ Marginal cost from less $x_2$: $\;dx_2 \cdot f_2 = -\frac{dc}{g_2}f_2$
 - Worthwhile whenever $\left(\dfrac{f_1}{g_1} - \dfrac{f_2}{g_2}\right)dc > 0$ — so at an optimum, with no further improving reallocations:
@@ -430,9 +431,9 @@ So far we've implicitly assumed an **interior** solution and a **binding** const
 
 $$\frac{MU_1}{MU_2} < \frac{p_1}{p_2} \quad \text{everywhere along the budget line}$$
 
-- Good 2 delivers higher marginal utility per dollar than good 1 at *every* affordable bundle — so it's optimal to spend nothing on good 1: $c_1 = 0$
-- At the corner, the FOC becomes an inequality rather than an equality: $\dfrac{\partial u}{\partial c_1} - \lambda p_1 < 0$
-- *(A genuine corner, solved numerically — `scipy` lands on it directly — see [`topic02_constrained_optimization_numerical.ipynb`](../../notebooks/topic02_constrained_optimization_numerical.ipynb))*
+* Good 2 delivers higher marginal utility per dollar than good 1 at *every* affordable bundle — so it's optimal to spend nothing on good 1: $c_1 = 0$
+* At the corner, the FOC becomes an inequality rather than an equality: $\dfrac{\partial u}{\partial c_1} - \lambda p_1 < 0$
+* *(A genuine corner, solved numerically — `scipy` lands on it directly — see [`topic02_constrained_optimization_numerical.ipynb`](../../notebooks/topic02_constrained_optimization_numerical.ipynb))*
 
 ---
 
@@ -452,12 +453,12 @@ $$\frac{\partial L}{\partial \lambda} = I - p_1c_1 - p_2c_2 = 0, \; \lambda > 0 
 
 ## As a Practical Matter
 
-- Often we make enough assumptions up front to know the solution is interior — then Lagrange with equality constraints (as in Part I) is all that's needed
-- When you're *not* sure:
-  - Specify the different possible cases and use economic logic to narrow down the likely ones
-  - A non-binding constraint can simply be dropped — solve using the remaining equalities
-  - Compare the objective across candidate solutions to find the best one
-  - *(An alternative method using slack variables is described in the textbook)*
+* Often we make enough assumptions up front to know the solution is interior — then Lagrange with equality constraints (as in Part I) is all that's needed
+* When you're *not* sure:
+  * Specify the different possible cases and use economic logic to narrow down the likely ones
+  * A non-binding constraint can simply be dropped — solve using the remaining equalities
+  * Compare the objective across candidate solutions to find the best one
+  * *(An alternative method using slack variables is described in the textbook)*
 
 ---
 
@@ -497,6 +498,7 @@ $$\frac{\partial L}{\partial \mu}\cdot\mu = 0 \qquad \text{(same logic for the c
 
 Depending on preferences — which constraint(s) actually bind — the optimum falls into one of three cases:
 
+<!-- Would be a natural fragment candidate, but this is an ordered (1./2./3.) list - the dash/star swap that drives Marpit fragments only applies to unordered list markers, not numbered ones. -->
 1. $\lambda > 0,\ \mu = 0$ — budget binds, transport capacity has room to spare
 2. $\lambda = 0,\ \mu > 0$ — transport capacity binds, budget has money to spare
 3. $\lambda > 0,\ \mu > 0$ — both bind at once (the kink point)
@@ -533,9 +535,9 @@ Depending on preferences — which constraint(s) actually bind — the optimum f
 
 Work out the solution under each possible combination of binding/non-binding constraints separately:
 
-- Solve assuming $(\lambda>0,\mu=0)$, then $(\lambda=0,\mu>0)$, then $(\lambda>0,\mu>0)$
-- Each case hands you *a* candidate solution — but setting a multiplier to zero ignores that constraint, so the resulting candidate may violate it and turn out **infeasible**
-- Discard infeasible candidates, then choose whichever feasible candidate gives the **highest objective value**
+* Solve assuming $(\lambda>0,\mu=0)$, then $(\lambda=0,\mu>0)$, then $(\lambda>0,\mu>0)$
+* Each case hands you *a* candidate solution — but setting a multiplier to zero ignores that constraint, so the resulting candidate may violate it and turn out **infeasible**
+* Discard infeasible candidates, then choose whichever feasible candidate gives the **highest objective value**
 
 ---
 
@@ -564,7 +566,7 @@ $$U(c_F,c_W) = c_F \cdot c_W \qquad p_F=1,\ p_W=2,\ I=100,\ T=80$$
 
 ## The Art of the Solve
 
-- Setting up a full Lagrangian is often more work than needed
-- Look for easy substitutions to reduce the number of constraints, or rescale the objective when the scale itself doesn't matter
-- Use economic intuition to rule out unlikely cases before grinding through the algebra
-- Learn to recognize familiar problem "families" — once you've solved one Cobb-Douglas budget problem, you've essentially solved them all
+* Setting up a full Lagrangian is often more work than needed
+* Look for easy substitutions to reduce the number of constraints, or rescale the objective when the scale itself doesn't matter
+* Use economic intuition to rule out unlikely cases before grinding through the algebra
+* Learn to recognize familiar problem "families" — once you've solved one Cobb-Douglas budget problem, you've essentially solved them all

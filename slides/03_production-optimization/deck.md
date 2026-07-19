@@ -42,16 +42,16 @@ $$MP_K = \frac{\partial q}{\partial K} = F_K(K,L) \qquad\qquad MP_L = \frac{\par
 
 $$\frac{\partial MP_K}{\partial K} = F_{KK} < 0 \qquad\qquad \frac{\partial MP_L}{\partial L} = F_{LL} < 0 \qquad\qquad \frac{\partial MP_L}{\partial K} = F_{LK} > 0$$
 
-- We generally assume diminishing marginal productivity in each input — it implies a downward-sloping demand for factors
-- $F_{LK} > 0$: capital and labor are **complements** in most production functions — more of one raises the marginal product of the other
+* We generally assume diminishing marginal productivity in each input — it implies a downward-sloping demand for factors
+* $F_{LK} > 0$: capital and labor are **complements** in most production functions — more of one raises the marginal product of the other
 
 ---
 
 ## Production Technology vs. Production Technique
 
-- A **production technology** is like a recipe book — the full set of available techniques for producing any amount $q$ of output
-- A **production technique** is like a single recipe: e.g. "combine 20 units of $K$ and 10 units of $L$" to make $q=10$ widgets
-- An **isoquant map** summarizes the technology; a point on an isoquant is a technique
+* A **production technology** is like a recipe book — the full set of available techniques for producing any amount $q$ of output
+* A **production technique** is like a single recipe: e.g. "combine 20 units of $K$ and 10 units of $L$" to make $q=10$ widgets
+* An **isoquant map** summarizes the technology; a point on an isoquant is a technique
 
 ---
 
@@ -67,8 +67,8 @@ $$\frac{\partial MP_K}{\partial K} = F_{KK} < 0 \qquad\qquad \frac{\partial MP_L
 
 ![center width:560](media/smooth-isoquant-assumption.png)
 
-- Economists often assume the full recipe book is known and smoothly substitutable, so the optimal technique depends only on factor prices
-- More realistically, firms must *search and adapt* to reach a new technique — costly, and some firms are better at it than others
+* Economists often assume the full recipe book is known and smoothly substitutable, so the optimal technique depends only on factor prices
+* More realistically, firms must *search and adapt* to reach a new technique — costly, and some firms are better at it than others
 
 ---
 
@@ -94,8 +94,8 @@ $$F(K,L) = \bar q \qquad\Longrightarrow\qquad F_K\,dK + F_L\,dL = 0 \qquad\Longr
 
 Assume the firm has already chosen its output level $q$ and wants to produce it as cheaply as possible:
 
-- Minimizing cost is a prerequisite for maximizing profit — a profit-maximizing firm never overpays for a given output
-- Choosing $K$ and $L$ to minimize the cost of producing $q$ leads to a **derived demand** for each input, and from that a cost function $C(q)$
+* Minimizing cost is a prerequisite for maximizing profit — a profit-maximizing firm never overpays for a given output
+* Choosing $K$ and $L$ to minimize the cost of producing $q$ leads to a **derived demand** for each input, and from that a cost function $C(q)$
 
 ---
 
@@ -155,8 +155,8 @@ $$\frac{F_K}{v} = \frac{F_L}{w}$$
 
 $$\frac{w}{F_L} = \frac{v}{F_K} = \lambda$$
 
-- Each side is dollars spent per extra unit of output from that input — $\left(\frac{\$/L}{q/L}\right) \to \left(\frac{\$}{L}\right)\cdot\left(\frac{L}{q}\right) \to \left(\frac{\$}{q}\right)$, i.e. dollars **per unit of output**
-- $\lambda$ is exactly the **marginal cost** of output: how much extra cost is incurred by relaxing the output constraint slightly
+* Each side is dollars spent per extra unit of output from that input — $\left(\frac{\$/L}{q/L}\right) \to \left(\frac{\$}{L}\right)\cdot\left(\frac{L}{q}\right) \to \left(\frac{\$}{q}\right)$, i.e. dollars **per unit of output**
+* $\lambda$ is exactly the **marginal cost** of output: how much extra cost is incurred by relaxing the output constraint slightly
 
 ---
 
@@ -239,8 +239,8 @@ With $\alpha=\tfrac18,\ \beta=\tfrac14$ (so $\alpha+\beta=\tfrac38<1$), the same
 
 $$\hat f(k,l,z) = k^\alpha l^\beta z^{1-\alpha-\beta} \qquad\qquad f(k,l) = \hat f(k,l,\bar z) = A\,k^\alpha l^\beta, \quad A = \bar z^{\,1-\alpha-\beta}$$
 
-- One way to think of DRS: the underlying technology is really **constant** returns to scale in *three* inputs, but one factor (here $z$, e.g. "managerial skill") is fixed and non-traded
-- As $q$ rises, the fixed factor is spread more and more thinly — this is exactly why DRS implies rising marginal cost
+* One way to think of DRS: the underlying technology is really **constant** returns to scale in *three* inputs, but one factor (here $z$, e.g. "managerial skill") is fixed and non-traded
+* As $q$ rises, the fixed factor is spread more and more thinly — this is exactly why DRS implies rising marginal cost
 
 ---
 
@@ -248,8 +248,8 @@ $$\hat f(k,l,z) = k^\alpha l^\beta z^{1-\alpha-\beta} \qquad\qquad f(k,l) = \hat
 
 ![center width:520](media/ac-mc-fixed-costs.png)
 
-- $MC$ is the slope of the $C$ curve; $AC$ is the slope of a ray from the origin to the $C$ curve
-- If $AC > MC$, $AC$ must be falling; if $AC < MC$, $AC$ must be rising — so $MC$ crosses $AC$ exactly at $AC$'s minimum
+* $MC$ is the slope of the $C$ curve; $AC$ is the slope of a ray from the origin to the $C$ curve
+* If $AC > MC$, $AC$ must be falling; if $AC < MC$, $AC$ must be rising — so $MC$ crosses $AC$ exactly at $AC$'s minimum
 
 ---
 
@@ -271,8 +271,8 @@ The profit-maximization FOCs can in principle be solved directly for **input dem
 
 $$\text{Capital demand} = K(p,v,w) \qquad\qquad \text{Labor demand} = L(p,v,w)$$
 
-- These are **unconditional** — they implicitly let the firm adjust its output as prices change
-- The cost-minimization problem's derived demands $K^*(w,v,q)$, $L^*(w,v,q)$ are **conditional** on a chosen output $q$
+* These are **unconditional** — they implicitly let the firm adjust its output as prices change
+* The cost-minimization problem's derived demands $K^*(w,v,q)$, $L^*(w,v,q)$ are **conditional** on a chosen output $q$
 
 ---
 
@@ -290,8 +290,8 @@ $$\max_{l} \; pF(k_0,l) - rk_0 - wl - \text{FC} \quad\text{s.t.}\quad k = k_0$$
 
 ![center width:520](media/short-run-long-run-costs.png)
 
-- Each $SC(k_i)$ curve is the short-run cost curve for a fixed capital level $k_i$
-- The **long-run** cost curve is the lower envelope of all the short-run curves — derived by letting $k$ vary optimally with $q$
+* Each $SC(k_i)$ curve is the short-run cost curve for a fixed capital level $k_i$
+* The **long-run** cost curve is the lower envelope of all the short-run curves — derived by letting $k$ vary optimally with $q$
 
 ---
 
@@ -325,8 +325,8 @@ $$\frac{d\pi}{dq} = \pi'(q) = \frac{dR}{dq} - \frac{dC}{dq} = 0 \qquad\Longright
 
 ![center width:520](media/profit-max-graph-soc.png)
 
-- $R$ and $C$ can have equal slopes at more than one point — here at $q_0$ *and* $q^*$
-- Without checking curvature, $q_0$ could wrongly be mistaken for a maximum — it's actually an inflection-like point, not the profit peak
+* $R$ and $C$ can have equal slopes at more than one point — here at $q_0$ *and* $q^*$
+* Without checking curvature, $q_0$ could wrongly be mistaken for a maximum — it's actually an inflection-like point, not the profit peak
 
 ---
 
