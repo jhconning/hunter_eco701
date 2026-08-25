@@ -2,11 +2,11 @@
 
 Read this first if you're picking up this work in a fresh conversation.
 Originally written 2026-07-13; rewritten 2026-07-19 for the move from Marp
-to Quarto + revealjs. The Marp-era version of this file (extraction-pipeline
-gotchas for Topics 1/2/3/8, the original Marp theme/CI details) is archived
-at [`docs/archive/HANDOFF-marp.md`](docs/archive/HANDOFF-marp.md) — still
-worth reading for the *why* behind existing content, but not the live
-workflow anymore.
+to Quarto + revealjs; last updated 2026-08-25. The Marp-era version of this
+file (extraction-pipeline gotchas for Topics 1/2/3/8, the original Marp
+theme/CI details) is archived at [`docs/archive/HANDOFF-marp.md`]
+(docs/archive/HANDOFF-marp.md) — still worth reading for the *why* behind
+existing content, but not the live workflow anymore.
 
 ## What this project is
 
@@ -23,7 +23,7 @@ already existed with a working GitHub Pages deploy pipeline before this
 reorganization started, and 5 topics were fully built and deployed *in
 Marp* before the move to Quarto (see "Migration status" below).
 
-## Migration status (2026-07-19)
+## Migration status (2026-08-25)
 
 The slide engine is moving from Marp to Quarto + revealjs — better fragment
 support (any element, not just bullet lists — see "Fragments" below),
@@ -40,11 +40,22 @@ revealjs features (columns, callouts, fragments, tabsets, live Plotly,
 etc.), not course content — now lives at
 [`docs/quarto-feature-demo/quarto_demo.qmd`](docs/quarto-feature-demo/quarto_demo.qmd).
 
-**As of this writing, migration is in progress.** Check each topic's
-`source.yml` for its actual current format (`deck.md` = still Marp,
-`deck.qmd` = migrated). Topics 4-7, 8b, 9-11 have no source material
-converted yet at all (per `TOPIC_PLAN.md`) — those get authored directly in
-Quarto from the start, no migration involved.
+**Status as of 2026-08-25:**
+- **Topic 01 (`01_definitions-and-key-tools/`)**: Trial-ported to Quarto
+  (`deck.qmd`), now in draft for enrichment with Bowles/Foley/Halliday Ch. 1
+  material (pre-extracted to `BH/chapter1_raw_extracted.txt`)
+- **Topics 02–03** (`02_constrained-optimization/`, `03_production-optimization/`):
+  Fully built in Marp (`deck.md`), deployed, awaiting port to Quarto
+- **Topic 08**: Dissolved 2026-07-18 (lecture slot retired, superseded by
+  Topic 1's rework); archived to `docs/archive/08_essentials-of-game-theory/`
+  with `deploy: false` safeguard
+- **Topics 04–07, 8b, 09–11**: Not started. Topics 04–07 + 08b will need
+  mechanical extraction from legacy PowerPoint then Quarto authoring. Topic 9
+  (Externalities/public goods) + Topic 11 (Framing analysis) need original
+  content with no legacy source material. See `TOPIC_PLAN.md` for details.
+- **Stale branches deleted**: `marp-fragments` (tracking branch) and
+  `topic2-continuous-games` (experimental Quarto port) both removed 2026-08-25
+  (neither was merged or live).
 
 ## Where everything is
 
@@ -292,3 +303,23 @@ payoff matrices by hand, deciding what to split/merge/cut, choosing which
 lists become `.incremental` and which images become `.columns` splits — is
 judgment applied slide-by-slide. Budget real time for this per topic; don't
 try to template it away.
+
+## Next steps (priority order)
+
+1. **Finish Topic 01 enrichment** (IMMEDIATE): Bowles/Foley/Halliday Ch. 1
+   (pages 35–85) pre-extracted to `BH/chapter1_raw_extracted.txt`. Brainstorm
+   + hand-author new framing slides, verify Quarto rendering, commit/push.
+2. **Port Topics 02–03 to Quarto** (MEDIUM): Both exist fully in Marp with
+   companion notebooks and figures. Mechanical port (adjust `---` separators,
+   rewrite Marp class syntax to Quarto attributes, test column layouts against
+   new theme), then re-verify layout against Quarto's different font-sizing model.
+3. **Extract + author Topics 04–07 and 8b** (LONGER): Run extraction pipeline
+   per `tools/README.md`, hand-author Quarto decks, build companion notebooks
+   (Topic 4 & 5 are priority for coverage).
+4. **Write Topics 09 + 11 from scratch** (DEFERRED): No legacy PowerPoint source.
+   Topic 9 needs N-player games (absorbing old Topic 8 material from `slidesI`
+   32–42), public goods, externalities, commons. Topic 11 needs original framing
+   of how micro theory structures empirical work.
+5. **Verify + refresh test-deploy cycle**: Each new topic should render cleanly
+   via `quarto render deck.qmd`, rasterize without overflow via `decktape` PDF
+   export, and have at least one in-browser preview before pushing to main.
