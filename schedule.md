@@ -1,5 +1,7 @@
 # Reading & Class Schedule — Fall 2026
 
+The following is very preliminary.  I'll build this out as the semester advances, with links to slides, jupyter notebooks, and other resources.
+
 Class meets **Mondays 5:30–7:30pm in HW 113**, with one Tuesday exception noted
 below. This page is kept current and takes precedence over the dates printed in
 the syllabus. Problem sets, solutions, submissions, announcements, and grades
