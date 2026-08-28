@@ -1,5 +1,7 @@
 # ECO 701: Microeconomic Theory
 
+Visit the site this repo builds at [https://jhconning.github.io/hunter_eco701/](https://jhconning.github.io/hunter_eco701/)
+
 **Hunter College, Department of Economics — Fall 2026**
 
 A Master's level course in modern microeconomic theory. We study the behavior of
