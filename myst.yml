@@ -6,6 +6,7 @@ project:
   github: jhconning/hunter_eco701
   toc:
     - file: README.md
+    - file: schedule.md
 site:
   options:
     folders: true

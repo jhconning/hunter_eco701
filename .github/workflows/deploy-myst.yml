@@ -27,6 +27,12 @@ jobs:
     # non-main ref from entering a job bound to it, which used to block the
     # whole job (including these harmless build-only steps) on every PR.
     runs-on: ubuntu-latest
+    env:
+      # Slide publishing switch. While the decks are being revised the site
+      # ships only the front page and the reading schedule. Set to 'true' to
+      # resume rendering and publishing every slides/*/deck.qmd (plus the
+      # remaining Marp decks) and to restore the deck index in the README.
+      PUBLISH_SLIDES: 'false'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -34,7 +40,7 @@ jobs:
           fetch-depth: 0
 
       - name: Update Table of Contents in README
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && env.PUBLISH_SLIDES == 'true' }}
         run: |
           deploy_date=$(TZ='America/New_York' date '+%Y-%m-%d %H:%M')
           echo -e "\n*Last Deployed: $deploy_date EST*\n" > toc.tmp
@@ -62,7 +68,7 @@ jobs:
           mv README.new README.md
 
       - name: Commit and Push README
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && env.PUBLISH_SLIDES == 'true' }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
@@ -83,9 +89,11 @@ jobs:
         run: myst build --html
 
       - name: Prepare Slides Directory
+        if: env.PUBLISH_SLIDES == 'true'
         run: mkdir -p _build/html/slides
 
       - name: Copy topic media folders to build
+        if: env.PUBLISH_SLIDES == 'true'
         run: |
           # Each topic folder (slides/<topic>/media/) gets mirrored into the build output
           # at the same relative path. Nested raw/media/ folders are intentionally excluded -
@@ -99,9 +107,18 @@ jobs:
             cp -R "$dir"/. "$dest"/
           done
 
-      - name: Check if slides folder exists
+      # has_slides=0 means "build the slides" (it began life as an exit status).
+      # It is now gated on PUBLISH_SLIDES as well as the folder existing, so the
+      # single switch above turns off every slide step that follows.
+      - name: Check whether to build slides
         id: slides-folder-exists
-        run: bash -c "[[ -d slides ]] ; echo \"has_slides=\$?\" >> \"$GITHUB_OUTPUT\""
+        run: |
+          if [[ "${PUBLISH_SLIDES}" == "true" && -d slides ]]; then
+            echo "has_slides=0" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_slides=1" >> "$GITHUB_OUTPUT"
+            echo "Slide rendering skipped (PUBLISH_SLIDES=${PUBLISH_SLIDES})."
+          fi
 
       # --- Quarto decks (the current, canonical format - see HANDOFF.md) ---
 

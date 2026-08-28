@@ -2,6 +2,8 @@
 title: "Microeconomic Theory"
 subtitle: "Topic 1: Definitions and Key Tools"
 author: "Jonathan Conning"
+description: "ECO 701 Topic 1: Definitions and Key Tools"
+deploy: true
 institute: "Hunter College, Dept. of Economics"
 format:
   revealjs:
@@ -9,11 +11,12 @@ format:
     slide-number: true
     footer: "Eco 701 - Micro Theory"
     html-math-method: katex
+    chalkboard: true
     width: 1280
     height: 720
 ---
 
-## What Is This Course About?
+## What Is This Course About? {.compact}
 
 ::: {.incremental}
 - **Resource allocation**: how societies decide who gets what
@@ -24,6 +27,7 @@ format:
 - **Evaluate:**
   - **Efficiency** — are all gains from cooperation realized?
   - **Distribution** — who captures them?
+- **The mechanisms keep coming**: ad auctions, kidney exchange — and now markets for (and by) AI agents. New rules, same questions
 :::
 
 <!-- Framing per BFH Ch. 1's institutions-first approach; "mechanism" is used in the mechanism-design sense (message space + outcome function, Hurwicz/Myerson/Maskin) rather than loosely equated with "rules of the game" - so auctions and screening contracts fit as cleanly as markets do. -->
@@ -33,6 +37,10 @@ format:
 ##### **mechanism  → strategic play → equilibrium → efficiency & distribution**
 
 > *The competitive market is one remarkable mechanism among many — not the only one, and not always available. Today builds the vocabulary; the rest of the course builds the machinery.*
+
+::: {.fragment}
+> *Economists design mechanisms for spectrum, kidneys, and ads; the next generation is being designed for — and by — machines. The tools in this course are the tools of that trade.*
+:::
 
 ---
 
@@ -473,7 +481,30 @@ Append a **tort rule** to the Fishermen's Dilemma: whoever breaks the fish-10 ag
 
 ---
 
-## The Method — and the Road Ahead
+## Postcard: An Economy of Machines? {.compact}
+
+**As of Fall 2026** — a dispatch, not a theorem.
+
+::: {.incremental}
+- A language model told to "negotiate the best price" is computing a **best response**. Two of them facing each other are playing a **game** — the one we just analyzed
+- Training methods align machine behavior with human goals using **incentive schemes** — and misfire in ways this course has names for (*reward hacking* is Goodhart's law at work; we meet it formally when we study contracts)
+- Michael I. Jordan (Berkeley, 2025) argues the AI era is less a coming superintelligence than a **giant, distributed mechanism-design problem** — markets, contracts, and incentives for systems that aggregate what millions of humans know
+- Sound familiar? **Hayek (1945)**: the price system already was a machine for aggregating dispersed knowledge that no single mind holds
+:::
+
+::: {.fragment}
+> *Different hardware, same questions: what are the rules of the game, and do they steer self-interested play toward outcomes we want?*
+:::
+
+<!-- Postcard convention: dated dispatch, tier-labeled - see new_ideas.md
+"AI-era thread" design note for the full example bank and guardrails.
+Jordan cite: "A Collectivist, Economic Perspective on AI", arXiv:2507.06268
+(position paper, not peer-reviewed - always "Jordan argues"). Hayek: "The Use
+of Knowledge in Society", AER 1945. Both listed as optional readings. -->
+
+---
+
+## The Method — and the Road Ahead {.compact}
 
 Every topic in this course runs the same loop:
 
@@ -484,6 +515,7 @@ Every topic in this course runs the same loop:
 - **Topics 4–6:** consumers; choices over time and risk; households that produce *and* consume
 - **Topic 7:** general equilibrium — when is Smith's conjecture a theorem? *(promise kept)*
 - **Topics 9–10:** when mechanisms fail — externalities and public goods; information, contracts, and power
+- **Throughout:** postcards from the AI frontier — where these exact tools are being redeployed, and where the analogies strain
 - **Reading:** Bowles & Halliday, *Microeconomics: Competition, Conflict, and Coordination*, Ch. 1 (this lecture); Nicholson & Snyder Ch. 2 for next week
 :::
 

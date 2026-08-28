@@ -2,6 +2,8 @@
 title: "Microeconomic Theory"
 subtitle: "Welcome & Course Logistics"
 author: "Jonathan Conning"
+description: "ECO 701 Topic 0: Welcome & Course Logistics"
+deploy: true
 institute: "Hunter College, Dept. of Economics"
 format:
   revealjs:
@@ -9,19 +11,20 @@ format:
     slide-number: true
     footer: "Eco 701 - Micro Theory"
     html-math-method: katex
+    chalkboard: true
     width: 1280
     height: 720
 ---
 
 ## Welcome
 
-*Fall 2018 — Slide Deck I*
+*Fall 2026 — Slide Deck 0*
 
 Jonathan Conning
 
-Office Hours: HW 1504A, Tue & Thu 11–12, and by appointment — jconning@hunter.cuny.edu
+Office Hours: HW 1504A, after class Mon & Wed 2-3, and by appointment — jconning@hunter.cuny.edu
 
-Teaching Assistant: Chuxin Liu
+Teaching Assistant: tba
 
 > *Slide Deck II continues where this leaves off.*
 

@@ -105,9 +105,35 @@ canvas/
 grades/
 legacy/
 BH/
+kbasu/
 syllabus/IDEAS.md
 _verify/
 _build/
+docs/.obsidian/
+
+# Assessment material and licensed readings - never publish. The Pages site is
+# public and (from 2026) so is the repo, so anything committed here is
+# world-readable, history included. Distribute these via Brightspace instead.
+exams/
+ps/
+readings/
+
+# Mechanical extraction output from the legacy PowerPoints: text dumps,
+# equation crops, diagram renders, Mathpix OCR results. Fully regeneratable
+# via tools/ (see tools/README.md), no student-facing value, and 68% of the
+# repo by file count - untracked 2026-08-27 ahead of making the repo public.
+# Still written and read locally; only the remote copy goes away.
+slides/*/raw/
+
+# Retired topic material (Topic 8's dissolved deck and its media). Project
+# history, kept on disk and described in TOPIC_PLAN.md / HANDOFF.md, but not
+# something a public course repo needs to carry.
+# (Pattern is docs/archive/* rather than docs/archive/ so the negation below
+# still works - git does not descend into a wholly excluded directory.)
+docs/archive/*
+# The one exception: HANDOFF.md, README.md and TOPIC_PLAN.md all link to the
+# Marp-era handoff, so keep that single file tracked to avoid dead links.
+!docs/archive/HANDOFF-marp.md
 
 # Quarto's in-place render output (tools/verify_deck.py renders deck.qmd
 # in its own topic folder, then cleans up - this is a safety net in case
@@ -123,3 +149,25 @@ docs/quarto-feature-demo/quarto_demo.html
 docs/quarto-feature-demo/quarto_demo_files/
 docs/quarto-feature-demo/quarto_demo.quarto_ipynb
 docs/quarto-feature-demo/rstack_*.png
+
+# Same again for the authoring feature-tour deck in slides/demos/ (named
+# feature-tour.qmd, not deck.qmd, so CI's `find slides -name deck.qmd`
+# render loop skips it - see the deck's own last slide)
+slides/demos/feature-tour.html
+slides/demos/feature-tour_files/
+slides/demos/feature-tour.quarto_ipynb
+
+# Decktape/quarto PDF export of a deck, produced locally by verify_deck.py or
+# by hand. Render output, same as deck.html - CI builds its own copy.
+slides/*/deck.pdf
+
+# LaTeX build artifacts (the compiled syllabus PDF itself IS tracked)
+*.aux
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+syllabus/*.log
+syllabus/*.out
+
+# Quarto's stray notebook intermediates from the demos deck
+slides/demos/feature-tour.quarto_ipynb*
