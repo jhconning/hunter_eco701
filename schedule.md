@@ -14,7 +14,7 @@ readings below, though, are set in advance: come to class having read them.
 |---|---|---|
 | **BFH** | Bowles, Foley & Halliday (2022), *Microeconomics: Competition, Conflict, and Coordination*, Oxford University Press | Free PDF from [Sam Bowles' website](https://sites.santafe.edu/~bowles/index.php/books/) |
 | **NS** | Nicholson & Snyder, *Microeconomic Theory: Basic Principles and Extensions*, South-Western | Rent or buy, hardcover or e-book. Any edition from the 13th forward; chapter numbers shift between editions, so match chapter titles |
-| **O&R** | Osborne & Rubinstein, *Models in Microeconomic Theory* (optional) | Free: [She edition](https://www.openbookpublishers.com/product/1171) · [He edition](https://www.openbookpublishers.com/product/1159) |
+| **O&R** | Osborne & Rubinstein, *Models in Microeconomic Theory* (optional) | Free from [Open Book Publishers](https://www.openbookpublishers.com/product/1171) |
 
 ## Schedule
 
