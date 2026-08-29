@@ -19,14 +19,14 @@ below describe it as it is, not as something to construct.
 
 ```
  ┌──────────────────────────────────────────────────────────────────────┐
- │ LOCAL — Y:\Hunter\Eco 701\Eco701\  (git repo, remote "hunter_eco701") │
+ │ LOCAL — Y:\Hunter\eco701\  (git repo, remote "hunter_eco701")         │
  │   slides/<NN_topic>/deck.qmd        Quarto revealjs decks             │
  │   slides/_shared/*.scss             one shared theme                  │
  │   slides/demos/feature-tour.qmd     authoring reference (not deployed)│
  │   notebooks/*.ipynb                 companion Jupyter notebooks       │
  │   tools/*.py                        extraction + verify_deck.py       │
  │   README.md + myst.yml              the site's front page and TOC     │
- │   exams/  ps/  grades/  legacy/     NOT published — see §8            │
+ │   exams/  ps/  grades/  archive/    NOT published — see §8            │
  └───────────────────────────────┬──────────────────────────────────────┘
                                  │  branch → PR → merge to main
                                  ▼
@@ -264,7 +264,8 @@ GitHub account. The publication boundary is `_build/html`: anything the workflow
 copies there is world-readable.
 
 Currently gitignored (never committed, therefore never published):
-`grades/`, `legacy/`, `BH/`, `canvas/`, `kbasu/`, `syllabus/IDEAS.md`.
+`archive/`, `grades/`, `exams/`, `ps/`, `readings/`, `BH/`, `canvas/`,
+`kbasu/`, `syllabus/IDEAS.md`.
 
 **Gap worth closing:** `exams/`, `ps/`, and `readings/` are empty scaffolding
 today, tracked by nothing — but they are *not* in `.gitignore`. The moment real
@@ -358,7 +359,7 @@ match this repo's actual tooling:
 |---|---|
 | New deck | *"Create `slides/04_<topic>/deck.qmd` using the ECO 701 YAML header and shared theme, with `description` and `deploy: true` set."* |
 | Port a Marp deck | *"Port `slides/02_constrained-optimization/deck.md` to Quarto per HANDOFF.md §5 — `---` separators, class syntax, column layouts — then verify with `tools/verify_deck.py`."* |
-| Extract from legacy pptx | *"Run the extraction pipeline in `tools/README.md` for Topic 5 against `legacy/slides/E701_F18 _slidesIIb.pptx`."* |
+| Extract from legacy pptx | *"Run the extraction pipeline in `tools/README.md` for Topic 5 against `archive/slides/legacy/E701_F18 _slidesIIb.pptx`."* |
 | Build the hub | *"Generate `schedule.md` from `TOPIC_PLAN.md` with the week/topic/slides/PDF/notebook table, and register it in `myst.yml`."* |
 | Check a deck | *"Render Topic 1, decktape it, and rasterize pages 5–10 so I can eyeball the fit."* |
 | Brightspace CSV | *"Convert the questions in `ps/topic4.md` to a Brightspace question-import CSV in `tools/out/` — do not commit the output."* |

@@ -1,7 +1,7 @@
 # Topic Plan: Mapping the 2018 Slides to the 11-Topic Sequence
 
 This maps the 11-topic sequence in [`syllabus/IDEAS.md`](syllabus/IDEAS.md) onto
-slide ranges in the three legacy decks (`legacy/slides/E701_F18 _slidesI.pptx`,
+slide ranges in the three legacy decks (`archive/slides/legacy/E701_F18 _slidesI.pptx`,
 `_slidesII.pptx`, `_slidesIIb.pptx`), based on a lightweight title-only scan of
 all 819 original slides plus the two topics already converted in detail.
 

@@ -182,7 +182,7 @@ Serves at `http://localhost:3000`; `Ctrl+C` stops it.
 **Serving the built output, to check exactly what CI will publish:**
 
 ```powershell
-cd "Y:\Hunter\Eco 701\Eco701\_build\html"; python -m http.server 8899
+cd "Y:\Hunter\eco701\_build\html"; python -m http.server 8899
 ```
 
 Then `http://localhost:8899/` for the front page and

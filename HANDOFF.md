@@ -57,15 +57,12 @@ tabsets, live Plotly), not course content.
 
 ## 2. Where everything is
 
-- **Repo root:** `Y:\Hunter\Eco 701\Eco701\` — note: no space in `Eco701`.
-  Do not confuse it with `Y:\Hunter\Eco 701\past\` or the top-level
-  `Y:\Hunter\Eco 701\slides\`, unrelated old folders that happen to sit
-  nearby.
+- **Repo root:** `Y:\Hunter\eco701\` (unified root matching eco331 model).
 - **GitHub remote:** `jhconning/hunter_eco701`, remote name `hunter_eco701`
   (**not** `origin`).
 - **Live site:** https://jhconning.github.io/hunter_eco701/ — deploys
   **only** on push to `main`, via `.github/workflows/deploy-myst.yml`.
-- **Legacy source pptx:** `legacy/slides/E701_F18 _slidesI.pptx` (337
+- **Legacy source pptx:** `archive/slides/legacy/E701_F18 _slidesI.pptx` (337
   slides), `_slidesII.pptx` (258), `_slidesIIb.pptx` (224). Gitignored —
   reference material, not tracked. `slidesIIb` is the authoritative revision;
   don't extract from `slidesII`.
@@ -111,7 +108,8 @@ shows the pattern better than more prose here.
 
 Elsewhere in the repo: `tools/` (extraction + verification scripts),
 `notebooks/` (companion Jupyter notebooks), `docs/` (archive, feature demo,
-future-topic notes), `legacy/` and `BH/` (untracked source material),
+future-topic notes), `archive/` (untracked reference material: the legacy pptx decks under
+`archive/slides/legacy/`, past semesters, old notebooks) and `BH/`,
 `exams/`, `ps/`, `readings/`, `syllabus/`.
 
 ### Topic status (2026-08-26)
@@ -446,7 +444,7 @@ time has passed; re-check before assuming it's conflict-free.
   trusting `doc.get_toc()`.
 - `BH/BowlesNotes.md` — notes from a prior course iteration, a useful head
   start for later chapters.
-- `legacy/Bowles/` (2016 draft) and the rest of `BH/` (2018 PowerPoint
+- `archive/slides/legacy/Bowles/` (2016 draft) and the rest of `BH/` (2018 PowerPoint
   chapters, syllabus, worksheets) are unrelated leftovers — ignore.
 
 ---

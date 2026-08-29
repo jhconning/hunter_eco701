@@ -101,8 +101,12 @@ ENV/
 .mypy_cache/
 
 # ECO 701 Custom Ignored Directories
-canvas/
+archive/
 grades/
+exams/
+ps/
+readings/
+canvas/
 legacy/
 BH/
 kbasu/
@@ -111,12 +115,12 @@ _verify/
 _build/
 docs/.obsidian/
 
-# Assessment material and licensed readings - never publish. The Pages site is
-# public and (from 2026) so is the repo, so anything committed here is
-# world-readable, history included. Distribute these via Brightspace instead.
-exams/
-ps/
-readings/
+# Media renders / videos
+*.mp4
+*.mov
+*.avi
+tools/manim/**/media/
+tools/manim/**/__pycache__/
 
 # Mechanical extraction output from the legacy PowerPoints: text dumps,
 # equation crops, diagram renders, Mathpix OCR results. Fully regeneratable

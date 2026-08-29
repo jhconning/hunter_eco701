@@ -34,9 +34,9 @@ paid API.
 
 Usage:
     mamba run -n ecopy python extract_topic.py \
-        --source "Y:\Hunter\Eco 701\past\eco701_F18\slides\E701_F18 _slidesI.pptx" \
+        --source "Y:\Hunter\eco701\archive\slides\legacy\E701_F18 _slidesI.pptx" \
         --start 43 --end 102 \
-        --out "Y:\Hunter\Eco 701\Eco701\slides\02_constrained-optimization\raw"
+        --out "Y:\Hunter\eco701\slides\02_constrained-optimization\raw"
 
 Writes into --out:
     extracted.txt           - slide-by-slide text + table content, in reading order
