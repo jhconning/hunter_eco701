@@ -184,3 +184,9 @@ tools/manim/
 docs/lms.md
 docs/future-topics/
 docs/Gradient Descent.md
+
+# Local environment & Quarto intermediates
+.env
+**/.env
+slides/*/*.quarto_ipynb*
+

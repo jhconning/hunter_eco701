@@ -33,6 +33,9 @@ jobs:
       # With it on, WHICH decks publish is decided per deck by `deploy: true`
       # in that deck's own YAML - see the "Select decks to publish" step.
       PUBLISH_SLIDES: 'true'
+      # Public origin of the deployed site. Used to repair the localhost URLs
+      # that MyST bakes into its prerendered output - see the rewrite step.
+      SITE_URL: 'https://jhconning.github.io/hunter_eco701'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -87,6 +90,21 @@ jobs:
         env:
           BASE_URL: '/hunter_eco701'
         run: myst build --html
+
+      - name: Rewrite the prerender origin in the build output
+        run: |
+          # `myst build --html` prerenders by fetching pages from a local
+          # server it starts itself, so every absolute URL it bakes in points
+          # at http://localhost:3000 - the <loc> entries and stylesheet href
+          # in sitemap.xml, the Sitemap: line in robots.txt, and og:url on
+          # each page. MyST 1.10.1's book-theme derives that origin from the
+          # request URL alone (Jse() in the theme bundle) with no config hook,
+          # so myst.yml cannot set it and rewriting afterwards is the fix.
+          #
+          # Restricted to the text formats that carry it; the JS bundles are
+          # left alone.
+          find _build/html -type f \( -name "*.html" -o -name "*.xml" -o -name "*.txt" \) -exec sed -i "s#http://localhost:3000#${SITE_URL}#g" {} +
+          echo "Remaining localhost references: $(grep -rl 'localhost:3000' _build/html --include='*.html' --include='*.xml' --include='*.txt' | wc -l)"
 
       - name: Prepare Slides Directory
         if: env.PUBLISH_SLIDES == 'true'

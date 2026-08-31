@@ -3,7 +3,7 @@ title: "Microeconomic Theory"
 subtitle: "Topic 1: Definitions and Key Tools"
 author: "Jonathan Conning"
 description: "ECO 701 Topic 1: Definitions and Key Tools"
-deploy: false   # draft — not yet released to students
+deploy: true
 institute: "Hunter College, Dept. of Economics"
 format:
   revealjs:
@@ -14,6 +14,11 @@ format:
     chalkboard: true
     width: 1280
     height: 720
+jupyter: python3
+execute:
+  echo: false
+  warning: false
+  freeze: auto
 ---
 
 ## What Is This Course About? {.compact}
@@ -44,23 +49,6 @@ format:
 
 ---
 
-## Before We Begin: Why Not Start With Optimization?
-
-::: {.incremental}
-- **You've already put in the work**: intermediate micro's toolkit — constrained optimization, competitive equilibrium, the efficiency theorems
-- Those results are genuinely powerful — and **conditional**, on assumptions (price-taking, no externalities, self-correcting feedback) that rarely get named out loud
-- This course **widens the lens** first (today: games, institutions, the many ways coordination can succeed or fail), then **returns you to that same toolkit** (Topics 2–7) asking what's actually doing the work
-- Same machinery, by the end — held with a more critical eye about when it delivers the clean answer, and when it doesn't
-:::
-
-::: {.fragment}
-> *This isn't abandoning what you learned — it's learning when it's true.*
-:::
-
-<!-- Quarto proof-of-concept: this is one of the 4 slides the Marp fragment pass (PR #6) had to SKIP, because a bullet list followed by a non-bulleted blockquote can't be sequenced with Marp's dash/star mechanism - the blockquote would show immediately. Here the blockquote is its own `.fragment`, arriving last, after the incremental list finishes. -->
-
----
-
 ## Two Eighteenth-Century Conjectures
 
 ::: {.incremental}
@@ -69,7 +57,7 @@ format:
 - **Adam Smith (1776):** each merchant "intends only his own gain," yet is "led by an invisible hand" to promote an end that was no part of his intention
   - **self-interest can coordinate**
 - Same assumptions about people; opposite predictions about society
-- Which conjecture prevails depends on the **rules of the game** — the classical institutional challenge, and this course's recurring question
+- Which conjecture prevails? Depends on strategic incentives shaped by the **rules of the game.** This is the classical institutional challenge, a recurring question in the course.
 :::
 
 <!-- BFH §1.2 (epigraph + HISTORY box). Hume and Smith quotes are public domain. -->
@@ -79,14 +67,14 @@ format:
 ## Coordination Problems, Then and Now
 
 ::: {.incremental}
-- Palanpur, Uttar Pradesh: farmers plant winter crops **weeks later** than would maximize yields — a lone early planter's seeds get eaten by birds, so early pays only if *most* plant early
-- *"If we knew how to do that, we would not be poor."*
+- BF book:  Palanpur, Uttar Pradesh: farmers plant winter crops **weeks later** than would maximize yields. A lone early planter's seeds is eaten by birds, so early pays only if *most* plant early.  
+- Why not coordinate?  *"If we knew how to do that, we would not be poor."*
 - A **coordination problem**: all could be better off (or some better, none worse) deciding *jointly* how to act than acting independently
-- The same structure at every scale:
-  - **climate** — everyone prefers someone else cut emissions (overuse of the atmosphere)
-  - **congestion** — my driving slows everyone else (overuse of roads)
-  - **knowledge** — patents restrict what costs nothing to share (underuse of ideas)
-- A **coordination failure** is a coordination problem left unsolved: an outcome worse for some, better for none
+- Same structure at different scales:
+  - **climate:** everyone prefers someone else cut emissions (overuse of the atmosphere)
+  - **congestion:** my driving slows everyone else (overuse of roads)
+  - **knowledge:** patents restrict what costs nothing to share (underuse of ideas)
+- **coordination failures** are coordination problems left unsolved 
 :::
 
 <!-- BFH §1.1 (Palanpur), §1.3 (modern examples), §1.4 (overuse/underuse; tragedy of the commons named on the next pass — full commons treatment lands in Topic 9). -->
@@ -118,7 +106,7 @@ A minimal toolkit: payoff matrices, best responses, Nash equilibrium
 Alfredo and Bob fish the same lake. Each independently chooses to fish **10 or 12 hours** a day. More hours for me means fewer fish per hour *for both of us*: my choice imposes a **negative external effect** on you.
 
 |  | Bob: 10 hours | Bob: 12 hours |
-|---|---|---|
+|:---:|:---:|:---:|
 | **Alfredo: 10 hours** | 75, 75 | 70, 78 |
 | **Alfredo: 12 hours** | 78, 70 | 72, 72 |
 
@@ -137,7 +125,7 @@ Alfredo and Bob fish the same lake. Each independently chooses to fish **10 or 1
 **Best response**: the strategy that maximizes *my* payoff, taking the others' strategies as fixed.
 
 |  | Bob: 10 hours | Bob: 12 hours |
-|---|---|---|
+|:---|:---:|:---:|
 | **Alfredo: 10 hours** | 75, 75 | 70, 78 ○ |
 | **Alfredo: 12 hours** | 78 ●, 70 | **72 ●, 72 ○** |
 
@@ -169,14 +157,24 @@ Alfredo and Bob fish the same lake. Each independently chooses to fish **10 or 1
 
 ---
 
-## Aside: Who Was John Nash?
+## Aside: John Nash
 
+:::: {.columns}
+::: {.column width="70%"}
 ::: {.incremental}
-- Nash's 1950 PhD dissertation — just 27 pages — proved that *every* finite game has at least one Nash equilibrium, possibly in mixed strategies
-- Cournot (1838) had used a version of the same idea nearly a century earlier, in a model of duopoly competition — but never stated it in general form (we meet Cournot's own model again in Topic 2)
-- Von Neumann & Morgenstern's *Theory of Games and Economic Behavior* (1944) couldn't pin down equilibrium beyond special cases like dominant strategies — their minimax theorem only works for zero-sum games
-- His story reached far beyond economics via Sylvia Nasar's 1998 biography *A Beautiful Mind* and Ron Howard's 2001 film adaptation
+- Nash's 1950 PhD dissertation. 27 pages. Proved that *every* finite game has at least one Nash equilibrium, possibly in mixed strategies
+- Cournot (1838) had used a version of the same idea nearly a century earlier to model duopoly competition. But never stated it in general form 
+- Von Neumann & Morgenstern's *Theory of Games and Economic Behavior* (1944) couldn't pin down equilibrium beyond special cases like dominant strategies. Their minimax theorem only works for zero-sum games
+- Recommended: Sylvia Nasar's 1998 biography *A Beautiful Mind* and Ron Howard's 2001 film adaptation
 :::
+:::
+
+::: {.column width="30%"}
+<div style="text-align: center; margin-top: 15px;">
+  <img src="media/nash-portrait.png" style="width: 100%; max-width: 320px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border-radius: 4px;">
+</div>
+:::
+::::
 
 <!-- Cannibalized (2026-07-18) from slides/08_essentials-of-game-theory/deck.md's two Nash-bio asides, text-only. -->
 
@@ -241,6 +239,164 @@ $$u_A(e_A, e_B) = \underbrace{\left(15 - \tfrac{1}{4}\,e_B\right)e_A}_{\text{val
 
 ---
 
+## Interactive: From Payoffs to the Reaction Curve
+
+For each choice of Bob ($e_B$), Alfredo solves $\max_{e_A} u_A(e_A, e_B)$ at the peak (left). Tracing these peaks across all $e_B$ forms Alfredo's **reaction curve** (right).
+
+```{python}
+#| echo: false
+#| fig-align: center
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import numpy as np
+
+e_A = np.linspace(0, 18, 200)
+eb_grid = np.linspace(0, 18, 100)
+eb_values = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+# Static reaction curve on right panel: e_A = 15 - 0.25 * e_B
+ea_br_curve = 15 - 0.25 * eb_grid
+
+frames = []
+for eb in eb_values:
+    marginal_val = 15 - 0.25 * eb
+    u_A = marginal_val * e_A - 0.5 * e_A**2
+    ea_star = marginal_val
+    ua_star = marginal_val * ea_star - 0.5 * ea_star**2
+    
+    frame_data = [
+        # Panel 1: u_A curve
+        go.Scatter(
+            x=e_A, y=u_A,
+            mode="lines",
+            line=dict(color="#24325c", width=3),
+            name="u_A(e_A)",
+            hovertemplate="e_A = %{x:.1f}<br>u_A = %{y:.1f}<extra>Payoff</extra>",
+            xaxis="x1", yaxis="y1"
+        ),
+        # Panel 1: Peak point
+        go.Scatter(
+            x=[ea_star], y=[ua_star],
+            mode="markers+text",
+            text=[f"e_A*={ea_star:.1f}"],
+            textposition="top center",
+            marker=dict(size=11, color="#c83232"),
+            name="Peak (FOC)",
+            hovertemplate=f"Max at e_A* = {ea_star:.1f}<br>u_A* = {ua_star:.1f}<extra></extra>",
+            xaxis="x1", yaxis="y1"
+        ),
+        # Panel 1: Flat tangent line at peak
+        go.Scatter(
+            x=[max(0, ea_star - 2.5), min(18, ea_star + 2.5)], y=[ua_star, ua_star],
+            mode="lines",
+            line=dict(color="#c83232", width=2, dash="dash"),
+            hoverinfo="skip",
+            xaxis="x1", yaxis="y1"
+        ),
+        # Panel 1: Vertical drop line
+        go.Scatter(
+            x=[ea_star, ea_star], y=[0, ua_star],
+            mode="lines",
+            line=dict(color="#8892a4", width=1.5, dash="dot"),
+            hoverinfo="skip",
+            xaxis="x1", yaxis="y1"
+        ),
+        
+        # Panel 2: Full Reaction Curve line
+        go.Scatter(
+            x=ea_br_curve, y=eb_grid,
+            mode="lines",
+            line=dict(color="#24325c", width=2.5),
+            name="Reaction Curve: e_A = 15 − ¼ e_B",
+            hovertemplate="e_A = %{x:.1f}<br>e_B = %{y:.1f}<extra>Reaction Curve</extra>",
+            xaxis="x2", yaxis="y2"
+        ),
+        # Panel 2: Current operating point (e_A*(e_B), e_B)
+        go.Scatter(
+            x=[ea_star], y=[eb],
+            mode="markers+text",
+            text=[f"({ea_star:.1f}, {eb})"],
+            textposition="top right" if eb < 14 else "bottom left",
+            marker=dict(size=12, color="#c83232"),
+            name="Current (e_A*, e_B)",
+            hovertemplate=f"Alfredo's Best Response:<br>e_A* = {ea_star:.1f} when e_B = {eb}<extra></extra>",
+            xaxis="x2", yaxis="y2"
+        ),
+        # Panel 2: Crosshair guide lines
+        go.Scatter(
+            x=[ea_star, ea_star, 0], y=[0, eb, eb],
+            mode="lines",
+            line=dict(color="#c83232", width=1.5, dash="dot"),
+            hoverinfo="skip",
+            xaxis="x2", yaxis="y2"
+        )
+    ]
+    frames.append(go.Frame(data=frame_data, name=f"{eb}"))
+
+initial_idx = 6  # eb = 12
+
+steps = []
+for eb in eb_values:
+    step = dict(
+        method="animate",
+        args=[
+            [f"{eb}"],
+            dict(
+                mode="immediate",
+                frame=dict(duration=150, redraw=True),
+                transition=dict(duration=100)
+            )
+        ],
+        label=f"{eb}h"
+    )
+    steps.append(step)
+
+sliders = [dict(
+    active=initial_idx,
+    currentvalue=dict(
+        prefix="Bob's effort (e_B): ",
+        visible=True,
+        font=dict(size=14, color="#24325c", family="-apple-system, Segoe UI, sans-serif")
+    ),
+    pad=dict(t=25, b=5),
+    len=0.92,
+    x=0.04,
+    steps=steps
+)]
+
+fig = make_subplots(
+    rows=1, cols=2,
+    subplot_titles=("(1) Alfredo's Payoff Hill: max u_A(e_A; e_B)", "(2) Reaction Curve in (e_A, e_B) Space"),
+    horizontal_spacing=0.10
+)
+
+for trace in frames[initial_idx].data:
+    if trace.xaxis == "x1":
+        fig.add_trace(trace, row=1, col=1)
+    else:
+        fig.add_trace(trace, row=1, col=2)
+
+fig.frames = frames
+
+fig.update_layout(
+    xaxis1=dict(title="Alfredo's hours (e_A)", range=[0, 18], showgrid=True, gridcolor="#e5e9f0"),
+    yaxis1=dict(title="Payoff u_A", range=[0, 120], showgrid=True, gridcolor="#e5e9f0"),
+    xaxis2=dict(title="Alfredo's hours (e_A)", range=[0, 18], showgrid=True, gridcolor="#e5e9f0"),
+    yaxis2=dict(title="Bob's hours (e_B)", range=[0, 18], showgrid=True, gridcolor="#e5e9f0"),
+    height=450,
+    width=1080,
+    margin=dict(l=40, r=20, t=35, b=65),
+    showlegend=False,
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(0,0,0,0)",
+    font=dict(family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif", size=12),
+    sliders=sliders
+)
+fig
+```
+
+---
+
 ## The Best-Response Function
 
 ::: {.columns}
@@ -257,7 +413,57 @@ $$e_A^{BR}(e_B) = 15 - \tfrac{1}{4}\,e_B$$
 :::
 :::
 ::: {.column width="44%"}
-![](media/fd_reaction_curves.png)
+```{python}
+#| echo: false
+#| fig-align: center
+import plotly.graph_objects as go
+import numpy as np
+
+e = np.linspace(0, 16, 100)
+fig = go.Figure()
+fig.add_trace(go.Scatter(
+    x=e, y=15 - 0.25*e,
+    name="Bob: e_B = 15 − ¼ e_A",
+    line=dict(color="#b8842a", width=3),
+    hovertemplate="e_A = %{x:.1f}, e_B = %{y:.1f}<extra>Bob's BR</extra>"
+))
+fig.add_trace(go.Scatter(
+    x=15 - 0.25*e, y=e,
+    name="Alfredo: e_A = 15 − ¼ e_B",
+    line=dict(color="#24325c", width=3),
+    hovertemplate="e_A = %{x:.1f}, e_B = %{y:.1f}<extra>Alfredo's BR</extra>"
+))
+fig.add_trace(go.Scatter(
+    x=[12], y=[12],
+    mode="markers+text",
+    text=["Nash (12,12)"],
+    textposition="top right",
+    marker=dict(size=11, color="#1c2430"),
+    name="Nash (12,12)",
+    hovertemplate="Nash Equilibrium: (12, 12)<extra></extra>"
+))
+fig.add_trace(go.Scatter(
+    x=[10], y=[10],
+    mode="markers+text",
+    text=["Planner (10,10)"],
+    textposition="bottom left",
+    marker=dict(size=11, color="#2e7d32"),
+    name="Social Optimum (10,10)",
+    hovertemplate="Social Optimum: (10, 10)<extra></extra>"
+))
+fig.update_layout(
+    xaxis=dict(title="Alfredo's hours (e_A)", range=[0, 16.5], showgrid=True, gridcolor="#e5e9f0"),
+    yaxis=dict(title="Bob's hours (e_B)", range=[0, 16.5], showgrid=True, gridcolor="#e5e9f0"),
+    height=410,
+    width=470,
+    margin=dict(l=35, r=15, t=15, b=35),
+    legend=dict(orientation="h", y=1.18, font=dict(size=11)),
+    font=dict(family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif", size=12),
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(0,0,0,0)"
+)
+fig
+```
 :::
 :::
 
@@ -336,7 +542,61 @@ Pareto efficiency, and the possibility frontiers of an economy
 :::
 :::
 ::: {.column width="44%"}
-![](media/fd_upf.png)
+```{python}
+#| echo: false
+#| fig-align: center
+import plotly.graph_objects as go
+import numpy as np
+
+uA_grid = np.linspace(65, 85, 50)
+uB_upf = 150 - uA_grid
+
+fig = go.Figure()
+
+# UPF frontier line
+fig.add_trace(go.Scatter(
+    x=uA_grid, y=uB_upf,
+    mode="lines",
+    name="UPF: u_A + u_B = 150",
+    line=dict(color="#24325c", width=3),
+    hovertemplate="u_A: %{x:.1f}, u_B: %{y:.1f}<extra>UPF Frontier</extra>"
+))
+
+# Inefficient Nash point a
+fig.add_trace(go.Scatter(
+    x=[72], y=[72],
+    mode="markers+text",
+    text=["a: (12,12) Nash"],
+    textposition="bottom left",
+    marker=dict(size=11, color="#c83232"),
+    name="a: Nash (72,72)",
+    hovertemplate="Nash (12,12): u_A=72, u_B=72<br>(Inefficient: inside frontier)<extra></extra>"
+))
+
+# Efficient matrix outcomes b, c, d
+fig.add_trace(go.Scatter(
+    x=[70, 75, 78], y=[78, 75, 70],
+    mode="markers+text",
+    text=["b: (10,12)", "c: (10,10) Planner", "d: (12,10)"],
+    textposition=["top left", "top right", "bottom right"],
+    marker=dict(size=11, color="#2e7d32"),
+    name="b, c, d: Efficient",
+    hovertemplate="%{text}: u_A=%{x}, u_B=%{y}<extra></extra>"
+))
+
+fig.update_layout(
+    xaxis=dict(title="Alfredo's utility (u_A)", range=[66, 84], showgrid=True, gridcolor="#e5e9f0"),
+    yaxis=dict(title="Bob's utility (u_B)", range=[66, 84], showgrid=True, gridcolor="#e5e9f0"),
+    height=410,
+    width=470,
+    margin=dict(l=35, r=15, t=15, b=35),
+    legend=dict(orientation="h", y=1.18, font=dict(size=10)),
+    font=dict(family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif", size=12),
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(0,0,0,0)"
+)
+fig
+```
 :::
 :::
 
@@ -379,7 +639,7 @@ Same rational players, different rules, different verdicts
 Arkady's land favors tomatoes, Barbara's favors corn — and both do badly when they glut the market with the same crop.
 
 |  | Barbara: Corn | Barbara: Tomatoes |
-|---|---|---|
+|:---|:---:|:---:|
 | **Arkady: Corn** | 1, 2.5 ○ | 2, 2 |
 | **Arkady: Tomatoes** | **4 ●, 4 ○** | 2.5 ●, 1 |
 
@@ -398,7 +658,7 @@ Arkady's land favors tomatoes, Barbara's favors corn — and both do badly when 
 Aram and Bina choose to plant **early or late**. Early gives the best harvest — *if the other also plants early*; a lone early planter loses seed to the birds.
 
 |  | Bina: Early | Bina: Late |
-|---|---|---|
+|:---|:---:|:---:|
 | **Aram: Early** | **4 ●, 4 ○** | 0, 3 |
 | **Aram: Late** | 3, 0 | **2 ●, 2 ○** |
 
@@ -427,7 +687,7 @@ Aram and Bina choose to plant **early or late**. Early gives the best harvest �
 
 ---
 
-## Postcard: Segregation as a Nash Equilibrium
+## Example: Segregation as a Nash Equilibrium
 
 ::: {.columns}
 ::: {.column width="60%"}
@@ -467,7 +727,7 @@ Aram and Bina choose to plant **early or late**. Early gives the best harvest �
 Append a **tort rule** to the Fishermen's Dilemma: whoever breaks the fish-10 agreement compensates the other's loss (75 − 70 = 5).
 
 |  | Bob: Cooperate | Bob: Defect |
-|---|---|---|
+|:---|:---:|:---:|
 | **Alfredo: Cooperate** | **75 ●, 75 ○** | 75 ●, 73 |
 | **Alfredo: Defect** | 73, 75 ○ | 72, 72 |
 
@@ -481,26 +741,35 @@ Append a **tort rule** to the Fishermen's Dilemma: whoever breaks the fish-10 ag
 
 ---
 
-## Postcard: An Economy of Machines? {.compact}
+## Application: Information Constraints and Mechanism Design {.compact}
 
-**As of Fall 2026** — a dispatch, not a theorem.
+Why the microeconomic toolkit matters across fields:
 
-::: {.incremental}
-- A language model told to "negotiate the best price" is computing a **best response**. Two of them facing each other are playing a **game** — the one we just analyzed
-- Training methods align machine behavior with human goals using **incentive schemes** — and misfire in ways this course has names for (*reward hacking* is Goodhart's law at work; we meet it formally when we study contracts)
-- Michael I. Jordan (Berkeley, 2025) argues the AI era is less a coming superintelligence than a **giant, distributed mechanism-design problem** — markets, contracts, and incentives for systems that aggregate what millions of humans know
-- Sound familiar? **Hayek (1945)**: the price system already was a machine for aggregating dispersed knowledge that no single mind holds
+::: {.columns}
+::: {.column width="50%"}
+**Corporate Finance & Banking (Tirole)**
+
+- Asset pricing on secondary markets takes cash flows as given and assumes complete markets
+- Corporate finance asks why those financial contracts exist in the first place and are structured as they are:
+  - **Asymmetric information & moral hazard:** borrower effort and risk choices are unobservable
+  - Explains why banks *ration* credit rather than clear markets by raising interest rates
+  - Debt covenants, collateral, and equity are **incentive mechanisms**
+:::
+
+::: {.column width="50%"}
+**Algorithmic Systems & AI (Jordan 2025)**
+
+- An autonomous model optimizing a prompt computes a **best response**; two models negotiating play a **game**
+- Aligning machine behavior with human goals is a **principal–agent problem**:
+  - The model's internal computation is unobservable
+  - "Reward hacking" is multitasking agency failure (Holmström–Milgrom)
+  - Aggregating dispersed human data is a mechanism-design problem (Hayek 1945)
+:::
 :::
 
 ::: {.fragment}
-> *Different hardware, same questions: what are the rules of the game, and do they steer self-interested play toward outcomes we want?*
+> *Whether governing firms, financial intermediaries, or algorithmic markets, the central question is the same: how to structure rules and contracts when information is asymmetric and agents act strategically.*
 :::
-
-<!-- Postcard convention: dated dispatch, tier-labeled - see new_ideas.md
-"AI-era thread" design note for the full example bank and guardrails.
-Jordan cite: "A Collectivist, Economic Perspective on AI", arXiv:2507.06268
-(position paper, not peer-reviewed - always "Jordan argues"). Hayek: "The Use
-of Knowledge in Society", AER 1945. Both listed as optional readings. -->
 
 ---
 
@@ -515,7 +784,7 @@ Every topic in this course runs the same loop:
 - **Topics 4–6:** consumers; choices over time and risk; households that produce *and* consume
 - **Topic 7:** general equilibrium — when is Smith's conjecture a theorem? *(promise kept)*
 - **Topics 9–10:** when mechanisms fail — externalities and public goods; information, contracts, and power
-- **Throughout:** postcards from the AI frontier — where these exact tools are being redeployed, and where the analogies strain
+- **Applications throughout:** corporate finance, credit markets, and algorithmic mechanisms — seeing how these tools apply to modern institutional problems
 - **Reading:** Bowles & Halliday, *Microeconomics: Competition, Conflict, and Coordination*, Ch. 1 (this lecture); Nicholson & Snyder Ch. 2 for next week
 :::
 

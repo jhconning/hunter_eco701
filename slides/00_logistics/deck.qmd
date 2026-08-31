@@ -16,41 +16,54 @@ format:
     height: 720
 ---
 
-## Welcome
+## ECO 701 -- Fall 2026
 
-*Fall 2026 — Slide Deck 0*
+**Jonathan Conning**
 
-Jonathan Conning
+**Office Hours:** HW 1504A after class Mon & Wed 2-3, and by appointment 
 
-Office Hours: HW 1504A, after class Mon & Wed 2-3, and by appointment — jconning@hunter.cuny.edu
+jconning@hunter.cuny.edu
 
-Teaching Assistant: tba
+**Teaching Assistant:** tba
 
 ---
 
-## Course Materials
+## Course Materials {footer=""}
 
+:::: {.columns}
+::: {.column width="75%"}
 - **Primary text:** Nicholson & Snyder, *Microeconomic Theory: Basic Principles and Extensions*, any edition from the 11th forward
-- **Supplementary:** Bowles & Halliday (2022), *Microeconomics: Competition, Conflict, and Coordination* — selected chapters; free online [PDF](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf)
-- I'll fill any gaps with detailed notes and handouts as we go
+- **Supplementary:** Bowles & Halliday (2022), *Microeconomics: Competition, Conflict, and Coordination* — selected chapters; free online [PDF](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf). 
+- I'll add notes, handouts, and notebooks as we go
+:::
+
+::: {.column width="25%"}
+<div style="text-align: center;">
+  <img src="media/NScover.png" style="display: block; height: 230px; margin: 0 auto 16px auto; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border-radius: 3px;">
+  <img src="media/BHcover.png" style="display: block; height: 250px; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border-radius: 3px;">
+</div>
+:::
+::::
 
 ---
 
 ## Slides & Announcements
 
-- I draw from a large, evolving collection of slides built up over many years teaching this course
-- Slides and reading schedules are posted to the course website: [https://jhconning.github.io/hunter_eco701/](https://jhconning.github.io/hunter_eco701/)
-- Official course announcements are on **Brightspace**
-- Slides are revised up to the last minute before class — check for updates
+- An evolving collection of slides is main guide to material.
+- Slides and reading schedules posted to site: **[jhconning.github.io/hunter_eco701/](https://jhconning.github.io/hunter_eco701/)**
+   - Brightspace only for announcements. 
+   - gradescope.com for problem sets (details to follow)
+   - Slides are revised up to the last minute before class — check for updates
 
 ---
 
-## Python & Jupyter Notebooks
+## Code and notebooks
 
-- I use Jupyter notebooks and Python to build visualizations and simulations — a small, evolving collection
+- I use Jupyter notebooks and python to build visualizations and simulations. An evolving collection.
 - All computational notebooks and resources are hosted on GitHub: [https://jhconning.github.io/hunter_eco701/](https://jhconning.github.io/hunter_eco701/)
-- **Not required** for this course, but exploring open-source scientific Python is increasingly valuable for research and applied work
-- See `lectures.quantecon.org/py/` for a good guide to getting started
+- **Not strictly required**, but exploring open-source scientific stack tools is increasingly a part of research and applied work in economics.
+- See past notebooks at [jhconning.github.io/Econ-Teach/](https://jhconning.github.io/Econ-Teach/) and for an intro to python, and more advanced work at 
+[quantecon.org/lectures/](https://quantecon.org/lectures/)
 
 ---
 
@@ -63,7 +76,7 @@ Teaching Assistant: tba
 | Lower of midterm or final | 30% |
 
 - Only 13 lectures this semester — problem sets carry real weight and will take real time
-- Work in groups to build shared understanding, but **write up and submit your own answers individually**
+- Work in groups to build shared understanding but **write up and submit your own answers individually**
 
 ---
 
@@ -73,6 +86,28 @@ Teaching Assistant: tba
 - **4 problem sets**, graded by the TA — submitted via **Gradescope** (details to follow)
   - 1st due 3rd class, Mon Sep 28 (posted a few days ahead)
 - Study groups welcome and encouraged — but write up solutions on your own
+
+---
+
+#### How to use (and not use) AI {footer=""}
+
+:::: {.columns}
+::: {.column width="45%"}
+- **As a complement, not a substitute:** as a tutor to explain derivations, check algebra, debug code, and generate practice problems.
+- **Do not outsource thinking:** Evidence shows shortcuts lower exam performance.
+- **No AI on exams** (closed-book / closed-device).
+- **Acknowledge AI use** on problem sets and show your own steps.
+
+
+> *"Armed with generative AI, a B student can produce A work while turning into a C student."*
+:::
+
+::: {.column width="45%"}
+<div style="display: flex; justify-content: center; align-items: center;">
+  <img src="media/AIcompare.png" style="height: 620px; width: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border-radius: 4px;">
+</div>
+:::
+::::
 
 
 ---
@@ -101,5 +136,5 @@ Please fill out an index card:
 ## Today's Plan
 
 - Introductions
-- A first look at game theory — strategies and equilibrium concepts; social dilemmas vs. invisible-hand games
-- Constrained optimization problems
+- A first look at game theory — strategies and equilibrium concepts; social dilemmas vs. invisible-hand games (from BH Ch 1)
+- Best responses, incentives, equilibrium.  Mechanisms and mechanism design.

@@ -16,15 +16,14 @@ readings below, though, are set in advance: come to class having read them.
 |---|---|---|
 | **BH** | Bowles & Halliday (2022), *Microeconomics: Competition, Conflict, and Coordination*, Oxford University Press | Free PDF: [BH PDF](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf) |
 | **NS** | Nicholson & Snyder, *Microeconomic Theory: Basic Principles and Extensions*, South-Western | Rent or buy, hardcover or e-book. Any edition from the 11th forward; chapter numbers shift between editions, so match chapter titles |
-| **O&R** | Osborne & Rubinstein, *Models in Microeconomic Theory* (optional) | Free from [Open Book Publishers](https://www.openbookpublishers.com/product/1171) |
 
 
 ## Schedule
 
 | # | Date | Topic | Reading | Slides |
 |---|---|---|---|---|
-| 1 | Mon Aug 31 | Course logistics. Definitions and key tools: institutions, mechanisms, games, equilibrium, efficiency and distribution | [BH 1](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf) | [Logistics](https://jhconning.github.io/hunter_eco701/slides/00_logistics/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/00_logistics/deck.pdf)) |
-| 2 | Mon Sep 14 | Definitions and key tools, concluded: best response and Nash equilibrium. Preferences and choice: rationality axioms, utility representation and its limits, ordinality, monotonicity and convexity, the indifference-curve zoo | [BH 1–2](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf); O&R 1, 4 | |
+| 1 | Mon Aug 31 | Course logistics. Definitions and key tools: institutions, mechanisms, games, equilibrium, efficiency and distribution | [BH 1](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf) | [Logistics](https://jhconning.github.io/hunter_eco701/slides/00_logistics/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/00_logistics/deck.pdf))<br>[Topic 1](https://jhconning.github.io/hunter_eco701/slides/01_definitions-and-key-tools/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/01_definitions-and-key-tools/deck.pdf)) |
+| 2 | Mon Sep 14 | Definitions and key tools, concluded: best response and Nash equilibrium. Preferences and choice: rationality axioms, utility representation and its limits, ordinality, monotonicity and convexity, the indifference-curve zoo | [BH 1–2](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf) | |
 | 3 | Mon Sep 28 | Constrained optimization I: the Lagrange method, comparative statics, the envelope theorem | NS 2 | |
 | 4 | Mon Oct 5 | Constrained optimization II: inequality constraints and Kuhn–Tucker | NS 2–3 | |
 | 5 | **Tue** Oct 13 | Production optimization: cost minimization, profit maximization, duality | NS 9–11 | |
