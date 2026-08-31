@@ -3,7 +3,7 @@ title: "Microeconomic Theory"
 subtitle: "Topic 1: Definitions and Key Tools"
 author: "Jonathan Conning"
 description: "ECO 701 Topic 1: Definitions and Key Tools"
-deploy: true
+deploy: false   # draft — not yet released to students
 institute: "Hunter College, Dept. of Economics"
 format:
   revealjs:

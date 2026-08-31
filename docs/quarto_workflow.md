@@ -30,9 +30,10 @@ Written 2026-08-27 against Quarto 1.9.38 and the VS Code Quarto extension
 Antigravity has the Jupyter extensions but no Quarto extension, so slide work
 belongs in real VS Code unless you install Quarto there from Open VSX.
 
-**Open the inner `Eco701` folder as the workspace root**, not the parent. The
-decks' theme paths (`../_shared/eco701-revealjs.scss`) and the `tools/`
-scripts both resolve from the repo root.
+**Open `Y:\Hunter\eco701` as the workspace root.** The decks' theme paths
+(`../_shared/eco701-revealjs.scss`) and the `tools/` scripts both resolve from
+the repo root. Launch Claude Code from there too — the working directory sets
+the session's project key, so starting elsewhere splits the history.
 
 ### Two settings that matter
 

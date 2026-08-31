@@ -33,7 +33,7 @@ below describe it as it is, not as something to construct.
  ┌──────────────────────────────────────────────────────────────────────┐
  │ GITHUB ACTIONS — .github/workflows/deploy-myst.yml                    │
  │   1. regenerate README's "Deployed Presentations" index               │
- │      (lists every slides file carrying `deploy: true`)                │
+ │      (every deck carrying `deploy: true`; drafts are skipped)         │
  │   2. myst build --html            → site shell from README + myst.yml │
  │   3. copy slides/<topic>/media/   → build output                      │
  │   4. quarto render each slides/*/deck.qmd  (in place)                 │
@@ -104,19 +104,35 @@ redirect stub at the old path (§7).
 
 1. Branch off `main` — never commit to `main` directly.
 2. Create or edit `slides/<NN_topic>/deck.qmd`. It must be named exactly
-   `deck.qmd` and sit exactly two levels under `slides/` — CI's render loop is
-   `find slides -mindepth 2 -maxdepth 2 -type f -name "deck.qmd"`. Anything else
-   is invisible to the build (which is why `slides/demos/feature-tour.qmd` never
-   deploys).
-3. In its YAML, include the front-matter keys the site index reads:
+   `deck.qmd` and sit exactly two levels under `slides/` — CI discovers decks
+   with `find slides -mindepth 2 -maxdepth 2 -type f \( -name "deck.qmd" -o
+   -name "deck.md" \)`. Anything else is invisible to the build (which is why
+   `slides/demos/feature-tour.qmd` never deploys).
+3. In its YAML, set the two keys that decide whether the deck is published:
    ```yaml
    description: "ECO 701 Topic N: Human-readable title"
    deploy: true
    ```
-   The README's "Deployed Presentations" list is regenerated on every push from
-   files carrying `deploy: true`, using `description` as the link text. A deck
-   without it still renders and deploys — it just never appears in the index.
-   Use `deploy: false` to be explicit about anything that should stay unlisted.
+   **`deploy:` is the release switch, not just an index entry.** CI publishes a
+   deck only if it carries `deploy: true`: that one test gates rendering, the
+   PDF export, the copy of the topic's `media/`, and the README's "Deployed
+   Presentations" list, which uses `description` as the link text.
+
+   A deck with `deploy: false`, or with no `deploy` line at all, is a draft —
+   not rendered, not exported, and its figures never reach the public site.
+   Start every new deck at `deploy: false` and flip it when the deck is ready:
+
+   ```yaml
+   deploy: false   # draft — not yet released to students
+   ```
+
+   Dropping a live deck back to `deploy: false` unpublishes it on the next push,
+   since Pages replaces the whole site on every deploy.
+
+   Above all of this sits one master switch, `PUBLISH_SLIDES` in
+   `.github/workflows/deploy-myst.yml`. Set to `'false'` it ships the front page
+   and reading schedule alone, whatever the decks say — the state the site was
+   parked in while the decks were being revised.
 4. Put images in `slides/<NN_topic>/media/` and reference them relatively.
    CI mirrors that folder into the build; nested `raw/media/` is deliberately
    excluded.
@@ -357,7 +373,7 @@ match this repo's actual tooling:
 
 | Task | Prompt |
 |---|---|
-| New deck | *"Create `slides/04_<topic>/deck.qmd` using the ECO 701 YAML header and shared theme, with `description` and `deploy: true` set."* |
+| New deck | *"Create `slides/04_<topic>/deck.qmd` using the ECO 701 YAML header and shared theme, with `description` set and `deploy: false` until it's ready to release."* |
 | Port a Marp deck | *"Port `slides/02_constrained-optimization/deck.md` to Quarto per HANDOFF.md §5 — `---` separators, class syntax, column layouts — then verify with `tools/verify_deck.py`."* |
 | Extract from legacy pptx | *"Run the extraction pipeline in `tools/README.md` for Topic 5 against `archive/slides/legacy/E701_F18 _slidesIIb.pptx`."* |
 | Build the hub | *"Generate `schedule.md` from `TOPIC_PLAN.md` with the week/topic/slides/PDF/notebook table, and register it in `myst.yml`."* |
