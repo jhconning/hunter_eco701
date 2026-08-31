@@ -7,6 +7,17 @@ project:
   toc:
     - file: README.md
     - file: schedule.md
+    - file: notebooks/README.md
+      title: "Notebooks"
+      children:
+        - file: notebooks/topic01_definitions_key_tools_figures.ipynb
+          title: "Topic 1: Model Figures"
+        - file: notebooks/topic01_schelling_segregation.ipynb
+          title: "Topic 1: Schelling Segregation"
+        - file: notebooks/topic02_constrained_optimization_figures.ipynb
+          title: "Topic 2: Optimization Geometry"
+        - file: notebooks/topic02_constrained_optimization_numerical.ipynb
+          title: "Topic 2: Optimization Solvers"
 site:
   options:
     folders: true
