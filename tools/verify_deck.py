@@ -200,7 +200,9 @@ def build_pdf_quarto(deck_dir, out_pdf):
         raise SystemExit("quarto render reported success but deck.html was not produced")
 
     print(f"Exporting to PDF with decktape (size {DECKTAPE_SIZE})...")
-    decktape_cmd = f'npx -y decktape reveal --size "{DECKTAPE_SIZE}" "deck.html" "{out_pdf}"'
+    chrome_path = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+    chrome_flag = f'--chrome-path "{chrome_path}"' if (os.name == "nt" and os.path.isfile(chrome_path)) else ""
+    decktape_cmd = f'npx -y decktape reveal {chrome_flag} --size "{DECKTAPE_SIZE}" "deck.html" "{out_pdf}"'
     try:
         if os.name == "nt":
             result = _run_via_git_bash_on_windows(decktape_cmd, cwd=deck_dir)

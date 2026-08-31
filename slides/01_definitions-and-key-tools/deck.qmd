@@ -706,21 +706,43 @@ Aram and Bina choose to plant **early or late**. Early gives the best harvest �
 
 ---
 
-## Example: Segregation as a Nash Equilibrium
+## Schelling's Segregation Model: Rules & Preferences {.compact}
 
-::: {.columns}
+12 households on a circle (positions 1–12), split evenly between two groups (Blue & Orange).
+
+::: {.incremental}
+- **Neighborhood:** Each household cares only about its **two immediate neighbors** ($i-1$ and $i+1$). Let $k_i \in \{0, 1, 2\}$ be the number of same-type neighbors.
+- **Preferences & Payoffs:**
+  - **Stated Ideal:** 1 Blue and 1 Orange neighbor ($k_i = 1$) — *nobody desires segregation*.
+  - **Satisfied ($u = 1$):** At least one neighbor shares their type ($k_i \ge 1$). Both mixed ($k_i = 1$) and all-same ($k_i = 2$) are fully satisfied.
+  - **Dissatisfied ($u = 0$):** Isolated among opposite-type neighbors ($k_i = 0$). Tolerant of integration, intolerant of isolation.
+- **How the Game is Played:**
+  - Satisfied households stay put. Dissatisfied households want to move.
+  - Two dissatisfied agents of different types **swap houses** if moving makes them satisfied.
+  - **Nash Equilibrium:** Any arrangement where **everyone is satisfied** ($k_i \ge 1$ for all $i$) — no household wants to move.
+:::
+
+---
+
+## Schelling's Segregation: Cascades & Multiple Equilibria {.compact}
+
+:::: {.columns}
 ::: {.column width="60%"}
 ::: {.incremental}
-- Households on a circle, two groups — everyone's stated ideal is **one neighbor of each type**
-- Satisfied unless **both** neighbors are the other type — tolerant of integration, intolerant of isolation
-- From maximum mixing, small individually sensible moves can cascade into **complete segregation** — shown at right
-- Segregated *and* integrated arrangements are both Nash equilibria — same preferences, different societies; which one occurs is a matter of history, not preference
+- **Fully Integrated ($t=0$):** Alternating pairs (e.g. $AABBAABB...$) give everyone $k_i = 1$. Everyone is satisfied $\rightarrow$ **Nash equilibrium!**
+- **The Shock & Cascade:** If a small disruption leaves two households dissatisfied ($k_i = 0$), they swap.
+- **The Tipping Dynamics:** When an agent moves, they change the neighbor counts for adjacent homes — triggering new dissatisfaction!
+- **Complete Segregation ($t=3$):** In just 3 swaps, the neighborhood locks into complete segregation (6 Blue together, 6 Orange together).
+- **Punchline:** Both integrated and segregated worlds are **Nash equilibria** under identical tolerant preferences. Macro-outcomes do not reflect micro-motives.
 :::
 :::
+
 ::: {.column width="40%"}
-![](media/schelling_before_after.png)
+<div style="text-align: center; margin-top: 5px;">
+  <img src="media/schelling_before_after.png" style="width: 95%; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border-radius: 4px;">
+</div>
 :::
-:::
+::::
 
 <!-- BFH §1.15 (model due to Schelling, 1971). Full walkthrough, verified against the book's own swap sequence, plus an interactive sensitivity widget: notebooks/topic01_schelling_segregation.ipynb -->
 
