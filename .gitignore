@@ -175,3 +175,12 @@ syllabus/*.out
 
 # Quarto's stray notebook intermediates from the demos deck
 slides/demos/feature-tour.quarto_ipynb*
+
+# Working material that lives in the repo but is not part of the course build.
+# Kept on disk (and synced by Drive), deliberately untracked - see HANDOFF.md.
+# These went in via an over-staged commit on 2026-08-29 and were untracked on
+# 2026-08-31.
+tools/manim/
+docs/lms.md
+docs/future-topics/
+docs/Gradient Descent.md
