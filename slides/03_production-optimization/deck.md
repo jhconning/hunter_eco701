@@ -2,7 +2,7 @@
 title: deck
 description: "ECO 701 Topic 3: Production Optimization"
 author: "Jonathan Conning"
-deploy: true
+deploy: false   # draft — not yet released to students
 marp: true
 math: katex
 paginate: true

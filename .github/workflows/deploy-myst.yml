@@ -28,11 +28,11 @@ jobs:
     # whole job (including these harmless build-only steps) on every PR.
     runs-on: ubuntu-latest
     env:
-      # Slide publishing switch. While the decks are being revised the site
-      # ships only the front page and the reading schedule. Set to 'true' to
-      # resume rendering and publishing every slides/*/deck.qmd (plus the
-      # remaining Marp decks) and to restore the deck index in the README.
-      PUBLISH_SLIDES: 'false'
+      # Master switch for the whole slide half of the build. 'false' ships
+      # only the front page and the reading schedule, whatever the decks say.
+      # With it on, WHICH decks publish is decided per deck by `deploy: true`
+      # in that deck's own YAML - see the "Select decks to publish" step.
+      PUBLISH_SLIDES: 'true'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -92,32 +92,62 @@ jobs:
         if: env.PUBLISH_SLIDES == 'true'
         run: mkdir -p _build/html/slides
 
-      - name: Copy topic media folders to build
+      - name: Select decks to publish
         if: env.PUBLISH_SLIDES == 'true'
         run: |
-          # Each topic folder (slides/<topic>/media/) gets mirrored into the build output
-          # at the same relative path. Nested raw/media/ folders are intentionally excluded -
-          # those are extraction intermediates, not deployable assets. Needed regardless of
-          # slide engine: Quarto (like marp-cli before it) doesn't copy statically-referenced
-          # images (![](media/x.png)) into its own output - only content it generates itself
-          # at render time.
-          find slides -mindepth 2 -maxdepth 2 -type d -name media | while read -r dir; do
-            dest="_build/html/${dir}"
+          # A deck reaches the site only if its own YAML carries `deploy: true`.
+          # `deploy: false`, or no deploy line at all, means draft: not rendered,
+          # not exported to PDF, media not copied, not listed in the README. This
+          # is the same test the README index step uses, so the index and the
+          # published site cannot drift apart.
+          #
+          # The list is written to the runner's temp dir (not the workspace) so
+          # it can never be swept into the build output or a commit.
+          list="${RUNNER_TEMP}/published_decks.txt"
+          : > "$list"
+          find slides -mindepth 2 -maxdepth 2 -type f \( -name "deck.qmd" -o -name "deck.md" \) |
+            sort | while read -r deck; do
+              if grep -q "^deploy:[[:space:]]*true" "$deck"; then
+                echo "$deck" >> "$list"
+                echo "publish   $deck"
+              else
+                echo "hold back $deck  (draft - no 'deploy: true')"
+              fi
+            done
+          echo "DECK_LIST=${list}" >> "$GITHUB_ENV"
+          echo "Publishing $(wc -l < "$list") deck(s)."
+
+      - name: Copy media folders for published decks
+        if: env.PUBLISH_SLIDES == 'true'
+        run: |
+          # Each published topic's media/ gets mirrored into the build output at
+          # the same relative path. Nested raw/media/ folders are intentionally
+          # excluded - those are extraction intermediates, not deployable assets.
+          # Needed regardless of slide engine: Quarto (like marp-cli before it)
+          # doesn't copy statically-referenced images (![](media/x.png)) into its
+          # own output - only content it generates itself at render time. Drafts
+          # are skipped here too, so an unreleased deck's figures never reach the
+          # public site even though nothing links to them.
+          while read -r deck; do
+            topic_dir=$(dirname "$deck")
+            [ -d "${topic_dir}/media" ] || continue
+            dest="_build/html/${topic_dir}/media"
             mkdir -p "$dest"
-            cp -R "$dir"/. "$dest"/
-          done
+            cp -R "${topic_dir}/media"/. "$dest"/
+          done < "$DECK_LIST"
 
       # has_slides=0 means "build the slides" (it began life as an exit status).
-      # It is now gated on PUBLISH_SLIDES as well as the folder existing, so the
-      # single switch above turns off every slide step that follows.
+      # It is now gated on PUBLISH_SLIDES and on at least one deck having opted
+      # in, so both the master switch and an all-drafts state turn off every
+      # slide step that follows.
       - name: Check whether to build slides
         id: slides-folder-exists
         run: |
-          if [[ "${PUBLISH_SLIDES}" == "true" && -d slides ]]; then
+          if [[ "${PUBLISH_SLIDES}" == "true" && -s "${DECK_LIST:-/nonexistent}" ]]; then
             echo "has_slides=0" >> "$GITHUB_OUTPUT"
           else
             echo "has_slides=1" >> "$GITHUB_OUTPUT"
-            echo "Slide rendering skipped (PUBLISH_SLIDES=${PUBLISH_SLIDES})."
+            echo "Slide rendering skipped (PUBLISH_SLIDES=${PUBLISH_SLIDES}, no deck marked 'deploy: true')."
           fi
 
       # --- Quarto decks (the current, canonical format - see HANDOFF.md) ---
@@ -151,7 +181,7 @@ jobs:
           # no built-in revealjs PDF export - see HANDOFF.md), copies both
           # into the build output, then cleans up the in-place render
           # artifacts so they don't pollute the checkout.
-          find slides -mindepth 2 -maxdepth 2 -type f -name "deck.qmd" | sort | while read -r qmd; do
+          grep -E '\.qmd$' "$DECK_LIST" | while read -r qmd; do
             topic_dir=$(dirname "$qmd")
             echo "Rendering ${qmd}"
             quarto render "$qmd"
@@ -176,19 +206,45 @@ jobs:
 
       # --- Legacy Marp decks (any topic not yet migrated - see HANDOFF.md) ---
 
-      - name: Marp Build HTML
+      - name: Stage published Marp decks
+        id: stage-marp
         if: steps.slides-folder-exists.outputs.has_slides == '0'
+        run: |
+          # marp-cli only takes an input DIRECTORY here, and it converts every
+          # .md it finds under it - which would publish each topic's
+          # new_ideas.md backlog alongside the deck, and would ignore
+          # `deploy:` entirely. Staging just the decks that opted in keeps both
+          # drafts and working notes off the site while leaving marp's own
+          # invocation unchanged.
+          rm -rf _stage
+          count=0
+          while read -r deck; do
+            case "$deck" in *.md) ;; *) continue ;; esac
+            topic_dir=$(dirname "$deck")
+            mkdir -p "_stage/${topic_dir}"
+            cp "$deck" "_stage/${topic_dir}/"
+            if [ -d "${topic_dir}/media" ]; then
+              cp -R "${topic_dir}/media" "_stage/${topic_dir}/media"
+            fi
+            count=$((count + 1))
+            echo "staged $deck"
+          done < "$DECK_LIST"
+          echo "has_marp=${count}" >> "$GITHUB_OUTPUT"
+          echo "Staged ${count} Marp deck(s)."
+
+      - name: Marp Build HTML
+        if: steps.slides-folder-exists.outputs.has_slides == '0' && steps.stage-marp.outputs.has_marp != '0'
         uses: docker://marpteam/marp-cli:v4.2.3
         with:
-          args: -I slides/ -o _build/html/slides/ --theme-set slides/_shared/eco701-theme.css
+          args: -I _stage/slides/ -o _build/html/slides/ --theme-set slides/_shared/eco701-theme.css
         env:
           MARP_USER: root:root
 
       - name: Marp Build PDFs
-        if: steps.slides-folder-exists.outputs.has_slides == '0'
+        if: steps.slides-folder-exists.outputs.has_slides == '0' && steps.stage-marp.outputs.has_marp != '0'
         uses: docker://marpteam/marp-cli:v4.2.3
         with:
-          args: -I slides/ -o _build/html/slides/ --pdf --allow-local-files --theme-set slides/_shared/eco701-theme.css
+          args: -I _stage/slides/ -o _build/html/slides/ --pdf --allow-local-files --theme-set slides/_shared/eco701-theme.css
         env:
           MARP_USER: root:root
 

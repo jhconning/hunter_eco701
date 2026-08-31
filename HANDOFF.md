@@ -112,6 +112,19 @@ future-topic notes), `archive/` (untracked reference material: the legacy pptx d
 `archive/slides/legacy/`, past semesters, old notebooks) and `BH/`,
 `exams/`, `ps/`, `readings/`, `syllabus/`.
 
+### What reaches the live site
+
+A deck is published only if its own YAML carries `deploy: true`. That single
+test gates rendering, the decktape PDF export, the copy of the topic's
+`media/`, and the README's deck index — so a deck marked `deploy: false` (or
+carrying no `deploy` line) is a draft students never see, and dropping a live
+deck back to `false` unpublishes it on the next push. Above it sits
+`PUBLISH_SLIDES` in `.github/workflows/deploy-myst.yml`, a master switch that
+suppresses every deck at once; it was `'false'` from 2026-08-28 (front page and
+reading schedule only, while the decks were revised) and back to `'true'` as of
+2026-08-30. Details in
+[`course_publishing_workflow.md`](course_publishing_workflow.md) §3.
+
 ### Topic status (2026-08-26)
 
 | Topic | Folder | State |

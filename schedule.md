@@ -7,7 +7,8 @@ below. This page is kept current and takes precedence over the dates printed in
 the syllabus. Problem sets, solutions, submissions, announcements, and grades
 are on Brightspace.
 
-**Slides for each lecture go up on the day of that lecture**, not before. The
+**Slides for each lecture go up on the day of that lecture**, not before, and
+appear in the Slides column as a link to the deck plus a PDF of the same. The
 readings below, though, are set in advance: come to class having read them.
 
 ## Texts
@@ -20,23 +21,23 @@ readings below, though, are set in advance: come to class having read them.
 
 ## Schedule
 
-| # | Date | Topic | Reading |
-|---|---|---|---|
-| 1 | Mon Aug 31 | Course logistics. Definitions and key tools: institutions, mechanisms, games, equilibrium, efficiency and distribution | BFH 1 |
-| 2 | Mon Sep 14 | Definitions and key tools, concluded: best response and Nash equilibrium. Preferences and choice: rationality axioms, utility representation and its limits, ordinality, monotonicity and convexity, the indifference-curve zoo | BFH 1–2; O&R 1, 4 |
-| 3 | Mon Sep 28 | Constrained optimization I: the Lagrange method, comparative statics, the envelope theorem | NS 2 |
-| 4 | Mon Oct 5 | Constrained optimization II: inequality constraints and Kuhn–Tucker | NS 2–3 |
-| 5 | **Tue** Oct 13 | Production optimization: cost minimization, profit maximization, duality | NS 9–11 |
-| 6 | Mon Oct 19 | Consumption optimization: utility maximization, demand and expenditure functions | NS 4–5 |
-| 7 | Mon Oct 26 | Consumption optimization, continued: income and substitution effects, labor supply | NS 5 |
-| 8 | Mon Nov 2 | **Midterm exam** (tentative) | — |
-| 9 | Mon Nov 9 | Choice over time and under uncertainty: discounting, expected utility, risk sharing | NS 7, 17 |
-| 10 | Mon Nov 16 | Household economics: the farm-household model, separability and its failure | Handout |
-| 11 | Mon Nov 23 | General equilibrium I: exchange, the core, the welfare theorems | NS 13 |
-| 12 | Mon Nov 30 | General equilibrium II: production and two-sector models | NS 13; BFH |
-| 13 | Mon Dec 7 | Externalities, public goods, and the commons; *N*-player games | NS 19; BFH |
-| 14 | Mon Dec 14 | Asymmetric information: moral hazard and the principal–agent problem. How micro theory frames empirical work. Final review | NS 18; BFH 5, 10 |
-| | Mon Dec 21 | **Final exam**, 5:30–7:30pm, HW 113 | — |
+| # | Date | Topic | Reading | Slides |
+|---|---|---|---|---|
+| 1 | Mon Aug 31 | Course logistics. Definitions and key tools: institutions, mechanisms, games, equilibrium, efficiency and distribution | BFH 1 | [Logistics](https://jhconning.github.io/hunter_eco701/slides/00_logistics/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/00_logistics/deck.pdf)) |
+| 2 | Mon Sep 14 | Definitions and key tools, concluded: best response and Nash equilibrium. Preferences and choice: rationality axioms, utility representation and its limits, ordinality, monotonicity and convexity, the indifference-curve zoo | BFH 1–2; O&R 1, 4 | |
+| 3 | Mon Sep 28 | Constrained optimization I: the Lagrange method, comparative statics, the envelope theorem | NS 2 | |
+| 4 | Mon Oct 5 | Constrained optimization II: inequality constraints and Kuhn–Tucker | NS 2–3 | |
+| 5 | **Tue** Oct 13 | Production optimization: cost minimization, profit maximization, duality | NS 9–11 | |
+| 6 | Mon Oct 19 | Consumption optimization: utility maximization, demand and expenditure functions | NS 4–5 | |
+| 7 | Mon Oct 26 | Consumption optimization, continued: income and substitution effects, labor supply | NS 5 | |
+| 8 | Mon Nov 2 | **Midterm exam** (tentative) | — | |
+| 9 | Mon Nov 9 | Choice over time and under uncertainty: discounting, expected utility, risk sharing | NS 7, 17 | |
+| 10 | Mon Nov 16 | Household economics: the farm-household model, separability and its failure | Handout | |
+| 11 | Mon Nov 23 | General equilibrium I: exchange, the core, the welfare theorems | NS 13 | |
+| 12 | Mon Nov 30 | General equilibrium II: production and two-sector models | NS 13; BFH | |
+| 13 | Mon Dec 7 | Externalities, public goods, and the commons; *N*-player games | NS 19; BFH | |
+| 14 | Mon Dec 14 | Asymmetric information: moral hazard and the principal–agent problem. How micro theory frames empirical work. Final review | NS 18; BFH 5, 10 | |
+| | Mon Dec 21 | **Final exam**, 5:30–7:30pm, HW 113 | — | |
 
 No class Mon Sep 7 (Labor Day), Mon Sep 21, or Mon Oct 12 (Indigenous Peoples'
 Day). Tuesday Oct 13 runs on a Monday schedule, so the class meets that day.
@@ -86,4 +87,4 @@ problem in another setting.
 
 *This schedule is a plan, not a contract: pace and coverage may change, and any
 change is announced in class and here. Page numbers for NS readings are
-announced per edition. Last updated 2026-08-28.*
+announced per edition. Last updated 2026-08-30.*
