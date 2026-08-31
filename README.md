@@ -20,5 +20,5 @@ revised up to the last minute, so do not expect to find them in advance.
 **[Reading schedule](schedule.md)** — what is assigned next, the texts and where
 to get them, and the articles and other material mentioned in lecture.
 
-Problem sets, solutions, submissions, announcements, and grades are on
-**Brightspace**.
+Problem sets and submissions will use **Gradescope** (details to follow). Course announcements are on **Brightspace**.
+

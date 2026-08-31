@@ -4,8 +4,7 @@ The following is preliminary.  I'll build this as the semester advances, with li
 
 Class meets **Mondays 5:30–7:30pm in HW 113**, with one Tuesday exception noted
 below. This page is kept current and takes precedence over the dates printed in
-the syllabus. Problem sets, solutions, submissions, announcements, and grades
-are on Brightspace.
+the syllabus. Problem sets and submissions will use **Gradescope** (details to follow). Course announcements are on **Brightspace**.
 
 **Slides for each lecture go up on the day of that lecture**, not before, and
 appear in the Slides column as a link to the deck plus a PDF of the same. The
@@ -16,8 +15,9 @@ readings below, though, are set in advance: come to class having read them.
 | | Text | Where to get it |
 |---|---|---|
 | **BH** | Bowles & Halliday (2022), *Microeconomics: Competition, Conflict, and Coordination*, Oxford University Press | Free PDF: [BH PDF](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf) |
-| **NS** | Nicholson & Snyder, *Microeconomic Theory: Basic Principles and Extensions*, South-Western | Rent or buy, hardcover or e-book. Any edition from the 13th forward; chapter numbers shift between editions, so match chapter titles |
+| **NS** | Nicholson & Snyder, *Microeconomic Theory: Basic Principles and Extensions*, South-Western | Rent or buy, hardcover or e-book. Any edition from the 11th forward; chapter numbers shift between editions, so match chapter titles |
 | **O&R** | Osborne & Rubinstein, *Models in Microeconomic Theory* (optional) | Free from [Open Book Publishers](https://www.openbookpublishers.com/product/1171) |
+
 
 ## Schedule
 

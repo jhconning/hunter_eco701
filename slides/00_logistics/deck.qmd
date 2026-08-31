@@ -26,13 +26,11 @@ Office Hours: HW 1504A, after class Mon & Wed 2-3, and by appointment — jconni
 
 Teaching Assistant: tba
 
-> *Slide Deck II continues where this leaves off.*
-
 ---
 
 ## Course Materials
 
-- **Primary text:** Nicholson & Snyder, *Microeconomic Theory: Basic Principles and Extensions*, 11th ed. (10th ed. is fine too)
+- **Primary text:** Nicholson & Snyder, *Microeconomic Theory: Basic Principles and Extensions*, any edition from the 11th forward
 - **Supplementary:** Bowles & Halliday (2022), *Microeconomics: Competition, Conflict, and Coordination* — selected chapters; free online [PDF](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf)
 - I'll fill any gaps with detailed notes and handouts as we go
 
@@ -42,7 +40,7 @@ Teaching Assistant: tba
 
 - I draw from a large, evolving collection of slides built up over many years teaching this course
 - Slides and reading schedules are posted to the course website: [https://jhconning.github.io/hunter_eco701/](https://jhconning.github.io/hunter_eco701/)
-- Official announcements, problem sets, and grades are on **Brightspace**
+- Official course announcements are on **Brightspace**
 - Slides are revised up to the last minute before class — check for updates
 
 ---
@@ -72,9 +70,10 @@ Teaching Assistant: tba
 ## Reading & Problem Sets
 
 - **Reading** follows the schedule (check online) — come to class having done the reading
-- **4 problem sets**, graded by the TA — solutions posted and work returned
-  - 1st due 3rd class, Tue 9/25 (posted a few days ahead)
+- **4 problem sets**, graded by the TA — submitted via **Gradescope** (details to follow)
+  - 1st due 3rd class, Mon Sep 28 (posted a few days ahead)
 - Study groups welcome and encouraged — but write up solutions on your own
+
 
 ---
 
