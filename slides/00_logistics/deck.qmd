@@ -33,7 +33,7 @@ Teaching Assistant: tba
 ## Course Materials
 
 - **Primary text:** Nicholson & Snyder, *Microeconomic Theory: Basic Principles and Extensions*, 11th ed. (10th ed. is fine too)
-- **Supplementary:** Bowles, Foley & Halliday, *Coordination, Conflict & Competition* (2018 draft) — selected chapters; more modern and philosophical, simpler math than we'll use
+- **Supplementary:** Bowles & Halliday (2022), *Microeconomics: Competition, Conflict, and Coordination* — selected chapters; free online [PDF](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf)
 - I'll fill any gaps with detailed notes and handouts as we go
 
 ---
@@ -41,15 +41,16 @@ Teaching Assistant: tba
 ## Slides & Announcements
 
 - I draw from a large, evolving collection of slides built up over many years teaching this course
-- Posted via Blackboard (links to slides on Google Drive) — that's also where all announcements go
-- I'll post large chunks ahead of time, but often cut, add, or reorder material a day or two before class — check for updates
+- Slides and reading schedules are posted to the course website: [https://jhconning.github.io/hunter_eco701/](https://jhconning.github.io/hunter_eco701/)
+- Official announcements, problem sets, and grades are on **Brightspace**
+- Slides are revised up to the last minute before class — check for updates
 
 ---
 
 ## Python & Jupyter Notebooks
 
 - I use Jupyter notebooks and Python to build visualizations and simulations — a small, evolving collection
-- Landing page: `notebooks.azure.com/jhconning/libraries/eco701`
+- All computational notebooks and resources are hosted on GitHub: [https://jhconning.github.io/hunter_eco701/](https://jhconning.github.io/hunter_eco701/)
 - **Not required** for this course, but exploring open-source scientific Python is increasingly valuable for research and applied work
 - See `lectures.quantecon.org/py/` for a good guide to getting started
 
@@ -79,7 +80,7 @@ Teaching Assistant: tba
 
 ## Reading for Next Class
 
-- Bowles/Foley/Halliday — Ch. 1, *"Society: Coordination Problems and Institutions"*
+- [Bowles & Halliday (BH)](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf) — Ch. 1, *"Society: Coordination Problems and Institutions"*
 - Nicholson & Snyder — Ch. 2, *"Mathematics for Micro"* (through p. 55, second-order conditions)
   - Dense if you haven't seen this before — don't worry, we'll reinforce it
 - Nicholson & Snyder — Ch. 3, *"Preferences and Utility"* (short)

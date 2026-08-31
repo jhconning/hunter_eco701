@@ -1,6 +1,6 @@
-# Reading & Class Schedule — Fall 2026
+# Reading Schedule — Fall 2026
 
-The following is very preliminary.  I'll build this out as the semester advances, with links to slides, jupyter notebooks, and other resources.
+The following is preliminary.  I'll build this as the semester advances, with links to slides, jupyter notebooks, and other resources appearing.
 
 Class meets **Mondays 5:30–7:30pm in HW 113**, with one Tuesday exception noted
 below. This page is kept current and takes precedence over the dates printed in
@@ -15,7 +15,7 @@ readings below, though, are set in advance: come to class having read them.
 
 | | Text | Where to get it |
 |---|---|---|
-| **BFH** | Bowles, Foley & Halliday (2022), *Microeconomics: Competition, Conflict, and Coordination*, Oxford University Press | Free PDF from [Sam Bowles' website](https://sites.santafe.edu/~bowles/index.php/books/) |
+| **BH** | Bowles & Halliday (2022), *Microeconomics: Competition, Conflict, and Coordination*, Oxford University Press | Free PDF: [BH PDF](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf) |
 | **NS** | Nicholson & Snyder, *Microeconomic Theory: Basic Principles and Extensions*, South-Western | Rent or buy, hardcover or e-book. Any edition from the 13th forward; chapter numbers shift between editions, so match chapter titles |
 | **O&R** | Osborne & Rubinstein, *Models in Microeconomic Theory* (optional) | Free from [Open Book Publishers](https://www.openbookpublishers.com/product/1171) |
 
@@ -23,8 +23,8 @@ readings below, though, are set in advance: come to class having read them.
 
 | # | Date | Topic | Reading | Slides |
 |---|---|---|---|---|
-| 1 | Mon Aug 31 | Course logistics. Definitions and key tools: institutions, mechanisms, games, equilibrium, efficiency and distribution | BFH 1 | [Logistics](https://jhconning.github.io/hunter_eco701/slides/00_logistics/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/00_logistics/deck.pdf)) |
-| 2 | Mon Sep 14 | Definitions and key tools, concluded: best response and Nash equilibrium. Preferences and choice: rationality axioms, utility representation and its limits, ordinality, monotonicity and convexity, the indifference-curve zoo | BFH 1–2; O&R 1, 4 | |
+| 1 | Mon Aug 31 | Course logistics. Definitions and key tools: institutions, mechanisms, games, equilibrium, efficiency and distribution | [BH 1](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf) | [Logistics](https://jhconning.github.io/hunter_eco701/slides/00_logistics/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/00_logistics/deck.pdf)) |
+| 2 | Mon Sep 14 | Definitions and key tools, concluded: best response and Nash equilibrium. Preferences and choice: rationality axioms, utility representation and its limits, ordinality, monotonicity and convexity, the indifference-curve zoo | [BH 1–2](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf); O&R 1, 4 | |
 | 3 | Mon Sep 28 | Constrained optimization I: the Lagrange method, comparative statics, the envelope theorem | NS 2 | |
 | 4 | Mon Oct 5 | Constrained optimization II: inequality constraints and Kuhn–Tucker | NS 2–3 | |
 | 5 | **Tue** Oct 13 | Production optimization: cost minimization, profit maximization, duality | NS 9–11 | |
@@ -34,9 +34,9 @@ readings below, though, are set in advance: come to class having read them.
 | 9 | Mon Nov 9 | Choice over time and under uncertainty: discounting, expected utility, risk sharing | NS 7, 17 | |
 | 10 | Mon Nov 16 | Household economics: the farm-household model, separability and its failure | Handout | |
 | 11 | Mon Nov 23 | General equilibrium I: exchange, the core, the welfare theorems | NS 13 | |
-| 12 | Mon Nov 30 | General equilibrium II: production and two-sector models | NS 13; BFH | |
-| 13 | Mon Dec 7 | Externalities, public goods, and the commons; *N*-player games | NS 19; BFH | |
-| 14 | Mon Dec 14 | Asymmetric information: moral hazard and the principal–agent problem. How micro theory frames empirical work. Final review | NS 18; BFH 5, 10 | |
+| 12 | Mon Nov 30 | General equilibrium II: production and two-sector models | NS 13; [BH](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf) | |
+| 13 | Mon Dec 7 | Externalities, public goods, and the commons; *N*-player games | NS 19; [BH](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf) | |
+| 14 | Mon Dec 14 | Asymmetric information: moral hazard and the principal–agent problem. How micro theory frames empirical work. Final review | NS 18; [BH 5, 10](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf) | |
 | | Mon Dec 21 | **Final exam**, 5:30–7:30pm, HW 113 | — | |
 
 No class Mon Sep 7 (Labor Day), Mon Sep 21, or Mon Oct 12 (Indigenous Peoples'
