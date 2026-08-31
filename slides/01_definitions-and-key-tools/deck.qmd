@@ -153,6 +153,25 @@ Alfredo and Bob fish the same lake. Each independently chooses to fish **10 or 1
 > *Why insist on equilibrium? A prediction the players themselves would immediately overturn falsifies itself — like predicting a marble will rest halfway up the side of a bowl.*
 :::
 
+---
+
+## Nash Equilibrium: Formal Definition
+
+For a game with players $i \in \{1, \dots, n\}$, strategy sets $S_i$, and payoff functions $u_i(s_i, s_{-i})$:
+
+::: {.incremental}
+- **Best Response:** A strategy $s_i^*$ is a **best response** to $s_{-i}$ if:
+  $$u_i(s_i^*, s_{-i}) \ge u_i(s_i, s_{-i}) \quad \forall s_i \in S_i$$
+  or $s_i^* \in BR_i(s_{-i}) = \arg\max_{s_i \in S_i} u_i(s_i, s_{-i})$
+- **Nash Equilibrium (Pure Strategies):** Strategy profile $s^* = (s_1^*, \dots, s_n^*)$ is a **Nash Equilibrium** if:
+  $$u_i(s_i^*, s_{-i}^*) \ge u_i(s_i, s_{-i}^*) \quad \forall s_i \in S_i, \quad \forall i$$
+  Equivalently, every player simultaneously best-responds: $s_i^* \in BR_i(s_{-i}^*)$ for all $i = 1, \dots, n$.
+:::
+
+::: {.fragment}
+> *Each player plays a best response to their belief that others will play their equilibrium strategies — and in equilibrium, those beliefs are mutually consistent and correct.*
+:::
+
 <!-- Quarto proof-of-concept #2 (see "Before We Begin" for #1): same fix, another slide Marp's fragment pass had to skip. -->
 
 ---

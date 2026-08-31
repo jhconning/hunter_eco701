@@ -114,10 +114,10 @@ jconning@hunter.cuny.edu
 
 ## Reading for Next Class
 
-- [Bowles & Halliday (BH)](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf) — Ch. 1, *"Society: Coordination Problems and Institutions"*
-- Nicholson & Snyder — Ch. 2, *"Mathematics for Micro"* (through p. 55, second-order conditions)
-  - Dense if you haven't seen this before — don't worry, we'll reinforce it
-- Nicholson & Snyder — Ch. 3, *"Preferences and Utility"* (short)
+- [Bowles & Halliday (BH)](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf) — Ch. 1, *"Society: Coordination Problems and Institutions"* (conclude)
+- **Nicholson & Snyder — Ch. 2, *"Mathematics for Micro"***
+  - Focus on unconstrained and constrained optimization, the method of Lagrange, second-order conditions, and the envelope theorem
+  - Dense if you haven't seen this before — don't worry, we'll reinforce it step-by-step
 
 ---
 
