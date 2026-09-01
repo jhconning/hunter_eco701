@@ -509,19 +509,19 @@ $$\frac{\partial W}{\partial e_A} = \underbrace{\left(15 - \tfrac14 e_B - e_A\ri
 ## Internalizing Harm: The Pigouvian Mechanism {.compact}
 
 ::: {.columns}
-::: {.column width="56%"}
+::: {.column width="38%"}
 ::: {.incremental}
-- **The Market Failure:** Private curves $e_A = 15 - \tfrac14 e_B$ cross at $(12, 12)$ because each fisher ignores their $-\tfrac14 e$ external damage
-- **The Pigouvian Solution:** Charge a fee/tax equal to marginal external harm: $\tau = \tfrac14 e_B$ per hour
-- **Taxed Private Optimization:**
-  $$\max_{e_A} \left[ u_A - \tau \cdot e_A \right] \implies 15 - \tfrac14 e_B - e_A - \tfrac14 e_B = 0$$
-  $$\mathbf{e_A^{\text{taxed}}(e_B) = 15 - \tfrac12\,e_B}$$
-- The tax **rotates the reaction curve inward** (slope $-0.25 \rightarrow -0.50$)
-- Decentralized self-interested play under the tax moves the Nash equilibrium directly to the **social optimum $(10, 10)$**!
+- **Market Failure:** Private curves $e_A = 15 - \tfrac14 e_B$ cross at $(12, 12)$ because fishers ignore their external damage
+- **Pigouvian Solution:** Charge fee/tax $\tau$ per hour of fishing
+- **Taxed Optimization:**
+  $$\max_{e_A} \left[ u_A - \tau \cdot e_A \right]$$
+  $$\mathbf{e_A^{\text{taxed}}(e_B) = (15 - \tau) - \tfrac14\,e_B}$$
+- The tax **shifts the reaction curve inward**
+- Setting $\tau = 2.5$ aligns the decentralized Nash equilibrium to **$(10, 10)$**!
 :::
 :::
 
-::: {.column width="44%"}
+::: {.column width="62%"}
 ```{python}
 #| echo: false
 #| fig-align: center
@@ -529,66 +529,118 @@ import plotly.graph_objects as go
 import numpy as np
 
 e_grid = np.linspace(0, 16, 100)
+tau_values = [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0]
+initial_tau = 2.5
+initial_idx = tau_values.index(initial_tau)
+
+def get_pigou_traces(tau):
+    ea_taxed = (15 - tau) - 0.25 * e_grid
+    eb_taxed = (15 - tau) - 0.25 * e_grid
+    eqm_e = (15 - tau) / 1.25
+    
+    t1 = go.Scatter(
+        x=e_grid, y=15 - 0.25*e_grid,
+        mode="lines",
+        name="Untaxed Bob: e_B = 15 − ¼ e_A",
+        line=dict(color="#b8842a", width=2),
+        hovertemplate="Untaxed Bob: e_B = 15 − ¼ e_A<extra></extra>"
+    )
+    t2 = go.Scatter(
+        x=15 - 0.25*e_grid, y=e_grid,
+        mode="lines",
+        name="Untaxed Alfredo: e_A = 15 − ¼ e_B",
+        line=dict(color="#24325c", width=2),
+        hovertemplate="Untaxed Alfredo: e_A = 15 − ¼ e_B<extra></extra>"
+    )
+    t3 = go.Scatter(
+        x=[12], y=[12],
+        mode="markers",
+        marker=dict(size=8, color="#8892a4", symbol="circle-open", line=dict(width=2)),
+        name="Untaxed Nash (12,12)",
+        hoverinfo="skip"
+    )
+    t4 = go.Scatter(
+        x=[10], y=[10],
+        mode="markers",
+        marker=dict(size=10, color="#2e7d32", symbol="star"),
+        name="Social Target (10,10)",
+        hoverinfo="skip"
+    )
+    t5 = go.Scatter(
+        x=e_grid, y=eb_taxed,
+        mode="lines",
+        name=f"Taxed Bob: e_B = {15-tau:.1f} − ¼ e_A",
+        line=dict(color="#2e7d32", width=2.5, dash="dash"),
+        hovertemplate=f"Taxed Bob: e_B = {15-tau:.1f} − ¼ e_A<extra></extra>"
+    )
+    t6 = go.Scatter(
+        x=ea_taxed, y=e_grid,
+        mode="lines",
+        name=f"Taxed Alfredo: e_A = {15-tau:.1f} − ¼ e_B",
+        line=dict(color="#1b5e20", width=2.5, dash="dash"),
+        hovertemplate=f"Taxed Alfredo: e_A = {15-tau:.1f} − ¼ e_B<extra></extra>"
+    )
+    
+    if tau == 0:
+        label = "Nash (12.0, 12.0)"
+        mcolor = "#c83232"
+    elif abs(tau - 2.5) < 1e-4:
+        label = "Pigou Optimum (10.0, 10.0)"
+        mcolor = "#2e7d32"
+    else:
+        label = f"Eqm ({eqm_e:.1f}, {eqm_e:.1f})"
+        mcolor = "#b8842a"
+        
+    t7 = go.Scatter(
+        x=[eqm_e], y=[eqm_e],
+        mode="markers+text",
+        text=[label],
+        textposition="top right" if eqm_e < 11.5 else "bottom left",
+        marker=dict(size=12, color=mcolor),
+        name="Active Equilibrium",
+        hovertemplate=f"Equilibrium under τ={tau:.1f}: e* = {eqm_e:.2f}<extra></extra>"
+    )
+    return [t1, t2, t3, t4, t5, t6, t7]
+
 fig_pigou = go.Figure()
+for t in get_pigou_traces(initial_tau):
+    fig_pigou.add_trace(t)
 
-# Private reaction curves
-fig_pigou.add_trace(go.Scatter(
-    x=e_grid, y=15 - 0.25*e_grid,
-    name="Private Bob (slope -¼)",
-    line=dict(color="#b8842a", width=2.5),
-    hovertemplate="Private Bob: e_B = 15 − ¼ e_A<extra></extra>"
-))
-fig_pigou.add_trace(go.Scatter(
-    x=15 - 0.25*e_grid, y=e_grid,
-    name="Private Alfredo (slope -4)",
-    line=dict(color="#24325c", width=2.5),
-    hovertemplate="Private Alfredo: e_A = 15 − ¼ e_B<extra></extra>"
-))
+frames = [
+    go.Frame(
+        data=get_pigou_traces(tau),
+        name=f"{tau:.1f}"
+    )
+    for tau in tau_values
+]
+fig_pigou.frames = frames
 
-# Taxed / Social reaction curves
-fig_pigou.add_trace(go.Scatter(
-    x=e_grid, y=15 - 0.5*e_grid,
-    name="Taxed Bob (slope -½)",
-    line=dict(color="#2e7d32", width=2.5, dash="dash"),
-    hovertemplate="Taxed Bob: e_B = 15 − ½ e_A<extra></extra>"
-))
-fig_pigou.add_trace(go.Scatter(
-    x=15 - 0.5*e_grid, y=e_grid,
-    name="Taxed Alfredo (slope -2)",
-    line=dict(color="#1b5e20", width=2.5, dash="dash"),
-    hovertemplate="Taxed Alfredo: e_A = 15 − ½ e_B<extra></extra>"
-))
+steps = [
+    dict(
+        method="animate",
+        args=[[f"{tau:.1f}"], dict(mode="immediate", frame=dict(duration=150, redraw=True), transition=dict(duration=100))],
+        label=f"{tau:.1f}"
+    )
+    for tau in tau_values
+]
 
-# Equilibria markers
-fig_pigou.add_trace(go.Scatter(
-    x=[12], y=[12],
-    mode="markers+text",
-    text=["Untaxed Nash (12,12)"],
-    textposition="top right",
-    marker=dict(size=10, color="#c83232"),
-    name="Untaxed (12,12)",
-    hovertemplate="Untaxed Nash: (12, 12)<extra></extra>"
-))
-fig_pigou.add_trace(go.Scatter(
-    x=[10], y=[10],
-    mode="markers+text",
-    text=["Taxed / Social (10,10)"],
-    textposition="bottom left",
-    marker=dict(size=10, color="#2e7d32"),
-    name="Taxed (10,10)",
-    hovertemplate="Taxed Optimum: (10, 10)<extra></extra>"
-))
+sliders = [dict(
+    active=initial_idx,
+    currentvalue=dict(prefix="Pigouvian Fee (τ): ", visible=True, xanchor="center", offset=8, font=dict(size=12, color="#1b5e20")),
+    pad=dict(t=20, b=0), len=0.92, x=0.04, y=-0.08, steps=steps
+)]
 
 fig_pigou.update_layout(
-    xaxis=dict(title="Alfredo's hours (e_A)", range=[0, 16], showgrid=True, gridcolor="#e5e9f0"),
+    xaxis=dict(title=dict(text="Alfredo's hours (e_A)", standoff=6), range=[0, 16], showgrid=True, gridcolor="#e5e9f0"),
     yaxis=dict(title="Bob's hours (e_B)", range=[0, 16], showgrid=True, gridcolor="#e5e9f0"),
-    height=410,
-    width=470,
-    margin=dict(l=35, r=15, t=15, b=35),
-    legend=dict(orientation="h", y=1.22, font=dict(size=10)),
+    height=415,
+    width=610,
+    margin=dict(l=35, r=15, t=20, b=45),
+    showlegend=False,
     font=dict(family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif", size=11),
     paper_bgcolor="rgba(0,0,0,0)",
-    plot_bgcolor="rgba(0,0,0,0)"
+    plot_bgcolor="rgba(0,0,0,0)",
+    sliders=sliders
 )
 fig_pigou
 ```
@@ -707,6 +759,25 @@ fig.update_layout(
 fig
 ```
 :::
+:::
+
+---
+
+## Governing the Commons: Beyond Markets and the State {.compact}
+
+How does society solve the "Tragedy of the Commons"? Bowles & Halliday (Ch. 1) contrast three institutional paradigms:
+
+::: {.incremental}
+- **1. The State (Pigou):** Top-down regulation — taxes on effort $\tau$, fishing licenses, or legal quotas enforced by courts and coast guards
+- **2. The Market (Coase):** Assign private property rights to the lake and let fishers trade to the UPF via contracts and side payments
+- **3. Community Governance (Elinor Ostrom, 2009 Nobel):**
+  - Rebutted Garrett Hardin's (1968) claim that resource users are trapped prisoners of the dilemma
+  - Documented hundreds of real-world fisheries, pastures, and irrigation systems governed sustainably without state coercion or private enclosure
+  - **The Mechanism:** Clear group boundaries, peer monitoring, graduated sanctions, social norms, and repeated interactions turn social dilemmas into cooperative equilibria
+:::
+
+::: {.fragment}
+> *"Neither the state nor the market is uniformly successful in solving common-pool resource problems... communities of resource users frequently devise ingenious institutions."* — Elinor Ostrom (1990)
 :::
 
 <!-- The UPF is linear because payoffs are transferable (quasilinear) — the clarification flagged in the old course notes. General UPFs curve; Topic 7. -->
