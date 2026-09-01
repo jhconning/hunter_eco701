@@ -18,6 +18,8 @@ project:
           title: "Topic 2: Optimization Geometry"
         - file: notebooks/topic02_constrained_optimization_numerical.ipynb
           title: "Topic 2: Optimization Solvers"
+        - file: notebooks/farm_household.ipynb
+          title: "Farm-Household Model"
 site:
   options:
     folders: true

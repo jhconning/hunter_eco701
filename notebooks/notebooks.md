@@ -26,6 +26,7 @@ See also my [teaching notebooks](https://jhconning.github.io/Econ-Teach/) on mic
 | **Topic 1: Schelling Segregation** | Thomas Schelling's (1971) spatial agent-based simulation demonstrating micro-motives, tolerance thresholds, and macro-segregation tipping dynamics. | [View Notebook](topic01_schelling_segregation.ipynb) |
 | **Topic 2: Optimization Geometry** | 3D objective surfaces, level curves, tangent planes, isoquants, gradient vectors, and the geometry of Lagrange multipliers. | [View Notebook](topic02_constrained_optimization_figures.ipynb) |
 | **Topic 2: Optimization Solvers** | Analytical derivations and numerical solvers with SymPy and SciPy: equality and inequality (KKT) constraints, shadow prices, and bordered Hessians. | [View Notebook](topic02_constrained_optimization_numerical.ipynb) |
+| **Applications: Farm-Household Model** | Autarkic (Chayanovian) household vs. separable market model: profit maximization, labor market regimes, and the separation property. | [View Notebook](farm_household.ipynb) |
 
 ---
 
