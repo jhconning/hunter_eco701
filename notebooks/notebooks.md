@@ -2,7 +2,11 @@
 
 Companion Jupyter notebooks for **ECO 701 (Microeconomic Theory)**.
 
-These notebooks accompany the lecture slides, providing analytical derivations, interactive simulations, and figure-generation scripts used to produce both static and interactive diagrams for class and to explore key theoretical topics more deeply. Many of these notebooks and interactive visualizations were developed with AI pair-programming assistance (using **Google Antigravity** and **Claude Code**).
+These notebooks accompany the lecture slides, providing analytical derivations, interactive simulations, and figure-generation scripts used to produce both static and interactive diagrams for class and to explore key theoretical topics more deeply. 
+
+Many of these notebooks and interactive visualizations were improved with AI pair-programming assistance (using **Google Antigravity** and **Claude Code**).
+
+See also my [teaching notebooks](https://jhconning.github.io/Econ-Teach/) on micro theory, trade, and other topics.
 
 ---
 
