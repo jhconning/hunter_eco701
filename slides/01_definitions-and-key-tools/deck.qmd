@@ -261,6 +261,7 @@ $$u_A(e_A, e_B) = \underbrace{\left(15 - \tfrac{1}{4}\,e_B\right)e_A}_{\text{val
 ## Interactive: From Payoffs to the Reaction Curve
 
 For each choice of Bob ($e_B$), Alfredo solves $\max_{e_A} u_A(e_A, e_B)$ at the peak (left). Tracing these peaks across all $e_B$ forms Alfredo's **reaction curve** (right).
+*This interaction works only if slide is opened as HTML. Click on the slider to start.
 
 ```{python}
 #| echo: false
@@ -276,83 +277,91 @@ eb_values = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
 # Static reaction curve on right panel: e_A = 15 - 0.25 * e_B
 ea_br_curve = 15 - 0.25 * eb_grid
 
-frames = []
-for eb in eb_values:
+def get_traces(eb):
     marginal_val = 15 - 0.25 * eb
     u_A = marginal_val * e_A - 0.5 * e_A**2
     ea_star = marginal_val
     ua_star = marginal_val * ea_star - 0.5 * ea_star**2
     
-    frame_data = [
-        # Panel 1: u_A curve
-        go.Scatter(
-            x=e_A, y=u_A,
-            mode="lines",
-            line=dict(color="#24325c", width=3),
-            name="u_A(e_A)",
-            hovertemplate="e_A = %{x:.1f}<br>u_A = %{y:.1f}<extra>Payoff</extra>",
-            xaxis="x1", yaxis="y1"
-        ),
-        # Panel 1: Peak point
-        go.Scatter(
-            x=[ea_star], y=[ua_star],
-            mode="markers+text",
-            text=[f"e_A*={ea_star:.1f}"],
-            textposition="top center",
-            marker=dict(size=11, color="#c83232"),
-            name="Peak (FOC)",
-            hovertemplate=f"Max at e_A* = {ea_star:.1f}<br>u_A* = {ua_star:.1f}<extra></extra>",
-            xaxis="x1", yaxis="y1"
-        ),
-        # Panel 1: Flat tangent line at peak
-        go.Scatter(
-            x=[max(0, ea_star - 2.5), min(18, ea_star + 2.5)], y=[ua_star, ua_star],
-            mode="lines",
-            line=dict(color="#c83232", width=2, dash="dash"),
-            hoverinfo="skip",
-            xaxis="x1", yaxis="y1"
-        ),
-        # Panel 1: Vertical drop line
-        go.Scatter(
-            x=[ea_star, ea_star], y=[0, ua_star],
-            mode="lines",
-            line=dict(color="#8892a4", width=1.5, dash="dot"),
-            hoverinfo="skip",
-            xaxis="x1", yaxis="y1"
-        ),
-        
-        # Panel 2: Full Reaction Curve line
-        go.Scatter(
-            x=ea_br_curve, y=eb_grid,
-            mode="lines",
-            line=dict(color="#24325c", width=2.5),
-            name="Reaction Curve: e_A = 15 − ¼ e_B",
-            hovertemplate="e_A = %{x:.1f}<br>e_B = %{y:.1f}<extra>Reaction Curve</extra>",
-            xaxis="x2", yaxis="y2"
-        ),
-        # Panel 2: Current operating point (e_A*(e_B), e_B)
-        go.Scatter(
-            x=[ea_star], y=[eb],
-            mode="markers+text",
-            text=[f"({ea_star:.1f}, {eb})"],
-            textposition="top right" if eb < 14 else "bottom left",
-            marker=dict(size=12, color="#c83232"),
-            name="Current (e_A*, e_B)",
-            hovertemplate=f"Alfredo's Best Response:<br>e_A* = {ea_star:.1f} when e_B = {eb}<extra></extra>",
-            xaxis="x2", yaxis="y2"
-        ),
-        # Panel 2: Crosshair guide lines
-        go.Scatter(
-            x=[ea_star, ea_star, 0], y=[0, eb, eb],
-            mode="lines",
-            line=dict(color="#c83232", width=1.5, dash="dot"),
-            hoverinfo="skip",
-            xaxis="x2", yaxis="y2"
-        )
-    ]
-    frames.append(go.Frame(data=frame_data, name=f"{eb}"))
+    t1 = go.Scatter(
+        x=e_A, y=u_A,
+        mode="lines",
+        line=dict(color="#24325c", width=3),
+        name="u_A(e_A)",
+        hovertemplate="e_A = %{x:.1f}<br>u_A = %{y:.1f}<extra>Payoff</extra>",
+        xaxis="x", yaxis="y"
+    )
+    t2 = go.Scatter(
+        x=[ea_star], y=[ua_star],
+        mode="markers+text",
+        text=[f"e_A*={ea_star:.1f}"],
+        textposition="top center",
+        marker=dict(size=11, color="#c83232"),
+        name="Peak (FOC)",
+        hovertemplate=f"Max at e_A* = {ea_star:.1f}<br>u_A* = {ua_star:.1f}<extra></extra>",
+        xaxis="x", yaxis="y"
+    )
+    t3 = go.Scatter(
+        x=[max(0, ea_star - 2.5), min(18, ea_star + 2.5)], y=[ua_star, ua_star],
+        mode="lines",
+        line=dict(color="#c83232", width=2, dash="dash"),
+        hoverinfo="skip",
+        xaxis="x", yaxis="y"
+    )
+    t4 = go.Scatter(
+        x=[ea_star, ea_star], y=[0, ua_star],
+        mode="lines",
+        line=dict(color="#8892a4", width=1.5, dash="dot"),
+        hoverinfo="skip",
+        xaxis="x", yaxis="y"
+    )
+    
+    t5 = go.Scatter(
+        x=ea_br_curve, y=eb_grid,
+        mode="lines",
+        line=dict(color="#24325c", width=2.5),
+        name="Reaction Curve: e_A = 15 − ¼ e_B",
+        hovertemplate="e_A = %{x:.1f}<br>e_B = %{y:.1f}<extra>Reaction Curve</extra>",
+        xaxis="x2", yaxis="y2"
+    )
+    t6 = go.Scatter(
+        x=[ea_star], y=[eb],
+        mode="markers+text",
+        text=[f"({ea_star:.1f}, {eb})"],
+        textposition="top right" if eb < 14 else "bottom left",
+        marker=dict(size=12, color="#c83232"),
+        name="Current (e_A*, e_B)",
+        hovertemplate=f"Alfredo's Best Response:<br>e_A* = {ea_star:.1f} when e_B = {eb}<extra></extra>",
+        xaxis="x2", yaxis="y2"
+    )
+    t7 = go.Scatter(
+        x=[ea_star, ea_star, 0], y=[0, eb, eb],
+        mode="lines",
+        line=dict(color="#c83232", width=1.5, dash="dot"),
+        hoverinfo="skip",
+        xaxis="x2", yaxis="y2"
+    )
+    return [t1, t2, t3, t4, t5, t6, t7]
 
-initial_idx = 6  # eb = 12
+initial_eb = 12
+initial_idx = eb_values.index(initial_eb)
+
+fig = make_subplots(
+    rows=1, cols=2,
+    subplot_titles=("(1) Alfredo's Payoff Hill: max u_A(e_A; e_B)", "(2) Reaction Curve in (e_A, e_B) Space"),
+    horizontal_spacing=0.10
+)
+
+# Add initial traces directly using row/col
+init_traces = get_traces(initial_eb)
+for t in init_traces[:4]:
+    fig.add_trace(t, row=1, col=1)
+for t in init_traces[4:]:
+    fig.add_trace(t, row=1, col=2)
+
+# Add frames for animation
+frames = [go.Frame(data=get_traces(eb), name=f"{eb}") for eb in eb_values]
+fig.frames = frames
 
 steps = []
 for eb in eb_values:
@@ -375,36 +384,24 @@ sliders = [dict(
     currentvalue=dict(
         prefix="Bob's effort (e_B): ",
         visible=True,
-        font=dict(size=14, color="#24325c", family="-apple-system, Segoe UI, sans-serif")
+        xanchor="center",
+        offset=10,
+        font=dict(size=13, color="#24325c", family="-apple-system, Segoe UI, sans-serif")
     ),
-    pad=dict(t=25, b=5),
+    pad=dict(t=30, b=5),
     len=0.92,
     x=0.04,
     steps=steps
 )]
 
-fig = make_subplots(
-    rows=1, cols=2,
-    subplot_titles=("(1) Alfredo's Payoff Hill: max u_A(e_A; e_B)", "(2) Reaction Curve in (e_A, e_B) Space"),
-    horizontal_spacing=0.10
-)
-
-for trace in frames[initial_idx].data:
-    if trace.xaxis == "x1":
-        fig.add_trace(trace, row=1, col=1)
-    else:
-        fig.add_trace(trace, row=1, col=2)
-
-fig.frames = frames
-
 fig.update_layout(
-    xaxis1=dict(title="Alfredo's hours (e_A)", range=[0, 18], showgrid=True, gridcolor="#e5e9f0"),
-    yaxis1=dict(title="Payoff u_A", range=[0, 120], showgrid=True, gridcolor="#e5e9f0"),
+    xaxis=dict(title="Alfredo's hours (e_A)", range=[0, 18], showgrid=True, gridcolor="#e5e9f0"),
+    yaxis=dict(title="Payoff u_A", range=[0, 120], showgrid=True, gridcolor="#e5e9f0"),
     xaxis2=dict(title="Alfredo's hours (e_A)", range=[0, 18], showgrid=True, gridcolor="#e5e9f0"),
     yaxis2=dict(title="Bob's hours (e_B)", range=[0, 18], showgrid=True, gridcolor="#e5e9f0"),
-    height=450,
+    height=430,
     width=1080,
-    margin=dict(l=40, r=20, t=35, b=65),
+    margin=dict(l=45, r=25, t=35, b=50),
     showlegend=False,
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
@@ -490,20 +487,18 @@ fig
 
 ---
 
-## The Planner's Problem: an Externality in One Derivative {.compact}
+## The Planner's Problem (takes externalities into account) {.compact}
 
-Maximize total joint surplus $W = u_A + u_B$:
+A Planner maximizes total joint surplus $W = u_A + u_B$:
 $$W(e_A, e_B) = \underbrace{\left[\left(15 - \tfrac14 e_B\right)e_A - \tfrac12 e_A^2\right]}_{u_A} + \underbrace{\left[\left(15 - \tfrac14 e_A\right)e_B - \tfrac12 e_B^2\right]}_{u_B}$$
 
 The Planner's FOC for $e_A$:
 $$\frac{\partial W}{\partial e_A} = \underbrace{\left(15 - \tfrac14 e_B - e_A\right)}_{\text{private marginal payoff}} + \underbrace{\left(-\tfrac14\,e_B\right)}_{\text{external cost on Bob}} = 0$$
 
 ::: {.incremental}
-- Alfredo alone sets only the *first* bracket to zero; the planner also counts the harm
-- Symmetric solution: $15 - \tfrac32 e = 0$, so $e^P = 10$ — *the "10 hours" in the matrix*
-- Nash overfishes ($12 > 10$) precisely because each ignores the $-\tfrac14 e_B$ term
-- Restrict strategies to $\{10, 12\}$ and evaluate $u$: exactly **78 > 75 > 72 > 70** — the 2×2 was this model all along
-- An institution that makes each fisher *face* the external term — a tax, a liability rule — aligns private and social optimality. That is where this lecture is headed
+- Alfredo alone sets only the *first* bracket to zero; ignores harm of his choice to others.
+- Planner at symmetric solution ($e=e_A=e_B$) solves: $15 - \tfrac32 e = 0$, so $e^P = 10$ — *"10 hours"*
+- Versus non-cooperative Nash: each overfishes ($12 > 10$) because each ignores external $-\tfrac14 e_B$ harm
 :::
 
 <!-- The Pigouvian moment: external effects (Part I) meet the FOC (Part II). -->
@@ -521,10 +516,10 @@ Pareto efficiency, and the possibility frontiers of an economy
 ::: {.columns}
 ::: {.column width="56%"}
 ::: {.incremental}
-- Outcome $A$ is **Pareto superior** to $B$ if at least one player is better off and nobody worse; the move is a **Pareto improvement**
+- An outcome $A$ is **Pareto superior** to $B$ if at least one player is better off and nobody worse; the move is a **Pareto improvement**
 - **Pareto efficient**: no feasible outcome is Pareto superior to it
 - In payoff space, "superior" means **northeast**
-- Only **a** has a feasible point to its northeast — **b, c, d are all Pareto efficient**, lopsided ones included
+- Only outcome **a** in original matrix has a feasible point to its northeast — **b, c, d are all Pareto efficient**, lopsided ones included
 - The single Pareto-*inefficient* outcome: the Nash equilibrium
 :::
 :::
