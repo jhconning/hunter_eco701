@@ -106,9 +106,14 @@ jobs:
           find _build/html -type f \( -name "*.html" -o -name "*.xml" -o -name "*.txt" \) -exec sed -i "s#http://localhost:3000#${SITE_URL}#g" {} +
           echo "Remaining localhost references: $(grep -rl 'localhost:3000' _build/html --include='*.html' --include='*.xml' --include='*.txt' | wc -l)"
 
-      - name: Prepare Slides Directory
+      - name: Prepare Slides and Syllabus Directories
         if: env.PUBLISH_SLIDES == 'true'
-        run: mkdir -p _build/html/slides
+        run: |
+          mkdir -p _build/html/slides
+          if [ -d syllabus ]; then
+            mkdir -p _build/html/syllabus
+            cp -r syllabus/*.pdf _build/html/syllabus/ 2>/dev/null || true
+          fi
 
       - name: Select decks to publish
         if: env.PUBLISH_SLIDES == 'true'

@@ -20,5 +20,7 @@ revised up to the last minute, so do not expect to find them in advance.
 **[Reading schedule](schedule.md)** — what is assigned next, the texts and where
 to get them, and the articles and other material mentioned in lecture.
 
+**[Course syllabus (PDF)](https://jhconning.github.io/hunter_eco701/syllabus/eco701-syllabus.pdf)** — course overview, grading policies, requirements, and full outline.
+
 Problem sets and submissions will use **Gradescope** (details to follow). Course announcements are on **Brightspace**.
 
