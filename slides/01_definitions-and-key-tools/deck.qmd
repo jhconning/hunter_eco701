@@ -511,13 +511,13 @@ $$\frac{\partial W}{\partial e_A} = \underbrace{\left(15 - \tfrac14 e_B - e_A\ri
 ::: {.columns}
 ::: {.column width="38%"}
 ::: {.incremental}
-- **Market Failure:** Private curves $e_A = 15 - \tfrac14 e_B$ cross at $(12, 12)$ because fishers ignore their external damage
+- **Baseline ($\tau = 0$):** Private curves cross at **$(12, 12)$ (Overfishing)** — each fisher ignores their $-\tfrac14 e$ external damage
 - **Pigouvian Solution:** Charge fee/tax $\tau$ per hour of fishing
 - **Taxed Optimization:**
   $$\max_{e_A} \left[ u_A - \tau \cdot e_A \right]$$
   $$\mathbf{e_A^{\text{taxed}}(e_B) = (15 - \tau) - \tfrac14\,e_B}$$
 - The tax **shifts the reaction curve inward**
-- Setting $\tau = 2.5$ aligns the decentralized Nash equilibrium to **$(10, 10)$**!
+- Raising $\tau$ from $0 \rightarrow 2.5$ moves decentralized market play from **$(12, 12)$ to the social optimum $(10, 10)$**!
 :::
 :::
 
@@ -530,7 +530,7 @@ import numpy as np
 
 e_grid = np.linspace(0, 16, 100)
 tau_values = [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0]
-initial_tau = 2.5
+initial_tau = 0.0
 initial_idx = tau_values.index(initial_tau)
 
 def get_pigou_traces(tau):
@@ -552,17 +552,12 @@ def get_pigou_traces(tau):
         line=dict(color="#24325c", width=2),
         hovertemplate="Untaxed Alfredo: e_A = 15 − ¼ e_B<extra></extra>"
     )
-    t3 = go.Scatter(
-        x=[12], y=[12],
-        mode="markers",
-        marker=dict(size=8, color="#8892a4", symbol="circle-open", line=dict(width=2)),
-        name="Untaxed Nash (12,12)",
-        hoverinfo="skip"
-    )
-    t4 = go.Scatter(
+    t_opt_fixed = go.Scatter(
         x=[10], y=[10],
-        mode="markers",
-        marker=dict(size=10, color="#2e7d32", symbol="star"),
+        mode="markers+text",
+        text=["Target: Optimum (10,10)"],
+        textposition="bottom left",
+        marker=dict(size=11, color="#2e7d32", symbol="star"),
         name="Social Target (10,10)",
         hoverinfo="skip"
     )
@@ -582,25 +577,28 @@ def get_pigou_traces(tau):
     )
     
     if tau == 0:
-        label = "Nash (12.0, 12.0)"
+        label = "Untaxed Overfishing (12, 12)"
+        tpos = "top right"
         mcolor = "#c83232"
     elif abs(tau - 2.5) < 1e-4:
-        label = "Pigou Optimum (10.0, 10.0)"
+        label = "Social Optimum (10, 10) ✓"
+        tpos = "bottom left"
         mcolor = "#2e7d32"
     else:
-        label = f"Eqm ({eqm_e:.1f}, {eqm_e:.1f})"
-        mcolor = "#b8842a"
+        label = f"Market Eqm ({eqm_e:.1f}, {eqm_e:.1f})"
+        tpos = "top right"
+        mcolor = "#c83232"
         
     t7 = go.Scatter(
         x=[eqm_e], y=[eqm_e],
         mode="markers+text",
         text=[label],
-        textposition="top right" if eqm_e < 11.5 else "bottom left",
+        textposition=tpos,
         marker=dict(size=12, color=mcolor),
-        name="Active Equilibrium",
+        name="Market Equilibrium",
         hovertemplate=f"Equilibrium under τ={tau:.1f}: e* = {eqm_e:.2f}<extra></extra>"
     )
-    return [t1, t2, t3, t4, t5, t6, t7]
+    return [t1, t2, t_opt_fixed, t5, t6, t7]
 
 fig_pigou = go.Figure()
 for t in get_pigou_traces(initial_tau):
@@ -626,16 +624,16 @@ steps = [
 
 sliders = [dict(
     active=initial_idx,
-    currentvalue=dict(prefix="Pigouvian Fee (τ): ", visible=True, xanchor="center", offset=8, font=dict(size=12, color="#1b5e20")),
+    currentvalue=dict(prefix="Tax per hour (τ): ", visible=True, xanchor="center", offset=8, font=dict(size=12, color="#1b5e20")),
     pad=dict(t=20, b=0), len=0.92, x=0.04, y=-0.08, steps=steps
 )]
 
 fig_pigou.update_layout(
-    xaxis=dict(title=dict(text="Alfredo's hours (e_A)", standoff=6), range=[0, 16], showgrid=True, gridcolor="#e5e9f0"),
+    xaxis=dict(title=dict(text="Alfredo's hours (e_A)", standoff=6), range=[0, 17], showgrid=True, gridcolor="#e5e9f0"),
     yaxis=dict(title="Bob's hours (e_B)", range=[0, 16], showgrid=True, gridcolor="#e5e9f0"),
     height=415,
     width=610,
-    margin=dict(l=35, r=15, t=20, b=45),
+    margin=dict(l=35, r=35, t=20, b=45),
     showlegend=False,
     font=dict(family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif", size=11),
     paper_bgcolor="rgba(0,0,0,0)",
