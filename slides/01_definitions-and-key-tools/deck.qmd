@@ -490,10 +490,12 @@ fig
 
 ---
 
-## The Planner's Problem: an Externality in One Derivative
+## The Planner's Problem: an Externality in One Derivative {.compact}
 
-Maximize joint surplus $W = u_A + u_B$. The first-order condition for $e_A$:
+Maximize total joint surplus $W = u_A + u_B$:
+$$W(e_A, e_B) = \underbrace{\left[\left(15 - \tfrac14 e_B\right)e_A - \tfrac12 e_A^2\right]}_{u_A} + \underbrace{\left[\left(15 - \tfrac14 e_A\right)e_B - \tfrac12 e_B^2\right]}_{u_B}$$
 
+The Planner's FOC for $e_A$:
 $$\frac{\partial W}{\partial e_A} = \underbrace{\left(15 - \tfrac14 e_B - e_A\right)}_{\text{private marginal payoff}} + \underbrace{\left(-\tfrac14\,e_B\right)}_{\text{external cost on Bob}} = 0$$
 
 ::: {.incremental}
