@@ -60,9 +60,9 @@ def _interactive_tangency(p1=2.0, p2=3.0, I=120.0):
 
 widgets.interact(
     _interactive_tangency,
-    p1=widgets.FloatSlider(value=2.0, min=1.0, max=5.0, step=0.25, description="$p_1$"),
-    p2=widgets.FloatSlider(value=3.0, min=1.0, max=5.0, step=0.25, description="$p_2$"),
-    I=widgets.FloatSlider(value=120.0, min=60.0, max=180.0, step=10.0, description="$I$"),
+    p1=widgets.FloatSlider(value=2.0, min=1.0, max=5.0, step=0.25, description="p_1:"),
+    p2=widgets.FloatSlider(value=3.0, min=1.0, max=5.0, step=0.25, description="p_2:"),
+    I=widgets.FloatSlider(value=120.0, min=60.0, max=180.0, step=10.0, description="I:"),
 );
 """
 
