@@ -7,7 +7,7 @@ project:
   toc:
     - file: README.md
     - file: schedule.md
-    - file: notebooks/README.md
+    - file: notebooks/notebooks.md
       title: "Notebooks"
       children:
         - file: notebooks/topic01_definitions_key_tools_figures.ipynb
