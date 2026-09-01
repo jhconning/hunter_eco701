@@ -3,334 +3,295 @@ import nbformat as nbf
 nb = nbf.v4.new_notebook()
 cells = []
 
-# Title and Intro
-cells.append(nbf.v4.new_markdown_cell("""# The Farm-Household Model: Autarky, Markets, and Separation
+# Title & Overview
+cells.append(nbf.v4.new_markdown_cell(r"""# Farm Household Models: Autarky, Markets, and Separation
 
 **ECO 701: Microeconomic Theory**  
 *Companion Computational Notebook*
 
-In standard introductory microeconomics, consumption theory (utility maximization by households) and production theory (profit maximization by firms) are taught in isolation. However, in developing economies and agricultural settings, the fundamental economic unit is often the **farm household**—an entity that acts simultaneously as a **producing firm** and a **consuming household**.
+Most economics textbooks typically present the decisions of firms and consumers in separate chapters. The firm maximizes profits subject to technological constraints, while the consumer maximizes utility subject to a budget constraint. 
+
+In developing country agriculture, however, the primary economic actor is the **farm household**—an enterprise that operates simultaneously as a **producer** (utilizing land and labor to grow crops) and a **consumer** (consuming food and valuing leisure).
 
 This notebook explores:
-1. **The Autarkic (Chayanovian) Benchmark:** A self-sufficient household without labor or commodity markets, where production and consumption decisions are inextricably linked (**non-separable**).
-2. **The Separable Market Model (Singh, Squire, & Strauss 1986; Benjamin 1992):** When competitive markets for labor and output exist, the household's decision separates into a two-stage recursive problem.
-3. **Labor Regimes:** Visualizing net labor exporters, net labor importers, and landless laborers.
-4. **Comparative Statics & The Inverse Relationship:** How market failures explain the famous inverse farm-size productivity relationship.
+1. **The Autarkic (Chayanovian) Household:** When labor or commodity markets are absent, production and consumption decisions are **non-separable** and an **inverse farm-size productivity relationship** emerges.
+2. **The Separable Farm Household (Singh, Squire, and Strauss 1986; Benjamin 1992):** With complete, competitive markets for labor and output, the farm's production decision separates completely from the household's preferences.
+3. **Labor Regimes:** Visualizing households that sell wage labor vs. households that hire in wage labor.
 """))
 
-# Setup cell
-cells.append(nbf.v4.new_code_cell("""import numpy as np
+# Setup and Model Functions
+cells.append(nbf.v4.new_code_cell(r"""%matplotlib inline
 import matplotlib.pyplot as plt
+import numpy as np
 import plotly.graph_objects as go
+from ipywidgets import interact, FloatSlider
 
-# Consistent styling for matplotlib
-plt.rcParams['font.sans-serif'] = 'Arial'
-plt.rcParams['axes.edgecolor'] = '#cbd5e1'
-plt.rcParams['axes.linewidth'] = 0.8
-plt.rcParams['grid.color'] = '#f1f5f9'
+# Global default parameters
+ALPHA = 0.5   # Land share in production: F(T, L) = T^alpha * L^(1-alpha)
+BETA = 0.7    # Food share in utility: U(c, l) = c^beta * l^(1-beta)
+TBAR = 100    # Default land endowment
+LBAR = 100    # Default time endowment
+W = 1.0       # Default market real wage
+
+def F(T, L, alpha=ALPHA):
+    '''Cobb-Douglas production function'''
+    return (T**alpha) * (L**(1 - alpha))
+
+def FL(T, L, alpha=ALPHA):
+    '''Marginal product (shadow price) of labor'''
+    return (1 - alpha) * F(T, L, alpha) / L
+
+def FT(T, L, alpha=ALPHA):
+    '''Marginal product (shadow price) of land'''
+    return alpha * F(T, L, alpha) / T
+
+def U(c, l, beta=BETA):
+    '''Cobb-Douglas utility function'''
+    return (c**beta) * (l**(1 - beta))
+
+def indif(l, ubar, beta=BETA):
+    '''Indifference curve: consumption as a function of leisure'''
+    return (ubar / (l**(1 - beta)))**(1 / beta)
+
+def HH_autarky(Tbar, Lbar, alpha=ALPHA, beta=BETA):
+    '''Autarkic (Chayanovian) optimal leisure, output/consumption, and utility'''
+    a = (1 - alpha) * beta / (1 - beta)
+    l_opt = Lbar / (1 + a)
+    q_opt = F(Tbar, Lbar - l_opt, alpha)
+    u_opt = U(q_opt, l_opt, beta)
+    return l_opt, q_opt, u_opt
+
+def farm_optimum(Tbar, w, alpha=ALPHA):
+    '''Optimal farm labor demand and profits (land rent)'''
+    LD = Tbar * ((1 - alpha) / w)**(1 / alpha)
+    profit = F(Tbar, LD, alpha) - w * LD
+    return LD, profit
+
+def HH_optimum(Tbar, Lbar, w, alpha=ALPHA, beta=BETA):
+    '''Optimal consumption, leisure, and utility with markets'''
+    _, profits = farm_optimum(Tbar, w, alpha)
+    income = profits + w * Lbar
+    consumption = beta * income
+    leisure = (1 - beta) * income / w
+    utility = U(consumption, leisure, beta)
+    return consumption, leisure, utility
 """, metadata={'tags': ['hide-input']}))
 
-# Model Definition
+# Section 1: Chayanovian Household
 cells.append(nbf.v4.new_markdown_cell(r"""---
 
-## 1. Model Setup: Technology and Preferences
+## 1. The Autarkic (Chayanovian) Household
 
-Consider a farm household endowed with:
-- Fixed land holding $\bar{T}$
-- Total time endowment $\bar{L}$ (which can be allocated between on-farm/off-farm labor $L$ and leisure $l = \bar{L} - L$)
+Inspired by the Russian agricultural economist **A.V. Chayanov (1926)**, we first consider a peasant household without access to labor or commodity markets.
 
-### Production Technology
-The farm produces agricultural output (food) $Q$ using land $\bar{T}$ and labor $L$ via a Cobb-Douglas production function:
-$$Q = F(\bar{T}, L) = A \bar{T}^{1-\alpha} L^\alpha \quad (0 < \alpha < 1)$$
-
-Marginal product of labor:
-$$\text{MP}_L(L) = \frac{\partial F}{\partial L} = \alpha A \bar{T}^{1-\alpha} L^{\alpha-1} = \frac{\alpha Q}{L}$$
-
-### Household Preferences
-The household derives utility from consumption of food $c$ and leisure $l$:
-$$U(c, l) = c^\beta l^{1-\beta} \quad (0 < \beta < 1)$$
-
-Marginal rate of substitution (MRS) between leisure and consumption:
-$$\text{MRS}(c, l) = \frac{\partial U / \partial l}{\partial U / \partial c} = \frac{(1-\beta) c}{\beta l}$$
-"""))
-
-# Autarky Section
-cells.append(nbf.v4.new_markdown_cell(r"""---
-
-## 2. Part 1: The Autarkic (Chayanovian) Household
-
-In an isolated village without labor or output markets (the **Robinson Crusoe / A.V. Chayanov** case), the household must consume exactly what it produces and supply all its own labor:
-$$c = F(\bar{T}, L) \quad \text{and} \quad L = \bar{L} - l$$
-
-The household solves:
-$$\max_{l} U\left(F(\bar{T}, \bar{L}-l),\, l\right)$$
+The household has land $\bar{T}$ and time $\bar{L}$, allocating time between on-farm work $L$ and leisure $l = \bar{L} - L$:
+$$\max_{l} U\left(F(\bar{T}, \bar{L} - l),\, l\right)$$
 
 ### First-Order Condition
-Equating the marginal rate of substitution to the marginal product of labor:
-$$\text{MRS}(c, l) = \text{MP}_L(L) \implies \frac{(1-\beta) F(\bar{T}, \bar{L}-l)}{\beta l} = \alpha \frac{F(\bar{T}, \bar{L}-l)}{\bar{L}-l}$$
+The household allocates labor until the **Marginal Rate of Substitution (MRS)** equals the **Marginal Product of Labor ($\text{MP}_L$)**:
+$$\text{MRS}(c, l) = \text{MP}_L(L) \implies \frac{(1-\beta) c}{\beta l} = (1-\alpha) \frac{F(\bar{T}, L)}{L}$$
 
-Canceling $F(\bar{T}, L)$ from both sides yields the closed-form autarkic allocation:
-$$l^*_{\text{aut}} = \frac{1-\beta}{1 - \beta(1-\alpha)} \bar{L}, \qquad L^*_{\text{aut}} = \bar{L} - l^*_{\text{aut}} = \frac{\alpha \beta}{1 - \beta(1-\alpha)} \bar{L}$$
+Substituting $c = F(\bar{T}, L)$ yields:
+$$l^*_{\text{aut}} = \frac{\bar{L}}{1 + \frac{(1-\alpha)\beta}{1-\beta}}, \qquad L^*_{\text{aut}} = \bar{L} - l^*_{\text{aut}}$$
 
-The internal **shadow wage** $w^*$ is the marginal product evaluated at $L^*_{\text{aut}}$:
-$$w^* = \text{MP}_L(L^*_{\text{aut}}) = \alpha A \bar{T}^{1-\alpha} (L^*_{\text{aut}})^{\alpha-1}$$
-
-> **Key Takeaway (Non-Separability):** Under autarky, production $L^*$ depends directly on consumer preferences ($\beta$) and time endowment ($\bar{L}$). Furthermore, labor intensity $L^*/\bar{T}$ decreases as farm size $\bar{T}$ increases, generating the empirical **Inverse Farm Size-Productivity Relationship**.
+The internal **shadow wage** $w^*$ is the slope of the common tangent:
+$$w^* = \text{MP}_L(\bar{T}, L^*_{\text{aut}}) = (1-\alpha) \frac{F(\bar{T}, L^*_{\text{aut}})}{L^*_{\text{aut}}}$$
 """))
 
-# Autarky Code and Plot
-cells.append(nbf.v4.new_code_cell(r"""# Model parameters
-A = 1.0
-alpha = 0.5   # Labor share in production
-beta = 0.5    # Food weight in utility
-Lbar = 100.0  # Total time endowment
-Tbar = 10.0   # Land endowment
-
-# Autarky analytical solution
-l_aut = ((1 - beta) / (1 - beta * (1 - alpha))) * Lbar
-L_aut = Lbar - l_aut
-c_aut = A * (Tbar**(1 - alpha)) * (L_aut**alpha)
-w_shadow = alpha * A * (Tbar**(1 - alpha)) * (L_aut**(alpha - 1))
-u_aut = (c_aut**beta) * (l_aut**(1 - beta))
-
-# Grid for plotting
-l_grid = np.linspace(1, Lbar - 1, 300)
-L_grid = Lbar - l_grid
-c_prod = A * (Tbar**(1 - alpha)) * (L_grid**alpha)
-c_indiff = (u_aut / (l_grid**(1 - beta)))**(1 / beta)
-
-fig, ax = plt.subplots(figsize=(8, 5.5), dpi=120)
-
-# Plot production possibility curve and indifference curve
-ax.plot(l_grid, c_prod, label=r'Production Frontier $c = F(\bar{T}, \bar{L}-l)$', color='#24325c', lw=2.5)
-ax.plot(l_grid, c_indiff, label=r'Indifference Curve $U(c,l) = U_{\mathrm{aut}}$', color='#b8842a', lw=2, ls='--')
-
-# Tangent line with slope = -w*
-c_tangent = c_aut - w_shadow * (l_grid - l_aut)
-mask = (c_tangent >= 0) & (c_tangent <= c_prod.max() * 1.3)
-ax.plot(l_grid[mask], c_tangent[mask], label=f'Shadow Wage Tangent ($w^*={w_shadow:.2f}$)', color='#8892a4', lw=1.2, ls=':')
-
-# Point of tangency
-ax.plot(l_aut, c_aut, 'o', color='#c83232', markersize=8, zorder=5, label=f'Autarky Eqm: $(l^*={l_aut:.1f}, c^*={c_aut:.1f})$')
-
-ax.set_xlim(0, Lbar * 1.05)
-ax.set_ylim(0, c_prod.max() * 1.25)
-ax.set_xlabel(r'Leisure $l$ (hours) $\longrightarrow$   [Labor $L = \bar{L}-l \longleftarrow$]', fontsize=11)
-ax.set_ylabel('Consumption / Output $c$', fontsize=11)
-ax.set_title('Autarkic (Chayanovian) Farm Household Equilibrium', fontsize=13, fontweight='bold', pad=12)
-ax.legend(loc='upper right', frameon=True, fontsize=9.5)
-ax.grid(True, alpha=0.3)
-plt.tight_layout()
-plt.show()
-""", metadata={'tags': ['hide-input']}))
-
-# Separable Market Section
-cells.append(nbf.v4.new_markdown_cell(r"""---
-
-## 3. Part 2: The Separable Farm Household with Markets
-
-Now suppose competitive markets exist for both labor (market wage $w$) and agricultural output (price $p$, normalized to $p = 1$). 
-
-The household can now:
-- Hire in farm labor ($L > \bar{L}-l$) or hire out family labor to off-farm employment ($L < \bar{L}-l$).
-- Buy or sell agricultural output on the market.
-
-### The Two-Stage Separation Property
-The household's optimization problem decomposes into two independent stages:
-
-#### Stage 1: Profit Maximization (Firm Problem)
-The farm operates as a pure profit-maximizing enterprise, choosing total labor demand $L^*$ on the farm:
-$$\max_{L} \Pi = F(\bar{T}, L) - w L \implies \text{MP}_L(L^*) = w$$
-
-Solving for optimal farm labor demand:
-$$\mathbf{L^*(w, \bar{T}) = \left(\frac{\alpha A}{w}\right)^{\frac{1}{1-\alpha}} \bar{T}}$$
-
-Farm profit (land rent):
-$$\mathbf{\Pi^*(w, \bar{T}) = F(\bar{T}, L^*) - w L^* = (1-\alpha) Q^*}$$
-
-> **The Separation Property:** Labor demand $L^*$ and farm output $Q^*$ depend **only** on technology $A$, land $\bar{T}$, and the market wage $w$. They are completely **independent of household preferences $\beta$ or family size $\bar{L}$**.
-
-#### Stage 2: Utility Maximization (Household Problem)
-The household receives full income $\bar{Y}$ comprising farm profits plus the market value of its time endowment:
-$$\bar{Y} = \Pi^*(w, \bar{T}) + w \bar{L}$$
-
-The household maximizes utility subject to the full-income budget constraint $c + w l \le \bar{Y}$:
-$$\max_{c, l} U(c, l) \quad \text{s.t.} \quad c + w l \le \bar{Y}$$
-
-Optimal consumption and leisure demand:
-$$\mathbf{c^* = \beta \bar{Y}}, \qquad \mathbf{l^* = \frac{(1-\beta) \bar{Y}}{w}}$$
-
-Family labor supply: $L^s = \bar{L} - l^*$.
-"""))
-
-# Regimes Comparison Code
-cells.append(nbf.v4.new_markdown_cell(r"""---
-
-## 4. Part 3: Labor Market Regimes
-
-Depending on its land endowment $\bar{T}$, family size $\bar{L}$, and preferences, the household falls into one of three distinct labor market regimes:
-
-1. **Net Labor Exporter ($L^* < L^s$):** Small land endowment relative to family labor. The household works on its own farm and sells surplus labor on the wage market.
-2. **Net Labor Importer ($L^* > L^s$):** Large land endowment relative to family labor. The household's farm labor demand exceeds family supply, hiring in hired hands.
-3. **Landless Household ($\bar{T} = 0$):** Zero farm profits ($\Pi^* = 0$). Operates as a pure neoclassical wage worker.
-"""))
-
-# Two-panel regimes figure
-cells.append(nbf.v4.new_code_cell(r"""def solve_farm_household(w, Tbar, Lbar, alpha=0.5, beta=0.5, A=1.0):
-    # Stage 1: Production
-    L_opt = ((alpha * A * (Tbar**(1 - alpha))) / w)**(1 / (1 - alpha))
-    Q_opt = A * (Tbar**(1 - alpha)) * (L_opt**alpha)
-    profit = Q_opt - w * L_opt
+# Chayanovian Plot
+cells.append(nbf.v4.new_code_cell(r"""def chayanov(Tbar=TBAR, Lbar=LBAR, alpha=ALPHA, beta=BETA):
+    leis = np.linspace(0.1, Lbar, num=200)
+    q = F(Tbar, Lbar - leis, alpha)
+    l_opt, Q, U_val = HH_autarky(Tbar, Lbar, alpha, beta)
+    w_shadow = FL(Tbar, Lbar - l_opt, alpha)
+    c_ind = indif(leis, U_val, beta)
     
-    # Stage 2: Consumption
-    Y_full = profit + w * Lbar
-    c_opt = beta * Y_full
-    l_opt = ((1 - beta) * Y_full) / w
-    L_supply = Lbar - l_opt
-    net_labor_hired = L_opt - L_supply  # >0 hired in, <0 sold out
-    net_food_marketed = Q_opt - c_opt   # >0 sold, <0 bought
+    fig, ax = plt.subplots(figsize=(8, 7), dpi=120)
+    ax.plot(leis, q, lw=2.5, color='#1f77b4', label=r'Production $F(\bar{T}, \bar{L}-l)$')
+    ax.plot(leis, c_ind, lw=2.0, color='#ff7f0e', label=r'Indifference Curve $U(c,l)=U^*$')
+    ax.plot(l_opt, Q, 'ob', markersize=8)
     
-    return {
-        'L_opt': L_opt, 'Q_opt': Q_opt, 'profit': profit, 'Y_full': Y_full,
-        'c_opt': c_opt, 'l_opt': l_opt, 'L_supply': L_supply,
-        'net_labor_hired': net_labor_hired, 'net_food_marketed': net_food_marketed
-    }
-
-w_market = 0.5
-hh_exporter = solve_farm_household(w=w_market, Tbar=4.0, Lbar=100.0)
-hh_importer = solve_farm_household(w=w_market, Tbar=25.0, Lbar=100.0)
-
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6), dpi=120)
-
-for ax, res, title in zip([ax1, ax2], [hh_exporter, hh_importer], 
-                          ['Net Labor Exporter (Small Farm, T=4)', 'Net Labor Importer (Large Farm, T=25)']):
-    l_grid = np.linspace(1, 100, 300)
-    L_grid = 100 - l_grid
-    c_prod = A * ((4.0 if 'Small' in title else 25.0)**(1 - alpha)) * (L_grid**alpha)
+    # Dashed coordinate drop lines
+    ax.vlines(l_opt, 0, Q, linestyles='dashed', color='#1f77b4', lw=1.2)
+    ax.hlines(Q, 0, l_opt, linestyles='dashed', color='#1f77b4', lw=1.2)
     
-    # Production curve & Budget line
-    ax.plot(l_grid, c_prod, label=r'Production Curve $F(T, \bar{L}-l)$', color='#24325c', lw=2.5)
+    # Tangent line (slope -w*)
+    tan_line = Q - w_shadow * (leis - l_opt)
+    mask = (tan_line >= 0) & (tan_line <= Q * 1.5)
+    ax.plot(leis[mask], tan_line[mask], 'k:', lw=1.2, label=f'Shadow Wage Tangent ($w^*={w_shadow:.2f}$)')
     
-    # Full income budget line: c = Y_full - w*l
-    c_budget = res['Y_full'] - w_market * l_grid
-    mask = (c_budget >= 0) & (c_budget <= c_prod.max() * 1.5)
-    ax.plot(l_grid[mask], c_budget[mask], label=r'Budget Line (slope $-w$)', color='#2e7d32', lw=2)
-    
-    # Production choice L*
-    l_prod_pt = 100 - res['L_opt']
-    ax.plot(l_prod_pt, res['Q_opt'], 's', color='#24325c', markersize=8, zorder=5, 
-            label=f'Farm Optimum $(L^*={res["L_opt"]:.1f}, Q^*={res["Q_opt"]:.1f})$')
-    
-    # Consumption choice (l*, c*)
-    ax.plot(res['l_opt'], res['c_opt'], 'o', color='#c83232', markersize=8, zorder=5,
-            label=f'Consumption $(l^*={res["l_opt"]:.1f}, c^*={res["c_opt"]:.1f})$')
-    
-    # Label net transactions
-    if res['net_labor_hired'] < 0:
-        ax.annotate(f"Sells {-res['net_labor_hired']:.1f}h wage labor\nBuys {-res['net_food_marketed']:.1f} food",
-                    xy=(res['l_opt'], res['c_opt']), xytext=(res['l_opt']-35, res['c_opt']+8),
-                    arrowprops=dict(arrowstyle="->", color="#c83232", lw=1.2),
-                    fontsize=9.5, fontweight='bold', color='#c83232',
-                    bbox=dict(boxstyle="round,pad=0.3", fc="#fef2f2", ec="#fca5a5"))
-    else:
-        ax.annotate(f"Hires {res['net_labor_hired']:.1f}h labor\nSells {res['net_food_marketed']:.1f} food surplus",
-                    xy=(res['l_opt'], res['c_opt']), xytext=(res['l_opt']-45, res['c_opt']+12),
-                    arrowprops=dict(arrowstyle="->", color="#2e7d32", lw=1.2),
-                    fontsize=9.5, fontweight='bold', color='#2e7d32',
-                    bbox=dict(boxstyle="round,pad=0.3", fc="#f0fdf4", ec="#86efac"))
-        
-    ax.set_xlim(0, 105)
-    ax.set_ylim(0, max(res['Q_opt'], res['c_opt']) * 1.35)
-    ax.set_xlabel(r'Leisure $l$ (hours)', fontsize=10.5)
-    ax.set_ylabel(r'Consumption / Output $c$', fontsize=10.5)
-    ax.set_title(title, fontsize=11.5, fontweight='bold', pad=10)
-    ax.legend(loc='upper right', fontsize=8.5)
+    ax.set_xlim(0, Lbar + 15)
+    ax.set_ylim(0, F(Tbar, Lbar, alpha) + 25)
+    ax.set_xlabel(r'$l$ — Leisure (hours)', fontsize=13)
+    ax.set_ylabel(r'$c$ — Consumption / Output', fontsize=13)
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
     ax.grid(True, alpha=0.3)
+    ax.set_title('Chayanovian Household Optimum (Autarky)', fontsize=14, fontweight='bold', pad=12)
+    ax.legend(loc='upper right', fontsize=10)
+    plt.tight_layout()
+    plt.show()
 
+chayanov(TBAR, LBAR, ALPHA, BETA)
+""", metadata={'tags': ['hide-input']}))
+
+# Inverse Farm Size Relationship
+cells.append(nbf.v4.new_markdown_cell(r"""### The Inverse Farm Size-Productivity Relationship under Autarky
+
+Because the autarkic household cannot hire outside labor or rent land, its labor allocation $L^*_{\text{aut}}$ is pinned down by its family time endowment $\bar{L}$. As farm size $\bar{T}$ increases:
+* Labor per unit of land $L/\bar{T}$ falls.
+* Yield (output per unit of land $Q/\bar{T}$) declines.
+* The shadow price of labor $w^*$ rises.
+
+This generates the well-known **inverse farm-size productivity relationship** commonly observed in developing economies with imperfect land and labor markets.
+"""))
+
+# Inverse Relationship Plot
+cells.append(nbf.v4.new_code_cell(r"""Tb = np.linspace(10, 200, 100)
+l_arr, q_arr, _ = HH_autarky(Tb, LBAR, ALPHA, BETA)
+
+fig, ax1 = plt.subplots(figsize=(8, 5.5), dpi=120)
+
+color = '#1f77b4'
+ax1.plot(Tb, q_arr / Tb, color=color, lw=2.5, label=r'Output per unit land ($Q/\bar{T}$)')
+ax1.set_xlabel(r'Farm Size $\bar{T}$', fontsize=12)
+ax1.set_ylabel(r'Output per unit land ($Q/\bar{T}$)', color=color, fontsize=12)
+ax1.tick_params(axis='y', labelcolor=color)
+ax1.grid(True, alpha=0.3)
+
+ax2 = ax1.twinx()
+color = '#333333'
+ax2.plot(Tb, FL(Tb, LBAR - l_arr, ALPHA), 'k--', lw=2.0, label=r'Shadow price of labor ($w^*$)')
+ax2.set_ylabel(r'Shadow Price of Labor ($w^*$)', color=color, fontsize=12)
+ax2.tick_params(axis='y', labelcolor=color)
+
+plt.title('Chayanovian Autarky: Inverse Farm-Size Productivity Relationship', fontsize=13, fontweight='bold', pad=12)
 plt.tight_layout()
 plt.show()
 """, metadata={'tags': ['hide-input']}))
 
-# Interactive Simulation Section
+# Section 2: Separable Model
 cells.append(nbf.v4.new_markdown_cell(r"""---
 
-## 5. Part 4: Interactive Simulation & Comparative Statics
+## 2. The Separable Farm Household with Markets
 
-Use the interactive Plotly widget below to explore how changes in the **Market Wage ($w$)** affect farm labor demand, full income, and the household's labor market regime.
+When competitive markets for labor (wage $w$) and food (price $p = 1$) exist, the farm household's decisions become **separable**:
+
+1. **Stage 1 (Profit Maximization):** The farm operates as a price-taking enterprise, choosing labor demand $L^*$ to maximize profits:
+   $$\max_{L} \Pi = F(\bar{T}, L) - w L \implies \text{MP}_L(L^*) = w$$
+   $$L^*(w, \bar{T}) = \bar{T} \left(\frac{1-\alpha}{w}\right)^{1/\alpha}, \qquad \Pi^*(w, \bar{T}) = F(\bar{T}, L^*) - w L^*$$
+   *Crucially, $L^*$ and $\Pi^*$ depend strictly on $(T, w)$—independent of preferences $\beta$ or family size $\bar{L}$.*
+
+2. **Stage 2 (Utility Maximization):** The household maximizes utility subject to its full-income budget line:
+   $$\max_{c, l} U(c, l) \quad \text{s.t.} \quad c + w l \le \Pi^*(w, \bar{T}) + w \bar{L}$$
+   $$c^* = \beta (\Pi^* + w \bar{L}), \qquad l^* = \frac{(1-\beta)(\Pi^* + w \bar{L})}{w}$$
 """))
 
-# Interactive Plotly widget
-cells.append(nbf.v4.new_code_cell(r"""import plotly.graph_objects as go
-import numpy as np
+# Replicated Beautiful Matplotlib Function
+cells.append(nbf.v4.new_code_cell(r"""def plot_production(Tbar, Lbar, w, ax):
+    lei = np.linspace(1, Lbar, 200)
+    q = F(Tbar, Lbar - lei)
+    ax.plot(lei, q, lw=2.5, color='#00558f')
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
 
-w_vals = [0.25, 0.50, 0.75, 1.00, 1.25]
-Lbar = 100.0
-Tbar_fixed = 10.0
-alpha = 0.5
-beta = 0.5
-A = 1.0
-
-def make_plotly_traces(w):
-    res = solve_farm_household(w, Tbar=Tbar_fixed, Lbar=Lbar, alpha=alpha, beta=beta, A=A)
-    l_g = np.linspace(1, 99, 150)
-    L_g = Lbar - l_g
-    c_p = A * (Tbar_fixed**(1 - alpha)) * (L_g**alpha)
-    c_b = res['Y_full'] - w * l_g
+def plot_farmconsumption(Tbar, Lbar, w, ax, alpha=ALPHA, beta=BETA):
+    lei = np.linspace(1, Lbar, 200)
+    LD, profits = farm_optimum(Tbar, w, alpha)
+    q_opt = F(Tbar, LD, alpha)
+    yline = profits + w * Lbar - w * lei
+    c_opt, l_opt, u_opt = HH_optimum(Tbar, Lbar, w, alpha, beta)
     
-    # Production curve
-    t_prod = go.Scatter(x=l_g, y=c_p, mode='lines', name='Production Curve', line=dict(color='#24325c', width=3))
-    # Budget line
-    t_bud = go.Scatter(x=l_g, y=c_b, mode='lines', name=f'Budget Line (w={w:.2f})', line=dict(color='#2e7d32', width=2, dash='dash'))
-    # Farm production point
-    t_fpt = go.Scatter(x=[Lbar - res['L_opt']], y=[res['Q_opt']], mode='markers+text', text=['Farm Opt (L*)'],
-                       textposition='top right', marker=dict(size=10, color='#24325c', symbol='square'), name='Farm Optimum')
-    # Household consumption point
-    t_cpt = go.Scatter(x=[res['l_opt']], y=[res['c_opt']], mode='markers+text', text=['Consumption (l*, c*)'],
-                       textposition='bottom left', marker=dict(size=11, color='#c83232'), name='Consumption Optimum')
-    return [t_prod, t_bud, t_fpt, t_cpt]
-
-fig_interactive = go.Figure(data=make_plotly_traces(0.50))
-
-frames = [
-    go.Frame(data=make_plotly_traces(w), name=f'{w:.2f}')
-    for w in w_vals
-]
-fig_interactive.frames = frames
-
-steps = [
-    dict(method='animate', args=[[f'{w:.2f}'], dict(mode='immediate', frame=dict(duration=150, redraw=True))], label=f'w = {w:.2f}')
-    for w in w_vals
-]
-
-sliders = [dict(
-    active=1,
-    currentvalue=dict(prefix='Market Real Wage: ', visible=True, xanchor='center', font=dict(size=12, color='#2e7d32')),
-    pad=dict(t=25, b=5), len=0.9, x=0.05, steps=steps
-)]
-
-fig_interactive.update_layout(
-    title='Interactive Farm-Household Model: Varying the Market Wage',
-    xaxis=dict(title='Leisure l (hours)', range=[0, 105], showgrid=True, gridcolor='#f1f5f9'),
-    yaxis=dict(title='Consumption / Output c', range=[0, 45], showgrid=True, gridcolor='#f1f5f9'),
-    height=500, width=720,
-    sliders=sliders,
-    paper_bgcolor='rgba(0,0,0,0)',
-    plot_bgcolor='rgba(0,0,0,0)'
-)
-fig_interactive
+    # Plot curves
+    ax.plot(Lbar - LD, q_opt, 'ob', markersize=7) 
+    ax.plot(lei, yline, color='#d95f02', lw=2.0)  
+    ax.plot(lei, indif(lei, u_opt, beta), 'k', lw=1.8)
+    ax.plot(l_opt, c_opt, 'ob', markersize=7)
+    
+    # Dashed reference lines
+    ax.vlines(l_opt, 0, c_opt, linestyles='dashed', color='#00558f', lw=1.2)
+    ax.hlines(c_opt, 0, l_opt, linestyles='dashed', color='#00558f', lw=1.2)
+    ax.vlines(Lbar - LD, 0, q_opt, linestyles='dashed', color='#00558f', lw=1.2)
+    ax.hlines(profits, 0, Lbar, linestyles='dashed', color='#00558f', lw=1.2)
+    ax.vlines(Lbar, 0, F(Tbar, Lbar, alpha), color='#00558f', lw=2.0)
+    ax.hlines(q_opt, 0, Lbar, linestyles='dashed', color='#00558f', lw=1.2)
+    
+    # Text labels on right axis and left axis
+    ax.text(Lbar + 1.5, profits, r'$\Pi ^*$', fontsize=16, va='center')
+    ax.text(Lbar + 1.5, q_opt, r'$F(\bar T, L^{*})$', fontsize=16, va='center')
+    ax.text(-5, c_opt, r'$c^*$', fontsize=16, ha='right', va='center')
+    
+    # Bottom arrows for L* and l*
+    ax.annotate('', (Lbar - LD, 2), (Lbar, 2), arrowprops=dict(arrowstyle='->', lw=1.2, color='black'))
+    ax.text((2 * Lbar - LD) / 2, 4, r'$L^{*}$', fontsize=16, ha='center')
+    
+    ax.annotate('', (0, 7), (l_opt, 7), arrowprops=dict(arrowstyle='<-', lw=1.2, color='black'))
+    ax.text(l_opt / 2, 9, r'$l^*$', fontsize=16, ha='center')
 """, metadata={'tags': ['hide-input']}))
 
-# Conclusion & Takeaways
+# Case 1: Household that Sells Wage Labor
 cells.append(nbf.v4.new_markdown_cell(r"""---
 
-## 6. Summary of Key Theoretical Insights
+## 3. Case 1: Household Sells Wage Labor and Buys Food
+
+When the market real wage is relatively high ($w = 1.0$), optimal farm labor demand is $L^* = 25\text{h}$. 
+
+Family labor supply is $L^s = \bar{L} - l^* = 100 - 37.5 = 62.5\text{h}$. The household:
+* Works $25\text{h}$ on its own farm.
+* **Hires out (sells) $37.5\text{h}$ of surplus labor** on the off-farm labor market.
+* Uses wage income to purchase additional food on the market ($c^* = 87.5 > F(\bar{T}, L^*) = 50$).
+"""))
+
+# Plot Case 1
+cells.append(nbf.v4.new_code_cell(r"""fig, ax = plt.subplots(figsize=(9, 7.5), dpi=120)
+plot_production(TBAR, LBAR, W, ax)
+plot_farmconsumption(TBAR, LBAR, W, ax)
+ax.set_title("The Separable Household Model: Net Labor Exporter (w = 1.0)", fontsize=13, fontweight='bold', pad=12)
+ax.set_xlim(0, LBAR + 20)
+ax.set_ylim(0, F(TBAR, LBAR) + 20)
+ax.set_xlabel(r'Leisure $l$', fontsize=12)
+ax.set_ylabel(r'Consumption $c$', fontsize=12)
+plt.tight_layout()
+plt.show()
+""", metadata={'tags': ['hide-input']}))
+
+# Case 2: Household that Hires Labor
+cells.append(nbf.v4.new_markdown_cell(r"""---
+
+## 4. Case 2: Household Hires Wage Labor and Sells Food
+
+When the market real wage is lower ($w = 0.55$), the farm's labor demand expands to $L^* = 82.6\text{h}$.
+
+Family labor supply is $L^s = \bar{L} - l^* = 100 - 54.8 = 45.2\text{h}$. The household:
+* Devotes all $45.2\text{h}$ of family labor to the farm.
+* **Hires in $37.4\text{h}$ of outside hired labor**.
+* **Sells surplus crop output** on the market ($F(\bar{T}, L^*) = 90.9 > c^* = 67.5$).
+"""))
+
+# Plot Case 2
+cells.append(nbf.v4.new_code_cell(r"""fig, ax = plt.subplots(figsize=(9, 7.5), dpi=120)
+plot_production(TBAR, LBAR, W * 0.55, ax)
+plot_farmconsumption(TBAR, LBAR, W * 0.55, ax)
+ax.set_title("The Separable Household Model: Net Labor Importer (w = 0.55)", fontsize=13, fontweight='bold', pad=12)
+ax.set_xlim(0, LBAR + 20)
+ax.set_ylim(0, F(TBAR, LBAR) + 20)
+ax.set_xlabel(r'Leisure $l$', fontsize=12)
+ax.set_ylabel(r'Consumption $c$', fontsize=12)
+plt.tight_layout()
+plt.show()
+""", metadata={'tags': ['hide-input']}))
+
+# Section 5: Summary Table
+cells.append(nbf.v4.new_markdown_cell(r"""---
+
+## 5. Summary: Key Theoretical Takeaways
 
 | Dimension | Autarkic (Chayanovian) Model | Separable Market Model |
 | :--- | :--- | :--- |
-| **Labor Demand ($L^*$)** | Depends on family size $\bar{L}$ and preferences $\beta$. | Depends strictly on $(T, w, p)$; independent of $\bar{L}, \beta$. |
-| **Land Allocation** | Small farms cultivate land more intensively ($L^*/T \uparrow$). | All farms equate $\text{MP}_L = w/p$; identical intensity $L^*/T$. |
-| **Inverse Relationship (IR)** | **Present:** Diminishing returns + fixed family labor supply. | **Absent:** Incomplete/missing markets are required to generate the IR. |
-| **Welfare Impact of Prices** | Ambiguous (depends on shadow price). | **Deaton (1989):** $\Delta \text{Welfare} \approx (Q^* - c^*) \Delta p$. Net producers gain; net consumers lose. |
+| **Separability** | **Non-separable:** Production depends on consumer preferences $\beta$ and time endowment $\bar{L}$. | **Separable:** Production $L^*$ depends only on technology $(A, \alpha)$, land $\bar{T}$, and wage $w$. |
+| **Labor Allocation** | Labor intensity $L^*/\bar{T}$ varies across farms. | All farms equate $\text{MP}_L = w$; identical labor intensity $L^*/\bar{T}$. |
+| **Inverse Productivity Relationship** | **Present:** Small farms cultivate land more intensively due to diminishing returns to labor. | **Absent:** Incomplete/missing markets are required for the inverse relationship to hold. |
+| **Price / Policy Response** | Ambiguous response to food price changes. | **Deaton (1989):** Welfare change $\Delta W \approx (Q^* - c^*) \Delta p$. Net sellers gain; net buyers lose. |
 """))
 
 nb['cells'] = cells
@@ -338,4 +299,4 @@ nb['cells'] = cells
 with open('notebooks/farm_household.ipynb', 'w', encoding='utf-8') as f:
     nbf.write(nb, f)
 
-print(f'Successfully generated notebooks/farm_household.ipynb with {len(cells)} cells!')
+print(f"Successfully generated notebooks/farm_household.ipynb with {len(cells)} cells!")
