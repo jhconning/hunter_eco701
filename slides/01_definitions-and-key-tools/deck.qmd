@@ -261,7 +261,8 @@ $$u_A(e_A, e_B) = \underbrace{\left(15 - \tfrac{1}{4}\,e_B\right)e_A}_{\text{val
 ## Interactive: From Payoffs to the Reaction Curve
 
 For each choice of Bob ($e_B$), Alfredo solves $\max_{e_A} u_A(e_A, e_B)$ at the peak (left). Tracing these peaks across all $e_B$ forms Alfredo's **reaction curve** (right).
-*This interaction works only if slide is opened as HTML. Click on the slider to start.
+
+*Drag the ball on the slider to start* 
 
 ```{python}
 #| echo: false
@@ -505,6 +506,97 @@ $$\frac{\partial W}{\partial e_A} = \underbrace{\left(15 - \tfrac14 e_B - e_A\ri
 
 ---
 
+## Internalizing Harm: The Pigouvian Mechanism {.compact}
+
+::: {.columns}
+::: {.column width="56%"}
+::: {.incremental}
+- **The Market Failure:** Private curves $e_A = 15 - \tfrac14 e_B$ cross at $(12, 12)$ because each fisher ignores their $-\tfrac14 e$ external damage
+- **The Pigouvian Solution:** Charge a fee/tax equal to marginal external harm: $\tau = \tfrac14 e_B$ per hour
+- **Taxed Private Optimization:**
+  $$\max_{e_A} \left[ u_A - \tau \cdot e_A \right] \implies 15 - \tfrac14 e_B - e_A - \tfrac14 e_B = 0$$
+  $$\mathbf{e_A^{\text{taxed}}(e_B) = 15 - \tfrac12\,e_B}$$
+- The tax **rotates the reaction curve inward** (slope $-0.25 \rightarrow -0.50$)
+- Decentralized self-interested play under the tax moves the Nash equilibrium directly to the **social optimum $(10, 10)$**!
+:::
+:::
+
+::: {.column width="44%"}
+```{python}
+#| echo: false
+#| fig-align: center
+import plotly.graph_objects as go
+import numpy as np
+
+e_grid = np.linspace(0, 16, 100)
+fig_pigou = go.Figure()
+
+# Private reaction curves
+fig_pigou.add_trace(go.Scatter(
+    x=e_grid, y=15 - 0.25*e_grid,
+    name="Private Bob (slope -¼)",
+    line=dict(color="#b8842a", width=2.5),
+    hovertemplate="Private Bob: e_B = 15 − ¼ e_A<extra></extra>"
+))
+fig_pigou.add_trace(go.Scatter(
+    x=15 - 0.25*e_grid, y=e_grid,
+    name="Private Alfredo (slope -4)",
+    line=dict(color="#24325c", width=2.5),
+    hovertemplate="Private Alfredo: e_A = 15 − ¼ e_B<extra></extra>"
+))
+
+# Taxed / Social reaction curves
+fig_pigou.add_trace(go.Scatter(
+    x=e_grid, y=15 - 0.5*e_grid,
+    name="Taxed Bob (slope -½)",
+    line=dict(color="#2e7d32", width=2.5, dash="dash"),
+    hovertemplate="Taxed Bob: e_B = 15 − ½ e_A<extra></extra>"
+))
+fig_pigou.add_trace(go.Scatter(
+    x=15 - 0.5*e_grid, y=e_grid,
+    name="Taxed Alfredo (slope -2)",
+    line=dict(color="#1b5e20", width=2.5, dash="dash"),
+    hovertemplate="Taxed Alfredo: e_A = 15 − ½ e_B<extra></extra>"
+))
+
+# Equilibria markers
+fig_pigou.add_trace(go.Scatter(
+    x=[12], y=[12],
+    mode="markers+text",
+    text=["Untaxed Nash (12,12)"],
+    textposition="top right",
+    marker=dict(size=10, color="#c83232"),
+    name="Untaxed (12,12)",
+    hovertemplate="Untaxed Nash: (12, 12)<extra></extra>"
+))
+fig_pigou.add_trace(go.Scatter(
+    x=[10], y=[10],
+    mode="markers+text",
+    text=["Taxed / Social (10,10)"],
+    textposition="bottom left",
+    marker=dict(size=10, color="#2e7d32"),
+    name="Taxed (10,10)",
+    hovertemplate="Taxed Optimum: (10, 10)<extra></extra>"
+))
+
+fig_pigou.update_layout(
+    xaxis=dict(title="Alfredo's hours (e_A)", range=[0, 16], showgrid=True, gridcolor="#e5e9f0"),
+    yaxis=dict(title="Bob's hours (e_B)", range=[0, 16], showgrid=True, gridcolor="#e5e9f0"),
+    height=410,
+    width=470,
+    margin=dict(l=35, r=15, t=15, b=35),
+    legend=dict(orientation="h", y=1.22, font=dict(size=10)),
+    font=dict(family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif", size=11),
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(0,0,0,0)"
+)
+fig_pigou
+```
+:::
+:::
+
+---
+
 ## Judging Outcomes {.divider}
 
 Pareto efficiency, and the possibility frontiers of an economy
@@ -546,15 +638,16 @@ Pareto efficiency, and the possibility frontiers of an economy
 
 ---
 
-## The Utility Possibility Frontier
+## The Utility Possibility Frontier & Coasian Bargaining {.compact}
 
 ::: {.columns}
 ::: {.column width="56%"}
 ::: {.incremental}
-- Now let hours vary continuously and allow **side payments** of catch: feasible payoff pairs fill out a whole region
-- Maximum joint surplus is $75 + 75 = 150$, at $e_A = e_B = 10$; utils transfer one-for-one, so the boundary is the line $u_A + u_B = 150$ — the **utility possibility frontier**
-- All four matrix outcomes lie on or inside it; the Nash outcome leaves $150 - 144 = 6$ unrealized
-- **Social dilemmas trap society *inside* its possibility frontier** — the recurring image of this course
+- **Private Contracting:** If fishers can negotiate with **side payments** $t$, they produce max cake ($e_A = e_B = 10, W^* = 150$) and transfer catch to split it
+- Utils transfer 1-for-1: $(75 + t) + (75 - t) = 150$, tracing the linear **Utility Possibility Frontier: $u_A + u_B = 150$**
+- **The Coase Theorem:** Zero transaction costs + defined property rights $\implies$ private bargaining reaches the UPF
+- Nash $(72, 72)$ is the **threat point / fallback** — bargaining splits the $150 - 144 = 6$ unit **economic rent**
+- *Why Coase fails:* information asymmetry (hidden hours at sea) and distributional conflict over shares
 :::
 :::
 ::: {.column width="44%"}
@@ -575,28 +668,28 @@ fig.add_trace(go.Scatter(
     mode="lines",
     name="UPF: u_A + u_B = 150",
     line=dict(color="#24325c", width=3),
-    hovertemplate="u_A: %{x:.1f}, u_B: %{y:.1f}<extra>UPF Frontier</extra>"
+    hovertemplate="UPF: u_A = %{x:.1f}, u_B = %{y:.1f}<extra></extra>"
 ))
 
 # Inefficient Nash point a
 fig.add_trace(go.Scatter(
     x=[72], y=[72],
     mode="markers+text",
-    text=["a: (12,12) Nash"],
+    text=["a: (12,12) Nash Fallback"],
     textposition="bottom left",
     marker=dict(size=11, color="#c83232"),
     name="a: Nash (72,72)",
-    hovertemplate="Nash (12,12): u_A=72, u_B=72<br>(Inefficient: inside frontier)<extra></extra>"
+    hovertemplate="Nash Threat Point: (72, 72)<br>Leaves 6 utils unrealized<extra></extra>"
 ))
 
-# Efficient matrix outcomes b, c, d
+# Matrix outcomes b, c, d
 fig.add_trace(go.Scatter(
-    x=[70, 75, 78], y=[78, 75, 70],
+    x=[78, 75, 70], y=[70, 75, 78],
     mode="markers+text",
-    text=["b: (10,12)", "c: (10,10) Planner", "d: (12,10)"],
-    textposition=["top left", "top right", "bottom right"],
+    text=["b: (12,10)", "c: (10,10) Coase Optimum", "d: (10,12)"],
+    textposition=["bottom right", "top right", "top left"],
     marker=dict(size=11, color="#2e7d32"),
-    name="b, c, d: Efficient",
+    name="Matrix Outcomes",
     hovertemplate="%{text}: u_A=%{x}, u_B=%{y}<extra></extra>"
 ))
 
@@ -606,8 +699,8 @@ fig.update_layout(
     height=410,
     width=470,
     margin=dict(l=35, r=15, t=15, b=35),
-    legend=dict(orientation="h", y=1.18, font=dict(size=10)),
-    font=dict(family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif", size=12),
+    legend=dict(orientation="h", y=1.20, font=dict(size=10)),
+    font=dict(family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif", size=11),
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)"
 )
