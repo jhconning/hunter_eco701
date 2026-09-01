@@ -14,7 +14,7 @@ Most economics textbooks typically present the decisions of firms and consumers 
 In developing country agriculture, however, the primary economic actor is the **farm household**—an enterprise that operates simultaneously as a **producer** (utilizing land and labor to grow crops) and a **consumer** (consuming food and valuing leisure).
 
 This notebook explores:
-1. **The Autarkic (Chayanovian) Household:** When labor or commodity markets are absent, production and consumption decisions are **non-separable** and an **inverse farm-size productivity relationship** emerges.
+1. **The Autarkic (Chayanovian) Household:** When labor or commodity markets are absent, production and consumption decisions are **non-separable** and the household maximizes utility subject to its own production possibilities.
 2. **The Separable Farm Household (Singh, Squire, and Strauss 1986; Benjamin 1992):** With complete, competitive markets for labor and output, the farm's production decision separates completely from the household's preferences.
 3. **Labor Regimes:** Visualizing households that sell wage labor vs. households that hire in wage labor.
 """))
@@ -133,41 +133,6 @@ cells.append(nbf.v4.new_code_cell(r"""def chayanov(Tbar=TBAR, Lbar=LBAR, alpha=A
     plt.show()
 
 chayanov(TBAR, LBAR, ALPHA, BETA)
-""", metadata={'tags': ['hide-input']}))
-
-# Inverse Farm Size Relationship
-cells.append(nbf.v4.new_markdown_cell(r"""### The Inverse Farm Size-Productivity Relationship under Autarky
-
-Because the autarkic household cannot hire outside labor or rent land, its labor allocation $L^*_{\text{aut}}$ is pinned down by its family time endowment $\bar{L}$. As farm size $\bar{T}$ increases:
-* Labor per unit of land $L/\bar{T}$ falls.
-* Yield (output per unit of land $Q/\bar{T}$) declines.
-* The shadow price of labor $w^*$ rises.
-
-This generates the well-known **inverse farm-size productivity relationship** commonly observed in developing economies with imperfect land and labor markets.
-"""))
-
-# Inverse Relationship Plot
-cells.append(nbf.v4.new_code_cell(r"""Tb = np.linspace(10, 200, 100)
-l_arr, q_arr, _ = HH_autarky(Tb, LBAR, ALPHA, BETA)
-
-fig, ax1 = plt.subplots(figsize=(8, 5.5), dpi=120)
-
-color = '#1f77b4'
-ax1.plot(Tb, q_arr / Tb, color=color, lw=2.5, label=r'Output per unit land ($Q/\bar{T}$)')
-ax1.set_xlabel(r'Farm Size $\bar{T}$', fontsize=12)
-ax1.set_ylabel(r'Output per unit land ($Q/\bar{T}$)', color=color, fontsize=12)
-ax1.tick_params(axis='y', labelcolor=color)
-ax1.grid(True, alpha=0.3)
-
-ax2 = ax1.twinx()
-color = '#333333'
-ax2.plot(Tb, FL(Tb, LBAR - l_arr, ALPHA), 'k--', lw=2.0, label=r'Shadow price of labor ($w^*$)')
-ax2.set_ylabel(r'Shadow Price of Labor ($w^*$)', color=color, fontsize=12)
-ax2.tick_params(axis='y', labelcolor=color)
-
-plt.title('Chayanovian Autarky: Inverse Farm-Size Productivity Relationship', fontsize=13, fontweight='bold', pad=12)
-plt.tight_layout()
-plt.show()
 """, metadata={'tags': ['hide-input']}))
 
 # Section 2: Separable Model
@@ -289,8 +254,8 @@ cells.append(nbf.v4.new_markdown_cell(r"""---
 | Dimension | Autarkic (Chayanovian) Model | Separable Market Model |
 | :--- | :--- | :--- |
 | **Separability** | **Non-separable:** Production depends on consumer preferences $\beta$ and time endowment $\bar{L}$. | **Separable:** Production $L^*$ depends only on technology $(A, \alpha)$, land $\bar{T}$, and wage $w$. |
-| **Labor Allocation** | Labor intensity $L^*/\bar{T}$ varies across farms. | All farms equate $\text{MP}_L = w$; identical labor intensity $L^*/\bar{T}$. |
-| **Inverse Productivity Relationship** | **Present:** Small farms cultivate land more intensively due to diminishing returns to labor. | **Absent:** Incomplete/missing markets are required for the inverse relationship to hold. |
+| **Labor Allocation** | Determined by household utility maximization against farm production frontier. | Determined by profit maximization ($\text{MP}_L = w$). |
+| **Labor Market Status** | Autarkic (self-sufficient; no hiring in or out). | Net labor exporter ($L^* < L^s$) or Net labor importer ($L^* > L^s$). |
 | **Price / Policy Response** | Ambiguous response to food price changes. | **Deaton (1989):** Welfare change $\Delta W \approx (Q^* - c^*) \Delta p$. Net sellers gain; net buyers lose. |
 """))
 
