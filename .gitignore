@@ -163,7 +163,7 @@ slides/demos/feature-tour.quarto_ipynb
 
 # Decktape/quarto PDF export of a deck, produced locally by verify_deck.py or
 # by hand. Render output, same as deck.html - CI builds its own copy.
-slides/*/deck.pdf
+slides/*/deck*.pdf
 
 # LaTeX build artifacts (the compiled syllabus PDF itself IS tracked)
 *.aux

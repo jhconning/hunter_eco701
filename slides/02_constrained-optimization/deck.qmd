@@ -838,7 +838,7 @@ $$u(c_1, c_2) = c_1 + \sqrt{c_2}$$
 - Evaluate marginal bang-per-buck at this corner:
   $$\frac{u_1}{p_1} = \frac{1}{5} = 0.20 < \frac{u_2}{p_2} = \frac{1}{2\sqrt{2}} \approx 0.3536$$
 - Good 2 gives higher return per \$ *even when all income spent on it*.
-- The consumer wants to sell negative amounts of good 1, but non-negativity ($c_1 \ge 0$) forbids it!
+- The consumer wants to **sell** (buy negative amounts of) good 1, but non-negativity ($c_1 \ge 0$) forbids it!
 - **Result:** Corner optimum at $(c_1^*, c_2^*) = (0, 2)$.
 :::
 :::

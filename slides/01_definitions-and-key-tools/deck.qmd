@@ -525,7 +525,7 @@ fig.update_layout(
     width=470,
     margin=dict(l=35, r=15, t=15, b=35),
     legend=dict(orientation="h", y=1.20, font=dict(size=10)),
-    font=dict(family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif", size=11),
+    font=dict(family="-apple-system, Arial, Helvetica, sans-serif", size=11),
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)"
 )
@@ -748,7 +748,7 @@ sliders = [dict(
         visible=True,
         xanchor="center",
         offset=10,
-        font=dict(size=13, color="#24325c", family="-apple-system, Segoe UI, sans-serif")
+        font=dict(size=13, color="#24325c", family="-apple-system, Arial, sans-serif")
     ),
     pad=dict(t=30, b=5),
     len=0.92,
@@ -767,7 +767,7 @@ fig.update_layout(
     showlegend=False,
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif", size=12),
+    font=dict(family="-apple-system, Arial, Helvetica, sans-serif", size=12),
     sliders=sliders
 )
 fig
@@ -836,7 +836,7 @@ fig.update_layout(
     width=470,
     margin=dict(l=35, r=15, t=15, b=35),
     legend=dict(orientation="h", y=1.18, font=dict(size=11)),
-    font=dict(family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif", size=12),
+    font=dict(family="-apple-system, Arial, Helvetica, sans-serif", size=12),
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)"
 )
@@ -996,7 +996,7 @@ fig_pigou.update_layout(
     width=610,
     margin=dict(l=35, r=35, t=20, b=45),
     showlegend=False,
-    font=dict(family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif", size=11),
+    font=dict(family="-apple-system, Arial, Helvetica, sans-serif", size=11),
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
     sliders=sliders
