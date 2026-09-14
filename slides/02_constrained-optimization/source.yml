@@ -2,7 +2,7 @@ topic: "Constrained Optimization"
 ideas_md_topic_number: 2
 source_file: "E701_F18 _slidesI.pptx"
 source_slides: [43, 102]
-status: done
+status: done (migrated from Marp deck.md to Quarto Reveal.js deck.qmd; verified cleanly via tools/verify_deck.py with 0 margin/footer overflow flags)
 notes: >
   Large topic (60 slides, 152 top-level equations) - converted in three
   sub-chunks per Jonathan's 2026-07-15 decision, all folded into
