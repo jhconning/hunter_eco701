@@ -50,6 +50,7 @@ execute:
 :::: {.columns}
 ::: {.column width="55%"}
 ::: {.incremental}
+- **The Hill:** $f(x) = 15 - (x - 5)^2$
 - **Unconstrained Peak ($x = 5$):**
   - Tangent is flat: $f'(5) = 0$.
   - But $x = 5$ lies in the **infeasible zone** ($x > 2$).
@@ -778,7 +779,6 @@ $$x_1 = MPL_1 \cdot L_1, \qquad x_2 = MPL_2 \cdot L_2$$
 
 ## Solving Welfare Maximization on the PPF {.compact}
 
-Form the Lagrangian:
 $$\mathcal{L}(x_1, x_2, \lambda) = u(x_1, x_2) + \lambda \left(\bar{L} - \frac{x_1}{MPL_1} - \frac{x_2}{MPL_2}\right)$$
 
 ::: {.incremental}
@@ -991,7 +991,7 @@ With two constraints, there are $2^2 = 4$ possible combinations. Dropping the tr
   - Ignore boat capacity. Standard Cobb-Douglas budget problem:
     $$c_W = \frac{I}{2 p_W} = \frac{100}{2(2)} = 25, \qquad c_F = \frac{I}{2 p_F} = \frac{100}{2(1)} = 50$$
   - **Check Feasibility:** $c_F + c_W = 50 + 25 = 75 \le 80$ tons. **FEASIBLE!**
-  - Objective: $U = 50 \times 25 = 1250$. Multipliers: $\lambda = 12.5, \mu = 0$.
+  - Objective: $U = 50 \times 25 = 1250$. Multipliers: $\lambda = 25, \mu = 0$.
 - **Regime 2: Transport Binds Only ($\lambda = 0, \mu > 0$)**
   - Ignore money budget. Equal weights ($w_F = 1, w_W = 1$):
     $$c_W = \frac{T}{2 w_W} = 40, \qquad c_F = \frac{T}{2 w_F} = 40$$
@@ -1113,9 +1113,9 @@ Let's verify the shadow prices numerically by perturbing the constraints:
   $$U^*(101) = 50.5 \times 25.25 = 1275.125$$
 - Numerical change in welfare:
   $$\Delta U^* = 1275.125 - 1250 = 25.125$$
-  $$\frac{\Delta U^*}{\Delta I} \approx 25.125 \div 2 = 12.56$$
+  $$\frac{\Delta U^*}{\Delta I} = \frac{25.125}{1} = 25.125$$
 - Exact analytical multiplier:
-  $$\lambda^* = 12.5 \approx \frac{\Delta U^*}{\Delta I}$$
+  $$\lambda^* = \frac{I}{4} = 25 \approx \frac{\Delta U^*}{\Delta I}$$
 :::
 :::
 

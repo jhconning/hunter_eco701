@@ -57,9 +57,10 @@ Topic 1 closed with the **Bridge Slide (Slide 39)**:
 - [`new_ideas.md`](file:///y:/Hunter/eco701/slides/02_constrained-optimization/new_ideas.md): Backlog of potential additions (Python solver slide, 3 hand cases vs. 1 `scipy` call, rotatable 3D Plotly view, corner solution graphic).
 - [`source.yml`](file:///y:/Hunter/eco701/slides/02_constrained-optimization/source.yml): Metadata and conversion history from the legacy slides.
 - `media/`: Contains legacy Mathcad equation crops and charts.
-- `figs/`: Contains modern Python-generated figures for the Earthquake relief problem, tangency checks, and 3D surfaces.
-- **Numerical Companion Notebook:**
+- `figs/`: Contains modern Python-generated figures for the Earthquake relief problem, tangency checks, and 3D surfaces. All legacy Mathcad crops have been completely replaced with modern matplotlib vector figures.
+- **Companion Notebooks:**
   - [`notebooks/topic02_constrained_optimization_numerical.ipynb`](file:///y:/Hunter/eco701/notebooks/topic02_constrained_optimization_numerical.ipynb): Contains fully verified symbolic and numerical solutions (`scipy.optimize.minimize` SLSQP) for the single-constraint consumer problem, corner solutions (quasi-linear utility), and the multi-constraint Earthquake relief problem.
+  - [`notebooks/topic02_earthquake_relief.ipynb`](file:///y:/Hunter/eco701/notebooks/topic02_earthquake_relief.ipynb): Dedicated companion notebook working through the Earthquake Relief problem (PS1 Q3), 3-regime checking, SymPy derivations, SciPy optimization, Envelope Theorem shadow price tests, and the logistics bottleneck tipping point.
 
 ---
 
