@@ -125,21 +125,33 @@ Consider the quadratic function $f(x) = x^2 - 10x + 20$:
 
 ---
 
-## Necessary vs. Sufficient Conditions
+## Necessary vs. Sufficient Conditions {.compact}
 
-::: {.incremental}
-- **Necessary condition for a local maximum:**
-  $$f(x^*) \text{ is a local max} \implies f'(x^*) = 0$$
-  - Every smooth unconstrained peak has a flat tangent.
-  - But flat tangents also occur at valleys and inflection points!
-- **Sufficient condition for a local maximum:**
-  $$f'(x^*) = 0 \quad \text{and} \quad f''(x^*) < 0 \implies f(x^*) \text{ is a strict local max}$$
-- **Sufficient condition for a local minimum:**
-  $$f'(x^*) = 0 \quad \text{and} \quad f''(x^*) > 0 \implies f(x^*) \text{ is a strict local min}$$
+:::: {.columns}
+::: {.column width="50%"}
+::: {.callout-warning icon=false}
+## Necessary (First-Order) Condition
+$$f(x^*) \text{ is a local optimum} \implies f'(x^*) = 0$$
+
+- Flat slope is required at every smooth interior optimum.
+- **Pitfall:** Flat tangents also occur at valleys and inflection points!
+:::
 :::
 
-::: {.fragment}
-> *The first derivative tells you the slope is zero. The second derivative tells you how the slope is curving.*
+::: {.column width="50%"}
+::: {.callout-note icon=false}
+## Sufficient (Second-Order) Conditions
+At a stationary point ($f'(x^*) = 0$):
+
+- $f''(x^*) < 0 \implies$ **Strict Local Maximum** (concave $\cap$)
+- $f''(x^*) > 0 \implies$ **Strict Local Minimum** (convex $\cup$)
+:::
+:::
+::::
+
+::: {.callout-tip icon=false}
+## The Core Intuition
+*The first derivative tells you the ground is flat. The second derivative tells you whether you are standing on a peak or at the bottom of a valley.*
 :::
 
 ---
@@ -781,14 +793,14 @@ $$\max_{x_1, \dots, x_n} \; f(x_1, \dots, x_n) \quad \text{s.t.} \quad g^m(x_1, 
 
 Let $V(c_1, \dots, c_M) = f(x^*(c))$ be the **value function** (maximum value as a function of the constraint bounds $c$).
 
-::: {.incremental}
-- How does the maximum attainable value change when constraint $k$ is relaxed?
-  $$\frac{\partial V(c)}{\partial c_k} = \frac{\partial f(x^*(c))}{\partial c_k}$$
-- By the **Envelope Theorem**:
-  $$\frac{\partial V}{\partial c_k} = \left.\frac{\partial \mathcal{L}}{\partial c_k}\right|_{x^*, \lambda^*} = \lambda_k^*$$
-- **The Core Lesson:** The Lagrange multiplier $\lambda_k^*$ is the **shadow price** of constraint $k$.
-  - It tells the decision maker the exact marginal value of relaxing scarcity by one unit.
-  - If relaxing the constraint costs less than $\lambda_k^*$, expand capacity!
+::: {.callout-note icon=false}
+## The Envelope Theorem (Shadow Price Formulation)
+$$\frac{\partial V(c)}{\partial c_k} = \left.\frac{\partial \mathcal{L}}{\partial c_k}\right|_{x^*, \lambda^*} = \lambda_k^*$$
+:::
+
+::: {.callout-tip icon=false}
+## Economic Interpretation
+$\lambda_k^*$ is the **shadow price** of constraint $k$: the exact marginal valuation of relaxing scarcity by one unit. If expanding resource $k$ costs less than $\lambda_k^*$, expand capacity!
 :::
 
 ---
@@ -814,15 +826,18 @@ So far we assumed:
 
 :::: {.columns}
 ::: {.column width="60%"}
-Consider quasi-linear utility: $u(c_1, c_2) = c_1 + \sqrt{c_2}$ with $p_1 = 5, p_2 = 1, I = 2$:
+Consider quasi-linear utility with $p_1 = 5, p_2 = 1, I = 2$:
+$$u(c_1, c_2) = c_1 + \sqrt{c_2}$$ 
+
+
 
 ::: {.incremental}
 - Marginal utilities: $u_1 = 1$, $u_2 = \frac{1}{2\sqrt{c_2}}$.
-- If the consumer spends all income on good 2:
-  $$c_2 = \frac{I}{p_2} = 2, \quad c_1 = 0$$
+- If consumer spends all income on good 2:
+  $c_2 = \frac{I}{p_2} = 2, \quad c_1 = 0$
 - Evaluate marginal bang-per-buck at this corner:
   $$\frac{u_1}{p_1} = \frac{1}{5} = 0.20 < \frac{u_2}{p_2} = \frac{1}{2\sqrt{2}} \approx 0.3536$$
-- Good 2 delivers higher return per dollar *even when all income is spent on it*.
+- Good 2 gives higher return per \$ *even when all income spent on it*.
 - The consumer wants to sell negative amounts of good 1, but non-negativity ($c_1 \ge 0$) forbids it!
 - **Result:** Corner optimum at $(c_1^*, c_2^*) = (0, 2)$.
 :::

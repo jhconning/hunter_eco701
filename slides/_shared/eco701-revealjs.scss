@@ -151,3 +151,71 @@ $presentation-line-height: 1.35;
 .reveal blockquote p {
   margin: 0;
 }
+
+// Callout / Definition / Theorem boxes (Recommendation C)
+.reveal .callout {
+  margin: 0.5em 0;
+  border-radius: 6px;
+  font-size: 0.85em;
+  border-left-width: 4px;
+}
+
+.reveal .callout .callout-header {
+  padding: 0.35em 0.7em 0.2em;
+  font-size: 0.95em;
+  font-weight: 600;
+}
+
+.reveal .callout .callout-body {
+  padding: 0.2em 0.7em 0.45em;
+  font-size: 0.9em;
+  line-height: 1.35;
+}
+
+.reveal .callout.callout-note {
+  border-left-color: #24325c;
+  background-color: #f4f6fa;
+
+  .callout-title {
+    color: #24325c;
+    font-weight: 600;
+  }
+}
+
+.reveal .callout.callout-tip,
+.reveal .callout.callout-important {
+  border-left-color: #b8842a;
+  background-color: #fdf8ee;
+
+  .callout-title {
+    color: #8c6014;
+    font-weight: 600;
+  }
+}
+
+.reveal .callout.callout-warning,
+.reveal .callout.callout-caution {
+  border-left-color: #a04434;
+  background-color: #fcf4f2;
+
+  .callout-title {
+    color: #a04434;
+    font-weight: 600;
+  }
+}
+
+// Code cell polish (Python / computational snippets - Recommendation D)
+.reveal div.sourceCode {
+  border-radius: 6px;
+  border: 1px solid #e1e4ea;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin: 0.5em 0;
+}
+
+.reveal pre code {
+  font-size: 0.72em;
+  line-height: 1.38;
+  padding: 0.7em 1em;
+  border-radius: 6px;
+}
+

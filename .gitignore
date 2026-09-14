@@ -189,4 +189,5 @@ docs/Gradient Descent.md
 .env
 **/.env
 slides/*/*.quarto_ipynb*
+_extensions/
 
