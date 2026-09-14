@@ -41,9 +41,9 @@ Recall the closing bridge from Topic 1:
 :::
 
 ::: {.column width="40%"}
-<div style="text-align: center; margin-top: 20px;">
-  <img src="figs/profit-max-graph.png" style="width: 95%; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-  <p style="font-size: 0.65em; color: #666; margin-top: 8px;">The unconstrained peak: where the slope is zero.</p>
+<div style="text-align: center; margin-top: 15px;">
+  <img src="figs/hill-and-fence-graph.png" style="width: 100%; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+  <p style="font-size: 0.65em; color: #666; margin-top: 8px;">Hitting the fence ($x \le 2$) before reaching the unconstrained peak ($x=5$).</p>
 </div>
 :::
 ::::
