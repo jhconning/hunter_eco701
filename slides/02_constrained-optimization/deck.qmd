@@ -23,27 +23,48 @@ execute:
 
 ## The Hill and the Fence {.compact}
 
-Recall the closing bridge from Topic 1:
+:::: {.columns}
+::: {.column width="55%"}
+::: {.incremental}
+- In Topic 1, choices were **unconstrained** (e.g., fishing effort with no budget or quota).
+- Real economic choices are defined by **scarcity**:
+  - **Consumers:** utility subject to an **income budget**
+  - **Firms:** cost minimization subject to an **output quota**
+  - **Relief agencies:** aid subject to **transport capacity**
+- **Unconstrained:** *"Where is the hill flat?"*
+- **Constrained:** *"How high can you climb before hitting the fence?"*
+:::
+:::
+
+::: {.column width="45%"}
+<div style="text-align: center; margin-top: 10px;">
+  <img src="figs/hill-and-fence-graph.png" style="width: 100%; border-radius: 6px; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
+</div>
+:::
+::::
+
+---
+
+## Tangency Fails at the Fence {.compact}
 
 :::: {.columns}
-::: {.column width="60%"}
+::: {.column width="55%"}
 ::: {.incremental}
-- In Topic 1, Alfredo chose his lake fishing hours freely:
-  $$\max_{e_A} \; u_A(e_A, e_B)$$
-  There was no budget, no quota, and no ceiling on total effort. That was **unconstrained optimization**.
-- Real economic choices are fundamentally defined by **scarcity**:
-  - **Consumers** maximize satisfaction subject to an **income budget**
-  - **Firms** minimize cost subject to an **output quota**
-  - **Relief agencies** maximize aid subject to a **transport limit**
-- **Unconstrained choice asks:** *"Where is the hill flat?"*
-- **Constrained choice asks:** *"How high can you climb before hitting the fence?"*
+- **Unconstrained Peak ($x = 5$):**
+  - Tangent is flat: $f'(5) = 0$.
+  - But $x = 5$ lies in the **infeasible zone** ($x > 2$).
+- **Constrained Optimum ($x^* = 2$):**
+  - The decision maker climbs until hitting the fence.
+  - At the fence, the slope is strictly positive: $f'(2) = 6 > 0$.
+- **The Core Lesson:**
+  - Tangency ($f'(x^*) = 0$) characterizes only unconstrained peaks.
+  - When scarcity binds, you stop before the hill is flat!
 :::
 :::
 
-::: {.column width="40%"}
-<div style="text-align: center; margin-top: 15px;">
-  <img src="figs/hill-and-fence-graph.png" style="width: 100%; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-  <p style="font-size: 0.65em; color: #666; margin-top: 8px;">Hitting the fence ($x \le 2$) before reaching the unconstrained peak ($x=5$).</p>
+::: {.column width="45%"}
+<div style="text-align: center; margin-top: 10px;">
+  <img src="figs/hill-and-fence-graph.png" style="width: 100%; border-radius: 6px; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
 </div>
 :::
 ::::
