@@ -9,8 +9,7 @@
     ],
     "quarto.render.renderOnSave": true,
     "quarto.render.previewType": "internal",
-    "python.defaultInterpreterPath": "C:\\Users\\jconning\\AppData\\Local\\miniforge3\\envs\\ecopy\\python.exe",
-    "terminal.integrated.env.windows": {
-        "QUARTO_PYTHON": "C:\\Users\\jconning\\AppData\\Local\\miniforge3\\envs\\ecopy\\python.exe"
-    }
+    "files.autoSave": "off",
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda"
 }

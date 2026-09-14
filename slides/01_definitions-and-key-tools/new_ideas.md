@@ -68,6 +68,40 @@ here into the deck, the notebook, or a problem set by deliberate decision.
   collective best responses, equilibrium selection, out-of-equilibrium
   dynamics) — currently presenter-notes only on the wrap slide.
 
+## Slide graphics & visual design (backlog)
+
+Captures high-value visual enhancements for slides that currently have ample whitespace and low content density, to be implemented at a later date:
+
+- **Mechanism Design Flowchart (Slide 2 transition)**:
+  - *Location:* The sparse transition slide right after "What Is This Course About?" (line 42: `mechanism → strategic play → equilibrium → efficiency & distribution`).
+  - *Design:* Clean, horizontal architecture diagram:
+    `[Rules of the Game / Information] → [Strategic Actions / Best Response] → [Equilibrium Outcome] → [Evaluation: Efficiency & Distribution]`, with a feedback loop returning to `[Mechanism Redesign: Taxes, Property Rights, Norms]`.
+  - *Purpose:* Establishes the visual mental model for the entire semester's methodology on the very first conceptual slide.
+
+- **Historical Duality Portraits: Hume vs. Smith (Slide 3: "Two Eighteenth-Century Conjectures")**:
+  - *Location:* Slide 52 ("Two Eighteenth-Century Conjectures").
+  - *Design:* Side-by-side two-column layout with archival, public-domain portrait etchings/engravings of David Hume (1739 meadow drainage) and Adam Smith (1776 invisible hand), paired directly with their contrasting quotes.
+  - *Purpose:* Matches the dignified archival visual tone established by the John Nash portrait (Slide 176), grounding the course's foundational debate in intellectual history without AI-generated imagery.
+
+- **The Social Dilemma Payoff Vector / Rent Graphic (Slide 14: "The Verdict: A Social Dilemma")**:
+  - *Location:* Slide 199 ("The Verdict: A Social Dilemma").
+  - *Design:* A compact payoff-space schematic illustrating the vector moving from the Nash fallback $(72, 72)$ to the cooperative optimum $(75, 75)$, highlighting the $+3$ per person gain as the *economic rent from cooperation*.
+  - *Purpose:* Gives a visual anchor to the terms "fallback position" and "economic rent" before transitioning to continuous calculus.
+
+- **Institutional Triad Diagram (Slide 26: "Governing the Commons: Beyond Markets and the State")**:
+  - *Location:* Slide 495 ("Governing the Commons: Beyond Markets and the State").
+  - *Design:* A 3-node triangular relationship diagram:
+    1. *The State (Pigou):* Top-down taxes, quotas, legal sanctions.
+    2. *The Market (Coase):* Private property rights, contracts, side payments.
+    3. *The Community (Ostrom):* Clear boundaries, peer monitoring, graduated sanctions, social norms.
+    (Optionally include an archival photograph of Elinor Ostrom alongside her quote).
+  - *Purpose:* Provides a clear, memorable visual taxonomy of the three institutional solutions to common-pool resource dilemmas.
+
+- **"The Hill and the Fence" Geometric Preview (Slide 38: "The Next Step: Constrained Optimization")**:
+  - *Location:* Slide 978 ("The Next Step: Constrained Optimization").
+  - *Design:* Stylized 2D contour map showing unconstrained peak optimization ($\nabla f = 0$, "where the hill is flat") contrasted with a straight constraint line ("the fence") where level curves hit tangency ($\nabla f = \lambda \nabla g$).
+  - *Purpose:* Visually operationalizes the closing metaphor and hands off directly to Topic 2's Method of Lagrange.
+
 ## Notebook / interactive
 
 - **Schelling circle simulation** — DONE (2026-07-18):
