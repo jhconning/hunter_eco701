@@ -889,7 +889,7 @@ Systematic Case Checking, SciPy Optimization, and Economic Intuition
 
 ::: {.column width="40%"}
 <div style="text-align: center; margin-top: 15px;">
-  <img src="media/feasible-region-two-constraints.png" style="width: 100%; border-radius: 6px;">
+  <img src="figs/feasible-region-two-constraints.png" style="width: 100%; border-radius: 6px;">
   <p style="font-size: 0.65em; color: #666;">The feasible region is the intersection of both half-spaces.</p>
 </div>
 :::
@@ -922,21 +922,21 @@ With two constraints, there are $2^2 = 4$ possible combinations. Dropping the tr
 :::: {.columns}
 ::: {.column width="33%"}
 <div style="text-align: center;">
-  <img src="media/case-transport-binds.png" style="width: 100%; border-radius: 6px;">
+  <img src="figs/case-transport-binds.png" style="width: 100%; border-radius: 6px;">
   <p style="font-size: 0.65em; color: #666;"><strong>Case 1: Boat Binds</strong><br>$\lambda = 0, \; \mu > 0$</p>
 </div>
 :::
 
 ::: {.column width="33%"}
 <div style="text-align: center;">
-  <img src="media/case-budget-binds.png" style="width: 100%; border-radius: 6px;">
+  <img src="figs/case-budget-binds.png" style="width: 100%; border-radius: 6px;">
   <p style="font-size: 0.65em; color: #666;"><strong>Case 2: Money Binds</strong><br>$\lambda > 0, \; \mu = 0$</p>
 </div>
 :::
 
 ::: {.column width="33%"}
 <div style="text-align: center;">
-  <img src="media/case-both-bind.png" style="width: 100%; border-radius: 6px;">
+  <img src="figs/case-both-bind.png" style="width: 100%; border-radius: 6px;">
   <p style="font-size: 0.65em; color: #666;"><strong>Case 3: Both Bind</strong><br>$\lambda > 0, \; \mu > 0$</p>
 </div>
 :::

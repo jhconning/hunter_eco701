@@ -140,23 +140,26 @@ jobs:
           echo "DECK_LIST=${list}" >> "$GITHUB_ENV"
           echo "Publishing $(wc -l < "$list") deck(s)."
 
-      - name: Copy media folders for published decks
+      - name: Copy media and figs folders for published decks
         if: env.PUBLISH_SLIDES == 'true'
         run: |
-          # Each published topic's media/ gets mirrored into the build output at
-          # the same relative path. Nested raw/media/ folders are intentionally
-          # excluded - those are extraction intermediates, not deployable assets.
+          # Each published topic's media/ and figs/ folders get mirrored into the build output
+          # at the same relative path. Nested raw/ folders are intentionally excluded -
+          # those are extraction intermediates, not deployable assets.
           # Needed regardless of slide engine: Quarto (like marp-cli before it)
-          # doesn't copy statically-referenced images (![](media/x.png)) into its
-          # own output - only content it generates itself at render time. Drafts
+          # doesn't copy statically-referenced images (![](media/x.png) or <img src="figs/x.png">)
+          # into its own output - only content it generates itself at render time. Drafts
           # are skipped here too, so an unreleased deck's figures never reach the
           # public site even though nothing links to them.
           while read -r deck; do
             topic_dir=$(dirname "$deck")
-            [ -d "${topic_dir}/media" ] || continue
-            dest="_build/html/${topic_dir}/media"
-            mkdir -p "$dest"
-            cp -R "${topic_dir}/media"/. "$dest"/
+            for asset_dir in media figs; do
+              if [ -d "${topic_dir}/${asset_dir}" ]; then
+                dest="_build/html/${topic_dir}/${asset_dir}"
+                mkdir -p "$dest"
+                cp -R "${topic_dir}/${asset_dir}"/. "$dest"/
+              fi
+            done
           done < "$DECK_LIST"
 
       # has_slides=0 means "build the slides" (it began life as an exit status).
@@ -246,9 +249,11 @@ jobs:
             topic_dir=$(dirname "$deck")
             mkdir -p "_stage/${topic_dir}"
             cp "$deck" "_stage/${topic_dir}/"
-            if [ -d "${topic_dir}/media" ]; then
-              cp -R "${topic_dir}/media" "_stage/${topic_dir}/media"
-            fi
+            for asset_dir in media figs; do
+              if [ -d "${topic_dir}/${asset_dir}" ]; then
+                cp -R "${topic_dir}/${asset_dir}" "_stage/${topic_dir}/${asset_dir}"
+              fi
+            done
             count=$((count + 1))
             echo "staged $deck"
           done < "$DECK_LIST"

@@ -35,7 +35,7 @@ below describe it as it is, not as something to construct.
  │   1. regenerate README's "Deployed Presentations" index               │
  │      (every deck carrying `deploy: true`; drafts are skipped)         │
  │   2. myst build --html            → site shell from README + myst.yml │
- │   3. copy slides/<topic>/media/   → build output                      │
+ │   3. copy slides/<topic>/{media,figs}/ → build output                 │
  │   4. quarto render each slides/*/deck.qmd  (in place)                 │
  │   5. decktape each → deck.pdf                                         │
  │   6. marp-cli for the not-yet-ported Marp decks (02, 03)              │
