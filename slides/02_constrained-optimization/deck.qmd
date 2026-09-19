@@ -910,7 +910,7 @@ Systematic Case Checking, SciPy Optimization, and Economic Intuition
 
 :::: {.columns}
 ::: {.column width="60%"}
-**Problem Set 1, Q3.** A disaster relief agency delivers food ($c_F$) and water/tents ($c_W$) to an island:
+**Worked example.** A disaster relief agency delivers food ($c_F$) and water/tents ($c_W$) to an island:
 
 ::: {.incremental}
 - **Preferences:** $U(c_F, c_W) = c_F \cdot c_W$
