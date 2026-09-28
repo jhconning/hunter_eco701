@@ -18,13 +18,36 @@ readings below, though, are set in advance: come to class having read them.
 | **NS** | Nicholson & Snyder, *Microeconomic Theory: Basic Principles and Extensions*, South-Western | Rent or buy, hardcover or e-book. Any edition from the 11th forward; chapter numbers shift between editions, so match chapter titles |
 
 
+### A note on the reading order
+
+We read Nicholson & Snyder out of order, and deliberately. After the
+optimization chapters we go to **production and cost (NS 9-11) before
+consumer demand (NS 4-5)**, reversing the textbook's sequence.
+
+The reason: the mathematics of constrained optimization is the same on both
+sides of the market, but on the firm's side the objects are concrete. Costs
+are measured in dollars, technology is observable, and the Lagrange
+multiplier comes out as marginal cost -- a number with units you can check.
+Once duality is clear there (Shephard's lemma, conditional input demand), the
+consumer results that follow -- Hicksian demand, Slutsky, Roy's identity --
+are the same envelope argument in different clothing, and go faster. Varian's
+graduate text, *Microeconomic Analysis*, is organized this way for the same
+reason.
+
+Two practical consequences. NS chapters 9-11 were written assuming you have
+read 4-5, so they occasionally refer forward to results we have not covered
+yet; read past those references, and we will fill the gaps in weeks 6-7. And
+because supply arrives before demand, we cannot close a market until both are
+in hand, which is why market equilibrium waits until the general-equilibrium
+weeks.
+
 ## Schedule
 
 | # | Date | Topic | Reading | Slides |
 |---|---|---|---|---|
 | 1 | Mon Aug 31 | Course logistics. Definitions and key tools: institutions, mechanisms, games, equilibrium, efficiency and distribution | [BH 1](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf) | [Logistics](https://jhconning.github.io/hunter_eco701/slides/00_logistics/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/00_logistics/deck.pdf))<br>[Topic 1](https://jhconning.github.io/hunter_eco701/slides/01_definitions-and-key-tools/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/01_definitions-and-key-tools/deck.pdf)) |
 | 2 | Mon Sep 14 | Definitions and key tools, concluded. Constrained optimization I: unconstrained and constrained optimization, the Lagrange method, comparative statics, envelope theorem.  Read NS Ch 2 "Math for Microeconomics," (through "Homogenous Functions")  | [BH 1](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf); NS 2 | [Topic 2](https://jhconning.github.io/hunter_eco701/slides/02_constrained-optimization/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/02_constrained-optimization/deck.pdf)) |
-| 3 | Mon Sep 28 | Constrained optimization I: the Lagrange method, comparative statics, the envelope theorem | NS 2 | |
+| 3 | Mon Sep 28 | Constrained optimization, continued: the multiplier as a shadow price, the envelope theorem, and problems with more than one constraint | NS 2 | |
 | 4 | Mon Oct 5 | Constrained optimization II: inequality constraints and Kuhn–Tucker | NS 2–3 | |
 | | **Wed Oct 7** | **Problem Set 1 due** by 11:59pm. Submit via [Gradescope](https://www.gradescope.com). | — | [Problem Set 1 (PDF)](https://drive.google.com/file/d/1JHyHvhxkaZG5WxH8HpaQoXDjGJswk9vv/view?usp=sharing) |
 | 5 | **Tue** Oct 13 | Production optimization: cost minimization, profit maximization, duality | NS 9–11 | |
