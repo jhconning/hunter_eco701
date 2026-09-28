@@ -6,5 +6,10 @@
         "origin",
         "upstream",
         "hunter_eco701"
-    ]
+    ],
+    "quarto.render.renderOnSave": true,
+    "quarto.render.previewType": "internal",
+    "files.autoSave": "off",
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda"
 }

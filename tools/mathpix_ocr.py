@@ -13,9 +13,9 @@ whole topic's equations without knowing roughly how many there are first
 
 Usage:
     mamba run -n ecopy python mathpix_ocr.py \
-        --eq-dir "Y:\Hunter\Eco 701\Eco701\slides\02_constrained-optimization\raw\media\eq" \
-        --out "Y:\Hunter\Eco 701\Eco701\slides\02_constrained-optimization\raw\mathpix.json" \
-        --env "Y:\Hunter\Eco 701\Eco701\.env"
+        --eq-dir "Y:\Hunter\eco701\slides\02_constrained-optimization\raw\media\eq" \
+        --out "Y:\Hunter\eco701\slides\02_constrained-optimization\raw\mathpix.json" \
+        --env "Y:\Hunter\eco701\.env"
 
 Writes --out: a dict keyed by filename, each with Mathpix's "latex_styled",
 "text", and "confidence" fields (raw API response, trimmed).

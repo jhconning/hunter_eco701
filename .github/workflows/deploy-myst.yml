@@ -27,6 +27,15 @@ jobs:
     # non-main ref from entering a job bound to it, which used to block the
     # whole job (including these harmless build-only steps) on every PR.
     runs-on: ubuntu-latest
+    env:
+      # Master switch for the whole slide half of the build. 'false' ships
+      # only the front page and the reading schedule, whatever the decks say.
+      # With it on, WHICH decks publish is decided per deck by `deploy: true`
+      # in that deck's own YAML - see the "Select decks to publish" step.
+      PUBLISH_SLIDES: 'true'
+      # Public origin of the deployed site. Used to repair the localhost URLs
+      # that MyST bakes into its prerendered output - see the rewrite step.
+      SITE_URL: 'https://jhconning.github.io/hunter_eco701'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -34,7 +43,7 @@ jobs:
           fetch-depth: 0
 
       - name: Update Table of Contents in README
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && env.PUBLISH_SLIDES == 'true' }}
         run: |
           deploy_date=$(TZ='America/New_York' date '+%Y-%m-%d %H:%M')
           echo -e "\n*Last Deployed: $deploy_date EST*\n" > toc.tmp
@@ -62,7 +71,7 @@ jobs:
           mv README.new README.md
 
       - name: Commit and Push README
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && env.PUBLISH_SLIDES == 'true' }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
@@ -82,26 +91,90 @@ jobs:
           BASE_URL: '/hunter_eco701'
         run: myst build --html
 
-      - name: Prepare Slides Directory
-        run: mkdir -p _build/html/slides
-
-      - name: Copy topic media folders to build
+      - name: Rewrite the prerender origin in the build output
         run: |
-          # Each topic folder (slides/<topic>/media/) gets mirrored into the build output
-          # at the same relative path. Nested raw/media/ folders are intentionally excluded -
-          # those are extraction intermediates, not deployable assets. Needed regardless of
-          # slide engine: Quarto (like marp-cli before it) doesn't copy statically-referenced
-          # images (![](media/x.png)) into its own output - only content it generates itself
-          # at render time.
-          find slides -mindepth 2 -maxdepth 2 -type d -name media | while read -r dir; do
-            dest="_build/html/${dir}"
-            mkdir -p "$dest"
-            cp -R "$dir"/. "$dest"/
-          done
+          # `myst build --html` prerenders by fetching pages from a local
+          # server it starts itself, so every absolute URL it bakes in points
+          # at http://localhost:3000 - the <loc> entries and stylesheet href
+          # in sitemap.xml, the Sitemap: line in robots.txt, and og:url on
+          # each page. MyST 1.10.1's book-theme derives that origin from the
+          # request URL alone (Jse() in the theme bundle) with no config hook,
+          # so myst.yml cannot set it and rewriting afterwards is the fix.
+          #
+          # Restricted to the text formats that carry it; the JS bundles are
+          # left alone.
+          find _build/html -type f \( -name "*.html" -o -name "*.xml" -o -name "*.txt" \) -exec sed -i "s#http://localhost:3000#${SITE_URL}#g" {} +
+          echo "Remaining localhost references: $(grep -rl 'localhost:3000' _build/html --include='*.html' --include='*.xml' --include='*.txt' | wc -l)"
 
-      - name: Check if slides folder exists
+      - name: Prepare Slides and Syllabus Directories
+        if: env.PUBLISH_SLIDES == 'true'
+        run: |
+          mkdir -p _build/html/slides
+          if [ -d syllabus ]; then
+            mkdir -p _build/html/syllabus
+            cp -r syllabus/*.pdf _build/html/syllabus/ 2>/dev/null || true
+          fi
+
+      - name: Select decks to publish
+        if: env.PUBLISH_SLIDES == 'true'
+        run: |
+          # A deck reaches the site only if its own YAML carries `deploy: true`.
+          # `deploy: false`, or no deploy line at all, means draft: not rendered,
+          # not exported to PDF, media not copied, not listed in the README. This
+          # is the same test the README index step uses, so the index and the
+          # published site cannot drift apart.
+          #
+          # The list is written to the runner's temp dir (not the workspace) so
+          # it can never be swept into the build output or a commit.
+          list="${RUNNER_TEMP}/published_decks.txt"
+          : > "$list"
+          find slides -mindepth 2 -maxdepth 2 -type f \( -name "deck.qmd" -o -name "deck.md" \) |
+            sort | while read -r deck; do
+              if grep -q "^deploy:[[:space:]]*true" "$deck"; then
+                echo "$deck" >> "$list"
+                echo "publish   $deck"
+              else
+                echo "hold back $deck  (draft - no 'deploy: true')"
+              fi
+            done
+          echo "DECK_LIST=${list}" >> "$GITHUB_ENV"
+          echo "Publishing $(wc -l < "$list") deck(s)."
+
+      - name: Copy media and figs folders for published decks
+        if: env.PUBLISH_SLIDES == 'true'
+        run: |
+          # Each published topic's media/ and figs/ folders get mirrored into the build output
+          # at the same relative path. Nested raw/ folders are intentionally excluded -
+          # those are extraction intermediates, not deployable assets.
+          # Needed regardless of slide engine: Quarto (like marp-cli before it)
+          # doesn't copy statically-referenced images (![](media/x.png) or <img src="figs/x.png">)
+          # into its own output - only content it generates itself at render time. Drafts
+          # are skipped here too, so an unreleased deck's figures never reach the
+          # public site even though nothing links to them.
+          while read -r deck; do
+            topic_dir=$(dirname "$deck")
+            for asset_dir in media figs; do
+              if [ -d "${topic_dir}/${asset_dir}" ]; then
+                dest="_build/html/${topic_dir}/${asset_dir}"
+                mkdir -p "$dest"
+                cp -R "${topic_dir}/${asset_dir}"/. "$dest"/
+              fi
+            done
+          done < "$DECK_LIST"
+
+      # has_slides=0 means "build the slides" (it began life as an exit status).
+      # It is now gated on PUBLISH_SLIDES and on at least one deck having opted
+      # in, so both the master switch and an all-drafts state turn off every
+      # slide step that follows.
+      - name: Check whether to build slides
         id: slides-folder-exists
-        run: bash -c "[[ -d slides ]] ; echo \"has_slides=\$?\" >> \"$GITHUB_OUTPUT\""
+        run: |
+          if [[ "${PUBLISH_SLIDES}" == "true" && -s "${DECK_LIST:-/nonexistent}" ]]; then
+            echo "has_slides=0" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_slides=1" >> "$GITHUB_OUTPUT"
+            echo "Slide rendering skipped (PUBLISH_SLIDES=${PUBLISH_SLIDES}, no deck marked 'deploy: true')."
+          fi
 
       # --- Quarto decks (the current, canonical format - see HANDOFF.md) ---
 
@@ -134,7 +207,7 @@ jobs:
           # no built-in revealjs PDF export - see HANDOFF.md), copies both
           # into the build output, then cleans up the in-place render
           # artifacts so they don't pollute the checkout.
-          find slides -mindepth 2 -maxdepth 2 -type f -name "deck.qmd" | sort | while read -r qmd; do
+          grep -E '\.qmd$' "$DECK_LIST" | while read -r qmd; do
             topic_dir=$(dirname "$qmd")
             echo "Rendering ${qmd}"
             quarto render "$qmd"
@@ -147,7 +220,11 @@ jobs:
             fi
 
             echo "Exporting PDF for ${qmd} via decktape"
-            npx -y decktape reveal --size "1280x720" "${topic_dir}/deck.html" "${dest}/deck.pdf"
+            # --no-sandbox: this runner's container has no working setuid
+            # sandbox helper for Chromium (a standard constraint on hosted
+            # CI, unrelated to this project) - without it decktape's bundled
+            # Chrome aborts at launch ("No usable sandbox!").
+            npx -y decktape reveal --size "1280x720" --chrome-arg="--no-sandbox" "${topic_dir}/deck.html" "${dest}/deck.pdf"
 
             rm -f "${topic_dir}/deck.html"
             rm -rf "${topic_dir}/deck_files"
@@ -155,19 +232,47 @@ jobs:
 
       # --- Legacy Marp decks (any topic not yet migrated - see HANDOFF.md) ---
 
-      - name: Marp Build HTML
+      - name: Stage published Marp decks
+        id: stage-marp
         if: steps.slides-folder-exists.outputs.has_slides == '0'
+        run: |
+          # marp-cli only takes an input DIRECTORY here, and it converts every
+          # .md it finds under it - which would publish each topic's
+          # new_ideas.md backlog alongside the deck, and would ignore
+          # `deploy:` entirely. Staging just the decks that opted in keeps both
+          # drafts and working notes off the site while leaving marp's own
+          # invocation unchanged.
+          rm -rf _stage
+          count=0
+          while read -r deck; do
+            case "$deck" in *.md) ;; *) continue ;; esac
+            topic_dir=$(dirname "$deck")
+            mkdir -p "_stage/${topic_dir}"
+            cp "$deck" "_stage/${topic_dir}/"
+            for asset_dir in media figs; do
+              if [ -d "${topic_dir}/${asset_dir}" ]; then
+                cp -R "${topic_dir}/${asset_dir}" "_stage/${topic_dir}/${asset_dir}"
+              fi
+            done
+            count=$((count + 1))
+            echo "staged $deck"
+          done < "$DECK_LIST"
+          echo "has_marp=${count}" >> "$GITHUB_OUTPUT"
+          echo "Staged ${count} Marp deck(s)."
+
+      - name: Marp Build HTML
+        if: steps.slides-folder-exists.outputs.has_slides == '0' && steps.stage-marp.outputs.has_marp != '0'
         uses: docker://marpteam/marp-cli:v4.2.3
         with:
-          args: -I slides/ -o _build/html/slides/ --theme-set slides/_shared/eco701-theme.css
+          args: -I _stage/slides/ -o _build/html/slides/ --theme-set slides/_shared/eco701-theme.css
         env:
           MARP_USER: root:root
 
       - name: Marp Build PDFs
-        if: steps.slides-folder-exists.outputs.has_slides == '0'
+        if: steps.slides-folder-exists.outputs.has_slides == '0' && steps.stage-marp.outputs.has_marp != '0'
         uses: docker://marpteam/marp-cli:v4.2.3
         with:
-          args: -I slides/ -o _build/html/slides/ --pdf --allow-local-files --theme-set slides/_shared/eco701-theme.css
+          args: -I _stage/slides/ -o _build/html/slides/ --pdf --allow-local-files --theme-set slides/_shared/eco701-theme.css
         env:
           MARP_USER: root:root
 

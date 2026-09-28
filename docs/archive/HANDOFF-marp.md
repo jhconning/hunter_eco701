@@ -33,7 +33,8 @@ you're exploring this repo cold, don't assume the `git log` before
 
 ## Where everything is
 
-- **Repo root:** `Y:\Hunter\Eco 701\Eco701\` (note: no space — do not confuse
+- **Repo root:** `Y:\Hunter\eco701\` (moved there 2026-08-29; when this
+  document was written it was `Y:\Hunter\Eco 701\Eco701\`. Do not confuse
   with `Y:\Hunter\Eco 701\past\` or the top-level `Y:\Hunter\Eco 701\slides\`,
   which are unrelated old folders that happen to be nearby)
 - **GitHub remote:** `jhconning/hunter_eco701`, remote name `hunter_eco701`

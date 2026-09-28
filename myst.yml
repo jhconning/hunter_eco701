@@ -6,6 +6,24 @@ project:
   github: jhconning/hunter_eco701
   toc:
     - file: README.md
+    - file: schedule.md
+    - file: notebooks/notebooks.md
+      title: "Notebooks"
+      children:
+        - file: notebooks/topic01_definitions_key_tools_figures.ipynb
+          title: "Topic 1: Model Figures"
+        - file: notebooks/topic01_schelling_segregation.ipynb
+          title: "Topic 1: Schelling Segregation"
+        - file: notebooks/topic02_constrained_optimization_figures.ipynb
+          title: "Topic 2: Optimization Geometry"
+        - file: notebooks/topic02_constrained_optimization_numerical.ipynb
+          title: "Topic 2: Optimization Solvers"
+        - file: notebooks/topic02_fsolve_intro.ipynb
+          title: "Topic 2: Solving Equations with fsolve"
+        - file: notebooks/topic02_earthquake_relief.ipynb
+          title: "Topic 2: Earthquake Relief Problem"
+        - file: notebooks/farm_household.ipynb
+          title: "Farm-Household Model"
 site:
   options:
     folders: true

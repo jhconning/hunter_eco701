@@ -5,8 +5,8 @@ no tables, no OCR - just the first text line of every slide.
 
 Usage:
     mamba run -n ecopy python title_scan.py \
-        --source "Y:\Hunter\Eco 701\past\eco701_F18\slides\E701_F18 _slidesI.pptx" \
-                 "Y:\Hunter\Eco 701\past\eco701_F18\slides\E701_F18 _slidesII.pptx" \
+        --source "Y:\Hunter\eco701\archive\slides\legacy\E701_F18 _slidesI.pptx" \
+                 "Y:\Hunter\eco701\archive\slides\legacy\E701_F18 _slidesII.pptx" \
         --out scratch_title_scan.txt
 
 This is intentionally NOT written into slides/ - keep its output in a

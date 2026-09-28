@@ -2,7 +2,7 @@ topic: "Definitions and Key Tools"
 ideas_md_topic_number: 1
 source_file: none (hand-authored rework)
 source_slides: null
-status: hand-authored (2026-07-16 rework replacing the pre-reorg 4-slide stub)
+status: hand-authored (2026-07-16 rework replacing the pre-reorg 4-slide stub); ported from Marp (deck.md) to Quarto+revealjs (deck.qmd) 2026-07-19, first topic migrated under the plan in HANDOFF.md - no content changes, only the engine/theme (slides/_shared/eco701-revealjs.scss) and the "Production Possibility Frontier" slide gaining {.compact} to fix a footer collision the port introduced (four incremental bullets + image + closing blockquote no longer fit the base font size once laid out via Quarto's .columns instead of Marp's ![bg] shorthand)
 notes: >
   Complete rewrite around Bowles & Halliday, "Microeconomics: Competition,
   Conflict, and Coordination" (OUP, 2022 final edition), Chapter 1 "Society:
@@ -23,7 +23,19 @@ notes: >
   slides/08_essentials-of-game-theory/deck.md's two Nash-bio asides
   (Topic 8 dissolved per TOPIC_PLAN.md) - text only, both bg images
   deliberately dropped for unverified/likely-copyrighted provenance, see
-  new_ideas.md; BH\BowlesNotes.md
+  new_ideas.md. 2026-07-19: a second slide salvaged from that same source,
+  "A Coordination Game With Conflict: Opera or Football?", inserted right
+  after Palanpur in the Catalog of Games - the one example there not
+  otherwise duplicated in this deck (Palanpur is multiple-equilibria-
+  without-conflict; this is multiple-equilibria-with-conflict, completing
+  the taxonomy). Diagram (media/opera-football-diagram.png, with its
+  hand-drawn best-response arrows/circled equilibria) copied verbatim from
+  the source topic's media/ - see that topic's own source.yml (now under
+  docs/archive/) for the render_diagram.py provenance. This salvage was
+  done ahead of archiving the rest of 08_essentials-of-game-theory, whose
+  remaining content (formal game/Nash definitions, the classic Cooperate/
+  Fink Prisoner's Dilemma, its own simpler Fisherman's Dilemma) was judged
+  genuinely redundant with this deck's applied treatment; BH\BowlesNotes.md
   (2018 course notes) supplied the continuous-effort fisherman model
   u_A = (15 - (1/4) e_B) e_A - (1/2) e_A^2, whose symmetric Nash (e* = 12)
   and planner (e^P = 10) solutions generate the deck's 2x2 payoffs

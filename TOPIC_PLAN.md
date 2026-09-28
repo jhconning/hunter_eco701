@@ -1,7 +1,7 @@
 # Topic Plan: Mapping the 2018 Slides to the 11-Topic Sequence
 
 This maps the 11-topic sequence in [`syllabus/IDEAS.md`](syllabus/IDEAS.md) onto
-slide ranges in the three legacy decks (`legacy/slides/E701_F18 _slidesI.pptx`,
+slide ranges in the three legacy decks (`archive/slides/legacy/E701_F18 _slidesI.pptx`,
 `_slidesII.pptx`, `_slidesIIb.pptx`), based on a lightweight title-only scan of
 all 819 original slides plus the two topics already converted in detail.
 
@@ -46,13 +46,20 @@ uncertainty is now just about exact slide boundaries, not about what to do.
    Topic 8b exactly as before — that decision is unaffected. Topic numbers
    are NOT renumbered (Topic 9 stays "9", etc.) — only the lecture slot is
    freed, so from this point the semester's lecture count runs one behind
-   the topic number. **Not yet decided**: what happens to the *existing*,
-   already-deployed `08_essentials-of-game-theory/` deck itself (archive it,
-   keep it live as an optional/reference resource, cannibalize specific
-   slides like the Nash bio aside into Topic 1 per its `new_ideas.md`) —
-   that's a separate question from the strategic one just resolved, since it
-   touches content already on the live site. Flag for Jonathan when Topic 9
-   is actually being built.
+   the topic number. **The existing deck's own fate: resolved (2026-07-19),
+   ahead of schedule** (originally flagged for whenever Topic 9 got built,
+   but forced sooner by the Marp→Quarto migration reaching Topic 8's turn
+   in Phase 3). Re-reading the deck side-by-side with Topic 1 found one
+   example genuinely not duplicated anywhere else in the course — the
+   Opera/Football coordination game, the only one with *conflicting*
+   (not just coordinating) interests over which of multiple equilibria to
+   reach — salvaged into Topic 1 right after its Palanpur example. The
+   remaining content (formal game/Nash definitions, the classic
+   Cooperate/Fink Prisoner's Dilemma, its own simpler Fisherman's Dilemma;
+   the Nash bio was already cannibalized on 2026-07-18) was archived to
+   `docs/archive/08_essentials-of-game-theory/` — moved out of `slides/`
+   entirely so the CI build never touches it, `deploy: false` set as a
+   second safeguard.
 
 ## Proposed mapping (draft)
 
@@ -65,7 +72,7 @@ uncertainty is now just about exact slide boundaries, not about what to do.
 | 5 | Consumption over time and uncertainty | Not started | `slidesI` 313-337 (intertemporal) **+** `slidesIIb` ~88-117 (risk/uncertainty, non-contiguous, different file) | Medium |
 | 6 | Household Economics (farm household) | Not started | `slidesI` 252-267 | High — clean, contiguous, matches description closely |
 | 7 | General Equilibrium | Not started | `slidesI` 268-312 (exchange) **+** `slidesIIb` ~204-222 (production/two-sector, non-contiguous, different file) | Medium |
-| 8 | Essentials of Game Theory | **DISSOLVED (2026-07-18)** — lecture slot retired, superseded by Topic 1's rework; `08_essentials-of-game-theory/` deck still exists but its fate (archive/keep/cannibalize) is undecided | `slidesI` 10-20 (built, now redundant); 32-42 continuation reassigned to Topic 9 | High |
+| 8 | Essentials of Game Theory | **DISSOLVED (2026-07-18), archived (2026-07-19)** — lecture slot retired, superseded by Topic 1's rework; one non-duplicated example (Opera/Football) salvaged into Topic 1, rest moved to `docs/archive/08_essentials-of-game-theory/` | `slidesI` 10-20 (built, now redundant); 32-42 continuation reassigned to Topic 9 | High |
 | 8b | *(not in IDEAS.md — optional/isolated)* Game Theory II: extensive form, repeated games, oligopoly | Not started, deliberately deferred — unaffected by Topic 8's dissolution | `slidesIIb` ~15-80 (Games in Extensive Form through "Other applications", before Principal Agent content starts at ~81) | Medium — confirm exact boundary |
 | 9 | Externalities and public goods | Deferred | No 2018 source material — needs original slides; now also absorbs Topic 8's N-player/mixed-strategy continuation (`slidesI` 32-42) | N/A |
 | 10 | Asymmetric Information (Moral Hazard, Principal-Agent) | Not started | `slidesIIb` ~82-159 | Medium — confirm exact boundary |

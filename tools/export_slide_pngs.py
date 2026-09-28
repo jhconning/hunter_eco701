@@ -20,9 +20,9 @@ presentation window it opens itself.
 
 Usage:
     mamba run -n ecopy python export_slide_pngs.py \
-        --source "Y:\Hunter\Eco 701\Eco701\legacy\slides\E701_F18 _slidesIIb.pptx" \
+        --source "Y:\Hunter\eco701\archive\slides\legacy\E701_F18 _slidesIIb.pptx" \
         --start 162 --end 202 \
-        --out "Y:\Hunter\Eco 701\Eco701\slides\03_production-optimization\raw"
+        --out "Y:\Hunter\eco701\slides\03_production-optimization\raw"
 
 Writes into --out/media/slide_png/ (same location render_equations.py uses,
 so slides already exported via that script's OLE-triggered path are just

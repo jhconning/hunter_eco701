@@ -1,0 +1,33 @@
+/*-- scss:rules --*/
+
+// Authoring aid, not part of the course look. Opt in per deck by appending
+// this file to that deck's theme list while you work, then remove it before
+// committing:
+//
+//   theme: [default, ../_shared/eco701-revealjs.scss, ../_shared/eco701-frame-debug.scss]
+//
+// Why it exists: reveal.js scales the 1280x720 slide to fit whatever pane it
+// is in, and paints the theme background across the WHOLE viewport - so the
+// slide's own edges are invisible and a tall preview pane looks like a tall
+// slide. Aspect ratio is in fact preserved (the scaling is uniform), but with
+// no visible frame there is nothing to judge fit against. This file paints the
+// surround a different color and outlines the slide box, giving the
+// page-on-a-desk view Marp's preview shows by default.
+
+.reveal-viewport {
+  background: #3a3a3c;
+}
+
+.reveal .slides {
+  // The theme's own page color, so the slide reads as a sheet on the surround.
+  background: #fffdf5;
+  outline: 1px dashed rgba(214, 158, 46, 0.9); // amber, matches the heading rule
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 18px 48px rgba(0, 0, 0, 0.45);
+}
+
+// Reveal positions .slides with a transform; a plain outline on it can be
+// clipped during transitions, so also mark the safe content area. Anything
+// crossing this line will overflow on a projector.
+.reveal .slides > section {
+  outline: 1px dotted rgba(0, 0, 0, 0.18);
+}
