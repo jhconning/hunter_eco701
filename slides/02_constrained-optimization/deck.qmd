@@ -549,20 +549,71 @@ $$\max_{c_1, c_2} \; u(c_1, c_2) = c_1 c_2 \quad \text{s.t.} \quad p_1 c_1 + p_2
 
 ---
 
-## Method 1: Direct Substitution {.compact}
+## Walking the Budget Line {.compact}
 
-Solve the budget constraint for $c_2$ and plug it into $u(c_1, c_2)$:
+Take $u = c_1 c_2$ with $p_1 = 2$, $p_2 = 3$, $I = 120$. Start anywhere on the budget line and ask: *is the next dollar better spent on good 1 or on good 2?*
 
-$$c_2(c_1) = \frac{I}{p_2} - \frac{p_1}{p_2} c_1$$
+| $c_1$ | $c_2$ | $MU_1/p_1 = c_2/2$ | $MU_2/p_2 = c_1/3$ | Which way? | $u$ |
+|:-:|:-:|:-:|:-:|:-:|:-:|
+| 15 | 30 | 15 | 5 | more good 1 | 450 |
+| 24 | 24 | 12 | 8 | more good 1 | 576 |
+| **30** | **20** | **10** | **10** | **stop** | **600** |
+| 36 | 16 | 8 | 12 | more good 2 | 576 |
 
 ::: {.incremental}
-- Substitute into the utility objective:
-  $$\max_{c_1} \; u\left(c_1, c_2(c_1)\right) = c_1 \left(\frac{I}{p_2} - \frac{p_1}{p_2} c_1\right) = \frac{I}{p_2} c_1 - \frac{p_1}{p_2} c_1^2$$
-- Take the first-order condition w.r.t. $c_1$:
-  $$\frac{du}{dc_1} = \frac{I}{p_2} - 2 \frac{p_1}{p_2} c_1 = 0 \;\Longrightarrow\; 2 \frac{p_1}{p_2} c_1 = \frac{I}{p_2}$$
-- **Optimal choices:**
-  $$c_1^* = \frac{I}{2 p_1}, \qquad c_2^* = \frac{I}{2 p_2}$$
-- The consumer spends exactly half their income on each good: $p_1 c_1^* = p_2 c_2^* = I / 2$.
+- At $(15, 30)$, a dollar moved from good 2 to good 1 loses about 5 utils and gains about 15: a net gain of 10, while **spending nothing extra**.
+- Keep walking and the two ratios close in from opposite sides. They meet at $10$ — and that common value is the multiplier $\lambda^*$.
+:::
+
+<!-- Every row lies on the budget line 2c1 + 3c2 = 120. At the optimum,
+     lambda* = I/(2 p1 p2) = 120/12 = 10, matching the "stop" row. -->
+
+---
+
+## The Hill Along the Fence {.compact}
+
+<div style="text-align: center;">
+  <img src="figs/hill-along-the-fence.png" style="width: 88%; border-radius: 6px;">
+</div>
+
+::: {.incremental}
+- **Left:** from A, every bundle on the highlighted stretch of the budget line beats A. Walk toward the tangency.
+- **Right:** utility measured *along* the budget line is a one-dimensional hill. A constrained problem is an ordinary climb — on the hill you see while walking the fence.
+:::
+
+---
+
+## The Arbitrage Rule {.compact}
+
+::: {.callout-tip icon=false}
+## Explore along the constraint
+- **If $MU_1/p_1 > MU_2/p_2$:** buy more of good 1 and less of good 2.
+- **If $MU_1/p_1 < MU_2/p_2$:** do the reverse.
+- **Stop when they are equal — or when you hit a wall.**
+:::
+
+::: {.incremental}
+- Every step keeps you on the budget line: the dollar added to one good is the dollar taken from the other.
+- "Equal" is the interior optimum, where the indifference curve is tangent to the budget line. "Hit a wall" is a corner, where you would keep going but cannot — we return to it with Kuhn–Tucker.
+- Everything that follows — tangency, the multiplier, the Lagrangian — is this rule in different notation.
+:::
+
+---
+
+## Method 1: Substitution Is Walking the Fence {.compact}
+
+Solve the budget constraint for $c_2$, and follow the budget line:
+
+$$c_2(c_1) = \frac{I}{p_2} - \frac{p_1}{p_2}\,c_1$$
+
+::: {.incremental}
+- $u\big(c_1, c_2(c_1)\big)$ is utility measured *along* the fence — the hill on the right of the last figure.
+- Its slope, by the chain rule, is the arbitrage gap:
+  $$\frac{d}{dc_1}\,u\big(c_1, c_2(c_1)\big) = u_1 - u_2\,\frac{p_1}{p_2} = p_1\left(\frac{u_1}{p_1} - \frac{u_2}{p_2}\right)$$
+- So the substitution FOC, slope $= 0$, **is** the no-arbitrage condition $u_1/p_1 = u_2/p_2$.
+- For $u = c_1 c_2$: $\;u = \frac{I}{p_2}c_1 - \frac{p_1}{p_2}c_1^2$, so setting $\frac{I}{p_2} - 2\frac{p_1}{p_2}c_1 = 0$ gives
+  $$c_1^* = \frac{I}{2p_1}, \qquad c_2^* = \frac{I}{2p_2}$$
+  — half of income on each good.
 :::
 
 ---
@@ -575,7 +626,7 @@ $$c_2(c_1) = \frac{I}{p_2} - \frac{p_1}{p_2} c_1$$
   - What if there are 10 choice variables and 4 constraints?
   - What if the constraint is an **inequality** that might not bind?
   - What if we need the **economic valuation** of relaxing the budget?
-- Direct substitution turns a constrained problem into an unconstrained one, but destroys the geometric symmetry and conceals the **shadow prices**.
+- Substitution works, but it privileges one variable, hides the constraint as a geometric object, and never reports $\lambda^*$, the **shadow price**: the value of relaxing the budget. Lagrange keeps all of these in view.
 - We need a method that preserves the structure of the constraint.
 :::
 
@@ -615,7 +666,7 @@ $$\left.\frac{dc_2}{dc_1}\right|_{\text{budget}} = -\frac{p_1}{p_2} = -MRT$$
 
 ## The Arbitrage Argument {.compact}
 
-Why *must* $u_1 / p_1 = u_2 / p_2$ hold at an interior optimum?
+The walk from A, stated in general: why *must* $u_1 / p_1 = u_2 / p_2$ hold at an interior optimum?
 
 ::: {.incremental}
 - Suppose instead:
@@ -858,8 +909,8 @@ $$u(c_1, c_2) = c_1 + \sqrt{c_2}$$
   $c_2 = \frac{I}{p_2} = 2, \quad c_1 = 0$
 - Evaluate marginal bang-per-buck at this corner:
   $$\frac{u_1}{p_1} = \frac{1}{5} = 0.20 < \frac{u_2}{p_2} = \frac{1}{2\sqrt{2}} \approx 0.3536$$
-- Good 2 gives higher return per \$ *even when all income spent on it*.
-- The consumer wants to **sell** (buy negative amounts of) good 1, but non-negativity ($c_1 \ge 0$) forbids it!
+- Good 2 gives the higher return per \$ *even with all income already spent on it*.
+- **Same arbitrage as before:** it says keep shifting dollars from good 1 to good 2 — and at $c_1 = 0$ there are none left to shift. The consumer would *sell* good 1 if they could; non-negativity ($c_1 \ge 0$) forbids it.
 - **Result:** Corner optimum at $(c_1^*, c_2^*) = (0, 2)$.
 :::
 :::
@@ -1170,5 +1221,5 @@ You should now be able to define, calculate, and interpret:
 | Non-Negativity Constraints | Production Possibility Frontier (PPF) | Complementary Slackness ($\lambda \cdot \text{slack} = 0$) |
 
 ::: {.fragment}
-> *Next week in Topic 3: We turn this machinery inside out — Duality, Expenditure Minimization, and the Roy/Shephard Envelopes.*
+> *Next in Topic 3: We point this machinery at the firm — cost minimization, the cost function, profit maximization, and the duality between them.*
 :::
