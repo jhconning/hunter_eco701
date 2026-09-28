@@ -20,26 +20,14 @@ readings below, though, are set in advance: come to class having read them.
 
 ### A note on the reading order
 
-We read Nicholson & Snyder out of order, and deliberately. After the
-optimization chapters we go to **production and cost (NS 9-11) before
-consumer demand (NS 4-5)**, reversing the textbook's sequence.
+We will read Nicholson & Snyder out of order, and deliberately. After the
+optimization chapters we go to **production and cost (NS 9-11) before consumer
+demand (NS 4-5)**, reversing the textbook's sequence.
 
-The reason: the mathematics of constrained optimization is the same on both
-sides of the market, but on the firm's side the objects are concrete. Costs
-are measured in dollars, technology is observable, and the Lagrange
-multiplier comes out as marginal cost -- a number with units you can check.
-Once duality is clear there (Shephard's lemma, conditional input demand), the
-consumer results that follow -- Hicksian demand, Slutsky, Roy's identity --
-are the same envelope argument in different clothing, and go faster. Varian's
-graduate text, *Microeconomic Analysis*, is organized this way for the same
-reason.
-
-Two practical consequences. NS chapters 9-11 were written assuming you have
-read 4-5, so they occasionally refer forward to results we have not covered
-yet; read past those references, and we will fill the gaps in weeks 6-7. And
-because supply arrives before demand, we cannot close a market until both are
-in hand, which is why market equilibrium waits until the general-equilibrium
-weeks.
+The reason: the mathematics of constrained optimization is the same on both the
+demand and supply sides of the market, but on the firm's side the objects are
+concrete. Costs are measured in dollars, technology is observable, and the
+Lagrange multiplier is interpreted as marginal cost.
 
 ## Schedule
 
