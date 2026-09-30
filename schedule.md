@@ -37,7 +37,7 @@ Lagrange multiplier is interpreted as marginal cost.
 | 2 | Mon Sep 14 | Definitions and key tools, concluded. Constrained optimization I: unconstrained and constrained optimization, the Lagrange method, comparative statics, envelope theorem.  Read NS Ch 2 "Math for Microeconomics," (through "Homogenous Functions")  | [BH 1](https://sites.santafe.edu/~bowles/wp-content/uploads/BH_22_merged.pdf); NS 2 | [Topic 2](https://jhconning.github.io/hunter_eco701/slides/02_constrained-optimization/deck.html) ([PDF](https://jhconning.github.io/hunter_eco701/slides/02_constrained-optimization/deck.pdf)) |
 | 3 | Mon Sep 28 | Constrained optimization, continued: the multiplier as a shadow price, the envelope theorem, and problems with more than one constraint | NS 2 | |
 | 4 | Mon Oct 5 | Constrained optimization II: inequality constraints and Kuhn–Tucker | NS 2–3 | |
-| | **Wed Oct 7** | **Problem Set 1 due** by 11:59pm. Submit via [Gradescope](https://www.gradescope.com). | — | [Problem Set 1 (PDF)](https://drive.google.com/file/d/1JHyHvhxkaZG5WxH8HpaQoXDjGJswk9vv/view?usp=sharing) |
+| | **Wed Oct 7** | **Problem Set 1 due** by 11:59pm. Submit via [Gradescope](https://www.gradescope.com). | — | [Problem Set 1 (PDF)](https://drive.google.com/file/d/118CiFlOrI3kbHCnuX5wL_z-qhSO6hw64/view?usp=sharing) |
 | 5 | **Tue** Oct 13 | Production optimization: cost minimization, profit maximization, duality | NS 9–11 | |
 | 6 | Mon Oct 19 | Consumption optimization: utility maximization, demand and expenditure functions | NS 4–5 | |
 | 7 | Mon Oct 26 | Consumption optimization, continued: income and substitution effects, labor supply | NS 5 | |
