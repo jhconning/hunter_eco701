@@ -551,19 +551,32 @@ $$\max_{c_1, c_2} \; u(c_1, c_2) = c_1 c_2 \quad \text{s.t.} \quad p_1 c_1 + p_2
 
 ## Walking the Budget Line {.compact}
 
-Take $u = c_1 c_2$ with $p_1 = 2$, $p_2 = 3$, $I = 120$. Start anywhere on the budget line and ask: *is the next dollar better spent on good 1 or on good 2?*
+Same problem as the last slide. On the budget line, *is the next dollar better spent on good 1 or on good 2?*
 
-| $c_1$ | $c_2$ | $MU_1/p_1 = c_2/2$ | $MU_2/p_2 = c_1/3$ | Which way? | $u$ |
+:::: {.columns}
+::: {.column width="60%"}
+| $c_1$ | $c_2$ | $MU_1/p_1$ | $MU_2/p_2$ | move | $u$ |
 |:-:|:-:|:-:|:-:|:-:|:-:|
-| 15 | 30 | 15 | 5 | more good 1 | 450 |
-| 24 | 24 | 12 | 8 | more good 1 | 576 |
+| 15 | 30 | 15 | 5 | → good 1 | 450 |
+| 24 | 24 | 12 | 8 | → good 1 | 576 |
 | **30** | **20** | **10** | **10** | **stop** | **600** |
-| 36 | 16 | 8 | 12 | more good 2 | 576 |
+| 36 | 16 | 8 | 12 | → good 2 | 576 |
+
+<p style="font-size: 0.6em; color: #666;">Here $MU_1/p_1 = c_2/2$ and $MU_2/p_2 = c_1/3$.</p>
 
 ::: {.incremental}
-- At $(15, 30)$, a dollar moved from good 2 to good 1 loses about 5 utils and gains about 15: a net gain of 10, while **spending nothing extra**.
-- Keep walking and the two ratios close in from opposite sides. They meet at $10$ — and that common value is the multiplier $\lambda^*$.
+- At $(15, 30)$: moving \$1 from good 2 to good 1 loses $\approx 5$ utils and gains $\approx 15$ — **net $+10$, same spending**.
+- The ratios close in from both sides and meet at $10 = \lambda^*$.
 :::
+:::
+
+::: {.column width="40%"}
+<div style="text-align: center;">
+  <img src="figs/tangency-scipy-check.png" style="width: 80%; border-radius: 6px;">
+  <p style="font-size: 0.55em; color: #666;">The optimum $E = (30, 20)$ from the last slide.</p>
+</div>
+:::
+::::
 
 <!-- Every row lies on the budget line 2c1 + 3c2 = 120. At the optimum,
      lambda* = I/(2 p1 p2) = 120/12 = 10, matching the "stop" row. -->
@@ -587,9 +600,11 @@ Take $u = c_1 c_2$ with $p_1 = 2$, $p_2 = 3$, $I = 120$. Start anywhere on the b
 
 ::: {.callout-tip icon=false}
 ## Explore along the constraint
+::: {style="font-size: 1.45em; line-height: 1.5;"}
 - **If $MU_1/p_1 > MU_2/p_2$:** buy more of good 1 and less of good 2.
 - **If $MU_1/p_1 < MU_2/p_2$:** do the reverse.
 - **Stop when they are equal — or when you hit a wall.**
+:::
 :::
 
 ::: {.incremental}
@@ -611,9 +626,8 @@ $$c_2(c_1) = \frac{I}{p_2} - \frac{p_1}{p_2}\,c_1$$
 - Its slope, by the chain rule, is the arbitrage gap:
   $$\frac{d}{dc_1}\,u\big(c_1, c_2(c_1)\big) = u_1 - u_2\,\frac{p_1}{p_2} = p_1\left(\frac{u_1}{p_1} - \frac{u_2}{p_2}\right)$$
 - So the substitution FOC, slope $= 0$, **is** the no-arbitrage condition $u_1/p_1 = u_2/p_2$.
-- For $u = c_1 c_2$: $\;u = \frac{I}{p_2}c_1 - \frac{p_1}{p_2}c_1^2$, so setting $\frac{I}{p_2} - 2\frac{p_1}{p_2}c_1 = 0$ gives
+- For $u = c_1 c_2$: $\;u = \frac{I}{p_2}c_1 - \frac{p_1}{p_2}c_1^2$, so setting $\frac{I}{p_2} - 2\frac{p_1}{p_2}c_1 = 0$ gives half of income on each good:
   $$c_1^* = \frac{I}{2p_1}, \qquad c_2^* = \frac{I}{2p_2}$$
-  — half of income on each good.
 :::
 
 ---
@@ -626,7 +640,7 @@ $$c_2(c_1) = \frac{I}{p_2} - \frac{p_1}{p_2}\,c_1$$
   - What if there are 10 choice variables and 4 constraints?
   - What if the constraint is an **inequality** that might not bind?
   - What if we need the **economic valuation** of relaxing the budget?
-- Substitution works, but it privileges one variable, hides the constraint as a geometric object, and never reports $\lambda^*$, the **shadow price**: the value of relaxing the budget. Lagrange keeps all of these in view.
+- Direct substitution turns a constrained problem into an unconstrained one, but destroys the geometric symmetry and conceals the **shadow prices**.
 - We need a method that preserves the structure of the constraint.
 :::
 
@@ -773,14 +787,13 @@ The exact same reallocation logic applies to **any** constrained optimization pr
 $$\max_{x_1, x_2} \; f(x_1, x_2) \quad \text{s.t.} \quad g(x_1, x_2) = c$$
 
 ::: {.incremental}
-- Consider a small movement along the constraint curve: $dg = g_1 dx_1 + g_2 dx_2 = 0$.
-- Shifting resources toward $x_1$ by $dx_1 = dc / g_1$ forces $dx_2 = -dc / g_2$.
+- Along the constraint, $dg = g_1\,dx_1 + g_2\,dx_2 = 0$: resource added to $x_1$ = resource taken from $x_2$.
+- Shift a small amount $\delta$ of the resource toward $x_1$: $\;dx_1 = \delta / g_1$, $\;dx_2 = -\delta / g_2$. (Budget case: $\delta = \$1$, $g_i = p_i$.)
 - **Net change in objective:**
-  $$df = f_1 \, dx_1 + f_2 \, dx_2 = \left(\frac{f_1}{g_1} - \frac{f_2}{g_2}\right) dc$$
-- Whenever $f_1 / g_1 \ne f_2 / g_2$, shifting resources yields a positive net gain!
-- At an interior optimum, all reallocations are exhausted:
+  $$df = f_1 \, dx_1 + f_2 \, dx_2 = \left(\frac{f_1}{g_1} - \frac{f_2}{g_2}\right) \delta$$
+- Whenever $f_1 / g_1 \ne f_2 / g_2$, shifting resources in the right direction yields a positive net gain!
+- At an interior optimum all reallocations are exhausted, and the common ratio is the constraint's **benefit-cost ratio**:
   $$\frac{f_1}{g_1} = \frac{f_2}{g_2} = \lambda^*$$
-- $\lambda^*$ is the **benefit-cost ratio** of the constraint.
 :::
 
 ---
@@ -909,8 +922,7 @@ $$u(c_1, c_2) = c_1 + \sqrt{c_2}$$
   $c_2 = \frac{I}{p_2} = 2, \quad c_1 = 0$
 - Evaluate marginal bang-per-buck at this corner:
   $$\frac{u_1}{p_1} = \frac{1}{5} = 0.20 < \frac{u_2}{p_2} = \frac{1}{2\sqrt{2}} \approx 0.3536$$
-- Good 2 gives the higher return per \$ *even with all income already spent on it*.
-- **Same arbitrage as before:** it says keep shifting dollars from good 1 to good 2 — and at $c_1 = 0$ there are none left to shift. The consumer would *sell* good 1 if they could; non-negativity ($c_1 \ge 0$) forbids it.
+- **Same arbitrage as before:** good 2 pays more per \$ *even with all income already on it*, so the rule says keep shifting dollars toward good 2 — but at $c_1 = 0$ there are none left. The consumer would *sell* good 1 if they could; $c_1 \ge 0$ forbids it.
 - **Result:** Corner optimum at $(c_1^*, c_2^*) = (0, 2)$.
 :::
 :::
