@@ -74,3 +74,34 @@ Every idea above is scoped to something that already exists in `deck.md`
 — none of it requires new source material from the legacy PowerPoint. See
 `source.yml` for the conversion history and gotchas specific to this
 topic (native-diagram capture, the variable title-height crop issue).
+
+## Parked for Topic 4 (cut from the Topic 3 deck 2026-10-05)
+
+The consumer/producer duality map was removed from Topic 3 because its
+consumer column (expenditure function, Hicksian and Marshallian demand) is
+not taught until Topic 4. It belongs at the end of Topic 4, when both
+columns are known. Caution before reusing: cost minimization is the true
+twin of expenditure minimization, but profit maximization has no budget
+constraint and is not the twin of utility maximization, so the
+"Primal/Dual" row labels overstate the symmetry. Original slide:
+
+```markdown
+## The Duality Map {.compact}
+
+| | **Consumer** | **Producer** |
+|---|---|---|
+| Primal | $\max u(x)$ s.t. $p\cdot x = m$ | $\max pq - C(q)$ |
+| Dual | $\min p\cdot x$ s.t. $u(x) = \bar u$ | $\min wL + rK$ s.t. $F(K,L) = q$ |
+| Value function | $V(p,m)$, $E(p,\bar u)$ | $\pi(p,w,r)$, $C(w,r,q)$ |
+| Quantity-fixed demand | Hicksian $x^h(p,\bar u)$ | conditional $L^*(w,r,q)$ |
+| Free demand | Marshallian $x(p,m)$ | unconditional $L(p,w,r)$ |
+| Envelope result | $\partial E/\partial p_i = x_i^h$ | $\partial C/\partial w = L^*, \; \partial \pi^*/\partial p = q^*$ |
+
+::: {.fragment}
+Two problems, one skeleton. Learn the skeleton and each new application costs you an afternoon, not a semester.
+:::
+```
+
+Also cut and available if wanted: a full Hotelling's lemma slide (now one
+bullet on the Shephard slide) and "Why Duality Earns Its Keep" (only the
+estimation point survives, in the Shephard callout).

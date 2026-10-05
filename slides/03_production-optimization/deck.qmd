@@ -3,7 +3,7 @@ title: "Microeconomic Theory"
 subtitle: "Topic 3: Production Optimization"
 author: "Jonathan Conning"
 description: "ECO 701 Topic 3: Production Optimization"
-deploy: false   # draft — not yet released to students
+deploy: true
 institute: "Hunter College, Dept. of Economics"
 format:
   revealjs:
@@ -16,64 +16,102 @@ format:
     height: 720
 ---
 
-<!-- Ported from the Marp deck (slidesIIb 162-202); see source.yml for the
-     extraction history. Figures regenerated from formulas in
-     notebooks/topic03_production_figures.ipynb. Notation standardised:
-     L = labor, K = capital, w = wage, r = rental rate, \mathcal{L} =
-     Lagrangian (the legacy deck used L for both labor and the Lagrangian,
-     and alternated between r and v for the rental rate). -->
-
 ## Same Fence, New Hill {.compact}
 
-Topic 2 gave you the machinery. Today we point it at the firm — and almost nothing about the *method* changes.
+Topic 2 built the machinery of constrained optimization. Now we apply it to the firm.
 
 :::: {.columns}
 ::: {.column width="52%"}
 | Topic 2: constrained optimization | Topic 3: the firm |
 |---|---|
-| climb the hill $\max f(x,y)$ | minimize spending $wL + rK$ |
+| climb the hill $\max f(x,y)$ | minimize spending $wL + vK$ |
 | stop at the fence $g(x,y) = c$ | reach output target $F(K,L) = q$ |
 | contour / level curve | isoquant |
-| tangency $\nabla f = \lambda \nabla g$ | tangency $MRTS = w/r$ |
+| tangency $\nabla f = \lambda \nabla g$ | tangency $MRTS = w/v$ |
 | $\lambda$ = shadow price of fence | $\lambda$ = marginal cost of output |
-| value function $V(c)$ | cost function $C(w,r,q)$ |
+| value function $V(c)$ | cost function $C(v,w,q)$ |
 :::
 
 ::: {.column width="48%"}
 ::: {.callout-tip icon=false}
-## The same three questions
+## The same three steps
 1. Where is the tangency?
 2. What does the multiplier mean?
 3. What happens when parameters move — the envelope theorem.
 :::
 
 ::: {.fragment}
-The economics is new. The calculus is what you already did.
+The calculus is what you already did. 
 
-*(Next week, Topic 4 will flip this same logic around for consumer choice.)*
+*(Topic 4 will flip this same logic around for consumer choice.)*
+:::
+:::
+::::
+
+<!-- Ported from the Marp deck (slidesIIb 162-202); see source.yml for the
+     extraction history. Figures regenerated from formulas in
+     notebooks/topic03_production_figures.ipynb. Notation standardised:
+     L = labor, K = capital, w = wage, v = rental rate, \mathcal{L} =
+     Lagrangian (the legacy deck used L for both labor and the Lagrangian,
+     and alternated between r and v for the rental rate).
+     Revised 2026-10-05 to sit alongside Nicholson & Snyder 11e ch. 9-11:
+     rental rate is v, cost function is C(v,w,q), contingent demands are
+     L^c and K^c, short-run capital is K_1, and the running numbers are the
+     text's (w = 12, v = 3, q = 40). Capital letters K, L and MRTS are kept
+     for continuity with Topic 2; the "Reading Alongside the Text" slide
+     gives students the translation. -->
+
+---
+
+## Three Questions About the Firm {.compact}
+
+::: {.incremental}
+- **What can the firm make?** The production function and its isoquants — the firm's *technology*.
+- **What is the cheapest way to make $q$?** Cost minimization, takes technology and input prices to derive a minimum **cost function** $C(v,w,q)$.
+- **How much should it make?** Profit maximization, given total revenue and cost functions, determines optimum **output choice** and a **supply curve** given market input and output prices.
+:::
+
+::: {.fragment}
+> Notice the order. The firm's problem splits in two: *first* figure out how toproduce any given output in the most cost efficient way (cost minimization), *then* choose the optimum output quantity (profit maximization).  
+:::
+
+---
+
+## Reading Nicholson and Snyder {.compact}
+
+Nicholson & Snyder (NS) chapters 9–11 cover the same ground in the same order: Ch. 9 technology, Ch. 10 cost, Ch. 11 profit.
+
+:::: {.columns}
+::: {.column width="50%"}
+| | NS | These slides |
+|---|:-:|:-:|
+| Inputs | $k$, $l$ | $K$, $L$ |
+| Production function | $f(k,l)$ | $F(K,L)$ |
+| Slope of an isoquant | $RTS$ | $MRTS$ |
+| Input demand at fixed $q$ | $l^c$, $k^c$ | $L^c$, $K^c$ |
+| Capital fixed in the short run | $k_1$ | $K_1$ |
+
+Same in both: $q$, wage $w$, rental rate of capital $v$, $C(v,w,q)$, $SAC$, $SMC$.
+:::
+
+::: {.column width="50%"}
+::: {.callout-tip icon=false}
+## Same numbers, too
+Our running example is the text's: $q = \sqrt{KL}$, $w = 12$, $v = 3$. Grey notes on the slides point to the matching NS figure or example.
+:::
+
+::: {.callout-warning icon=false}
+## One thing to skip for now
+Chapter 10 refers back to Chapters 4–5 (expenditure minimization, compensated demand). We reach those in Topic 4.
 :::
 :::
 ::::
 
 ---
 
-## Today's Three Questions {.compact}
-
-::: {.incremental}
-- **What can the firm make?** The production function and its isoquants — the firm's *technology*.
-- **What is the cheapest way to make $q$?** Cost minimization, which turns technology and factor prices into a **cost function** $C(w,r,q)$.
-- **How much should it make?** Profit maximization, which turns the cost function into an **output choice** and a **supply curve**.
-:::
-
-::: {.fragment}
-> Notice the order. The firm's problem splits in two: *first* produce any given output efficiently, *then* choose the output. The second question cannot be answered until the first one is.
-:::
-
----
-
 ## Part I: Production Technology {.divider}
 
-What the firm is able to do, before any question of what it *should* do
+**Production Functions:** What the firm is able to do, before any question of what it *should* do — NS Chapter 9
 
 ---
 
@@ -84,8 +122,9 @@ A firm's **production function** gives the maximum output attainable from each c
 $$q = F(K,L)$$
 
 ::: {.incremental}
-- $F(K,L)$ is the *maximum* output producible from those inputs. Anything less is **technically inefficient** — and never optimal to choose.
-- Built into the definition: the firm already knows how to get the most out of what it buys. Every question that follows is about *which* inputs to buy.
+- For any combination of inputs $(K,L)$ the production function $F(K,L)$ is the *maximum* output producible from those inputs. Anything less is **technically inefficient** — and never optimal to choose.
+- Built into the definition: the firm already knows how to get the most out of the inputs it buys. Every question that follows is about *which* combination inputs to buy (given technology and market prices).
+
 :::
 
 ---
@@ -96,8 +135,10 @@ $$MP_K = \frac{\partial q}{\partial K} = F_K(K,L) \qquad\qquad MP_L = \frac{\par
 
 ::: {.incremental}
 - The extra output from one more unit of an input, holding the other fixed — a partial derivative, exactly as in Topic 2.
-- These are the firm's analogue of marginal utilities. They will do the same job in the tangency condition.
+
 :::
+
+<p style="font-size: 0.6em; color: #666;">Text: NS Example 9.1 works through a numerical case.</p>
 
 ---
 
@@ -108,7 +149,6 @@ $$F_{KK} < 0 \qquad\qquad F_{LL} < 0 \qquad\qquad F_{LK} > 0$$
 ::: {.incremental}
 - **Own effects negative:** piling more labor onto a fixed stock of machines eventually yields less and less. This is what makes factor demand slope downward.
 - **Cross effect positive:** capital and labor are **complements** in most technologies — more machines raise the marginal product of workers.
-- Diminishing $MP_L$ is *not* the same thing as decreasing returns to scale. The first holds $K$ fixed; the second scales both inputs. Keep them apart.
 :::
 
 ---
@@ -148,19 +188,8 @@ A firm that knows only three recipes is not stuck with three points.
 :::
 ::::
 
----
-
-## A Caveat on Smooth Substitution {.compact}
-
-::: {.callout-warning icon=false}
-## What the smooth isoquant assumes away
-The textbook firm knows the entire recipe book and can move along an isoquant costlessly. Real firms **search, experiment, and adapt** — and some are much better at it than others.
-:::
-
-::: {.incremental}
-- If the whole book were known and free to use, the technique chosen would depend on nothing but factor prices.
-- Persistent productivity gaps between firms in the same industry — and between countries — are evidence that it is not.
-- We keep the smooth assumption because it isolates the price logic. Just remember it is an assumption, not a finding.
+::: {.fragment}
+> **Caveat:** real firms must search and experiment to find good recipes. Lasting productivity gaps between similar firms show the recipe book is not free to read.
 :::
 
 ---
@@ -181,7 +210,7 @@ Each curve collects the input bundles yielding one output level.
 ::: {.column width="50%"}
 <div style="text-align: center;">
   <img src="figs/isoquant-map.png" style="width: 100%; border-radius: 6px;">
-  <p style="font-size: 0.65em; color: #666;">The isoquant map for $q = K^{1/2}L^{1/2}$.</p>
+  <p style="font-size: 0.65em; color: #666;">The isoquant map for $q = K^{1/2}L^{1/2}$. Text: NS Figure 9.1.</p>
 </div>
 :::
 ::::
@@ -192,21 +221,19 @@ Each curve collects the input bundles yielding one output level.
 
 :::: {.columns}
 ::: {.column width="52%"}
-Totally differentiate $F(K,L) = \bar q$ — the same implicit-function step as Topic 2's $MRS$:
-
-$$F_K\,dK + F_L\,dL = 0 \;\Longrightarrow\; \left.\frac{dK}{dL}\right|_{\bar q} = -\frac{F_L}{F_K}$$
+Recall from Topic 2: the slope of an isoquant is $-F_L/F_K$. Its size is the $MRTS$ (NS writes $RTS$).
 
 ::: {.incremental}
 - $MRTS = F_L/F_K = MP_L/MP_K$: how much capital the firm can release per extra worker, output held fixed.
 - It **diminishes** as labor replaces capital — labor gets less productive at the margin, capital more so.
-- A *technological* rate of exchange. The market's rate is $w/r$. Cost minimization is about lining the two up.
+- A *technological* rate of exchange. The market's rate is $w/v$. Cost minimization is about lining the two up.
 :::
 :::
 
 ::: {.column width="48%"}
 <div style="text-align: center;">
   <img src="figs/mrts-diminishing.png" style="width: 100%; border-radius: 6px;">
-  <p style="font-size: 0.65em; color: #666;">Tangents flatten as $L$ rises: diminishing $MRTS$.</p>
+  <p style="font-size: 0.65em; color: #666;">Tangents flatten as $L$ rises: diminishing $MRTS$. Text: NS Example 9.2.</p>
 </div>
 :::
 ::::
@@ -224,31 +251,60 @@ $$F(tK, tL) = t^{\,\varepsilon} F(K,L)$$
 - $\varepsilon < 1$: **decreasing returns** — something is being spread thinner. We will name it shortly.
 - $\varepsilon > 1$: **increasing returns** — specialization, indivisible equipment, network effects.
 - For Cobb-Douglas $F = K^\alpha L^\beta$, $\varepsilon = \alpha + \beta$ — read straight off the exponents.
+- Not the same as diminishing $MP_L$: that holds $K$ fixed, this scales both inputs.
 :::
 
 ::: {.fragment}
-> Hold on to $\alpha + \beta$. It is about to reappear as the exponent on $q$ in the cost function, and it decides whether cost curves are straight, convex, or concave.
+>  $\alpha + \beta$ will reappear as the exponent on $q$ in the cost function, and it decides whether cost curves are straight (CRS), convex (DRS), or concave (IRS).
 :::
 
 ---
 
 ## Part II: Cost Minimization {.divider}
 
-From technology and factor prices to the cost function $C(w,r,q)$
+From technology and input prices to the cost function $C(v,w,q)$ — NS Chapter 10
 
 ---
 
 ## The Firm's Cost-Minimization Problem {.compact}
 
-Take the output level $q$ as given for now, and produce it as cheaply as possible:
+Take the output level $q$ as given for now, and produce it as cheaply as possible. Labor costs $w$ per unit; capital rents for $v$ per unit:
 
-$$\min_{K,L} \; wL + rK \qquad \text{subject to} \qquad F(K,L) = q$$
+$$\min_{K,L} \; wL + vK \qquad \text{subject to} \qquad F(K,L) = q$$
 
 ::: {.incremental}
 - **Why this comes first:** a profit-maximizing firm never overpays for the output it ends up making. Whatever $q$ turns out to be optimal, it will be produced at minimum cost.
-- The solution gives **conditional input demands** $L^*(w,r,q)$ and $K^*(w,r,q)$ — conditional because they are tied to a particular $q$.
-- Substituting them back into $wL + rK$ gives the **cost function** $C(w,r,q)$, the object Part III needs.
+- The solution gives **contingent input demands** $L^c(v,w,q)$ and $K^c(v,w,q)$ — contingent on a particular $q$. (Many texts say *conditional*.)
+- Substituting them back into $wL + vK$ gives the **cost function** $C(v,w,q)$, the object Part III needs.
 :::
+
+---
+
+## Walking the Isoquant {.compact}
+
+Our running example, the same one as the text: $q = \sqrt{KL}$, $w = 12$, $v = 3$. The firm must make $q = 40$. Every row below does that. Which is cheapest?
+
+:::: {.columns}
+::: {.column width="52%"}
+| $L$ | $K$ | labor bill $wL$ | capital bill $vK$ | total cost |
+|:-:|:-:|:-:|:-:|:-:|
+| 5 | 320 | 60 | 960 | 1020 |
+| 10 | 160 | 120 | 480 | 600 |
+| **20** | **80** | **240** | **240** | **480** |
+| 40 | 40 | 480 | 120 | 600 |
+| 80 | 20 | 960 | 60 | 1020 |
+:::
+
+::: {.column width="48%"}
+::: {.incremental}
+- Start at the top: many machines, few workers. Trading machines for workers saves money — until it doesn't.
+- The same walk as Topic 2's budget line. This time we walk along the *isoquant* and look for the lowest cost.
+- Cost bottoms out at $L = 20$, $K = 80$. The next slides explain why.
+:::
+:::
+::::
+
+<p style="font-size: 0.8em; color: #666;">Text: NS Example 10.1 uses these numbers.</p>
 
 ---
 
@@ -258,10 +314,10 @@ $$\min_{K,L} \; wL + rK \qquad \text{subject to} \qquad F(K,L) = q$$
 ::: {.column width="52%"}
 Bundles costing the same total $C$:
 
-$$C = wL + rK \;\Longrightarrow\; K = \frac{C}{r} - \frac{w}{r}\,L$$
+$$C = wL + vK \;\Longrightarrow\; K = \frac{C}{v} - \frac{w}{v}\,L$$
 
 ::: {.incremental}
-- Parallel lines of slope $-w/r$ — the **market** rate of exchange between inputs.
+- Parallel lines of slope $-w/v$ — the **market** rate of exchange between inputs.
 - Lines further out cost more. The firm wants the *lowest* line that still reaches its isoquant.
 - Structurally identical to Topic 2's budget line, but the roles are reversed: there the line was the constraint, here it is the objective.
 :::
@@ -270,7 +326,7 @@ $$C = wL + rK \;\Longrightarrow\; K = \frac{C}{r} - \frac{w}{r}\,L$$
 ::: {.column width="48%"}
 <div style="text-align: center;">
   <img src="figs/isocost-family.png" style="width: 100%; border-radius: 6px;">
-  <p style="font-size: 0.65em; color: #666;">Isocost lines for $w=2$, $r=4$: slope $-1/2$.</p>
+  <p style="font-size: 0.65em; color: #666;">Isocost lines for $w=12$, $v=3$: slope $-4$.</p>
 </div>
 :::
 ::::
@@ -284,12 +340,14 @@ $$C = wL + rK \;\Longrightarrow\; K = \frac{C}{r} - \frac{w}{r}\,L$$
 ::: {.incremental}
 - Lines below the isoquant are cheaper but **unattainable** — they never touch the required output.
 - Lines cutting the isoquant are attainable but **wasteful** — slide along the isoquant and spend less.
-- Minimum cost is the **tangency**: the lowest isocost line that still touches the isoquant, at $(L^*, K^*)$.
+- Minimum cost is the **tangency**: the lowest isocost line that still touches the isoquant.
 :::
 
 ::: {.fragment}
-At $w=2$, $r=4$, $q=10$: $L^*=14.1$, $K^*=7.1$, $C^*=56.6$.
+At $w=12$, $v=3$, $q=40$: $L=20$, $K=80$, $C=480$ — the best row of the table.
 :::
+
+<p style="font-size: 0.8em; color: #666;">Text: NS Figure 10.1.</p>
 :::
 
 ::: {.column width="50%"}
@@ -304,12 +362,12 @@ At $w=2$, $r=4$, $q=10$: $L^*=14.1$, $K^*=7.1$, $C^*=56.6$.
 
 ## Solving It: The Method of Lagrange {.compact}
 
-$$\mathcal{L}(K,L,\lambda) = wL + rK + \lambda\big[q - F(K,L)\big]$$
+$$\mathcal{L}(K,L,\lambda) = wL + vK + \lambda\big[q - F(K,L)\big]$$
 
 First-order conditions:
 
 $$\frac{\partial \mathcal{L}}{\partial L} = w - \lambda F_L = 0 \qquad
-\frac{\partial \mathcal{L}}{\partial K} = r - \lambda F_K = 0 \qquad
+\frac{\partial \mathcal{L}}{\partial K} = v - \lambda F_K = 0 \qquad
 \frac{\partial \mathcal{L}}{\partial \lambda} = q - F(K,L) = 0$$
 
 ::: {.incremental}
@@ -317,7 +375,7 @@ $$\frac{\partial \mathcal{L}}{\partial L} = w - \lambda F_L = 0 \qquad
 - Note the sign convention: we are **minimizing**, so the multiplier enters with $[q - F(K,L)]$ and $\lambda$ will come out positive.
 :::
 
-<!-- Legacy slide 176: the professor's typed FOCs, re-keyed from the slide PNG. -->
+<p style="font-size: 0.8em; color: #666;">Text: NS Example 10.1 sets up the same Lagrangian.</p>
 
 ---
 
@@ -325,16 +383,16 @@ $$\frac{\partial \mathcal{L}}{\partial L} = w - \lambda F_L = 0 \qquad
 
 Divide the first FOC by the second:
 
-$$\frac{w}{r} = \frac{F_L}{F_K} = \frac{MP_L}{MP_K} = MRTS$$
+$$\frac{w}{v} = \frac{F_L}{F_K} = \frac{MP_L}{MP_K} = MRTS$$
 
 Or rearrange instead:
 
-$$\frac{MP_L}{w} = \frac{MP_K}{r}$$
+$$\frac{MP_L}{w} = \frac{MP_K}{v}$$
 
 ::: {.incremental}
 - **First form:** the technological rate of substitution equals the market's price ratio — the isoquant is tangent to the isocost line.
 - **Second form — the arbitrage reading:** the last dollar spent on labor buys exactly as much extra output as the last dollar spent on capital.
-- If they were unequal — say $MP_L/w > MP_K/r$ — the firm could shift a dollar from capital to labor, produce *more* for the same spending, then cut back to the required $q$ and save money. Equality is what leaves no such trade on the table.
+- **In the table:** at $L=10$, $K=160$ a dollar of labor adds $1/6$ of a unit of output, a dollar of capital only $1/24$. Shift dollars toward labor and the same output costs less. At $L=20$, $K=80$ both are $1/12$: no trade left.
 :::
 
 ---
@@ -343,11 +401,11 @@ $$\frac{MP_L}{w} = \frac{MP_K}{r}$$
 
 From the two FOCs:
 
-$$\lambda = \frac{w}{MP_L} = \frac{r}{MP_K}$$
+$$\lambda = \frac{w}{MP_L} = \frac{v}{MP_K}$$
 
 ::: {.incremental}
 - Check the units: $\dfrac{\$/\text{worker}}{\text{output}/\text{worker}} = \dfrac{\$}{\text{output}}$ — dollars per unit of output.
-- So $\lambda$ is the cost of squeezing out one more unit of output: $\lambda = \partial C/\partial q = MC$.
+- So $\lambda$ is the cost of squeezing out one more unit of output: $\lambda = \partial C/\partial q = MC$. In our example $\lambda = 12$: the 41st unit costs about \$12.
 - Exactly the Topic 2 story with new names. There, $\lambda$ was the marginal utility of relaxing the budget; here, the marginal cost of tightening the output quota.
 :::
 
@@ -358,18 +416,52 @@ A multiplier always answers the same question: *what is one more unit of the con
 
 ---
 
-## Conditional Demands and the Cost Function {.compact}
+## Where We Are {.compact}
 
-Solving the FOCs together with $F(K,L)=q$ gives the **conditional input demands**:
+<!-- ===== STOPPING POINT, class 4 (Mon Oct 5) =====
+     Everything above is Topic 2's method applied to the firm and is taught
+     with the end of Topic 2. Class 5 (Tue Oct 13) restarts on the slide
+     below and continues from "Contingent Demands and the Cost Function".
+     See schedule.md rows 4-5. -->
 
-$$L^*(w,r,q) \qquad\qquad K^*(w,r,q)$$
+:::: {.columns}
+::: {.column width="50%"}
+::: {.callout-tip icon=false}
+## So far: Topic 2's method, pointed at the firm
+- **Technology:** production function, isoquants, $MRTS$, returns to scale.
+- **Cost minimization:** walk the isoquant to the tangency, $MRTS = w/v$.
+- **The multiplier:** $\lambda$ is marginal cost.
+:::
+:::
+
+::: {.column width="50%"}
+::: {.callout-note icon=false}
+## Next: what the tangency buys us
+- Plug the best choices back in to get the **cost function** $C(v,w,q)$.
+- Cost curves, the short run and the long run.
+- Choosing output: profit maximization and the supply curve.
+:::
+:::
+::::
+
+Our example so far: to make $q = 40$ at $w = 12$, $v = 3$, the firm hires 20 workers and 80 machines and spends 480. The last unit costs about \$12.
+
+<p style="font-size: 0.8em; color: #666;">Reading for the second half: NS Chapter 10 from "Cost Functions" on, and Chapter 11.</p>
+
+---
+
+## Contingent Demands and the Cost Function {.compact}
+
+Solving the FOCs together with $F(K,L)=q$ gives the **contingent input demands**:
+
+$$L^c(v,w,q) \qquad\qquad K^c(v,w,q)$$
 
 Substituting them back into the objective gives the **cost function**:
 
-$$C(w,r,q) \;=\; \min_{K,L}\,\{wL + rK : F(K,L) = q\} \;=\; w\,L^*(w,r,q) + r\,K^*(w,r,q)$$
+$$C(v,w,q) \;=\; \min_{K,L}\,\{wL + vK : F(K,L) = q\} \;=\; w\,L^c(v,w,q) + v\,K^c(v,w,q)$$
 
 ::: {.incremental}
-- This is the production twin of the **expenditure function** $E(p_1,p_2,\bar u)$ — plug the optimal choices back into what you were minimizing.
+- The recipe: plug the optimal choices back into what you were minimizing. Next week the consumer gets the same treatment.
 - $C$ inherits the technology *and* the prices. Change $w$ and the whole cost curve moves.
 - Everything in Part III is built from this one object.
 :::
@@ -381,14 +473,16 @@ $$C(w,r,q) \;=\; \min_{K,L}\,\{wL + rK : F(K,L) = q\} \;=\; w\,L^*(w,r,q) + r\,K
 Let $F(K,L) = K^{1/2}L^{1/2}$, so $\alpha + \beta = 1$ — constant returns.
 
 ::: {.incremental}
-- Tangency: $MRTS = K/L = w/r$, so $K = (w/r)\,L$.
-- Substitute into $q = K^{1/2}L^{1/2}$: $\;q = (w/r)^{1/2} L$, hence
-  $$L^*(w,r,q) = q\sqrt{r/w} \qquad K^*(w,r,q) = q\sqrt{w/r}$$
-- Costs: $C = wL^* + rK^* = q\sqrt{wr} + q\sqrt{wr}$, so
-  $$\boxed{\;C(w,r,q) = 2q\sqrt{wr}\;}$$
-- Cost is **linear** in $q$: $MC = AC = 2\sqrt{wr}$, constant. Doubling output doubles cost, the hallmark of constant returns.
-- If price equals marginal cost ($p = MC = 2\sqrt{wr}$), total revenue $pq$ exactly equals total cost $C$: economic profit is zero. Factor payments exhaust revenue.
+- Tangency: $MRTS = K/L = w/v$, so $K = (w/v)\,L$.
+- Substitute into $q = K^{1/2}L^{1/2}$: $\;q = (w/v)^{1/2} L$, hence
+  $$L^c(v,w,q) = q\sqrt{v/w} \qquad K^c(v,w,q) = q\sqrt{w/v}$$
+- Costs: $C = wL^c + vK^c = q\sqrt{vw} + q\sqrt{vw}$, so
+  $$\boxed{\;C(v,w,q) = 2q\sqrt{vw}\;}$$
+- With $w=12$, $v=3$: $\;L^c = q/2$, $\;K^c = 2q$, $\;C = 12q$. At $q=40$ that is 20 workers, 80 machines and a cost of 480.
+- Cost is **linear** in $q$: $MC = AC = 12$. Doubling output doubles cost, the hallmark of constant returns.
 :::
+
+<p style="font-size: 0.8em; color: #666;">Text: NS Examples 10.1 and 10.2.</p>
 
 ---
 
@@ -396,14 +490,16 @@ Let $F(K,L) = K^{1/2}L^{1/2}$, so $\alpha + \beta = 1$ — constant returns.
 
 For $F(K,L) = K^\alpha L^\beta$ the same steps give
 
-$$C(w,r,q) = B\; q^{\frac{1}{\alpha+\beta}}\; r^{\frac{\alpha}{\alpha+\beta}}\; w^{\frac{\beta}{\alpha+\beta}},
-\qquad B = (\alpha+\beta)\,\alpha^{-\frac{\alpha}{\alpha+\beta}}\beta^{-\frac{\beta}{\alpha+\beta}}$$
+$$C(v,w,q) = B\; q^{\frac{1}{\alpha+\beta}}\; v^{\frac{\alpha}{\alpha+\beta}}\; w^{\frac{\beta}{\alpha+\beta}}
+\qquad (B \text{ is a constant})$$
 
 ::: {.incremental}
 - The exponent on $q$ is $1/(\alpha+\beta)$ — the reciprocal of the returns-to-scale parameter.
 - $\alpha+\beta = 1 \Rightarrow$ cost linear in $q$. $\;\alpha+\beta < 1 \Rightarrow$ convex. $\;\alpha+\beta > 1 \Rightarrow$ concave.
-- The exponents on $w$ and $r$ are the **cost shares** of labor and capital, and they sum to one: doubling both factor prices doubles cost, whatever the technology.
+- The exponents on $w$ and $v$ are the **cost shares** of labor and capital, and they sum to one: doubling both input prices doubles cost, whatever the technology.
 :::
+
+<p style="font-size: 0.8em; color: #666;">Text: NS Example 10.2.</p>
 
 ---
 
@@ -415,15 +511,15 @@ Hold prices fixed and let $q$ rise. Each output level has its own tangency.
 
 ::: {.incremental}
 - The **expansion path** is the locus of those tangencies — how the firm scales up.
-- For Cobb-Douglas at fixed prices it is a **ray**: input proportions never change with scale.
-- Read off the vertical: minimum cost at each $q$ *is* the cost function $C(q)$.
+- For Cobb-Douglas at fixed prices it is a **ray**: input proportions never change with scale. Here $K = 4L$.
+- Read off the cost at each tangency and you have the cost function $C(q)$.
 :::
 :::
 
 ::: {.column width="50%"}
 <div style="text-align: center;">
   <img src="figs/expansion-path.png" style="width: 100%; border-radius: 6px;">
-  <p style="font-size: 0.65em; color: #666;">Tangencies at $q = 6, 10, 14$ trace the expansion path.</p>
+  <p style="font-size: 0.65em; color: #666;">Tangencies at $q = 20, 40, 60$ trace the expansion path. Text: NS Figure 10.2.</p>
 </div>
 :::
 ::::
@@ -432,7 +528,7 @@ Hold prices fixed and let $q$ rise. Each output level has its own tangency.
 
 ## Average and Marginal Cost
 
-$$AC(w,r,q) = \frac{C(w,r,q)}{q} \qquad\qquad MC(w,r,q) = \frac{\partial C(w,r,q)}{\partial q}$$
+$$AC(v,w,q) = \frac{C(v,w,q)}{q} \qquad\qquad MC(v,w,q) = \frac{\partial C(v,w,q)}{\partial q}$$
 
 ::: {.incremental}
 - $AC$ is the slope of a ray from the origin to the cost curve; $MC$ is the slope of the curve itself.
@@ -459,7 +555,7 @@ $$AC(w,r,q) = \frac{C(w,r,q)}{q} \qquad\qquad MC(w,r,q) = \frac{\partial C(w,r,q
 ::: {.column width="54%"}
 <div style="text-align: center;">
   <img src="figs/returns-to-scale-costs.png" style="width: 100%; border-radius: 6px;">
-  <p style="font-size: 0.65em; color: #666;">Same technology family, three returns-to-scale cases.</p>
+  <p style="font-size: 0.65em; color: #666;">Same technology family, three returns-to-scale cases. Text: NS Figures 10.4–10.5.</p>
 </div>
 :::
 ::::
@@ -478,40 +574,49 @@ F(K,L) = \hat F(K,L,\bar z) = A\,K^\alpha L^\beta, \quad A = \bar z^{\,1-\alpha-
 - This is why decreasing returns and rising marginal cost travel together, and why "decreasing returns" is often a statement about **what is being held fixed**, not about physics.
 :::
 
----
-
-## Average and Marginal Cost With Fixed Costs {.compact}
-
-:::: {.columns}
-::: {.column width="46%"}
-::: {.incremental}
-- A fixed cost lifts $C(q)$ at $q=0$ but leaves $MC$ untouched.
-- Spreading it over more units pulls $AC$ down; rising $MC$ eventually pushes $AC$ back up. Hence the U.
-- **The averaging rule:** if $MC < AC$, $AC$ falls; if $MC > AC$, $AC$ rises. So $MC$ must cut $AC$ exactly at $AC$'s minimum.
-:::
-:::
-
-::: {.column width="54%"}
-<div style="text-align: center;">
-  <img src="figs/ac-mc-fixed-costs.png" style="width: 100%; border-radius: 6px;">
-  <p style="font-size: 0.65em; color: #666;">$C(q) = 20 + \tfrac{1}{2}q^3 - 4q^2 + 20q$.</p>
-</div>
-:::
-::::
+<p style="font-size: 0.8em; color: #666;">Text: NS tells this story around Figure 10.5 and uses a fixed third input in Example 11.5.</p>
 
 ---
 
 ## The Short Run: One Input Fixed {.compact}
 
-Fix capital at $\bar k$. The firm can only vary labor:
+Fix capital at $K_1$. The firm can only vary labor:
 
-$$SC(q;\bar k) = r\bar k + w\,L(q;\bar k), \qquad\text{where } F(\bar k, L) = q$$
+$$SC(q;K_1) = vK_1 + w\,L(q;K_1), \qquad\text{where } F(K_1, L) = q$$
 
 ::: {.incremental}
-- With $K$ stuck, the firm **cannot** equate $MRTS$ to $w/r$ — the tangency condition fails, and cost is higher than it needs to be for every $q$ except one.
-- For $q = K^{1/2}L^{1/2}$ with $w = r = 1$: $L = q^2/\bar k$, so $\;SC(q;\bar k) = \bar k + q^2/\bar k$.
+- $vK_1$ is a **fixed cost**: owed whatever the output. $wL$ is the **variable cost**.
+- With $K$ stuck, the firm **cannot** equate $MRTS$ to $w/v$ — the tangency condition fails, and cost is higher than it needs to be for every $q$ except one.
+- Our example with $K_1 = 80$: $\;L = q^2/80$, so $\;SC = 240 + \tfrac{3}{20}q^2$.
 - "Short run" is not a length of time. It is a statement about which choices are still open.
 :::
+
+<p style="font-size: 0.8em; color: #666;">Text: NS Figure 10.7 and Example 10.5.</p>
+
+---
+
+## Short-Run Average and Marginal Cost {.compact}
+
+:::: {.columns}
+::: {.column width="46%"}
+With $K_1 = 80$:
+
+$$SAC = \frac{240}{q} + \frac{3q}{20} \qquad SMC = \frac{3q}{10}$$
+
+::: {.incremental}
+- Spreading the fixed cost over more units pulls $SAC$ down; rising $SMC$ eventually pushes it back up. Hence the U.
+- **The averaging rule:** if $SMC < SAC$, $SAC$ falls; if $SMC > SAC$, $SAC$ rises. So $SMC$ cuts $SAC$ exactly at its minimum.
+- The minimum is at $q = 40$, where $SAC = SMC = 12$, the long-run cost. A plant of 80 is exactly right for 40 units and wrong for every other output.
+:::
+:::
+
+::: {.column width="54%"}
+<div style="text-align: center;">
+  <img src="figs/sac-smc-short-run.png" style="width: 100%; border-radius: 6px;">
+  <p style="font-size: 0.65em; color: #666;">Short-run cost curves for $K_1 = 80$. Text: NS Table 10.2, Figure 10.9.</p>
+</div>
+:::
+::::
 
 ---
 
@@ -520,33 +625,31 @@ $$SC(q;\bar k) = r\bar k + w\,L(q;\bar k), \qquad\text{where } F(\bar k, L) = q$
 :::: {.columns}
 ::: {.column width="52%"}
 ::: {.incremental}
-- Each plant size $\bar k$ has its own short-run curve $SC(q;\bar k) = \bar k + q^2/\bar k$.
-- In the long run, the firm chooses plant size to minimize cost:
-  $$\min_{\bar k} \; \left[\bar k + \frac{q^2}{\bar k}\right] \;\Longrightarrow\; \frac{\partial SC}{\partial \bar k} = 1 - \frac{q^2}{\bar k^2} = 0 \;\Longrightarrow\; \bar k^* = q$$
-- Substitute optimal plant size $\bar k^* = q$ back in:
-  $$C(q) = q + \frac{q^2}{q} = 2q$$
-- The long-run linear curve is recovered as the **lower envelope** of all short-run curves.
-- Tangency means slopes match at $\bar k^*$: $SMC = LMC$.
+- Each plant size $K_1$ has its own short-run curve, $SC = 3K_1 + 12q^2/K_1$.
+- In the long run the firm picks the plant size that makes $q$ cheapest:
+  $$\min_{K_1} \left[3K_1 + \frac{12q^2}{K_1}\right] \;\Longrightarrow\; K_1 = 2q$$
+- Substitute back: $C(q) = 6q + 6q = 12q$, the long-run cost we found before.
+- The long-run curve is the **lower envelope** of the short-run curves, touching each one where its plant size is the right one.
 :::
 
 ::: {.fragment}
-This is the envelope theorem from Topic 2: at $\bar k^*$, a small shift in plant size has zero first-order effect on cost ($\partial SC/\partial \bar k = 0$).
+Topic 2's envelope idea again: at the right plant size, a small change in $K_1$ has no first-order effect on cost.
 :::
 :::
 
 ::: {.column width="48%"}
 <div style="text-align: center;">
   <img src="figs/short-run-long-run-envelope.png" style="width: 100%; border-radius: 6px;">
-  <p style="font-size: 0.65em; color: #666;">Short-run curves and the long-run curve they envelope.</p>
+  <p style="font-size: 0.65em; color: #666;">Short-run curves and the long-run curve they envelope. Text: NS Example 10.5, Table 10.1, Figure 10.8.</p>
 </div>
 :::
 ::::
 
 ---
 
-## Part III: Profit Maximization and Duality {.divider}
+## Part III: Profit Maximization {.divider}
 
-Choosing output, deriving supply, and the map between the firm's two problems
+Choosing output, deriving supply, and how the firm's two problems fit together — NS Chapter 11
 
 ---
 
@@ -557,113 +660,113 @@ With $C(q)$ in hand, the firm's remaining choice is one variable:
 $$\pi(q) = R(q) - C(q) = p(q)\cdot q - C(q)$$
 
 ::: {.incremental}
-- $p(q)$ allows for a firm large enough to move the price. A **competitive** firm treats $p$ as fixed — a special case, not a different model.
+- $p(q)$ allows for a firm large enough to move the price. A **price-taking** firm treats $p$ as fixed — a special case, not a different model.
 - We take the **demand curve as given** today. Topic 4 derives it from preferences — which is also why we cannot close a market until then.
 - Cost minimization already did the hard work: the two-variable problem in $(K,L)$ has collapsed into a one-variable problem in $q$.
-- This is the single-variable optimization from Topic 2, now with economic content in both terms.
 :::
 
 ---
 
-## Worked Example {.compact}
-
-:::: {.columns}
-::: {.column width="46%"}
-Let $p(q) = 10 - q$ and $c(q) = \tfrac{1}{2}q^2$:
-
-$$\pi(q) = 10q - q^2 - \tfrac{1}{2}q^2 = 10q - \tfrac{3}{2}q^2$$
-
-::: {.incremental}
-- FOC: $\pi'(q) = 10 - 3q = 0 \Rightarrow q^* = 10/3 \approx 3.33$.
-- SOC: $\pi''(q) = -3 < 0$. A maximum.
-- $\pi^* = 16.67$, at price $p = 6.67$.
-- On the graph: profit peaks exactly where the revenue and cost curves have **parallel tangents**.
-:::
-:::
-
-::: {.column width="54%"}
-<div style="text-align: center;">
-  <img src="figs/profit-max-panel.png" style="width: 100%; border-radius: 6px;">
-  <p style="font-size: 0.65em; color: #666;">Equal slopes above; the profit peak below.</p>
-</div>
-:::
-::::
-
----
-
-## The First-Order Condition: MR = MC
+## The Rule: MR = MC
 
 $$\frac{d\pi}{dq} = \frac{dR}{dq} - \frac{dC}{dq} = 0 \qquad\Longrightarrow\qquad MR = MC$$
 
 ::: {.incremental}
 - Produce one more unit whenever it brings in more than it costs; stop where the two are equal.
-- "Parallel tangents" and "$MR = MC$" are the same statement, one geometric and one algebraic.
-- In our example: $MR = 10 - 2q$ and $MC = q$, so $10 - 2q = q$ and $q^* = 10/3$ again.
+- This is Topic 2's single-variable first-order condition, now with economic content in both terms.
+- For a price-taking firm every extra unit sells at $p$, so $MR = p$ and the rule becomes $p = MC$.
 :::
+
+<p style="font-size: 0.8em; color: #666;">Text: NS Figure 11.1.</p>
 
 ---
 
-## Why the Second-Order Condition Matters {.compact}
-
-$$\left.\frac{d^2\pi}{dq^2}\right|_{q=q^*} < 0$$
-
-::: {.incremental}
-- $MR = MC$ can hold at more than one output. Where $\pi$ is at a local *trough*, the same equality holds and marginal reasoning points the wrong way.
-- Recall Topic 2's cubic: a flat tangent is **necessary** but never **sufficient**.
-- Economically: at a profit minimum, the firm should run *away* from $q$ in either direction — which is exactly what firms near a shut-down threshold do.
-:::
-
-::: {.callout-warning icon=false}
-## The habit worth keeping
-Solve the FOC, then check the SOC, then check the boundary — here, whether producing at all beats shutting down.
-:::
-
----
-
-## Average and Marginal Revenue {.compact}
+## Supply: The Price-Taking Firm {.compact}
 
 :::: {.columns}
 ::: {.column width="48%"}
-$$AR(q) = \frac{R(q)}{q} = \frac{p(q)\,q}{q} = p(q)$$
+Our firm in the short run, with $K_1 = 80$:
 
-Average revenue **is** the demand curve, by definition.
+$$p = SMC = \tfrac{3}{10}\,q$$
 
 ::: {.incremental}
-- With linear inverse demand $p(q) = A - bq$:
-  $$R = Aq - bq^2,\quad MR = A - 2bq$$
-- $MR$ falls **twice as fast** as price: each extra unit sells at a lower price *and* drags down the price on every unit before it.
-- For a competitive firm, $p$ is fixed, so $MR = p$ and the rule collapses to $p = MC$.
+- So it supplies $q = \tfrac{10}{3}p$. The **supply curve** *is* the marginal cost curve.
+- At $p = 12$: $q = 40$, revenue 480, cost 480. The firm **breaks even** — zero economic profit.
+- At $p = 15$: $q = 50$, profit $= 750 - 615 = 135$.
+- Below $p = 12$ it loses money but keeps producing: revenue still covers the wage bill, and the 240 for capital is owed either way.
 :::
 :::
 
 ::: {.column width="52%"}
 <div style="text-align: center;">
-  <img src="figs/ar-mr-linear.png" style="width: 100%; border-radius: 6px;">
-  <p style="font-size: 0.65em; color: #666;">$AR$ and $MR$ for $p(q) = 10 - q$.</p>
+  <img src="figs/short-run-supply.png" style="width: 100%; border-radius: 6px;">
+  <p style="font-size: 0.65em; color: #666;">Short-run supply for $K_1 = 80$. Text: NS Examples 11.3 and 11.4.</p>
 </div>
 :::
 ::::
 
 ---
 
-## Supply and the Shut-Down Decision {.compact}
+## Produce or Shut Down? {.compact}
 
-:::: {.columns}
-::: {.column width="48%"}
-A price-taking firm sets $p = MC$ — but only if producing beats stopping.
+::: {.callout-note icon=false}
+## The short-run rule
+The fixed cost is owed either way, so compare price with **average variable cost** ($AVC$, variable cost per unit).
+
+- $p \ge \min AVC$: produce where $p = SMC$.
+- $p < \min AVC$: shut down and lose only the fixed cost.
+:::
 
 ::: {.incremental}
-- Fixed costs are sunk in the short run, so the comparison is $p$ against **average variable cost**.
-- $p \ge \min AVC$: produce at $p = MC$. $\;p < \min AVC$: shut down and lose only the fixed cost.
-- So the firm's **supply curve** is the rising branch of $MC$ above $\min AVC$ — here, above $p = 12$.
-- Cost minimization, done first, is what makes this curve meaningful: it is the cheapest cost of every output.
+- Our firm has $AVC = \tfrac{3}{20}q$, lowest at zero output, so it never shuts down in the short run.
+- When $AVC$ is U-shaped, supply is the rising part of $SMC$ above $\min AVC$, and nothing below it.
+- **The habit worth keeping:** solve the first-order condition, check the second-order condition (marginal cost rising faster than marginal revenue), then check the boundary — does producing at all beat stopping?
+:::
+
+<p style="font-size: 0.8em; color: #666;">Text: NS Figure 11.3 draws the U-shaped case.</p>
+
+---
+
+## A Firm With Market Power: The Sub Shop {.compact}
+
+:::: {.columns}
+::: {.column width="50%"}
+A sandwich shop faces daily demand $q = 100 - 10p$, so $p(q) = 10 - q/10$. Each sub costs \$4 to make.
+
+::: {.incremental}
+- Average revenue is $R/q = p(q)$: the demand curve itself.
+- $R = 10q - q^2/10$, so $MR = 10 - q/5$. It falls **twice as fast** as price: one more sub sells for less *and* lowers the price on all the others.
+- $MR = MC$: $\;10 - q/5 = 4$, so $q^* = 30$ subs, sold at \$7 each.
+- Profit: $(7 - 4) \times 30 = \$90$ a day.
 :::
 :::
 
-::: {.column width="52%"}
+::: {.column width="50%"}
 <div style="text-align: center;">
-  <img src="figs/supply-and-shutdown.png" style="width: 100%; border-radius: 6px;">
-  <p style="font-size: 0.65em; color: #666;">Supply is $MC$ above minimum $AVC$.</p>
+  <img src="figs/ar-mr-linear.png" style="width: 100%; border-radius: 6px;">
+  <p style="font-size: 0.65em; color: #666;">Demand, marginal revenue and marginal cost. Text: NS Example 11.1.</p>
+</div>
+:::
+::::
+
+---
+
+## The Sub Shop: Two Views of One Optimum {.compact}
+
+:::: {.columns}
+::: {.column width="46%"}
+::: {.incremental}
+- **Top panel:** profit is the gap between revenue and cost. It is widest where the two curves have **parallel tangents**.
+- "Parallel tangents" and "$MR = MC$" are the same statement, one geometric and one algebraic.
+- **Bottom panel:** $\pi(q) = 6q - q^2/10$ peaks at $q^* = 30$. Second-order condition: $\pi'' = -1/5 < 0$, a maximum.
+- Why not sell more? At 35 subs the price must fall to \$6.50 and profit drops to \$87.50. Marginal revenue, not price, drives the choice.
+:::
+:::
+
+::: {.column width="54%"}
+<div style="text-align: center;">
+  <img src="figs/profit-max-panel.png" style="width: 74%; border-radius: 6px;">
+  <p style="font-size: 0.65em; color: #666;">Equal slopes above; the profit peak below.</p>
 </div>
 :::
 ::::
@@ -672,98 +775,57 @@ A price-taking firm sets $p = MC$ — but only if producing beats stopping.
 
 ## Profit Max and Cost Min: The Same Tangency {.compact}
 
-$$\max_{K,L}\; pF(K,L) - wL - rK
+$$\max_{K,L}\; pF(K,L) - wL - vK
 \qquad\Longrightarrow\qquad
-p\,F_L = w, \quad p\,F_K = r$$
+p\,F_L = w, \quad p\,F_K = v$$
 
-$$\min_{K,L}\; wL + rK \;\text{ s.t. }\; F(K,L) = \bar q
+$$\min_{K,L}\; wL + vK \;\text{ s.t. }\; F(K,L) = \bar q
 \qquad\Longrightarrow\qquad
-\lambda F_L = w, \quad \lambda F_K = r$$
+\lambda F_L = w, \quad \lambda F_K = v$$
 
 ::: {.incremental}
-- Divide either pair and you get the identical condition $F_L/F_K = w/r$.
-- The problems differ in one place: profit maximization pins the multiplier down at $\lambda = p$, because the firm may choose its output. Cost minimization leaves $q$ fixed and lets $\lambda$ land where it must.
-- **So a profit-maximizing firm is automatically cost-minimizing** for whatever output it chooses. The converse is not true — cost minimization is silent about scale.
+- Divide either pair and you get the same condition: $F_L/F_K = w/v$.
+- One difference: the profit-maximizer also chooses output, which sets $\lambda = p$ — price equals marginal cost.
+- **So a profit-maximizing firm is automatically cost-minimizing.** Not the reverse: cost minimization says nothing about how much to make.
 :::
 
 ---
 
-## Conditional vs. Unconditional Input Demand {.compact}
+## A Wage Rise Hits Twice {.compact}
 
 ::: {.incremental}
-- **Conditional** demands $L^*(w,r,q)$, $K^*(w,r,q)$ come from cost minimization. They answer: *given* that I make $q$, what do I hire?
-- **Unconditional** demands $L(p,w,r)$, $K(p,w,r)$ come from profit maximization. They let output adjust too.
-- A wage rise therefore hits a firm twice: it substitutes capital for labor at fixed output (the conditional effect), *and* it produces less (the scale effect).
+- **Contingent** demand $L^c(v,w,q)$ comes from cost minimization. It answers: *given* that I make $q$, what do I hire?
+- **Total** demand $L(p,v,w)$ comes from profit maximization. It lets output adjust too.
+- So a wage rise cuts hiring twice. **Substitution effect:** capital replaces labor at the old output. **Output effect:** costs are higher, so the firm makes less.
 :::
 
 ::: {.fragment}
-> Same pairing as consumer theory: Hicksian demand holds utility fixed, Marshallian demand lets it adjust. The substitution/income split there is the substitution/scale split here.
+> Keep this two-part split in mind. Next week a price change will hit the consumer in two ways as well: a substitution effect and an income effect.
 :::
+
+<p style="font-size: 0.8em; color: #666;">Text: NS Example 11.5 and Figure 11.5.</p>
 
 ---
 
 ## Shephard's Lemma {.compact}
 
-What happens to minimum cost when a factor price rises? Apply the envelope theorem to $C(w,r,q) = \min \mathcal{L}$:
+What happens to minimum cost when the wage rises? Topic 2's envelope rule: differentiate the Lagrangian with respect to the parameter, *holding the choices fixed*. Here $\partial \mathcal{L}/\partial w = L$, so
 
-$$\frac{\partial C(w,r,q)}{\partial w} = L^*(w,r,q) \qquad\qquad \frac{\partial C(w,r,q)}{\partial r} = K^*(w,r,q)$$
+$$\frac{\partial C(v,w,q)}{\partial w} = L^c(v,w,q) \qquad\qquad \frac{\partial C(v,w,q)}{\partial v} = K^c(v,w,q)$$
 
 ::: {.incremental}
-- Differentiating the *value* of the problem, only the direct effect counts — the re-optimization of $K$ and $L$ contributes nothing at the margin, because the firm was already optimizing.
-- **Check it:** $C = 2q\sqrt{wr}$ gives $\partial C/\partial w = q\sqrt{r/w}$, which is exactly the $L^*$ we derived.
-- Read it as economics: a one-dollar rise in the wage raises minimum cost by about $L^*$ — the wage bill you are already committed to.
+- **Why the choices can be held fixed:** the firm was already optimizing, so re-adjusting $K$ and $L$ adds nothing at the margin.
+- **Check it:** $C = 2q\sqrt{vw}$ gives $\partial C/\partial w = q\sqrt{v/w}$, exactly the $L^c$ we derived — 20 workers at our numbers.
+- **Read it as economics:** a one-dollar rise in the wage raises minimum cost by about $L^c$ — one dollar for every worker already on the payroll.
+- The same trick on maximized profit gives the supply curve: $\partial \pi^*/\partial p = q^*$ (**Hotelling's lemma**).
 :::
 
 ::: {.callout-tip icon=false}
-## Same lemma, other side of the street
-$\partial E(p,\bar u)/\partial p_i = x_i^h$ is Shephard's lemma wearing a consumer's hat.
+## Why this earns its keep
+Firms report prices and spending, not technology. Estimate the cost function from those, take one derivative, and you have input demand. Next week: the same lemma for the consumer.
 :::
 
----
-
-## Hotelling's Lemma {.compact}
-
-What happens to maximized profit when prices change? Define the profit function:
-
-$$\pi^*(p,w,r) = \max_{q} \; [p\,q - C(w,r,q)]$$
-
-::: {.incremental}
-- Apply the envelope theorem to $\pi^*(p,w,r)$:
-  $$\frac{\partial \pi^*}{\partial p} = q^*(p,w,r) \qquad\qquad (\text{the firm's supply function})$$
-  $$\frac{\partial \pi^*}{\partial w} = -L^*(p,w,r) \qquad\qquad \frac{\partial \pi^*}{\partial r} = -K^*(p,w,r)$$
-- **Economic reading:**
-  - A \$1 increase in output price raises profit by $q^*$ (the units you are already selling).
-  - A \$1 increase in the wage reduces profit by $L^*$ (the workers you already hire).
-- Differentiating the value function hands you the firm's supply and input demands directly.
-:::
-
----
-
-## The Duality Map {.compact}
-
-| | **Consumer** | **Producer** |
-|---|---|---|
-| Primal | $\max u(x)$ s.t. $p\cdot x = m$ | $\max pq - C(q)$ |
-| Dual | $\min p\cdot x$ s.t. $u(x) = \bar u$ | $\min wL + rK$ s.t. $F(K,L) = q$ |
-| Value function | $V(p,m)$, $E(p,\bar u)$ | $\pi(p,w,r)$, $C(w,r,q)$ |
-| Quantity-fixed demand | Hicksian $x^h(p,\bar u)$ | conditional $L^*(w,r,q)$ |
-| Free demand | Marshallian $x(p,m)$ | unconditional $L(p,w,r)$ |
-| Envelope result | $\partial E/\partial p_i = x_i^h$ | $\partial C/\partial w = L^*, \; \partial \pi^*/\partial p = q^*$ |
-
-::: {.fragment}
-Two problems, one skeleton. Learn the skeleton and each new application costs you an afternoon, not a semester.
-:::
-
----
-
-## Why Duality Earns Its Keep {.compact}
-
-::: {.incremental}
-- **Estimation:** cost functions are estimable from data firms actually report — prices and expenditures — while production functions need unobserved technology. Duality says the cost function contains the same information.
-- **Prediction without re-solving:** one derivative of $C$ gives you input demand; no need to redo the optimization.
-- **Policy:** the welfare effect of a tax on an input is $\partial C/\partial w$ — a quantity you already know.
-- **Theory:** the properties carry over. $C$ is concave in prices, homogeneous of degree one in $(w,r)$, non-decreasing in $q$ — mirroring $E$ in consumer theory.
-:::
+<p style="font-size: 0.8em; color: #666;">Text: NS Example 10.4 (Shephard) and Example 11.4 (Hotelling).</p>
 
 ---
 
@@ -771,24 +833,29 @@ Two problems, one skeleton. Learn the skeleton and each new application costs yo
 
 You should now be able to define, compute, and interpret:
 
-| Technology | Cost | Output & Duality |
+| Technology (NS 9) | Cost (NS 10) | Output and Supply (NS 11) |
 |---|---|---|
 | Production function $F(K,L)$ | Isocost line | Marginal revenue ($MR$) |
 | Marginal product ($MP_L$, $MP_K$) | Cost-minimizing tangency | $MR = MC$, and $p = MC$ |
-| Diminishing marginal productivity | Conditional input demand | Average revenue $= p(q)$ |
-| Isoquant / isoquant map | Cost function $C(w,r,q)$ | Shut-down point ($p = \min AVC$) |
-| $MRTS = MP_L/MP_K$ | $\lambda = MC$ | Firm supply curve |
-| Returns to scale ($\alpha + \beta$) | $AC$, $MC$, and the averaging rule | Unconditional input demand |
-| Technique vs. technology | Short-run vs. long-run cost | Shephard's lemma |
+| Diminishing marginal productivity | Contingent (conditional) input demand | Average revenue $= p(q)$ |
+| Isoquant / isoquant map | Cost function $C(v,w,q)$ | Short-run supply curve |
+| $MRTS = MP_L/MP_K$ (NS: $RTS$) | $\lambda = MC$ | Break-even and shut-down prices |
+| Returns to scale ($\alpha + \beta$) | Fixed and variable cost; $SAC$, $SMC$ | Substitution and output effects |
+| Technique vs. technology | Short run, long run, and the envelope | Shephard's lemma |
 
 ---
 
 ## The Road Ahead {.compact}
 
 ::: {.incremental}
-- **Today:** technology $\to$ cost $\to$ output. Cost minimization first, output choice second, and the envelope theorem doing quiet work at both stages.
+- **This topic:** technology $\to$ cost $\to$ output. Cost minimization first, output choice second, and the envelope theorem doing quiet work at both stages.
 - **Next (Topic 4):** the consumer's side of the same duality — utility maximization, expenditure minimization, and where demand curves come from.
 - **Later:** these supply and demand curves meet. Topic 7 asks when their intersection is efficient; Topics 9–10 ask what to do when it is not.
+:::
+
+::: {.callout-note icon=false}
+## Lecture and text
+**In NS 9–11 but not in lecture:** elasticity of substitution, technical progress, producer surplus, marginal revenue product. **In lecture but not in the text:** blending techniques into a smooth isoquant, increasing returns and natural monopoly.
 :::
 
 ::: {.fragment}
