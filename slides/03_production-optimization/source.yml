@@ -48,3 +48,26 @@ notes: >
   a problem statement and its FOCs onto one display-math line - same
   "always rasterize and look" discipline as Topic 2, just a different
   overflow direction (horizontal, not vertical).
+
+  PORTED TO QUARTO 2026-09-26. deck.qmd replaces the Marp deck.md (kept for
+  now as the pre-port record). Changes made during the port:
+    - Notation standardised: L = labor, K = capital, w = wage, r = rental
+      rate, \mathcal{L} = Lagrangian. The Marp deck used L for both labor
+      and the Lagrangian and alternated between r and v for the rental
+      rate; RTS renamed MRTS to match Topic 2.
+    - All 15 legacy PowerPoint slide crops in media/ replaced by 12 figures
+      generated from formulas in
+      notebooks/topic03_production_figures.ipynb -> figs/. Ten of the old
+      crops were whole 2400x1350 slides, carrying their own titles and
+      prose annotations.
+    - Added, beyond the legacy content: an opening bridge slide mapping
+      Topic 2's consumer problem onto the firm's; returns to scale defined
+      in Part I; the increasing-returns case alongside CRS and DRS; the
+      competitive supply curve and the shut-down condition; Shephard's
+      lemma; a consumer/producer duality map; and the vocabulary and
+      road-ahead closers used in Topics 1-2.
+    - Topic 2's closing teaser was reworded in the same commit: it had
+      promised consumer duality (expenditure minimisation, Roy's identity)
+      for Topic 3, which the schedule assigns to production.
+  Verified with tools/verify_deck.py: 45 pages, 0 flagged, spot-checked by
+  eye. Still deploy: false pending review.
