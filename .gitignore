@@ -119,6 +119,8 @@ docs/.obsidian/
 *.mp4
 *.mov
 *.avi
+# ...except short clips embedded in slide decks (deployed with figs/)
+!slides/*/figs/*.mp4
 tools/manim/**/media/
 tools/manim/**/__pycache__/
 

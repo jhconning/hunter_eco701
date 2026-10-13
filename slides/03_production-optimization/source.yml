@@ -48,3 +48,121 @@ notes: >
   a problem statement and its FOCs onto one display-math line - same
   "always rasterize and look" discipline as Topic 2, just a different
   overflow direction (horizontal, not vertical).
+
+  PORTED TO QUARTO 2026-09-26. deck.qmd replaces the Marp deck.md (kept for
+  now as the pre-port record). Changes made during the port:
+    - Notation standardised: L = labor, K = capital, w = wage, r = rental
+      rate, \mathcal{L} = Lagrangian. The Marp deck used L for both labor
+      and the Lagrangian and alternated between r and v for the rental
+      rate; RTS renamed MRTS to match Topic 2.
+    - All 15 legacy PowerPoint slide crops in media/ replaced by 12 figures
+      generated from formulas in
+      notebooks/topic03_production_figures.ipynb -> figs/. Ten of the old
+      crops were whole 2400x1350 slides, carrying their own titles and
+      prose annotations.
+    - Added, beyond the legacy content: an opening bridge slide mapping
+      Topic 2's consumer problem onto the firm's; returns to scale defined
+      in Part I; the increasing-returns case alongside CRS and DRS; the
+      competitive supply curve and the shut-down condition; Shephard's
+      lemma; a consumer/producer duality map; and the vocabulary and
+      road-ahead closers used in Topics 1-2.
+    - Topic 2's closing teaser was reworded in the same commit: it had
+      promised consumer duality (expenditure minimisation, Roy's identity)
+      for Topic 3, which the schedule assigns to production.
+  Verified with tools/verify_deck.py: 45 pages, 0 flagged, spot-checked by
+  eye. Still deploy: false pending review.
+
+  REVISED 2026-10-05 after a review against Nicholson & Snyder 11e ch. 9-11
+  (the assigned reading). This reverses one port decision above: the rental
+  rate is now v, not r, matching the text (and freeing r for the interest
+  rate in Topic 5). Also adopted from the text: C(v,w,q) argument order,
+  "contingent" demand with L^c / K^c, SAC / SMC, "substitution and output
+  effects", and its numbers. Parts II-III now carry one running example,
+  the text's (q = sqrt(KL), w = 12, v = 3, q = 40 -> L = 20, K = 80,
+  C = 12q, SC = 240 + 3q^2/20 at K_1 = 80; NS Examples 10.1, 10.5, 11.3,
+  11.4), and Part III's market-power case is the sub shop of NS Example
+  11.1. Kept from Topic 2 rather than the text: capital K, L and MRTS; a
+  "Reading Alongside the Text" slide gives the translation. Grey "Text:"
+  notes on slides point to NS figures and examples.
+    - Slides must not assume consumer expenditure results (expenditure
+      function, Hicksian/Marshallian demand): production is taught before
+      consumption. Consumer parallels appear only as "next week" previews.
+      The Duality Map was removed for this reason and parked in
+      new_ideas.md for Topic 4.
+    - New: "Reading Alongside the Text", "Walking the Isoquant" (cost
+      table mirroring Topic 2's budget-line walk), "Short-Run Average and
+      Marginal Cost", "Produce or Shut Down?". Removed: the cubic
+      fixed-cost and shut-down figures (ac-mc-fixed-costs.png,
+      supply-and-shutdown.png), the stand-alone second-order-condition
+      slide, the Hotelling and "Why Duality" slides. Part III now runs
+      rule -> price-taking supply -> market power.
+    - Taught over two classes (decided 2026-10-05, because Kuhn-Tucker
+      finished a class early). Class 4 (Oct 5): opening, Part I, and Part II
+      through "The Multiplier Is Marginal Cost". Class 5 (Oct 13): from
+      "Where We Are" to the end. The split is marked by an HTML comment and
+      the "Where We Are" recap slide; schedule.md rows 4-5 match.
+    - Added later on 2026-10-05: slide 3 ("Three Questions About the Firm")
+      became a question / takeaway table, with a matching closing slide
+      "Three Questions, Answered". Four NS topics the deck had skipped were
+      added, one slide each: "The Elasticity of Substitution" (after the
+      MRTS slide; NS Figures 9.3-9.4), "Technical Progress" (end of Part I;
+      NS Figure 9.5, Examples 9.4 and 10.3), "Producer Surplus" (after
+      "Produce or Shut Down?"; NS Figure 11.4, Example 11.4), and "Hiring
+      Inputs: Marginal Revenue Product" (before "Same Tangency"). New
+      figures: elasticity-of-substitution.png, technical-progress.png,
+      producer-surplus.png. Their notebook cells were run on their own, so
+      those three cells have no stored output in the notebook.
+    - Also 2026-10-05: "Euler's Theorem" added after "Returns to Scale"
+      (F_KL > 0 is stated for constant returns only; it can fail under
+      decreasing returns). "Short-Run Average and Marginal Cost" moved from
+      Part II to Part III, just before "Supply: The Price-Taking Firm": in
+      Part II students read its dashed long-run cost line as a price. The
+      short run is explained there with an isoquant drawing on the board,
+      leading into "The Long Run Is the Envelope".
+    - Also 2026-10-05: Part II now ends with "The Envelope Theorem" (new;
+      Topic 2 gave only the shadow-price form, so the general rule is
+      stated here for the first time), "Shephard's Lemma" (moved from the
+      end of Part III and given a proof from the first-order conditions,
+      without the Lagrangian), and "Cost Minimization: Summary" (new).
+      Hotelling's lemma is now a bullet on "Producer Surplus".
+    - Also 2026-10-05: added "Properties of the Cost Function" (after
+      Shephard; NS ch. 10 "Properties of cost functions", Figure 10.6),
+      "The Profit Function and Its Properties" (after "A Wage Rise Hits
+      Twice"; NS ch. 11 "Properties of the profit function", Example 11.4),
+      and an appendix slide after "The Road Ahead" proving the envelope
+      theorem with the Lagrangian (NS ch. 2, Problem 2.12). The profit
+      function is the short-run one, Pi = p^2 K_1/(4w) - v K_1, because
+      with constant returns the long-run profit function does not exist.
+      This reverses the morning's decision to leave homogeneity and
+      concavity out as jargon.
+    - Also 2026-10-05: the Euler slide was split into a sequence in Part I:
+      "Euler's Theorem" (statement and proof), "Euler's Theorem: Who Gets
+      the Output?" (payments of marginal products leave (1 - eps) q; zero
+      profit under constant returns), "Where Do Decreasing Returns Come
+      From?" (moved here from Part II; its constant was renamed from A to
+      B so that A is free for technical progress), "Technical Progress",
+      then "Capital, Technology and Wages" (F_KL > 0 under constant returns
+      and what it means for wages). The short-run slide in Part II got a
+      one-line callback to the fixed input z.
+    - Added 2026-10-13: a four-slide development application before the
+      closers ("A Farm Is a Firm With Fixed Land" through "Misallocation,
+      and the Question It Raises"). It uses only Topic 3 tools and the
+      farm-household notebook's technology (q = sqrt(TL)), and ends by
+      motivating the farm-household model taught later (Topic 6). Figure
+      farm-labor-allocation.png comes from the Topic 3 figure notebook.
+    - Added 2026-10-13: two silent clips cut from the Episode 1 Manim video
+      (tools/manim/cobb_douglas_video/renders/episode1_cobb_douglas_1080p30.mp4):
+      figs/video-surface-to-isoquants.mp4 (2:39-4:28 of the episode) after
+      "The Isoquant Map", and figs/video-homothetic-ray.mp4 (5:46-6:59)
+      after the homothetic slide. They sit in figs/ because the deploy
+      workflow copies only media/ and figs/; .gitignore has an exception
+      for slides/*/figs/*.mp4. No narration has been recorded.
+    - Also 2026-10-13 (afternoon review): "Profit Max and Cost Min" now
+      says the constant-returns firm has no definite long-run output, and
+      "A Wage Rise Hits Twice" shows the output effect in the short run
+      (K_1 = 80, p = 15: output 50 to 40, labor 31.25 to 20). Part I's
+      uses of the 20/80/480 answer point forward to Part II. Step 4 on the
+      opening slide names where kinks and corners appear. The constant in
+      the general Cobb-Douglas cost function is kappa, because B is the
+      fixed-factor constant in Part I. "Short-Run Average and Marginal
+      Cost" stays in Part III (see the 2026-10-05 note above).
