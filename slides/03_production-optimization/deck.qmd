@@ -706,7 +706,7 @@ Hold prices fixed and let $q$ rise. Each output level has its own tangency.
 - **Every homogeneous function is homothetic.** Both marginal products are homogeneous of degree $\varepsilon - 1$ (Euler's corollary), so their ratio depends only on $K/L$. Every Cobb-Douglas has a ray, whatever $\alpha + \beta$ is.
 - **What it buys:** cost splits into a scale part and a price part, $C(v,w,q) = h(q)\,c(v,w)$. Ours is $q \times 2\sqrt{vw}$.
 - **Not homothetic:** $q = K + \sqrt{L}$ has $MRTS = 1/(2\sqrt{L})$, which depends on $L$ alone. At fixed prices labor never changes, and all growth comes from machines.
-- **Next week:** utility has no units, so it has no "degree". Only homotheticity matters there, and it means budget shares that do not change with income.
+- **Next week:** utility has no units, so its degree of homogeneity means nothing. Homotheticity does carry over when preferences have it: budget shares then do not change with income.
 :::
 
 <p style="font-size: 0.8em; color: #666;">Text: NS Chapter 2 on homothetic functions; Figures 10.2 and 10.3.</p>
@@ -779,20 +779,19 @@ $$SC(q;K_1) = vK_1 + w\,L(q;K_1), \qquad\text{where } F(K_1, L) = q$$
 
 ---
 
-## The Long Run Is the Envelope {.compact}
+## The Envelope Theorem: A First Example {.compact}
 
 :::: {.columns}
 ::: {.column width="52%"}
-::: {.incremental}
-- Each plant size $K_1$ has its own short-run curve, $SC = 3K_1 + 12q^2/K_1$.
-- In the long run the firm picks the plant size that makes $q$ cheapest:
-  $$\min_{K_1} \left[3K_1 + \frac{12q^2}{K_1}\right] \;\Longrightarrow\; K_1 = 2q$$
-- Substitute back: $C(q) = 6q + 6q = 12q$, the long-run cost we found before.
-- The long-run curve is the **lower envelope** of the short-run curves, touching each one where its plant size is the right one.
-:::
+In the long run the firm picks the plant size $K_1$ that makes $q$ cheapest. How does minimum cost change with $q$?
 
-::: {.fragment}
-At the right plant size, a small change in $K_1$ has no first-order effect on cost. The next slide states this as a general rule.
+$$C(q) = \min_{K_1} \left[3K_1 + \frac{12q^2}{K_1}\right]$$
+
+::: {.incremental}
+- **The long way:** solve, $K_1^* = 2q$, so $C(q) = 12q$ and $dC/dq = 12$.
+- **The envelope way:** hold the plant fixed: $\partial SC/\partial q = 24q/K_1 = 12$ at $q = 40$, $K_1 = 80$. No cost function needed.
+- **Check:** at $q = 41$, keeping the old plant costs 492.15 and the best plant (82) costs 492.00. Re-optimizing saves only 15 cents.
+- **The picture:** where a short-run curve touches the long-run curve, the two have the same slope. Hence the name.
 :::
 :::
 
@@ -808,14 +807,16 @@ At the right plant size, a small change in $K_1$ has no first-order effect on co
 
 ## The Envelope Theorem {.compact}
 
-Minimum cost depends on things the firm does not choose: $w$, $v$ and $q$. How does it change when one of them changes?
-
 ::: {.callout-note icon=false}
 ## The rule
-Differentiate the Lagrangian with respect to the parameter, holding the choices $K$, $L$ and $\lambda$ at their optimal values.
+If $V(a) = \max_x f(x,a)$, then $\dfrac{dV}{da} = \dfrac{\partial f}{\partial a}$ evaluated at the optimal $x^*(a)$. Only the direct effect of the parameter counts. The same holds for a minimum.
 :::
 
-Apply it to $\mathcal{L} = wL + vK + \lambda\,[q - F(K,L)]$:
+**Why.** By the chain rule,
+$$\frac{dV}{da} = \underbrace{\frac{\partial f}{\partial x}}_{=\,0}\,\frac{dx^*}{da} + \frac{\partial f}{\partial a}$$
+At the optimum $\partial f/\partial x = 0$: the function is flat at its peak, so the change in the choice adds nothing at the margin.
+
+**With a constraint,** apply the rule to the Lagrangian $\mathcal{L} = wL + vK + \lambda\,[q - F(K,L)]$, holding $K$, $L$ and $\lambda$ at their optimal values:
 
 | Parameter | Derivative of $\mathcal{L}$ | Result |
 |---|:-:|---|
@@ -823,12 +824,7 @@ Apply it to $\mathcal{L} = wL + vK + \lambda\,[q - F(K,L)]$:
 | Wage $w$ | $L$ | $\partial C/\partial w = L^c$, Shephard's lemma |
 | Rental rate $v$ | $K$ | $\partial C/\partial v = K^c$ |
 
-::: {.incremental}
-- **Why the choices can be held fixed:** the firm is already at the cheapest input mix. A small re-adjustment of $K$ and $L$ changes cost by nothing at the margin.
-- **The long-run picture is the same rule:** at the right plant size $\partial SC/\partial K_1 = 0$, so the short-run and long-run curves touch.
-:::
-
-<p style="font-size: 0.8em; color: #666;">Text: NS Chapter 2, the envelope theorem. A proof is in the appendix.</p>
+<p style="font-size: 0.8em; color: #666;">Text: NS Chapter 2, the envelope theorem. The proof with a constraint is in the appendix.</p>
 
 ---
 
@@ -925,14 +921,14 @@ $$\frac{d\pi}{dq} = \frac{dR}{dq} - \frac{dC}{dq} = 0 \qquad\Longrightarrow\qqua
 
 :::: {.columns}
 ::: {.column width="46%"}
-To choose output we need the cost per unit and the cost of the next unit. With $K_1 = 80$, short-run cost is $SC = 240 + \tfrac{3}{20}q^2$, so:
+Our firm from Part II's short-run slide: $q = \sqrt{KL}$, $w = 12$, $v = 3$, capital stuck at $K_1 = 80$. Making $q$ takes $L = q^2/80$ workers, so $SC = 240 + 12\,(q^2/80) = 240 + \tfrac{3}{20}q^2$:
 
 $$SAC = \frac{240}{q} + \frac{3q}{20} \qquad SMC = \frac{3q}{10}$$
 
 ::: {.incremental}
-- Spreading the fixed cost over more units pulls $SAC$ down; rising $SMC$ eventually pushes it back up. Hence the U.
-- **The averaging rule:** if $SMC < SAC$, $SAC$ falls; if $SMC > SAC$, $SAC$ rises. So $SMC$ cuts $SAC$ exactly at its minimum.
-- The minimum is at $q = 40$, where $SAC = SMC = 12$, the long-run cost. A plant of 80 is the right size for 40 units only.
+- The fixed cost spread over more units pulls $SAC$ down; rising $SMC$ pushes it back up. Hence the U.
+- **Averaging rule:** $SAC$ falls while $SMC < SAC$ and rises once $SMC > SAC$, so $SMC$ cuts $SAC$ at its minimum.
+- At $q = 40$, $SAC = SMC = 12$, the long-run cost: a plant of 80 is right for 40 units only.
 :::
 :::
 
@@ -1101,22 +1097,57 @@ $$\min_{K,L}\; wL + vK \;\text{ s.t. }\; F(K,L) = \bar q
 
 ---
 
-## A Wage Rise Hits Twice {.compact}
+## Unconditional Input Demand: A Worked Example {.compact}
+
+A definite output needs decreasing returns: $F = K^\alpha L^\beta$ with $\alpha + \beta < 1$. The firm chooses both inputs, and so its output:
+
+$$\max_{K,L}\; pK^\alpha L^\beta - wL - vK \quad\Longrightarrow\quad p\beta K^\alpha L^{\beta-1} = w, \qquad p\alpha K^{\alpha-1}L^\beta = v$$
 
 ::: {.incremental}
-- **Contingent** demand $L^c(v,w,q)$ comes from cost minimization. It answers: *given* that I make $q$, what do I hire?
-- **Total** demand $L(p,v,w)$ comes from profit maximization. It lets output adjust too, so it needs rising marginal cost.
-- So a wage rise cuts hiring twice. **Substitution effect:** capital replaces labor at the old output. **Output effect:** costs are higher, so the firm makes less.
-- The substitution effect is larger when the elasticity of substitution $\sigma$ is larger.
-- **Substitution, wage up from 12 to 15:** to make the same 40 units our firm now uses about 18 workers instead of 20, and 89 machines instead of 80. Marginal cost rises from 12 to about 13.4.
-- **Output, seen in the short run:** with $K_1 = 80$ and $p = 15$, supply is $q = pK_1/2w$. The same wage rise cuts output from 50 to 40 and hiring from 31.25 workers to 20.
+- **Divide:** $K/L = (\alpha/\beta)(w/v)$, the same tangency as cost minimization.
+- **Substitute back:** the unconditional (total) demand for labor is
+  $$L(p,v,w) = \left[\,p\left(\frac{\beta}{w}\right)^{1-\alpha}\left(\frac{\alpha}{v}\right)^{\alpha}\right]^{\frac{1}{1-\alpha-\beta}}$$
+  and similarly for capital. Unlike $L^c$ it depends on $p$: labor demand is **derived** from product demand.
+- **The exponent $1/(1-\alpha-\beta)$** is why constant returns fail: as $\alpha + \beta \to 1$, demand goes to zero or without bound.
+- **Example,** $\alpha = \beta = \tfrac14$, $p = 48$, $w = 12$, $v = 3$: $K/L = 4$, so $L = 2$, $K = 8$, $q = 2$. Profit is 48, half of revenue 96, as Euler's theorem says.
 :::
+
+<p style="font-size: 0.8em; color: #666;">Text: NS Chapter 11, "Profit Maximization and Input Demand". The full derivation is in the appendix.</p>
+
+---
+
+## A Wage Rise Hits Twice {.compact}
+
+:::: {.columns}
+::: {.column width="52%"}
+**Contingent** demand $L^c(v,w,q)$ holds output fixed. **Total** demand $L(p,v,w)$ lets output adjust. Same firm, wage up from 12 to 48:
+
+| | $w = 12$ | $w = 48$ |
+|---|:-:|:-:|
+| Contingent labor ($q = 2$) | 2 | 1 |
+| Total labor | 2 | 0.25 |
+| Contingent capital ($q = 2$) | 8 | 16 |
+| Total capital | 8 | 4 |
+| Output | 2 | 1 |
+
+::: {.incremental}
+- **Substitution effect** (2 to 1): at the old output, machines replace workers.
+- **Output effect** (1 to 0.25): the dearer wage raises marginal cost, so the firm makes less, and making less needs fewer of both inputs. Here marginal cost doubles, output halves, and each input falls to a quarter.
+- **Capital** replaces labor at fixed output (8 to 16), but falls once output falls (8 to 4).
+:::
+:::
+
+::: {.column width="48%"}
+<div style="text-align: center;">
+  <img src="figs/labor-demand-conditional-unconditional.png" style="width: 100%; border-radius: 6px;">
+  <p style="font-size: 0.65em; color: #666;">Total demand is flatter than contingent demand. Text: NS Example 11.5 and Figure 11.5.</p>
+</div>
 
 ::: {.fragment}
-> Keep this two-part split in mind. Next week a price change will hit the consumer in two ways as well: a substitution effect and an income effect.
+> Next week the consumer's price effect splits the same way: substitution plus income. One difference: a firm's input demand always slopes down; a consumer's can bend back (Giffen).
 :::
-
-<p style="font-size: 0.8em; color: #666;">Text: NS Example 11.5 and Figure 11.5.</p>
+:::
+::::
 
 ---
 
@@ -1136,8 +1167,8 @@ $$\Pi(p,v,w) = \frac{p^2 K_1}{4w} - vK_1 \qquad\qquad \text{at } K_1 = 80,\ w = 
 : {tbl-colwidths="[30,42,28]"}
 
 ::: {.incremental}
-- **Check at $p = 15$:** $\Pi = 135$ and $q = 50$, as on the supply slide.
-- **Hotelling's lemma in words:** a one-dollar rise in the price raises profit by $q$ dollars, one for every unit already being sold.
+- **Hotelling's lemma in words:** a one-dollar rise in the price raises profit by $q$ dollars.
+- **The envelope theorem at work:** at $p = 15$, $\Pi = 135$ and $q = 50$. Raise $p$ to 15.1: keeping $q = 50$ adds 5.00 to profit; re-optimizing adds 5.017.
 - **What convexity implies:** $\partial q/\partial p = \partial^2\Pi/\partial p^2 \ge 0$. The supply curve slopes up.
 :::
 
@@ -1166,7 +1197,7 @@ $$\max_L \; \sqrt{TL} - wL \qquad\Longrightarrow\qquad MP_L = \tfrac12\sqrt{T/L}
 
 ---
 
-## A Prediction You Can Test {.compact}
+## A Testable Prediction {.compact}
 
 Divide the hiring rule by the farm's land:
 
@@ -1179,7 +1210,7 @@ $$\frac{L}{T} = \frac{1}{4w^2} \qquad\qquad \frac{q}{T} = \frac{1}{2w}$$
 :::
 
 ::: {.fragment}
-> A theory earns its keep when it makes a prediction that could be wrong. Here it is wrong in an informative way.
+> A theory is still useful when it makes a prediction that could be wrong. Here the 'benchmark' theory is wrong in an informative way.
 :::
 
 ---
@@ -1333,3 +1364,29 @@ $$\frac{\partial C}{\partial w} = \underbrace{\frac{\partial \mathcal{L}}{\parti
 :::
 
 <p style="font-size: 0.8em; color: #666;">Text: NS Chapter 2, "Envelope Theorem in Constrained Maximization Problems" and Problem 2.12.</p>
+
+---
+
+## Appendix: Deriving Unconditional Input Demand {.compact}
+
+First-order conditions of $\max_{K,L}\, pK^\alpha L^\beta - wL - vK$: $\;\;\text{(1)}\;\, p\beta K^{\alpha}L^{\beta-1} = w, \quad \text{(2)}\;\, p\alpha K^{\alpha-1}L^{\beta} = v$
+
+:::: {.columns}
+::: {.column width="58%"}
+1. **Divide (2) by (1):** $\;\dfrac{\alpha L}{\beta K} = \dfrac{v}{w}$, so $\;K = \dfrac{\alpha}{\beta}\dfrac{w}{v}\,L$.
+2. **Substitute into (1):** $\;p\beta\left(\dfrac{\alpha}{\beta}\dfrac{w}{v}\right)^{\alpha} L^{\alpha+\beta-1} = w$.
+3. **Tidy,** using $\beta(\alpha/\beta)^\alpha = \alpha^\alpha\beta^{1-\alpha}$:
+   $$L^{1-\alpha-\beta} = p\left(\frac{\beta}{w}\right)^{1-\alpha}\left(\frac{\alpha}{v}\right)^{\alpha}$$
+4. **Raise to $1/(1-\alpha-\beta)$:**
+   $$L = \left[\,p\left(\frac{\beta}{w}\right)^{1-\alpha}\left(\frac{\alpha}{v}\right)^{\alpha}\right]^{\frac{1}{1-\alpha-\beta}}$$
+:::
+
+::: {.column width="42%"}
+**Capital,** swapping $\alpha \leftrightarrow \beta$ and $w \leftrightarrow v$:
+$$K = \left[\,p\left(\frac{\alpha}{v}\right)^{1-\beta}\left(\frac{\beta}{w}\right)^{\beta}\right]^{\frac{1}{1-\alpha-\beta}}$$
+
+**Check** with $\alpha = \beta = \tfrac14$, $p = 48$, $w = 12$, $v = 3$, where the outer exponent is 2:
+$$L = \left[48 \cdot 48^{-3/4}\cdot 12^{-1/4}\right]^2 = \left[(48/12)^{1/4}\right]^2 = 2$$
+and $K = (w/v)\,L = 4 \times 2 = 8$.
+:::
+::::

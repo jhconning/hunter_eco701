@@ -1,0 +1,32 @@
+topic: "Consumption Optimization"
+ideas_md_topic_number: 4
+source_file: "E701_F18 _slidesI.pptx"
+source_slides: [114, 251]
+status: class 6 half released 2026-10-19 (deploy: true); class 7 half not built
+notes: >
+  Built 2026-10-19, written fresh rather than extracted, using the 2018
+  slidesI 114-251 (utility functions, indirect utility, lump sum principle,
+  expenditure minimization, compensated demand, Slutsky, consumer welfare,
+  labor supply) as a topic list and Nicholson & Snyder 11e ch. 3-5 for
+  notation and order.
+
+  Running example mirrors Topic 3's firm so that duality is visible in the
+  numbers: u = sqrt(xy), p_x = 12, p_y = 3, I = 480 gives (20, 80), u = 40,
+  and E(12, 3, 40) = 480; E = 2U sqrt(p_x p_y) has the same form as
+  C = 2q sqrt(vw). A price rise to p_x = 48 gives x = 5 (ordinary) and
+  x^c = 10 (compensated at U = 40), CV = 480, EV = 240, consumer surplus
+  240 ln 4 = 332.7. The lump-sum example: a tax of 36 on x raises 180 and
+  leaves V = 20; a lump sum of 180 leaves V = 25.
+
+  Notation: x^c for compensated (Hicksian) demand, matching NS and Topic
+  3's L^c. Problem Set 2 Question 1 currently writes x^h.
+
+  Class 6 (Oct 19): Parts I-III, through "Where We Are". Class 7 (Oct 26):
+  income and substitution effects, Slutsky, welfare, labor supply - not yet
+  built. Topics 2 and PS1 already covered the consumer Lagrangian, MRS,
+  the tangency, the multiplier as marginal utility of income, corners and
+  Marshallian demand, so Part II here is a recap with the running example.
+  The 2018 slides on aggregating preferences and Arrow's theorem are
+  included as a single warning slide, "A Warning: Groups Are Not
+  Consumers" (Condorcet cycle, agenda setting, Arrow in one line, caution
+  about representative consumers), added 2026-10-19.

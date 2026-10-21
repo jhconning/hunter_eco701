@@ -166,3 +166,26 @@ notes: >
       the general Cobb-Douglas cost function is kappa, because B is the
       fixed-factor constant in Part I. "Short-Run Average and Marginal
       Cost" stays in Part III (see the 2026-10-05 note above).
+    - Added 2026-10-15: the envelope theorem is now introduced by example.
+      "The Long Run Is the Envelope" became "The Envelope Theorem: A First
+      Example": the plant-size choice min over K_1 of 3K_1 + 12q^2/K_1,
+      with dC/dq found the long way (C = 12q) and the envelope way
+      (dSC/dq = 24q/K_1 = 12 at the old plant), and a check at q = 41
+      (492.15 with the old plant against 492.00 with the best one). "The
+      Envelope Theorem" now states the unconstrained rule with its
+      one-line chain-rule reason before the Lagrangian table. The profit
+      function slide has a matching numerical check of Hotelling's lemma
+      (p = 15 to 15.1: 5.00 with q held at 50, 5.017 re-optimized).
+    - Added 2026-10-19: "Unconditional Input Demand: A Worked Example"
+      (F = K^a L^b with a + b < 1; the example a = b = 1/4, p = 48, w = 12,
+      v = 3 gives L = 2, K = 8, q = 2) and a rebuilt "A Wage Rise Hits
+      Twice" comparing contingent and total demand for a wage rise 12 to
+      48 (labor 2 -> 1 -> 0.25; capital 8 -> 16 at fixed output but 8 -> 4
+      once output falls; elasticities -1/2, -3/2). The old short-run
+      numbers on that slide were dropped. Figure
+      labor-demand-conditional-unconditional.png from the figure notebook.
+    - Same day: dropped the wage-elasticity column from "A Wage Rise Hits
+      Twice" and replaced the elasticity equation with a plain statement of
+      the output effect (marginal cost doubles, output halves, each input
+      falls to a quarter); added "Appendix: Deriving Unconditional Input
+      Demand", pointed to from the worked example.

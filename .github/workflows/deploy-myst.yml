@@ -114,6 +114,16 @@ jobs:
             mkdir -p _build/html/syllabus
             cp -r syllabus/*.pdf _build/html/syllabus/ 2>/dev/null || true
           fi
+          # Problem set handouts (never solutions) linked from schedule.md.
+          if [ -d problem_sets ]; then
+            mkdir -p _build/html/problem_sets
+            cp problem_sets/*.pdf _build/html/problem_sets/ 2>/dev/null || true
+          fi
+          # Study aids (practice exams and their solutions) linked from schedule.md.
+          if [ -d study_aids ]; then
+            mkdir -p _build/html/study_aids
+            cp study_aids/*.pdf _build/html/study_aids/ 2>/dev/null || true
+          fi
 
       - name: Select decks to publish
         if: env.PUBLISH_SLIDES == 'true'
@@ -224,7 +234,10 @@ jobs:
             # sandbox helper for Chromium (a standard constraint on hosted
             # CI, unrelated to this project) - without it decktape's bundled
             # Chrome aborts at launch ("No usable sandbox!").
-            npx -y decktape reveal --size "1280x720" --chrome-arg="--no-sandbox" "${topic_dir}/deck.html" "${dest}/deck.pdf"
+            # Pinned: decktape 3.17.0 (released 2026-10-19) could not find its
+            # Chrome on this runner and failed every deck. 3.16.1 is the last
+            # version known to work here; raise the pin deliberately.
+            npx -y decktape@3.16.1 reveal --size "1280x720" --chrome-arg="--no-sandbox" "${topic_dir}/deck.html" "${dest}/deck.pdf"
 
             rm -f "${topic_dir}/deck.html"
             rm -rf "${topic_dir}/deck_files"
