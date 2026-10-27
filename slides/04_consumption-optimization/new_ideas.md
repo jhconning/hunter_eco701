@@ -23,3 +23,13 @@ Backlog for Topic 4, started 2026-10-19. Nothing here is committed to.
   theorem (slidesI 167-171).
 - An interactive budget-line / indifference-curve widget in the figure
   notebook.
+
+## CES interactive (parked 2026-10-26)
+
+One slide after "A Gallery of Preferences" with two sliders, elasticity of
+substitution and share parameter, showing one CES family bending from
+L-shapes through Cobb-Douglas to straight lines. Optional second panel:
+budget share of x against p_x (flat at sigma = 1). Build with Quarto
+Observable JS (two linked sliders, computed live), not Plotly frames.
+Parked because students already felt overloaded before the midterm;
+better suited to after the midterm or as a companion notebook.

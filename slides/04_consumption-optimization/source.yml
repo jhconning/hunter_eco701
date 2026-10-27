@@ -30,3 +30,25 @@ notes: >
   included as a single warning slide, "A Warning: Groups Are Not
   Consumers" (Condorcet cycle, agenda setting, Arrow in one line, caution
   about representative consumers), added 2026-10-19.
+
+  SECOND HALF added 2026-10-26 for class 7: Part IV (changes in income,
+  the price rise 12 -> 48 split into substitution 20 -> 10 and income
+  10 -> 5, the Slutsky equation with a numerical check, compensated vs.
+  ordinary demand curves, Giffen goods with Jensen and Miller 2008, and
+  CV = 480 / EV = 240 / consumer surplus 333), Part V (labor supply with
+  U = c*l and unearned income; the wage rise's two effects; the hand-off
+  to the farm household), "Three Questions, Answered" and a midterm
+  slide. "Next week" references in the first half were changed to point
+  to Part IV, and the mid-deck recap now leads into it.
+# 2026-10-26 (after independent review): added "Indifference Curves Cannot Cross"
+# (figs/indifference-cross.png, copied from exams/F26/figs, made by
+# exams/F26/make_practice_midterm_figs.py) and "A Household That Also Farms"
+# (figs/farm-household-separation.png, last cell of
+# notebooks/topic04_consumer_figures.ipynb; same numbers as practice-midterm Ingmar).
+# Slutsky slide now shows the differentiation step; labor supply uses price p.
+# 2026-10-26 (later): added "A Shortcut: Invert Indirect Utility" (Part III) and
+# two interactive Plotly slides with price sliders over precomputed frames:
+# "Deriving Demand Graphically" (opens Part IV) and "Two Problems, One Price
+# Change" (after "A Price Rise, Split in Two"). The deck now executes Python
+# (jupyter: ecopy, same setup as Topic 1); the PDF shows each slider's
+# starting frame (price 12 and price 48).

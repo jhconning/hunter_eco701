@@ -14,7 +14,39 @@ format:
     chalkboard: true
     width: 1280
     height: 720
+jupyter: ecopy
+execute:
+  echo: false
+  warning: false
+  freeze: auto
 ---
+
+```{python}
+#| include: false
+# Shared setup for the interactive figure (same style as Topic 4).
+import numpy as np
+import plotly.graph_objects as go
+
+NAVY, AMBER, GREY, RED = "#24325c", "#b8842a", "#8a8a8a", "#c83232"
+FONT = dict(family="-apple-system, Arial, Helvetica, sans-serif", size=14)
+AXIS = dict(showline=True, linecolor=NAVY, linewidth=2, ticks="outside", ticklen=6,
+            tickcolor=NAVY, tickwidth=1.5, zeroline=False, showgrid=True, gridcolor="#e5e9f0",
+            title_font=dict(size=17, color=NAVY), tickfont=dict(size=13, color=NAVY))
+
+
+def value_slider(fig, values, start, n_static, frame_traces, prefix):
+    """Attach one frame per value and a slider that steps through them."""
+    n = len(frame_traces(start))
+    fig.frames = [go.Frame(data=frame_traces(v), name=str(v), traces=list(range(n_static, n_static + n)))
+                  for v in values]
+    steps = [dict(method="animate", label=str(v),
+                  args=[[str(v)], dict(mode="immediate", frame=dict(duration=0, redraw=True),
+                                       transition=dict(duration=0))])
+             for v in values]
+    fig.update_layout(sliders=[dict(
+        active=values.index(start), steps=steps, len=0.9, x=0.05, pad=dict(t=58, b=0),
+        currentvalue=dict(prefix=prefix, visible=True, xanchor="center", font=dict(size=15, color=NAVY)))])
+```
 
 ## Production Optimization topics {.compact}
 
@@ -123,7 +155,7 @@ $$q = F(K,L)$$
 
 ::: {.incremental}
 - For any combination of inputs $(K,L)$ the production function $F(K,L)$ is the *maximum* output producible from those inputs. Anything less is **technically inefficient** — and never optimal to choose.
-- Built into the definition: the firm already knows how to get the most out of the inputs it buys. Every question that follows is about *which* combination inputs to buy (given technology and market prices).
+- Built into the definition: the firm already knows how to get the most out of the inputs it buys. Every question that follows is about *which* combination of inputs to buy (given technology and market prices).
 
 :::
 
@@ -796,10 +828,45 @@ $$C(q) = \min_{K_1} \left[3K_1 + \frac{12q^2}{K_1}\right]$$
 :::
 
 ::: {.column width="48%"}
-<div style="text-align: center;">
-  <img src="figs/short-run-long-run-envelope.png" style="width: 100%; border-radius: 6px;">
-  <p style="font-size: 0.65em; color: #666;">Short-run curves and the long-run curve they envelope. Text: NS Example 10.5, Table 10.1, Figure 10.8.</p>
-</div>
+```{python}
+#| fig-align: center
+# Running firm q = sqrt(KL), w = 12, v = 3. Long run: C = 12q.
+# Short run with plant K1: SC = 3*K1 + 12*q^2/K1, touching C at q = K1/2.
+plants = [20, 40, 60, 80, 100, 120, 160]
+q = np.linspace(0, 80, 300)
+fig = go.Figure()
+for k in [40, 120]:
+    fig.add_trace(go.Scatter(x=q, y=3 * k + 12 * q ** 2 / k, mode="lines",
+                             line=dict(color=GREY, width=1, dash="dot"), hoverinfo="skip"))
+fig.add_trace(go.Scatter(x=q, y=12 * q, mode="lines", line=dict(color=NAVY, width=3), hoverinfo="skip"))
+fig.add_annotation(x=79, y=600, text="long run C = 12q", showarrow=False, xanchor="right",
+                   font=dict(color=NAVY, size=13))
+n_static = len(fig.data)
+
+
+def moving(k):
+    qt = k / 2
+    return [
+        go.Scatter(x=q, y=3 * k + 12 * q ** 2 / k, mode="lines", line=dict(color=AMBER, width=3),
+                   hoverinfo="skip"),
+        go.Scatter(x=[qt], y=[12 * qt], mode="markers", marker=dict(color=RED, size=12), hoverinfo="skip"),
+        go.Scatter(x=[2], y=[960], mode="text", textposition="bottom right",
+                   text=[f"plant K<sub>1</sub> = {k}: fixed cost {3 * k}<br>right size only at q = {qt:g}"],
+                   textfont=dict(size=14, color=AMBER), hoverinfo="skip"),
+    ]
+
+
+for t in moving(80):
+    fig.add_trace(t)
+value_slider(fig, plants, 80, n_static, moving, "Plant size K₁: ")
+fig.update_xaxes(range=[0, 80], title_text="output q", **AXIS)
+fig.update_yaxes(range=[0, 1000], title_text="cost", **AXIS)
+fig.update_layout(width=560, height=500, showlegend=False, font=FONT, margin=dict(l=55, r=15, t=10, b=40),
+                  paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
+fig
+```
+
+<p style="font-size: 0.65em; color: #666; text-align: center;">Drag the plant size. Text: NS Example 10.5, Table 10.1, Figure 10.8.</p>
 :::
 ::::
 
