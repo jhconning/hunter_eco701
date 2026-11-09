@@ -1,0 +1,24 @@
+topic: "Choice over Time and under Uncertainty"
+ideas_md_topic_number: 5
+source_file: "E701_F18 _slidesI.pptx (313-336); E701_F18 _slidesIIb.pptx (88-126)"
+source_slides: [313, 336]
+status: built 2026-11-08 for class 9 (Nov 9); deploy false until released
+notes: >
+  Written fresh rather than extracted, using the 2018 slides as a topic list
+  (slidesI 313-336: discounting, the intertemporal budget, interest-rate
+  effects for borrowers and savers, permanent vs temporary income, Euler
+  equation, monopoly lender; slidesIIb 88-120: expected utility, insurance,
+  state-contingent claims, fair markets, consumption pooling) and NS ch. 7
+  and 17. Plan and rationale: PLAN.md in this folder.
+
+  One set of numbers throughout: log utility, delta = 1, pi = 1/2. Borrower
+  income (20, 80), saver (80, 20); both consume (50, 50) at r = 0. At r = 25%
+  the borrower moves to (42, 52.5), the saver to (48, 60). No-borrowing
+  multiplier mu = 0.0375 (mu/lambda = 3). Harvest 20 (drought) or 80 (rain):
+  CE 40, risk premium 10; loaded prices 0.6/0.4 give (36.7, 55). Monopoly
+  lender and insurer, as the dual (expenditure minimization), give (40, 40)
+  with profit 20 and expected profit 10.
+
+  Dropped from 2018: present bias / quasi-hyperbolic slides and the Thaler
+  slides; the three-period monopoly lender (now two periods, at the end).
+  Figures: notebooks/topic05_time_uncertainty_figures.ipynb.
