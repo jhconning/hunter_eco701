@@ -1,6 +1,6 @@
 ---
 title: "Microeconomic Theory"
-subtitle: "Topic 5: Finance <br>Choice over Time and Risk"
+subtitle: "Topic 5: Choice over Time and Risk<br>(Finance)"
 author: "Jonathan Conning"
 description: "ECO 701 Topic 5: Finance, Choice over Time and Risk"
 deploy: true
@@ -21,6 +21,8 @@ execute:
   freeze: auto
 ---
 
+## From Topic 4 & the Midterm to Topic 5: A Dictionary {.compact}
+
 <!-- Topic 5, built 2026-11-08 from slides/05_time-and-uncertainty/PLAN.md.
      One set of numbers throughout: log utility, delta = 1, pi = 1/2.
      Borrower endowment (20, 80), saver (80, 20). r = 0: both consume (50, 50).
@@ -29,321 +31,25 @@ execute:
      Monopoly lender / insurer at the end: (40, 40), profit 20 / 10.
      Figures: notebooks/topic05_time_uncertainty_figures.ipynb. -->
 
-## Review: When a Price Moves, So Does What You Own {.divider}
-
-Labor supply and the farm household from Topic 4, Part V
-
----
-
-## Labor Supply: A Wage Rise Revalues Your Time {.compact}
-
-:::: {.columns}
-::: {.column width="38%"}
-$U = c\,\ell$, 24 hours, unearned income $y$, $p = 1$:
-
-$$c + w\ell = \underbrace{24w}_{\text{value of her time}} + \;y$$
-
-```{=html}
-<div style="font-size: 0.62em; margin-top: 0.4em;">
-  <label style="display:flex;align-items:center;gap:0.6em;margin:0.25em 0;"><span style="width:2.2em;"><i>w</i></span><input type="range" id="ls-w" min="0.5" max="3" step="0.25" value="2" style="flex:1;"><span id="ls-w-v" style="width:3em;text-align:right;"></span></label>
-  <label style="display:flex;align-items:center;gap:0.6em;margin:0.25em 0;"><span style="width:2.2em;"><i>y</i></span><input type="range" id="ls-y" min="0" max="24" step="2" value="12" style="flex:1;"><span id="ls-y-v" style="width:3em;text-align:right;"></span></label>
-  <div style="margin-top:0.5em;display:flex;gap:0.6em;">
-    <button id="ls-y12" style="font-size:1em;padding:0.15em 0.6em;">y = 12</button>
-    <button id="ls-y0" style="font-size:1em;padding:0.15em 0.6em;">y = 0 (Ingmar)</button>
-  </div>
-  <div id="ls-readout" style="color: #24325c; margin-top: 0.7em; line-height: 1.45;"></div>
-</div>
-```
-:::
-
-::: {.column width="62%"}
-```{=html}
-<svg id="ls-svg" viewBox="0 0 560 440" style="width: 100%; max-height: 440px; font-family: Arial, Helvetica, sans-serif;"></svg>
-<script>
-(function () {
-  // U = c*l, p = 1, 24 hours. The wage moves from w0 = 1 to the slider value w.
-  // A: old choice. B: compensated (same utility, new wage). C: new wage, old full income.
-  // D: new choice. A->B substitution, B->C ordinary income, C->D endowment income.
-  var NS = "http://www.w3.org/2000/svg", svg = document.getElementById("ls-svg");
-  var L = 55, T = 12, W0 = 1, SX = 450 / 30, SY = 360 / 100;
-  function X(v) { return L + v * SX; }
-  function Y(v) { return T + 360 - v * SY; }
-  function el(tag, attrs, parent) {
-    var e = document.createElementNS(NS, tag);
-    for (var k in attrs) e.setAttribute(k, attrs[k]);
-    (parent || svg).appendChild(e);
-    return e;
-  }
-  var clip = el("clipPath", {id: "ls-clip"});
-  el("rect", {x: L, y: T, width: 450, height: 360}, clip);
-  for (var g = 0; g <= 30; g += 6) {
-    el("line", {x1: X(g), y1: Y(0), x2: X(g), y2: Y(100), stroke: "#e5e9f0"});
-    el("text", {x: X(g), y: Y(0) + 20, "text-anchor": "middle", "font-size": 14, fill: "#24325c"}).textContent = g;
-  }
-  for (g = 0; g <= 100; g += 20) {
-    el("line", {x1: X(0), y1: Y(g), x2: X(30), y2: Y(g), stroke: "#e5e9f0"});
-    el("text", {x: X(0) - 8, y: Y(g) + 5, "text-anchor": "end", "font-size": 14, fill: "#24325c"}).textContent = g;
-  }
-  el("line", {x1: X(0), y1: Y(0), x2: X(30), y2: Y(0), stroke: "#24325c", "stroke-width": 2});
-  el("line", {x1: X(0), y1: Y(0), x2: X(0), y2: Y(100), stroke: "#24325c", "stroke-width": 2});
-  el("line", {x1: X(24), y1: Y(0), x2: X(24), y2: Y(100), stroke: "#8a93a6", "stroke-width": 1.5});
-  el("text", {x: X(24) + 6, y: Y(96), "font-size": 14, fill: "#8a93a6"}).textContent = "24 hours";
-  el("text", {x: X(15), y: Y(0) + 44, "text-anchor": "middle", "font-size": 16, fill: "#24325c"}).textContent = "leisure ℓ (hours)";
-  el("text", {x: 16, y: Y(50), "text-anchor": "middle", "font-size": 16, fill: "#24325c",
-              transform: "rotate(-90 16 " + Y(50) + ")"}).textContent = "consumption c";
-  var old = el("line", {stroke: "#9aa3b5", "stroke-width": 2.5, "stroke-dasharray": "7,5"});
-  var fixed = el("line", {stroke: "#9aa3b5", "stroke-width": 1.5, "stroke-dasharray": "2,4", "clip-path": "url(#ls-clip)"});
-  var comp = el("line", {stroke: "#3b6ea5", "stroke-width": 1.5, "stroke-dasharray": "5,4", "clip-path": "url(#ls-clip)"});
-  var bnew = el("line", {stroke: "#b8842a", "stroke-width": 4});
-  var ic0 = el("path", {fill: "none", stroke: "#9aa3b5", "stroke-width": 2, "clip-path": "url(#ls-clip)"});
-  var ic1 = el("path", {fill: "none", stroke: "#b8842a", "stroke-width": 2, "clip-path": "url(#ls-clip)"});
-  var endow = el("circle", {r: 7, fill: "#24325c"});
-  var elab = el("text", {"font-size": 14, fill: "#24325c"}); elab.textContent = "endowment";
-  var pts = {}, labs = {};
-  [["A", "#9aa3b5"], ["B", "#3b6ea5"], ["C", "#9aa3b5"], ["D", "#b8842a"]].forEach(function (p) {
-    pts[p[0]] = el("circle", {r: p[0] === "C" ? 5 : 7, fill: p[1]});
-    labs[p[0]] = el("text", {"font-size": 16, "font-weight": "bold", fill: p[1]});
-    labs[p[0]].textContent = p[0];
-  });
-  function setLine(e, a, b, l0, l1) {  // c = a - b*l from l0 to l1
-    e.setAttribute("x1", X(l0)); e.setAttribute("y1", Y(a - b * l0));
-    e.setAttribute("x2", X(l1)); e.setAttribute("y2", Y(a - b * l1));
-  }
-  function curve(u) {
-    var d = [];
-    for (var l = 0.6; l <= 30; l += 0.3) d.push((d.length ? "L" : "M") + X(l).toFixed(1) + "," + Y(Math.min(u / l, 140)).toFixed(1));
-    return d.join("");
-  }
-  function place(k, l, c, dx, dy) {
-    pts[k].setAttribute("cx", X(l)); pts[k].setAttribute("cy", Y(c));
-    labs[k].setAttribute("x", X(l) + dx); labs[k].setAttribute("y", Y(c) + dy);
-  }
-  function f(v) { return (v >= 0 ? "+" : "−") + Math.abs(v).toFixed(1); }
-  function val(id) { return parseFloat(document.getElementById("ls-" + id).value); }
-  function draw() {
-    var w = val("w"), y = val("y");
-    var M0 = 24 * W0 + y, M1 = 24 * w + y;
-    var lA = M0 / (2 * W0), cA = M0 / 2, U0 = cA * lA;
-    var lB = Math.sqrt(U0 / w), cB = Math.sqrt(U0 * w);
-    var lC = M0 / (2 * w), cC = M0 / 2;
-    var lD = M1 / (2 * w), cD = M1 / 2;
-    setLine(old, M0, W0, 0, 24);
-    setLine(fixed, M0, w, 0, 30);
-    setLine(comp, 2 * cB, w, 0, 30);
-    setLine(bnew, M1, w, 0, 24);
-    ic0.setAttribute("d", curve(U0));
-    ic1.setAttribute("d", curve(cD * lD));
-    endow.setAttribute("cx", X(24)); endow.setAttribute("cy", Y(y));
-    elab.setAttribute("x", X(24) + 10); elab.setAttribute("y", Y(y) + (y > 4 ? -8 : -14));
-    place("A", lA, cA, -18, -10);
-    place("B", lB, cB, -18, -10);
-    place("C", lC, cC, -18, 20);
-    place("D", lD, cD, 10, -10);
-    document.getElementById("ls-w-v").textContent = w.toFixed(2);
-    document.getElementById("ls-y-v").textContent = y;
-    document.getElementById("ls-readout").innerHTML =
-      "Wage moves from <b>1</b> to <b>" + w.toFixed(2) + "</b>. Leisure:<br>" +
-      "<span style='color:#3b6ea5'>A→B substitution</span> " + f(lB - lA) + " h<br>" +
-      "B→C ordinary income " + f(lC - lB) + " h<br>" +
-      "<span style='color:#b8842a'>C→D value of her time</span> " + f(lD - lC) + " h<br>" +
-      "<b>Total</b> " + f(lD - lA) + " h: she works <b>" + (24 - lD).toFixed(1) + "</b> h (was " + (24 - lA).toFixed(1) + ").";
-  }
-  ["w", "y"].forEach(function (id) { document.getElementById("ls-" + id).addEventListener("input", draw); });
-  document.getElementById("ls-y12").addEventListener("click", function () { document.getElementById("ls-y").value = 12; draw(); });
-  document.getElementById("ls-y0").addEventListener("click", function () { document.getElementById("ls-y").value = 0; draw(); });
-  draw();
-})();
-</script>
-```
-:::
-::::
-
-<p style="font-size: 0.75em; color: #666;">Grey: wage 1. Amber: the new wage; both lines pivot around the endowment (24, <i>y</i>). Dotted grey: the new wage with full income held at its old value, as if she did not own her time. In Topic 4 money income was fixed; here a wage rise also makes her 24 hours worth more.</p>
-
----
-
-## The Slutsky Equation with an Endowment {.compact}
-
-Topic 4 held money income fixed. When income comes from selling what you own, $I = p\,\omega + \dots$, a price rise also raises income by $\omega$:
-
-$$\frac{\partial x}{\partial p} \;=\; \underbrace{\frac{\partial x^c}{\partial p}}_{\text{substitution} \,<\, 0} \;+\; \underbrace{(\omega - x)\,\frac{\partial x}{\partial I}}_{\text{income effect, sign set by your net position}}$$
-
-::: {.incremental}
-- **Net seller** ($\omega > x$): a higher price makes you **richer**. **Net buyer** ($\omega < x$): poorer. By the envelope theorem (Topic 2), $dV/dp = \lambda\,(\omega - x)$.
-- **Ask before you look:** in each row, is the household richer or poorer when the price rises?
-:::
-
-::: {.fragment}
-| Who | Good and its price | Endowment $\omega$ | Net position | Price rises |
-|---|---|---|---|---|
-| Worker | leisure, wage $w$ | 24 hours | sells $24 - \ell$ hours | **richer**: may work less |
-| Farm household | food, price $p$ | its harvest $Q$ | sells $Q - c$, or buys | net seller **richer**, net buyer **poorer** |
-| Saver | today's consumption, $1+r$ | $m_1$ | lends $m_1 - c_1$ | **richer** |
-| Borrower | today's consumption, $1+r$ | $m_1$ | borrows $c_1 - m_1$ | **poorer** |
-
-: {tbl-colwidths="[15,25,15,23,22]"}
-:::
-
-<p style="font-size: 0.8em; color: #666;">Text: NS Chapter 16 (labor supply) and Chapter 17 (interest rates). Food prices and welfare: Deaton, "Rice Prices and Income Distribution in Thailand", Economic Journal 1989.</p>
-
----
-
-## The Farm Household: Separation, and When It Fails {.compact}
-
-:::: {.columns}
-::: {.column width="38%"}
-$U = c\,\ell^{a}$, 24 hours, farm $F(L) = 6\sqrt{L}$, food price $p$, wage $w$. Family and hired labor are perfect substitutes.
-
-```{=html}
-<div style="font-size: 0.62em; margin-top: 0.4em;">
-  <label style="display:flex;align-items:center;gap:0.6em;margin:0.25em 0;"><span style="width:6.5em;">wage <i>w</i></span><input type="range" id="fh-w" min="0.8" max="1.6" step="0.05" value="1" style="flex:1;"><span id="fh-w-v" style="width:3em;text-align:right;"></span></label>
-  <label style="display:flex;align-items:center;gap:0.6em;margin:0.25em 0;"><span style="width:6.5em;">food price <i>p</i></span><input type="range" id="fh-p" min="0.7" max="1.2" step="0.05" value="1" style="flex:1;"><span id="fh-p-v" style="width:3em;text-align:right;"></span></label>
-  <label style="display:flex;align-items:center;gap:0.6em;margin:0.25em 0;"><span style="width:6.5em;">taste for leisure <i>a</i></span><input type="range" id="fh-a" min="0.5" max="2" step="0.1" value="1" style="flex:1;"><span id="fh-a-v" style="width:3em;text-align:right;"></span></label>
-  <div style="margin-top:0.5em;display:flex;gap:0.6em;">
-    <button id="fh-mkt" style="font-size:1em;padding:0.15em 0.6em;">Close the labor market</button>
-    <button id="fh-reset" style="font-size:1em;padding:0.15em 0.6em;">Reset</button>
-  </div>
-  <div id="fh-readout" style="color: #24325c; margin-top: 0.7em; line-height: 1.45;"></div>
-</div>
-```
-:::
-
-::: {.column width="62%"}
-```{=html}
-<svg id="fh-svg" viewBox="0 0 560 440" style="width: 100%; max-height: 440px; font-family: Arial, Helvetica, sans-serif;"></svg>
-<script>
-(function () {
-  // U = c * l^a, 24 hours, F(L) = 6 sqrt(L), food price p, wage w.
-  // Markets open: L* = 9p^2/w^2, Q = 18p/w, profit 9p^2/w; full income M = 24w + profit;
-  //   l = a M / ((1+a) w), c = M / ((1+a) p), capped at l = 24 (works nothing, eats profit/p).
-  // Labor market closed (Chayanov): max 6 sqrt(L) (24-L)^a, so L = 24/(1+2a), c = F(L);
-  //   shadow wage (food per hour) = F'(L) = 3/sqrt(L).
-  var NS = "http://www.w3.org/2000/svg", svg = document.getElementById("fh-svg");
-  var L = 55, T = 12, SX = 450 / 26, SY = 360 / 45, open = true;
-  function X(v) { return L + v * SX; }
-  function Y(v) { return T + 360 - v * SY; }
-  function el(tag, attrs, parent) {
-    var e = document.createElementNS(NS, tag);
-    for (var k in attrs) e.setAttribute(k, attrs[k]);
-    (parent || svg).appendChild(e);
-    return e;
-  }
-  var clip = el("clipPath", {id: "fh-clip"});
-  el("rect", {x: L, y: T, width: 450, height: 360}, clip);
-  for (var g = 0; g <= 24; g += 6) {
-    el("line", {x1: X(g), y1: Y(0), x2: X(g), y2: Y(45), stroke: "#e5e9f0"});
-    el("text", {x: X(g), y: Y(0) + 20, "text-anchor": "middle", "font-size": 14, fill: "#24325c"}).textContent = g;
-  }
-  for (g = 0; g <= 45; g += 5) {
-    el("line", {x1: X(0), y1: Y(g), x2: X(26), y2: Y(g), stroke: "#e5e9f0"});
-    el("text", {x: X(0) - 8, y: Y(g) + 5, "text-anchor": "end", "font-size": 14, fill: "#24325c"}).textContent = g;
-  }
-  el("line", {x1: X(0), y1: Y(0), x2: X(26), y2: Y(0), stroke: "#24325c", "stroke-width": 2});
-  el("line", {x1: X(0), y1: Y(0), x2: X(0), y2: Y(45), stroke: "#24325c", "stroke-width": 2});
-  el("line", {x1: X(24), y1: Y(0), x2: X(24), y2: Y(45), stroke: "#8a93a6", "stroke-width": 1.5});
-  el("text", {x: X(13), y: Y(0) + 44, "text-anchor": "middle", "font-size": 16, fill: "#24325c"}).textContent = "leisure ℓ (hours); farm work measured left from 24";
-  el("text", {x: 16, y: Y(22.5), "text-anchor": "middle", "font-size": 16, fill: "#24325c",
-              transform: "rotate(-90 16 " + Y(22.5) + ")"}).textContent = "food c";
-  var d = [];
-  for (var l = 0; l <= 24; l += 0.2) d.push((d.length ? "L" : "M") + X(l).toFixed(1) + "," + Y(6 * Math.sqrt(24 - l)).toFixed(1));
-  el("path", {d: d.join(""), fill: "none", stroke: "#24325c", "stroke-width": 3});
-  el("text", {x: X(0.5), y: Y(22), "font-size": 14, fill: "#24325c"}).textContent = "farm output F(24 − ℓ)";
-  var budget = el("line", {stroke: "#b8842a", "stroke-width": 3.5, "clip-path": "url(#fh-clip)"});
-  var shadow = el("line", {stroke: "#24325c", "stroke-width": 1.5, "stroke-dasharray": "4,4", "clip-path": "url(#fh-clip)"});
-  var ic = el("path", {fill: "none", stroke: "#3b6ea5", "stroke-width": 2.5, "clip-path": "url(#fh-clip)"});
-  var profit = el("line", {stroke: "#b03a2e", "stroke-width": 4});
-  var prod = el("circle", {r: 7, fill: "#24325c"});
-  var cons = el("circle", {r: 7, fill: "#3b6ea5"});
-  var plab = el("text", {"font-size": 14, fill: "#24325c"}); plab.textContent = "farm";
-  var clab = el("text", {"font-size": 14, fill: "#3b6ea5"}); clab.textContent = "household";
-  function val(id) { return parseFloat(document.getElementById("fh-" + id).value); }
-  function draw() {
-    var w = val("w"), p = val("p"), a = val("a"), msg, Lf, Q, lei, c;
-    document.getElementById("fh-w-v").textContent = w.toFixed(2);
-    document.getElementById("fh-p-v").textContent = p.toFixed(2);
-    document.getElementById("fh-a-v").textContent = a.toFixed(1);
-    ["w", "p"].forEach(function (id) { document.getElementById("fh-" + id).disabled = !open; });
-    if (open) {
-      Lf = 9 * p * p / (w * w); Q = 6 * Math.sqrt(Lf);
-      var pi = 9 * p * p / w, M = 24 * w + pi;
-      lei = a * M / ((1 + a) * w); c = M / ((1 + a) * p);
-      if (lei > 24) { lei = 24; c = pi / p; }
-      // Budget in food units: c = (M - w l)/p, from l = 0 to 24.
-      budget.setAttribute("x1", X(0)); budget.setAttribute("y1", Y(M / p));
-      budget.setAttribute("x2", X(24)); budget.setAttribute("y2", Y(pi / p));
-      budget.style.display = ""; shadow.style.display = "none"; profit.style.display = "";
-      profit.setAttribute("x1", X(24)); profit.setAttribute("y1", Y(0));
-      profit.setAttribute("x2", X(24)); profit.setAttribute("y2", Y(pi / p));
-      var work = 24 - lei, gap = Lf - work, sale = Q - c;
-      var trade = gap > 0.05 ? "hires <b>" + gap.toFixed(1) + "</b> h" : gap < -0.05 ? "sells <b>" + (-gap).toFixed(1) + "</b> h of labor" : "neither hires nor sells labor";
-      var food = sale > 0.05 ? "<b>net seller</b> of food (" + sale.toFixed(1) + "): a higher <i>p</i> makes it richer"
-               : sale < -0.05 ? "<b>net buyer</b> of food (" + (-sale).toFixed(1) + "): a higher <i>p</i> makes it poorer" : "self-sufficient in food";
-      msg = "<b>Farm</b> (firm): <i>L</i>* = " + Lf.toFixed(1) + " h, output " + Q.toFixed(1) + ", profit " + (pi / p).toFixed(1) + " food.<br>" +
-            "<b>Household</b> (consumer): leisure " + lei.toFixed(1) + " h, works " + work.toFixed(1) + " h, " + trade + ".<br>" +
-            "Eats " + c.toFixed(1) + ": " + food + ".<br>" +
-            "<span style='color:#666'>Move <i>a</i>: hiring changes, <i>L</i>* does not.</span>";
-    } else {
-      Lf = 24 / (1 + 2 * a); Q = 6 * Math.sqrt(Lf); lei = 24 - Lf; c = Q;
-      var sw = 3 / Math.sqrt(Lf);
-      budget.style.display = "none"; profit.style.display = "none"; shadow.style.display = "";
-      shadow.setAttribute("x1", X(0)); shadow.setAttribute("y1", Y(c + sw * lei));
-      shadow.setAttribute("x2", X(26)); shadow.setAttribute("y2", Y(c - sw * (26 - lei)));
-      msg = "<b>No labor market:</b> the family farms its own land with its own time.<br>" +
-            "Farm work <i>L</i> = " + Lf.toFixed(1) + " h, set by <b>tastes</b> (<i>a</i>), not by a wage.<br>" +
-            "Eats its harvest, " + c.toFixed(1) + ". Shadow wage " + sw.toFixed(2) + " food per hour (dashed).<br>" +
-            "<span style='color:#666'>Move <i>a</i>: now <i>L</i> moves too. Separation fails.</span>";
-    }
-    var u = c * Math.pow(lei, a), pts = [];
-    for (var x = 0.5; x <= 26; x += 0.25) pts.push((pts.length ? "L" : "M") + X(x).toFixed(1) + "," + Y(Math.min(u / Math.pow(x, a), 90)).toFixed(1));
-    ic.setAttribute("d", pts.join(""));
-    prod.setAttribute("cx", X(24 - Lf)); prod.setAttribute("cy", Y(Q));
-    cons.setAttribute("cx", X(lei)); cons.setAttribute("cy", Y(c));
-    plab.setAttribute("x", X(24 - Lf) - 14); plab.setAttribute("y", Y(Q) + 26);
-    clab.setAttribute("x", X(lei) + 8); clab.setAttribute("y", Y(c) - 14);
-    plab.style.display = open ? "" : "none";
-    clab.textContent = open ? "household" : "farm = household";
-    document.getElementById("fh-mkt").textContent = open ? "Close the labor market" : "Open the labor market";
-    document.getElementById("fh-readout").innerHTML = msg;
-  }
-  ["w", "p", "a"].forEach(function (id) { document.getElementById("fh-" + id).addEventListener("input", draw); });
-  document.getElementById("fh-mkt").addEventListener("click", function () { open = !open; draw(); });
-  document.getElementById("fh-reset").addEventListener("click", function () {
-    open = true;
-    document.getElementById("fh-w").value = 1; document.getElementById("fh-p").value = 1; document.getElementById("fh-a").value = 1;
-    draw();
-  });
-  draw();
-})();
-</script>
-```
-:::
-::::
-
-<p style="font-size: 0.75em; color: #666;">Open markets: the farm picks <i>L</i>* where the wage line touches the output curve, then the household chooses along that line. Profit (red) is the line's height at 24. Closed labor market (Chayanov): the household picks its point on the output curve itself. Topic 6 builds this model; the notebook <code>farm_household.ipynb</code> has the general case.</p>
-
----
-
-## From Topic 4 to Topic 5: A Dictionary {.compact}
+In Topic 4 (and Question 13 on the midterm), you maximized $U(c, \ell)$ starting from an **endowment** of 24 hours. Topic 5 solves that **exact same two-good problem**, changing only the labels:
 
 | Topic 4: labor supply and the farm | Topic 5: choice over time |
 |---|---|
 | Leisure $\ell$ and consumption $c$ | Consumption today $c_1$ and tomorrow $c_2$ |
-| Wage $w$: the price of an hour of leisure | $1 + r$: the price of $c_1$ in units of $c_2$ |
-| Endowment: 24 hours (and unearned income $y$) | Endowment: income $m_1$ today and $m_2$ tomorrow |
-| Full income $24w + y$ | Wealth $m_1 + m_2/(1+r)$ |
-| Sells labor, or hires it in | Lends (saver), or borrows (borrower) |
-| A wage rise: richer if she sells time | A rate rise: richer if she lends |
-| The farm maximizes profit, then the family consumes | Invest until the return equals $1 + r$, then borrow or lend (Fisher) |
-| No labor market: farm work depends on tastes | No credit market: consumption, and investment, depend on tastes |
+| Wage $w$: the price of an hour of leisure | $1 + r$: the price of $c_1$ in units of $c_2$ (or $p_2 = \tfrac{1}{1+r}$) |
+| Endowment: 24 hours (and unearned income $Y$) | Endowment: income $m_1$ today and $m_2$ tomorrow |
+| Full income $24w + Y$ | Wealth $W = m_1 + m_2/(1+r)$ |
+| **Net seller** (works $24 - \ell > 0$) vs. **net buyer** | **Saver** (lends $m_1 - c_1 > 0$) vs. **Borrower** (borrows $c_1 - m_1 > 0$) |
+| A wage rise makes a worker **richer** | An interest rate rise makes a saver **richer**, a borrower **poorer** |
+| Farm maximizes profit first, then family consumes | Invest until $f'(k) = 1 + r$ first, then borrow or lend (Fisher) |
 
-: {tbl-colwidths="[50,50]"}
+: {tbl-colwidths="[48,52]"}
 
 ::: {.fragment}
-> **Same model, new labels.** Every time a price moves, ask two questions: what is the substitution effect, and **which side of the market is she on?**
+> **Same model, new labels.** Every time a price moves, the budget line rotates around the endowment. Ask two questions: what is the **substitution effect**, and **which side of the market (buyer or seller) is she on?**
 :::
 
 ---
-
 
 ## Optimization: From Goods to Dates and States {.compact}
 
@@ -360,7 +66,7 @@ Topic 4 solved the consumer's problem for two goods. Here we call them $c_1$ and
 : {tbl-colwidths="[16,28,28,28]"}
 
 ::: {.fragment}
-> We will fill in the empty columns. The method does not change: a Lagrangian, a tangency, a budget line. What changes is **what the goods are** and **what the prices mean**. In Topic 5 the goods we trade are **promises**: claims on consumption at another date or in another state of the world.
+> We will fill in the empty columns step by step. The method does not change: a Lagrangian, a tangency, a budget line. What changes is **what the goods are** and **what the prices mean**. In Topic 5 the goods we trade are **promises**: claims on consumption at another date or in another state of the world.
 :::
 
 ---
@@ -469,21 +175,23 @@ $$c_1 + \frac{c_2}{1+r} = m_1 + \frac{m_2}{1+r}$$
 
 :::: {.columns}
 ::: {.column width="38%"}
-Now let the good have a dollar price in each period, $P_1$ today and $P_2$ tomorrow (inflation if $P_2 > P_1$):
+In Topic 4's form, with $p_1 = 1$ and $p_2 = \frac{1}{1+r}$:
 
-$$P_1 c_1 + \frac{P_2\, c_2}{1+r} = P_1 m_1 + \frac{P_2\, m_2}{1+r}$$
+$$c_1 + \frac{c_2}{1+r} = m_1 + \frac{m_2}{1+r} = W$$
+
+- **Slope:** $-\dfrac{p_1}{p_2} = -(1+r)$
+- **Horizontal intercept:** $c_1^{\max} = W$
+- **Vertical intercept:** $c_2^{\max} = (1+r)\,W$
 
 ```{=html}
-<div id="ibc-controls" style="font-size: 0.62em; margin-top: 0.4em;">
-  <label style="display:flex;align-items:center;gap:0.6em;margin:0.25em 0;"><span style="width:2.2em;"><i>P</i><sub>1</sub></span><input type="range" id="ibc-P1" min="0.5" max="2" step="0.05" value="1" style="flex:1;"><span id="ibc-P1-v" style="width:3em;text-align:right;"></span></label>
-  <label style="display:flex;align-items:center;gap:0.6em;margin:0.25em 0;"><span style="width:2.2em;"><i>P</i><sub>2</sub></span><input type="range" id="ibc-P2" min="0.5" max="2" step="0.05" value="1" style="flex:1;"><span id="ibc-P2-v" style="width:3em;text-align:right;"></span></label>
-  <label style="display:flex;align-items:center;gap:0.6em;margin:0.25em 0;"><span style="width:2.2em;"><i>r</i></span><input type="range" id="ibc-r" min="0" max="1" step="0.05" value="0" style="flex:1;"><span id="ibc-r-v" style="width:3em;text-align:right;"></span></label>
-  <label style="display:flex;align-items:center;gap:0.6em;margin:0.25em 0;"><span style="width:2.2em;"><i>m</i><sub>1</sub></span><input type="range" id="ibc-m1" min="0" max="100" step="5" value="20" style="flex:1;"><span id="ibc-m1-v" style="width:3em;text-align:right;"></span></label>
-  <label style="display:flex;align-items:center;gap:0.6em;margin:0.25em 0;"><span style="width:2.2em;"><i>m</i><sub>2</sub></span><input type="range" id="ibc-m2" min="0" max="100" step="5" value="80" style="flex:1;"><span id="ibc-m2-v" style="width:3em;text-align:right;"></span></label>
+<div id="ibc-controls" style="font-size: 0.68em; margin-top: 0.6em;">
+  <label style="display:flex;align-items:center;gap:0.6em;margin:0.4em 0;"><span style="width:2.2em;"><i>r</i></span><input type="range" id="ibc-r" min="0" max="1" step="0.05" value="0" style="flex:1;"><span id="ibc-r-v" style="width:3.2em;text-align:right;"></span></label>
+  <label style="display:flex;align-items:center;gap:0.6em;margin:0.4em 0;"><span style="width:2.2em;"><i>m</i><sub>1</sub></span><input type="range" id="ibc-m1" min="0" max="100" step="5" value="20" style="flex:1;"><span id="ibc-m1-v" style="width:3.2em;text-align:right;"></span></label>
+  <label style="display:flex;align-items:center;gap:0.6em;margin:0.4em 0;"><span style="width:2.2em;"><i>m</i><sub>2</sub></span><input type="range" id="ibc-m2" min="0" max="100" step="5" value="80" style="flex:1;"><span id="ibc-m2-v" style="width:3.2em;text-align:right;"></span></label>
 </div>
 ```
 
-<p style="font-size: 0.75em; color: #666;">With $P_1 = P_2 = 1$ this is the previous slide. Dashed grey: the starting line, income (20, 80) and $r = 0$.</p>
+<p style="font-size: 0.72em; color: #666; margin-top: 0.6em;">Dashed grey: the starting line, income $(20, 80)$ and $r = 0$.<br><i>Note on inflation:</i> If good prices rise at inflation rate $\pi_{\text{inf}}$ and the nominal rate is $i$, simply use the real interest rate $1 + r = \frac{1+i}{1+\pi_{\text{inf}}}$ (Fisher equation: $r \approx i - \pi_{\text{inf}}$).</p>
 :::
 
 ::: {.column width="62%"}
@@ -492,7 +200,7 @@ $$P_1 c_1 + \frac{P_2\, c_2}{1+r} = P_1 m_1 + \frac{P_2\, m_2}{1+r}$$
 <div id="ibc-readout" style="font-size: 0.62em; color: #24325c; margin-top: 0.2em;"></div>
 <script>
 (function () {
-  // Intertemporal budget line P1 c1 + P2 c2/(1+r) = P1 m1 + P2 m2/(1+r), drawn on [0,200]^2.
+  // Intertemporal budget line c1 + c2/(1+r) = m1 + m2/(1+r), drawn on [0,200]^2.
   var NS = "http://www.w3.org/2000/svg", svg = document.getElementById("ibc-svg");
   var L = 55, T = 12, S = 360 / 200;             // left margin, top margin, pixels per unit
   function X(v) { return L + v * S; }
@@ -521,11 +229,11 @@ $$P_1 c_1 + \frac{P_2\, c_2}{1+r} = P_1 m_1 + \frac{P_2\, m_2}{1+r}$$
   var dot = el("circle", {r: 7, fill: "#24325c"});
   var lab = el("text", {"font-size": 15, fill: "#24325c"});
   lab.textContent = "endowment";
-  var ids = ["P1", "P2", "r", "m1", "m2"];
+  var ids = ["r", "m1", "m2"];
   function val(id) { return parseFloat(document.getElementById("ibc-" + id).value); }
   function draw() {
-    var P1 = val("P1"), P2 = val("P2"), r = val("r"), m1 = val("m1"), m2 = val("m2");
-    var W = P1 * m1 + P2 * m2 / (1 + r), c1max = W / P1, c2max = W * (1 + r) / P2;
+    var r = val("r"), m1 = val("m1"), m2 = val("m2");
+    var W = m1 + m2 / (1 + r), c1max = W, c2max = W * (1 + r);
     line.setAttribute("x1", X(0)); line.setAttribute("y1", Y(c2max));
     line.setAttribute("x2", X(c1max)); line.setAttribute("y2", Y(0));
     dot.setAttribute("cx", X(m1)); dot.setAttribute("cy", Y(m2));
@@ -535,8 +243,8 @@ $$P_1 c_1 + \frac{P_2\, c_2}{1+r} = P_1 m_1 + \frac{P_2\, m_2}{1+r}$$
       document.getElementById("ibc-" + id + "-v").textContent = id === "r" ? Math.round(v * 100) + "%" : v;
     });
     document.getElementById("ibc-readout").innerHTML =
-      "<b>Wealth:</b> " + W.toFixed(1) + " dollars today. <b>Intercepts:</b> " + c1max.toFixed(1) +
-      " today, " + c2max.toFixed(1) + " tomorrow. <b>Slope:</b> \u2212" + (P1 * (1 + r) / P2).toFixed(2) + ".";
+      "<b>Wealth (<i>W</i>):</b> " + W.toFixed(1) + " today. <b>Intercepts:</b> " + c1max.toFixed(1) +
+      " today, " + c2max.toFixed(1) + " tomorrow. <b>Slope:</b> \u2212" + (1 + r).toFixed(2) + " (<i>p</i>\u2082 = " + (1 / (1 + r)).toFixed(2) + ").";
   }
   ids.forEach(function (id) { document.getElementById("ibc-" + id).addEventListener("input", draw); });
   draw();
@@ -546,70 +254,17 @@ $$P_1 c_1 + \frac{P_2\, c_2}{1+r} = P_1 m_1 + \frac{P_2\, m_2}{1+r}$$
 :::
 ::::
 
-<p style="font-size: 0.75em; color: #666;">Income moves the line in parallel; prices and the interest rate rotate it around the endowment. What matters for the slope is $(1+r)P_1/P_2$, one plus the <b>real</b> interest rate.</p>
+<p style="font-size: 0.75em; color: #666;">Changing income $(m_1, m_2)$ shifts the line in parallel; changing the interest rate $r$ rotates the line around the endowment point $(m_1, m_2)$.</p>
 
 ---
 
-## The Euler Equation {.compact}
-
-$$\mathcal{L} = u(c_1) + \delta\, u(c_2) + \lambda\,\big[\,p_1 m_1 + p_2 m_2 - p_1 c_1 - p_2 c_2\,\big]$$
-
-::: {.incremental}
-- **First-order conditions:** $\;u'(c_1) = \lambda\, p_1 = \lambda \qquad \delta\, u'(c_2) = \lambda\, p_2 = \dfrac{\lambda}{1+r}$
-- **Divide:** $\;MRS = \dfrac{u'(c_1)}{\delta\, u'(c_2)} = \dfrac{p_1}{p_2} = 1 + r$. The tangency from Topic 4, nothing more.
-- Written as the **Euler equation**: $\;u'(c_1) = \delta\,(1+r)\,u'(c_2)$. Giving up a dollar today costs $u'(c_1)$; saved, it buys $1+r$ dollars tomorrow, worth $\delta(1+r)u'(c_2)$ today. At the optimum the two are equal.
-- **The multiplier:** $\lambda = u'(c_1)$, the marginal utility of a dollar of wealth (Topic 2's shadow price).
-- **Benchmark:** if $\delta(1+r) = 1$, then $u'(c_1) = u'(c_2)$, so $c_1 = c_2$. **Perfect smoothing**, whatever the timing of income.
-:::
-
----
-
-## Log Utility Is Cobb-Douglas {.compact}
-
-Take $u(c) = \ln c$. Then
-$$U = \ln c_1 + \delta \ln c_2 = \ln\big(c_1\, c_2^{\,\delta}\big)$$
-a monotone transformation of the Cobb-Douglas $c_1 c_2^{\,\delta}$. Utility is only a ranking (Topic 4), so **the demands are Topic 4's Cobb-Douglas demands**:
-
-::: {.incremental}
-- $c_1 = \dfrac{1}{1+\delta}\cdot\dfrac{W}{p_1} \qquad c_2 = \dfrac{\delta}{1+\delta}\cdot\dfrac{W}{p_2} = \dfrac{\delta}{1+\delta}\,(1+r)\,W$
-- She spends a fixed share of her wealth on each period. With $\delta = 1$, half of it.
-- **Our numbers:** $\delta = 1$, $r = 0$, so $p_1 = p_2 = 1$. This is Topic 4 with equal prices. Both households below have wealth $W = 100$, so both consume $c_1 = c_2 = 50$.
-- **Consumption growth:** $\;\dfrac{c_2}{c_1} = \delta(1+r)$. It depends on patience and the interest rate, **not** on when the income arrives.
-:::
-
-<p style="font-size: 0.8em; color: #666;">Compare Topic 4 (where $c_1$ was called $x$): $c_1 = \frac{\alpha}{\alpha+\beta}\frac{I}{p_1}$ for $u = c_1^{\alpha} c_2^{\beta}$. Here $\alpha = 1$, $\beta = \delta$.</p>
-
----
-
-## A Borrower and a Saver {.compact}
-
-Same preferences, same interest rate ($r = 0$), same wealth (100). Different **timing** of income.
-
-:::: {.columns}
-::: {.column width="64%"}
-<div style="text-align: center;">
-  <img src="figs/borrower-saver.png" style="width: 100%; border-radius: 6px;">
-</div>
-:::
-
-::: {.column width="36%"}
-::: {.incremental}
-- **Borrower,** income (20, 80): a student, or a farmer before harvest. Borrows 30 today: she **sells a promise** to repay 30 tomorrow.
-- **Saver,** income (80, 20): a worker before retirement. Saves 30 today: she **buys that promise** and collects tomorrow.
-- **Both end at (50, 50).** Without a credit market each would be stuck at its endowment, on the dotted indifference curve.
-:::
-:::
-::::
-
----
-
-## Move the Income: Borrow or Save? {.compact}
+## Using Financial Markets to Smooth Consumption {.compact}
 
 :::: {.columns}
 ::: {.column width="38%"}
-Log utility, wealth $W = m_1 + \frac{m_2}{1+r}$:
+With log utility $\ln c_1 + \delta \ln c_2$ and wealth $W = m_1 + \frac{m_2}{1+r}$:
 
-$$c_1 = \frac{W}{1+\delta} \qquad c_2 = \frac{\delta(1+r)\,W}{1+\delta}$$
+$$c_1^* = \frac{W}{1+\delta} \qquad c_2^* = \frac{\delta(1+r)\,W}{1+\delta}$$
 
 ```{=html}
 <div style="font-size: 0.62em; margin-top: 0.4em;">
@@ -623,6 +278,8 @@ $$c_1 = \frac{W}{1+\delta} \qquad c_2 = \frac{\delta(1+r)\,W}{1+\delta}$$
   </div>
 </div>
 ```
+
+<p style="font-size: 0.72em; color: #666; margin-top: 0.5em;">Dashed legs show how much she <b>borrows or saves today</b> ($|c_1^* - m_1|$) and <b>repays or collects tomorrow</b> ($|c_2^* - m_2|$). Dotted curve: autarky utility at the endowment.</p>
 :::
 
 ::: {.column width="62%"}
@@ -657,12 +314,16 @@ $$c_1 = \frac{W}{1+\delta} \qquad c_2 = \frac{\delta(1+r)\,W}{1+\delta}$$
               transform: "rotate(-90 16 " + Y(100) + ")"}).textContent = "c₂ (tomorrow)";
   el("line", {x1: X(0), y1: Y(0), x2: X(200), y2: Y(200), stroke: "#c9cfdb", "stroke-width": 1.5, "stroke-dasharray": "4,4"});
   var line = el("line", {stroke: "#b8842a", "stroke-width": 4, "clip-path": "url(#bs-clip)"});
+  var icEndow = el("path", {fill: "none", stroke: "#8a99ad", "stroke-width": 1.8, "stroke-dasharray": "4,4", "clip-path": "url(#bs-clip)"});
   var ic = el("path", {fill: "none", stroke: "#3b6ea5", "stroke-width": 2.5, "clip-path": "url(#bs-clip)"});
-  var arrow = el("line", {stroke: "#24325c", "stroke-width": 1.5, "stroke-dasharray": "5,4"});
+  var hLeg = el("line", {stroke: "#24325c", "stroke-width": 2, "stroke-dasharray": "5,4"});
+  var vLeg = el("line", {stroke: "#24325c", "stroke-width": 2, "stroke-dasharray": "5,4"});
+  var hLab = el("text", {"font-size": 13, fill: "#24325c", "font-weight": "bold"});
+  var vLab = el("text", {"font-size": 13, fill: "#24325c", "font-weight": "bold"});
   var endow = el("circle", {r: 7, fill: "#24325c"});
   var opt = el("circle", {r: 7, fill: "#3b6ea5"});
   var elab = el("text", {"font-size": 15, fill: "#24325c"}); elab.textContent = "endowment";
-  var olab = el("text", {"font-size": 15, fill: "#3b6ea5"}); olab.textContent = "choice";
+  var olab = el("text", {"font-size": 15, fill: "#3b6ea5"}); olab.textContent = "optimum";
   var ids = ["m1", "m2", "r", "d"];
   function val(id) { return parseFloat(document.getElementById("bs-" + id).value); }
   function draw() {
@@ -670,29 +331,51 @@ $$c_1 = \frac{W}{1+\delta} \qquad c_2 = \frac{\delta(1+r)\,W}{1+\delta}$$
     var W = m1 + m2 / (1 + r), c1 = W / (1 + d), c2 = d * (1 + r) * W / (1 + d);
     line.setAttribute("x1", X(0)); line.setAttribute("y1", Y(W * (1 + r)));
     line.setAttribute("x2", X(W)); line.setAttribute("y2", Y(0));
-    // Indifference curve through the choice: c2 = c2* (c1*/c1)^(1/delta)
-    var pts = [];
+    var pts = [], ptsE = [];
     for (var x = 2; x <= 200; x += 2) {
       var y = c2 * Math.pow(c1 / x, 1 / d);
       if (y <= 260) pts.push((pts.length ? "L" : "M") + X(x).toFixed(1) + "," + Y(y).toFixed(1));
+      if (m1 > 0 && m2 > 0) {
+        var yE = m2 * Math.pow(m1 / x, 1 / d);
+        if (yE <= 260) ptsE.push((ptsE.length ? "L" : "M") + X(x).toFixed(1) + "," + Y(yE).toFixed(1));
+      }
     }
     ic.setAttribute("d", pts.join(""));
+    icEndow.setAttribute("d", ptsE.join(""));
     endow.setAttribute("cx", X(m1)); endow.setAttribute("cy", Y(m2));
     opt.setAttribute("cx", X(c1)); opt.setAttribute("cy", Y(c2));
-    arrow.setAttribute("x1", X(m1)); arrow.setAttribute("y1", Y(m2));
-    arrow.setAttribute("x2", X(c1)); arrow.setAttribute("y2", Y(c2));
-    elab.setAttribute("x", X(m1) + 12); elab.setAttribute("y", Y(m2) - 8);
-    olab.setAttribute("x", X(c1) + 12); olab.setAttribute("y", Y(c2) + 20);
+    // Horizontal leg: (m1, m2) -> (c1, m2); Vertical leg: (c1, m2) -> (c1, c2)
+    hLeg.setAttribute("x1", X(m1)); hLeg.setAttribute("y1", Y(m2));
+    hLeg.setAttribute("x2", X(c1)); hLeg.setAttribute("y2", Y(m2));
+    vLeg.setAttribute("x1", X(c1)); vLeg.setAttribute("y1", Y(m2));
+    vLeg.setAttribute("x2", X(c1)); vLeg.setAttribute("y2", Y(c2));
+    elab.setAttribute("x", X(m1) + (c1 >= m1 ? -10 : 12)); elab.setAttribute("y", Y(m2) - 10);
+    elab.setAttribute("text-anchor", c1 >= m1 ? "end" : "start");
+    olab.setAttribute("x", X(c1) + (c1 >= m1 ? 10 : -10)); olab.setAttribute("y", Y(c2) + 18);
+    olab.setAttribute("text-anchor", c1 >= m1 ? "start" : "end");
+    var b = c1 - m1, diff2 = Math.abs(c2 - m2);
+    if (Math.abs(b) > 0.5) {
+      hLab.setAttribute("x", X((m1 + c1) / 2));
+      hLab.setAttribute("y", Y(m2) - 6);
+      hLab.setAttribute("text-anchor", "middle");
+      hLab.textContent = (b > 0 ? "borrows " : "saves ") + Math.abs(b).toFixed(0);
+      vLab.setAttribute("x", X(c1) + (b > 0 ? 8 : -8));
+      vLab.setAttribute("y", Y((m2 + c2) / 2) + 4);
+      vLab.setAttribute("text-anchor", b > 0 ? "start" : "end");
+      vLab.textContent = (b > 0 ? "repays " : "collects ") + diff2.toFixed(0);
+    } else {
+      hLab.textContent = ""; vLab.textContent = "";
+    }
     ids.forEach(function (id) {
       var v = val(id);
       document.getElementById("bs-" + id + "-v").textContent = id === "r" ? Math.round(v * 100) + "%" : v;
     });
-    var b = c1 - m1, msg;
+    var msg;
     if (b > 0.05) msg = "<b>Borrows</b> " + b.toFixed(1) + " today: sells a promise to repay " + (b * (1 + r)).toFixed(1) + " tomorrow.";
     else if (b < -0.05) msg = "<b>Saves</b> " + (-b).toFixed(1) + " today: buys a promise to collect " + (-b * (1 + r)).toFixed(1) + " tomorrow.";
     else msg = "Neither borrows nor saves.";
     document.getElementById("bs-readout").innerHTML =
-      "<b>Wealth</b> " + W.toFixed(1) + ". <b>Choice</b> (" + c1.toFixed(1) + ", " + c2.toFixed(1) + "). " + msg;
+      "<b>Wealth</b> " + W.toFixed(1) + ". <b>Optimum</b> (" + c1.toFixed(1) + ", " + c2.toFixed(1) + "). " + msg;
   }
   function preset(a, b) {
     document.getElementById("bs-m1").value = a; document.getElementById("bs-m2").value = b;
@@ -709,7 +392,84 @@ $$c_1 = \frac{W}{1+\delta} \qquad c_2 = \frac{\delta(1+r)\,W}{1+\delta}$$
 :::
 ::::
 
-<p style="font-size: 0.75em; color: #666;">Moving income along the budget line changes only <b>whether</b> she borrows or saves, never what she consumes. The choice depends on wealth, patience and the interest rate.</p>
+<p style="font-size: 0.75em; color: #666;">Moving income along the budget line changes only <b>whether</b> she borrows or saves, never what she consumes. The optimum depends on wealth, patience ($\delta$) and the interest rate ($r$).</p>
+
+---
+
+## The Euler Equation {.compact}
+
+$$\mathcal{L} = u(c_1) + \delta\, u(c_2) + \lambda\,\big[\,p_1 m_1 + p_2 m_2 - p_1 c_1 - p_2 c_2\,\big]$$
+
+::: {.incremental}
+- **First-order conditions:** $\;u'(c_1) = \lambda\, p_1 = \lambda \qquad \delta\, u'(c_2) = \lambda\, p_2 = \dfrac{\lambda}{1+r}$
+- **Divide:** $\;MRS = \dfrac{u'(c_1)}{\delta\, u'(c_2)} = \dfrac{p_1}{p_2} = 1 + r$. The tangency from Topic 4, nothing more.
+:::
+
+::: {.fragment}
+<div style="border: 2px solid #24325c; background: #f5f7fb; border-radius: 8px; padding: 0.45em 1em; margin: 0.4em auto; width: 88%; text-align: center;">
+<span style="font-size: 0.85em; font-weight: 700; color: #24325c; letter-spacing: 0.02em;">THE EULER EQUATION</span>
+$$u'(c_1) = \delta\,(1+r)\,u'(c_2)$$
+<span style="font-size: 0.8em;">Giving up \$1 today costs $u'(c_1)$; saved, it buys $1+r$ dollars tomorrow, worth $\delta(1+r)u'(c_2)$ today.<br> At the optimum, the two are equal.</span>
+</div>
+:::
+
+::: {.incremental}
+- **The multiplier:** $\lambda = u'(c_1)$, the marginal utility of a dollar of wealth (Topic 2's shadow price).
+- **Benchmark:** if $\delta(1+r) = 1$, then $u'(c_1) = u'(c_2)$, so $c_1 = c_2$.<br> **Perfect smoothing**, whatever the timing of income.
+:::
+
+---
+
+## Log Utility Is Cobb-Douglas {.compact}
+
+:::: {.columns}
+::: {.column width="54%"}
+Take $u(c) = \ln c$. Then
+$$U = \ln c_1 + \delta \ln c_2 = \ln\big(c_1\, c_2^{\,\delta}\big)$$
+is a monotone transformation of Cobb-Douglas $c_1^{\alpha} c_2^{\beta}$ with $\alpha = 1, \beta = \delta$. Using **CD Formula** ($c_1 = \frac{\alpha}{\alpha+\beta}\frac{W}{p_1}$):
+
+::: {.incremental}
+$$c_1 = \dfrac{1}{1+\delta}\cdot\dfrac{W}{p_1} \qquad c_2 = \dfrac{\delta}{1+\delta}\cdot\dfrac{W}{p_2} = \dfrac{\delta}{1+\delta}\,(1+r)\,W$$
+- With $\delta = 1$, she always spends **half her wealth $W$ on each period**.
+- **Consumption growth:** $\;\dfrac{c_2}{c_1} = \delta(1+r)$. Depends on patience and $r$, **never** on when income arrives.
+:::
+:::
+
+::: {.column width="46%"}
+::: {.callout-note icon=false}
+### Step-by-Step with Our Numbers ($\delta = 1$, borrower $(20, 80)$)
+1. **At $r = 0$ ($p_1 = 1,\; p_2 = 1$):**
+   - Wealth: $W = 20 + 80 = 100$
+   - Spend $\tfrac12 W$ on each: $c_1^* = \frac{50}{1} = \mathbf{50}$, $\;c_2^* = \frac{50}{1} = \mathbf{50}$
+2. **At $r = 25\%$ ($p_1 = 1,\; p_2 = \frac{1}{1.25} = 0.8$):**
+   - Wealth: $W = 1(20) + 0.8(80) = 20 + 64 = \mathbf{84}$
+   - Spend $\tfrac12 W = 42$ on each good:
+     $$c_1^* = \frac{42}{1} = \mathbf{42}, \qquad c_2^* = \frac{42}{0.8} = \mathbf{52.5}$$
+:::
+:::
+::::
+
+---
+
+## A Borrower and a Saver {.compact}
+
+Same preferences, same interest rate ($r = 0$), same wealth (100). Different **timing** of income.
+
+:::: {.columns}
+::: {.column width="64%"}
+<div style="text-align: center;">
+  <img src="figs/borrower-saver.png" style="width: 100%; border-radius: 6px;">
+</div>
+:::
+
+::: {.column width="36%"}
+::: {.incremental}
+- **Borrower,** income (20, 80): a student, or a farmer before harvest. Borrows 30 today: she **sells a promise** to repay 30 tomorrow.
+- **Saver,** income (80, 20): a worker before retirement. Saves 30 today: she **buys that promise** and collects tomorrow.
+- **Both end at (50, 50).** Without a credit market each would be stuck at its endowment, on the dotted indifference curve.
+:::
+:::
+::::
 
 ---
 
@@ -791,10 +551,10 @@ Add a **borrowing constraint** $c_1 \le m_1 = 20$ (Topic 2's inequality constrai
 $$\mathcal{L} = \ln c_1 + \ln c_2 + \lambda\,[100 - c_1 - c_2] + \mu\,[20 - c_1]$$
 
 ::: {.incremental}
-- The constraint binds: she is stuck at $E = (20, 80)$.
-- **FOCs:** $\;\tfrac{1}{c_2} = \lambda$, so $\lambda = \tfrac{1}{80}$; $\;\tfrac{1}{c_1} = \lambda + \mu$, so $\mu = \tfrac{1}{20} - \tfrac{1}{80} = 0.0375 > 0$.
-- **The Euler equation fails:** $u'(c_1) > u'(c_2)$. She would like to move consumption forward but cannot.
-- **Reading $\mu$:** in dollars, $\mu/\lambda = 3$. At $E$ her $MRS$ is 4: she would repay up to \$4 tomorrow for one more dollar today, an interest rate of **300%** on the first dollar. That is why moneylenders and payday loans find customers.
+- **The constraint binds:** she is stuck at the corner $E = (20, 80)$, so $\mu > 0$.
+- **The Euler condition fails (Euler inequality):**
+  $$u'(c_1) > \delta\,(1+r)\,u'(c_2) \quad\Longleftrightarrow\quad MRS = \frac{u'(c_1)}{\delta\,u'(c_2)} > 1+r$$
+  At $E$, $MRS = \tfrac{1/20}{1/80} = 4 > 1$: she would repay up to \$4 tomorrow for \$1 today, so she wants to borrow but cannot.
 - **Why can't she borrow?** Her **promise** to repay is not believed or cannot be enforced: no collateral, no credit history, weak courts. A credit constraint is a limit on the promises she can sell.
 :::
 :::
@@ -811,13 +571,15 @@ $$\mathcal{L} = \ln c_1 + \ln c_2 + \lambda\,[100 - c_1 - c_2] + \mu\,[20 - c_1]
 
 ## Investment, and Separation Once More {.compact}
 
-Suppose the household can also **invest** $k$ today in a project (a well, fertilizer, schooling) that returns $f(k)$ tomorrow.
+Suppose the household can also **invest** $k$ today in a project (a well, fertilizer, schooling) that pays $f(k)$ tomorrow.
 
 ::: {.incremental}
-- **With a credit market:** choose $k$ to maximize the present value of income, $\;m_1 - k + \dfrac{m_2 + f(k)}{1+r}$. So $f'(k) = 1 + r$. **Preferences do not enter.** Then borrow or save to smooth consumption out of that wealth.
-- This is **Fisher separation**: production first, consumption second. It is the same result as the farm household at the end of Topic 4: maximize farm profit, then treat it as income.
-- **Without a credit market:** investment must come out of today's consumption, so $f'(k) = MRS = \dfrac{u'(c_1)}{\delta u'(c_2)}$. A poor or impatient household, with a high $MRS$, **invests less**, even in a project with a high return.
-- So **separation fails when markets fail.** Poor households invest less not because they are worse at farming but because they cannot borrow. This is the farm-household model next week.
+- **With a credit market (Fisher separation):** Any increase in wealth $W$ shifts the budget line out, so she chooses $k$ to **maximize wealth (NPV)**:
+  $$\max_k\; W(k) = (m_1 - k) + \frac{m_2 + f(k)}{1+r} \quad\xrightarrow{\text{FOC: } W'(k)=0}\quad -1 + \frac{f'(k)}{1+r} = 0 \;\implies\; \mathbf{f'(k^*) = 1+r}$$
+  Invest until the marginal return $f'(k)$ equals the market rate $1+r$. **Preferences do not enter**—then borrow or save to smooth consumption. (Same two-step logic as the farm in Topic 4.)
+- **Without a credit market (autarky):** Investment must come out of today's consumption: $c_1 = m_1 - k$ and $c_2 = m_2 + f(k)$. Maximizing $u(m_1 - k) + \delta\,u(m_2 + f(k))$ gives FOC:
+  $$-u'(c_1) + \delta\,u'(c_2)\,f'(k) = 0 \quad\implies\quad \mathbf{f'(k) = \frac{u'(c_1)}{\delta\,u'(c_2)} = MRS}$$
+- **Separation fails when markets fail:** A poor or impatient household (high $MRS > 1+r$) **invests less**, not because it is worse at farming, but because it cannot borrow. *(Topic 6 next week.)*
 :::
 
 <p style="font-size: 0.8em; color: #666;">Text: NS Chapter 17 (investment and the rate of return).</p>
@@ -926,22 +688,94 @@ $$EU = \pi_b\, u(c_b) + \pi_g\, u(c_g)$$
 
 ---
 
-## Full Insurance: Smoothing Across States {.compact}
+## The Three Lagrangians, Side by Side {.compact}
+
+Now that we have both objectives and budgets, notice that Topic 5 adds **no new mathematics**—it simply re-labels the two goods in Topic 4's problem:
+
+$$\begin{aligned}
+\text{Topic 4 (Goods):} \quad \mathcal{L} &= u(x,y) + \lambda\,\big[\,I - p_x x - p_y y\,\big] \\
+\text{Part I (Dates):} \quad \mathcal{L} &= u(c_1) + \delta\,u(c_2) + \lambda\,\big[\,p_1 m_1 + p_2 m_2 - p_1 c_1 - p_2 c_2\,\big] \\
+\text{Part II (States):} \quad \mathcal{L} &= \pi_b\,u(c_b) + \pi_g\,u(c_g) + \lambda\,\big[\,p_b m_b + p_g m_g - p_b c_b - p_g c_g\,\big]
+\end{aligned}$$
+
+::: {.incremental}
+- **First-Order Conditions (Marginal Utility = Shadow Price $\times$ Price):**
+  - Goods: $u_x = \lambda p_x \quad\text{and}\quad u_y = \lambda p_y$
+  - Dates: $u'(c_1) = \lambda p_1 \quad\text{and}\quad \delta u'(c_2) = \lambda p_2 = \dfrac{\lambda}{1+r}$
+  - States: $\pi_b u'(c_b) = \lambda p_b \quad\text{and}\quad \pi_g u'(c_g) = \lambda p_g$
+- **Ratios eliminate $\lambda$ to yield the tangency condition ($MRS = \text{Price Ratio}$):**
+  $$\frac{u_x}{u_y} = \frac{p_x}{p_y} \qquad\qquad \frac{u'(c_1)}{\delta u'(c_2)} = \frac{p_1}{p_2} = 1+r \qquad\qquad \frac{\pi_b u'(c_b)}{\pi_g u'(c_g)} = \frac{p_b}{p_g}$$
+- In each problem, $\lambda$ is Topic 2's shadow price: **the marginal utility of a dollar of wealth**.
+:::
+
+---
+
+## State-Space Indifference Curves and Tangency {.compact}
+
+::: {.incremental}
+- **Probabilities shape the indifference curves:** Along an indifference curve $EU = \pi_b\, u(c_b) + \pi_g\, u(c_g) = \bar{U}$, totally differentiating $d(EU) = 0$ gives:
+  $$\pi_b\, u'(c_b)\,dc_b + \pi_g\, u'(c_g)\,dc_g = 0 \quad\Longrightarrow\quad MRS_{c_b, c_g} = -\left.\frac{dc_g}{dc_b}\right|_{EU=\bar{U}} = \frac{\pi_b\, u'(c_b)}{\pi_g\, u'(c_g)}$$
+- **On the $45^\circ$ certainty line ($c_b = c_g$):** $u'(c_b) = u'(c_g)$, so every indifference curve has slope $-\pi_b/\pi_g$.
+- **Tangency ($MRS = p_b / p_g$):**
+  $$\frac{\pi_b\, u'(c_b)}{\pi_g\, u'(c_g)} = \frac{p_b}{p_g}$$
+- **Fair prices ($p_s = \pi_s$):** Probabilities cancel, leaving $u'(c_b) = u'(c_g) \implies c_b = c_g$ (**full insurance**, just like $\delta(1+r)=1$ in Part I).
+- **Log utility ($\pi_b = \pi_g = \tfrac12$):** Cobb-Douglas with equal shares $\tfrac12$:
+  - Fair prices ($p_b = p_g = 0.5$): $W = 50 \implies (c_b^*, c_g^*) = (50, 50)$.
+  - Loaded prices ($p_b = 0.6, p_g = 0.4$): $W = 0.6(20) + 0.4(80) = 44 \implies (c_b^*, c_g^*) = (36.7, 55)$ (**partial insurance**).
+:::
+
+---
+
+## Full Insurance: Trading Claims at Fair Prices {.compact}
 
 :::: {.columns}
-::: {.column width="40%"}
+::: {.column width="46%"}
+Start from the budget constraint in Topic 4's form:
+$$p_b\, c_b + p_g\, c_g = p_b\, m_b + p_g\, m_g$$
+
+Rearrange to see the **net trade** from $E = (20, 80)$:
+$$\underbrace{p_b\,(c_b - m_b)}_{\text{buys drought claims}} = \underbrace{p_g\,(m_g - c_g)}_{\text{sells rain claims}}$$
+
 ::: {.incremental}
-- **Tangency:** $\;\dfrac{\pi_b\, u'(c_b)}{\pi_g\, u'(c_g)} = \dfrac{p_b}{p_g}$
-- **Fair prices** cancel the probabilities: $u'(c_b) = u'(c_g)$, so $c_b = c_g$. **Full insurance.** Compare $\delta(1+r) = 1$ in Part I.
-- **Log utility:** Cobb-Douglas with shares $\pi_b$, $\pi_g$. Fair prices: $c_b = c_g = 50$, the same numbers as the borrower.
-- **Loaded prices** (the insurer charges extra): drought claims cost 0.6, rain claims 0.4. Wealth $= 0.6(20) + 0.4(80) = 44$; she buys $c_b = 36.7$, $c_g = 55$. **Partial insurance**, like a borrower facing a higher interest rate.
+- **Fair prices ($p_b = p_g = 0.5$):** $W = 50 \implies (c_b^*, c_g^*) = (50, 50)$ (**full insurance**).
+- **Sells 30 rain claims** ($80 - 50$) at $p_g = \$0.50 \implies$ raises **$\$15$**.
+- **Buys 30 drought claims** ($50 - 20$) at $p_b = \$0.50 \implies$ costs **$\$15$**.
+- *(Standard policy: pay a **30** premium in rain; receive **30** net payout in drought.)*
+- **Or as a bond:** Sell the entire harvest $(20, 80)$ for $W = \$50$ and buy **50 risk-free bonds** (each costing $p_b + p_g = \$1$ and paying $\$1$ in either state) for $(50, 50)$.
 :::
 :::
 
-::: {.column width="60%"}
+::: {.column width="54%"}
 <div style="text-align: center;">
-  <img src="figs/insurance-states.png" style="width: 100%; border-radius: 6px;">
-  <p style="font-size: 0.65em; color: #666;">On the 45° certainty line consumption is the same in both states; there the slope of every indifference curve is $\pi_b/\pi_g$. Text: NS Chapter 7.</p>
+  <img src="figs/insurance-fair.png" style="width: 96%; border-radius: 6px;">
+  <p style="font-size: 0.65em; color: #666;"><b>Watch the axes:</b> we are back in Topic 4's two-good space $(c_b, c_g)$. On the $45^\circ$ certainty line, every indifference curve has slope $-\pi_b/\pi_g$.</p>
+</div>
+:::
+::::
+
+---
+
+## Partial Insurance: Trading Claims at Loaded Prices {.compact}
+
+:::: {.columns}
+::: {.column width="46%"}
+Now suppose the insurer charges **loaded prices** ($p_b = 0.6$, $p_g = 0.4$), so drought claims cost $1.5\times$ rain claims:
+
+$$p_b\,(c_b - m_b) = p_g\,(m_g - c_g)$$
+
+::: {.incremental}
+- **Wealth:** $W = 0.6(20) + 0.4(80) = 44$.
+- **Optimum:** $(c_b^*, c_g^*) = (36.7, 55)$—**partial insurance**.
+- **Sells 25 rain claims** ($80 - 55$) at $p_g = \$0.40 \implies$ raises **$\$10$**.
+- **Buys 16.7 drought claims** ($36.7 - 20$) at $p_b = \$0.60 \implies$ costs **$\$10$**.
+- Same geometry as a borrower facing a higher interest rate in Part I.
+:::
+:::
+
+::: {.column width="54%"}
+<div style="text-align: center;">
+  <img src="figs/insurance-loaded.png" style="width: 96%; border-radius: 6px;">
+  <p style="font-size: 0.65em; color: #666;">Because drought claims are dearer ($p_b/p_g = 1.5$), she stops short of the $45^\circ$ certainty line. Text: NS Chapter 7.</p>
 </div>
 :::
 ::::
@@ -957,31 +791,30 @@ Risk sharing in villages
 ## Two Farmers, Opposite Luck {.compact}
 
 :::: {.columns}
-::: {.column width="52%"}
-Farmer A's harvest is (20, 80); farmer B's, on different land, is (80, 20). Total income is 100 in each state.
+::: {.column width="54%"}
+Farmer A's harvest is (20, 80); farmer B's is (80, 20). Total income is $Y_s = 100$ in each state. **The planner's Lagrangian** has a **separate resource constraint $\lambda_s$ for each state $s \in \{b, g\}$**:
 
-**Which allocations are Pareto efficient?** Maximize a weighted sum of their expected utilities:
-$$\begin{aligned} &\max\; \theta\, EU_A + (1-\theta)\, EU_B \\ &\text{s.t.}\quad c_{As} + c_{Bs} = Y_s \;\text{ in each state } s \end{aligned}$$
+$$\mathcal{L} = \theta\, EU_A + (1-\theta)\, EU_B + \sum_{s \in \{b,g\}} \lambda_s\,\big[Y_s - c_{As} - c_{Bs}\big]$$
 
 ::: {.incremental}
-- **FOC in each state:** $\;\dfrac{u'(c_{As})}{u'(c_{Bs})} = \dfrac{1-\theta}{\theta}$, **the same ratio in every state**.
-- **Log utility:** $c_{As} = \theta\, Y_s$. Each farmer eats a fixed **share of the village total**, whatever her own harvest. With equal weights, 50 each in both states.
-- **Full insurance with no insurance company.** Like Part I's borrower and saver, each gives where she has plenty and receives where she is short.
+- **FOCs in state $s$:** $\;\theta\,\pi_s\, u'(c_{As}) = \lambda_s = (1-\theta)\,\pi_s\, u'(c_{Bs})$. Both $\lambda_s$ and $\pi_s$ cancel:
+  $$\frac{u'(c_{As})}{u'(c_{Bs})} = \frac{1-\theta}{\theta} \quad\text{(same ratio in every state)}$$
+- **Log utility:** $c_{As} = \theta\, Y_s$. Each eats a fixed **share of the village total**, never her own harvest. With equal weights, 50 each in both states.
 :::
 :::
 
-::: {.column width="48%"}
+::: {.column width="46%"}
 |  | Drought | Rain |
 |---|---|---|
 | Farmer A's harvest | 20 | 80 |
 | Farmer B's harvest | 80 | 20 |
-| **Village total** | **100** | **100** |
+| **Village total ($Y_s$)** | **100** | **100** |
 | Transfer from B to A | +30 | −30 |
-| **Each eats** (equal weights) | **50** | **50** |
+| **Each eats** ($\theta = \tfrac12$) | **50** | **50** |
 
 : {tbl-colwidths="[46,27,27]"}
 
-<p style="font-size: 0.75em; color: #666;">In a drought B gives A 30; when it rains A gives B 30. Neither one's consumption depends on her own harvest. Topic 7 draws this as an Edgeworth box.</p>
+<p style="font-size: 0.75em; color: #666;">In a drought B gives A 30; when it rains A gives B 30. Full insurance with no insurance company. Topic 7 draws this as an Edgeworth box.</p>
 :::
 ::::
 
@@ -996,6 +829,66 @@ $$\begin{aligned} &\max\; \theta\, EU_A + (1-\theta)\, EU_B \\ &\text{s.t.}\quad
 :::
 
 <p style="font-size: 0.75em; color: #666;">Townsend, "Risk and Insurance in Village India", <i>Econometrica</i> 1994.</p>
+
+---
+
+## Simulated Village: Idiosyncratic vs. Aggregate Shocks {.compact}
+
+20 households with log utility and equal Pareto weights ($\theta_i = \tfrac{1}{20}$) over 16 seasons.<br> Each eats the village average $c_{it} = \bar{Y}_t$.
+
+```{python}
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(701)
+N, T = 20, 16
+t = np.arange(1, T + 1)
+
+# Idiosyncratic shocks around mean 50 (each household faces independent harvest shocks)
+idio = rng.normal(0, 14, size=(N, T))
+idio = idio - idio.mean(axis=0, keepdims=True)  # pure idiosyncratic around 50
+y_idio = np.clip(50 + idio, 10, 95)
+c_idio = y_idio.mean(axis=0)
+
+# Add an aggregate village-wide drought in seasons 7-9 (-20 for everyone)
+agg = np.zeros(T)
+agg[6:9] = -20
+y_agg = np.clip(y_idio + agg, 10, 95)
+c_agg = y_agg.mean(axis=0)
+
+fig, axes = plt.subplots(1, 2, figsize=(11.2, 4.1), sharey=True)
+colors = ["#9aa7b8", "#b5c0cf", "#c7cfd9"]
+
+for ax, y, c, title in [
+    (axes[0], y_idio, c_idio, "Idiosyncratic shocks only (pooling smooths completely)"),
+    (axes[1], y_agg, c_agg, "With an aggregate drought in seasons 7–9"),
+]:
+    for i in range(3):
+        ax.plot(t, y[i], linestyle="--", linewidth=1.5, color=colors[i],
+                label="Sample household incomes" if i == 0 else None)
+    ax.plot(t, c, color="#24325c", linewidth=3.2, marker="o", markersize=4.5,
+            label="Pooled consumption (village avg)")
+    if title.startswith("With"):
+        ax.axvspan(6.6, 9.4, color="#b8842a", alpha=0.14, label="Village drought")
+    ax.set_title(title, fontsize=12, fontweight="bold", color="#24325c", pad=8)
+    ax.set_xlabel("Season", fontsize=11, color="#24325c")
+    ax.set_xticks(range(2, T + 1, 2))
+    ax.set_ylim(5, 95)
+    ax.grid(axis="y", color="#e5e9f0", linewidth=0.8)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.legend(frameon=False, fontsize=9.5, loc="upper right")
+
+axes[0].set_ylabel("Income / Consumption", fontsize=11, color="#24325c")
+fig.patch.set_alpha(0.0)
+for ax in axes:
+    ax.patch.set_alpha(0.0)
+plt.tight_layout()
+plt.show()
+```
+
+<p style="font-size: 0.72em; color: #666;">Dashed lines show 3 of the 20 households' volatile harvests; the solid navy line is everyone's pooled consumption $c_{it} = \bar{Y}_t$. Pooling eliminates individual noise but moves with the village drought.</p>
 
 ---
 
@@ -1100,6 +993,134 @@ $$\begin{aligned} &\max_{c_1, c_2}\; \underbrace{(20 + 80) - (c_1 + c_2)}_{\text
 : {tbl-colwidths="[40,30,30]"}
 
 - Topic 1's distinction: **efficiency and distribution are separate questions.** Market power here changes who gains, not whether consumption is smoothed. (With hidden information, Topic 10, it can do both.)
+:::
+
+---
+
+## Part V: Applications {.divider}
+
+Worked examples: cover contracts and credit-market equilibrium
+
+---
+
+## Application 1: Crop Insurance, the Certainty Equivalent {.compact}
+
+A coffee farmer earns $m_g = 144$ in good weather and $m_b = 4$ in a frost, each with probability $\tfrac12$. Utility is $u(c) = \sqrt{c}$.
+
+:::: {.columns}
+::: {.column width="50%"}
+- **Step 1. Expected income and utility:**<br>
+  $E[c] = \tfrac12(144) + \tfrac12(4) = \mathbf{74}$ (\$)<br>
+  $EU = \tfrac12\sqrt{144} + \tfrac12\sqrt{4} = \mathbf{7}$ (utils)
+
+::: {.fragment fragment-index=1}
+- **Step 2. Certainty equivalent:**<br>
+  $\sqrt{CE} = 7 \implies CE = \mathbf{49}$<br>
+  Risk premium $= 74 - 49 = \mathbf{25}$
+:::
+
+::: {.fragment fragment-index=2}
+- **Step 3. Full cover:** pay $P$ in both states; in a frost the insurer pays the loss, $140$. He has $144 - P$ either way.<br>
+  **Fair premium** (insurer breaks even): $P = \tfrac12 \times 140 = \mathbf{70}$. He keeps $144 - 70 = 74 = E[c]$ for sure.<br>
+  **Most he would pay:** $144 - P \ge CE$, so $P \le \mathbf{95}$.<br>
+  The gap, $95 - 70 = 25$, is the risk premium.
+:::
+:::
+
+::: {.column width="50%"}
+::: {.r-stack}
+![](figs/app1-ce-1.png){width="100%"}
+
+![](figs/app1-ce-2.png){.fragment fragment-index=1 width="100%"}
+
+![](figs/app1-ce-3.png){.fragment fragment-index=2 width="100%"}
+:::
+:::
+::::
+
+---
+
+## Application 1: State Space, Fair Prices {.compact}
+
+The same farmer, now trading **contingent claims** as in Part II. A frost claim pays \$1 in a frost and costs $p_b$; a good-weather claim costs $p_g$, with $p_b + p_g = 1$. His endowment is $E = (m_b, m_g) = (4, 144)$.
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.incremental}
+- **Step 1. Budget line** (slope $-p_b/p_g$):
+  $$p_b\,c_b + p_g\,c_g = p_b(4) + p_g(144) = W$$
+- **Step 2. Tangency** ($MRS$ = price ratio):
+  $$\frac{\pi_b}{\pi_g}\sqrt{\frac{c_g}{c_b}} = \frac{p_b}{p_g}$$
+- **Step 3. Fair prices equal the probabilities:** $p_b = \pi_b = \tfrac12$ and $p_g = \pi_g = \tfrac12$. They cancel in the tangency, leaving $c_b^* = c_g^*$: **full insurance**, at $W = \mathbf{74}$ in both states.
+- **The trade:** he sells $70$ good-weather claims and buys $70$ frost claims, \$35 each way. It is the last slide's contract: pay \$70, collect \$140 in a frost.
+:::
+:::
+
+::: {.column width="50%"}
+<div style="text-align: center;">
+  <img src="figs/app1-state-1.png" style="width: 80%; border-radius: 6px;">
+</div>
+:::
+::::
+
+---
+
+## Application 1: State Space, Loaded Prices {.compact}
+
+Now frost claims cost more than their odds: $p_b = \tfrac35$, $p_g = \tfrac25$, so $p_b/p_g = \tfrac32$. The budget line through $E$ is steeper.
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.incremental}
+- **Budget line:** $\tfrac35 c_b + \tfrac25 c_g = \tfrac35(4) + \tfrac25(144) = 60$
+- **Tangency:** now $\tfrac{p_b}{p_g} = \tfrac32$ but $\tfrac{\pi_b}{\pi_g} = 1$, so $\sqrt{c_g/c_b} = \tfrac32$ and $c_g = \tfrac94 c_b$. Together: $\mathbf{c_b^* = 40,\; c_g^* = 90}$. **Partial insurance.**
+- **The trade:** he sells $54$ good-weather claims and buys $36$ frost claims, \$21.60 each way.
+- **Check ($EU$):** no trade $7$; full insurance $(60, 60)$ gives $7.75$; the optimum gives $\mathbf{7.91}$.
+- **In insurance language** (see Problem Set 3, Question 1.3c): cover $K$ at premium rate $q = p_b$ means pay $qK$ in both states, collect $K$ in a frost. So claims sold $= qK$, bought $= (1-q)K$. Here $K = 90$ (premium $54$); at fair prices $K = 140$ (premium $70$).
+:::
+:::
+
+::: {.column width="50%"}
+<div style="text-align: center;">
+  <img src="figs/app1-state-2.png" style="width: 80%; border-radius: 6px;">
+</div>
+:::
+::::
+
+---
+
+## Application 2: Equilibrium Interest Rate {.compact}
+
+**Clara** has endowment $(16, 100)$ and **David** has $(84, 25)$. Both have $U = \ln c_1 + \ln c_2$ ($\delta = 1$). Totals: $M_1 = 100$ today, $M_2 = 125$ tomorrow.
+
+::: {.incremental}
+- **Step 1. Individual demand** (Cobb-Douglas: spend half of wealth $W^i$ today):
+  $$c_1^i = \frac{1}{2}\left(m_1^i + \frac{m_2^i}{1+r}\right) \qquad\Longrightarrow\qquad c_1^C = 8 + \frac{50}{1+r}, \qquad c_1^D = 42 + \frac{12.5}{1+r}$$
+- **Step 2. Test a rate, $r = 0$:** Clara wants to borrow $58 - 16 = 42$; David wants to lend $84 - 54.5 = 29.5$. **Excess demand for loans of $12.5$**, so $r$ must rise.
+- **Step 3. Clear the loan market** (Clara's borrowing $=$ David's lending):
+  $$\frac{50}{1+r} - 8 = 42 - \frac{12.5}{1+r} \implies \frac{62.5}{1+r} = 50 \implies 1 + r^* = 1.25, \qquad \mathbf{r^* = 25\%} \;\; (p_2 = 0.8)$$
+- **Shortcut:** total demand today is $\tfrac12\left(M_1 + \tfrac{M_2}{1+r}\right) = M_1$, so $1 + r^* = \dfrac{M_2}{M_1}$. With impatience, $1 + r^* = \dfrac{M_2}{\delta M_1}$.
+:::
+
+---
+
+## Application 2: The Equilibrium Allocation {.compact}
+
+| | Clara (Borrower) | David (Saver) | Total |
+|---|---|---|---|
+| Endowment $(m_1, m_2)$ | $(16, 100)$ | $(84, 25)$ | $(100, 125)$ |
+| Wealth $W = m_1 + 0.8\,m_2$ | $96$ | $104$ | $200$ |
+| Consumption $(c_1^*, c_2^*)$ | **$(48, 60)$** | **$(52, 65)$** | **$(100, 125)$** |
+| Saving ($m_1 - c_1^*$) | **$-32$** (borrows $32$) | **$+32$** (lends $32$) | $0$ |
+| Tomorrow ($m_2 - c_2^*$) | repays $40$ | collects $40$ | $0$ |
+| $c_1 c_2$: no credit market $\to$ equilibrium | $1600 \to 2880$ | $2100 \to 3380$ | |
+
+: {tbl-colwidths="[37,21,21,21]"}
+
+::: {.incremental}
+- **Walras's law:** we cleared only today's market, yet tomorrow's clears too ($60 + 65 = 125$). Each budget constraint holds, so with two goods one market-clearing condition is enough.
+- **Both gain** from the credit market: each ends on a higher indifference curve than at their endowment.
+- **Why $r^* > 0$:** income grows from $100$ to $125$, so the rate must be high enough that both households want consumption to grow by $25\%$ ($c_2 = (1+r)\,c_1$).
 :::
 
 ---

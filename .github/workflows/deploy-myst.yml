@@ -81,7 +81,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: '22.x'
 
       - name: Install MyST
         run: npm install -g mystmd
@@ -119,10 +119,11 @@ jobs:
             mkdir -p _build/html/problem_sets
             cp problem_sets/*.pdf _build/html/problem_sets/ 2>/dev/null || true
           fi
-          # Study aids (practice exams and their solutions) linked from schedule.md.
+          # Study aids (practice exams, solutions, and unlisted handouts) linked from schedule.md or shared directly.
           if [ -d study_aids ]; then
             mkdir -p _build/html/study_aids
             cp study_aids/*.pdf _build/html/study_aids/ 2>/dev/null || true
+            cp study_aids/*.html _build/html/study_aids/ 2>/dev/null || true
           fi
 
       - name: Select decks to publish
@@ -208,22 +209,51 @@ jobs:
         if: steps.slides-folder-exists.outputs.has_slides == '0'
         uses: quarto-dev/quarto-actions/setup@v2
 
+      - name: Restore rendered deck cache
+        if: steps.slides-folder-exists.outputs.has_slides == '0'
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/deck-cache
+          key: deck-cache-${{ hashFiles('slides/**/*.qmd', 'slides/**/*.scss', 'slides/**/figs/**', 'slides/**/media/**') }}
+          restore-keys: |
+            deck-cache-
+
       - name: Quarto Render + PDF Export
         if: steps.slides-folder-exists.outputs.has_slides == '0'
         run: |
           # Renders each deck.qmd in place (Quarto's natural mode - relative
           # media/ references resolve against the source file's own
-          # directory), decktapes the result to a parallel PDF (Quarto has
-          # no built-in revealjs PDF export - see HANDOFF.md), copies both
-          # into the build output, then cleans up the in-place render
-          # artifacts so they don't pollute the checkout.
+          # directory), decktapes the result to a parallel PDF, copies both
+          # into the build output, and caches per-topic outputs keyed on the
+          # SHA-256 hash of that topic's directory + slides/_shared/.
+          # Unmodified decks reuse their cached deck.html, deck_files/, and
+          # deck.pdf instead of re-running Quarto and decktape.
+          mkdir -p "${RUNNER_TEMP}/deck-cache"
           grep -E '\.qmd$' "$DECK_LIST" | while read -r qmd; do
             topic_dir=$(dirname "$qmd")
-            echo "Rendering ${qmd}"
+            topic_name=$(basename "$topic_dir")
+            dest="_build/html/${topic_dir}"
+            cache_dir="${RUNNER_TEMP}/deck-cache/${topic_name}"
+            mkdir -p "$dest"
+
+            cur_hash=$(find "${topic_dir}" slides/_shared -type f \
+              ! -name 'deck.html' ! -name 'deck.pdf' ! -name 'deck.quarto_ipynb*' ! -path '*/deck_files/*' \
+              | sort | xargs -r sha256sum | sha256sum | cut -d' ' -f1)
+
+            if [ -f "${cache_dir}/source.sha256" ] && [ "$(cat "${cache_dir}/source.sha256")" = "$cur_hash" ] \
+               && [ -f "${cache_dir}/deck.html" ] && [ -f "${cache_dir}/deck.pdf" ]; then
+              echo "Cache HIT for ${qmd} — skipping render and decktape"
+              cp "${cache_dir}/deck.html" "${dest}/deck.html"
+              cp "${cache_dir}/deck.pdf" "${dest}/deck.pdf"
+              if [ -d "${cache_dir}/deck_files" ]; then
+                cp -R "${cache_dir}/deck_files" "${dest}/deck_files"
+              fi
+              continue
+            fi
+
+            echo "Cache MISS for ${qmd} — rendering and exporting PDF"
             quarto render "$qmd"
 
-            dest="_build/html/${topic_dir}"
-            mkdir -p "$dest"
             cp "${topic_dir}/deck.html" "${dest}/deck.html"
             if [ -d "${topic_dir}/deck_files" ]; then
               cp -R "${topic_dir}/deck_files" "${dest}/deck_files"
@@ -238,6 +268,15 @@ jobs:
             # Chrome on this runner and failed every deck. 3.16.1 is the last
             # version known to work here; raise the pin deliberately.
             npx -y decktape@3.16.1 reveal --size "1280x720" --chrome-arg="--no-sandbox" "${topic_dir}/deck.html" "${dest}/deck.pdf"
+
+            rm -rf "${cache_dir}"
+            mkdir -p "${cache_dir}"
+            cp "${dest}/deck.html" "${cache_dir}/deck.html"
+            cp "${dest}/deck.pdf" "${cache_dir}/deck.pdf"
+            if [ -d "${dest}/deck_files" ]; then
+              cp -R "${dest}/deck_files" "${cache_dir}/deck_files"
+            fi
+            echo "$cur_hash" > "${cache_dir}/source.sha256"
 
             rm -f "${topic_dir}/deck.html"
             rm -rf "${topic_dir}/deck_files"
