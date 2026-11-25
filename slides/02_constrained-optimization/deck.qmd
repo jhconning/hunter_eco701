@@ -14,11 +14,6 @@ format:
     chalkboard: true
     width: 1280
     height: 720
-jupyter: ecopy
-execute:
-  echo: false
-  warning: false
-  freeze: auto
 ---
 
 ## The Hill and the Fence {.compact}
@@ -879,13 +874,37 @@ $$\max_{x_1, \dots, x_n} \; f(x_1, \dots, x_n) \quad \text{s.t.} \quad g^m(x_1, 
 Let $V(c_1, \dots, c_M) = f(x^*(c))$ be the **value function** (maximum value as a function of the constraint bounds $c$).
 
 ::: {.callout-note icon=false}
-## The Envelope Theorem (Shadow Price Formulation)
+## The Envelope Theorem (Constraint Bound Formulation)
 $$\frac{\partial V(c)}{\partial c_k} = \left.\frac{\partial \mathcal{L}}{\partial c_k}\right|_{x^*, \lambda^*} = \lambda_k^*$$
 :::
 
 ::: {.callout-tip icon=false}
 ## Economic Interpretation
 $\lambda_k^*$ is the **shadow price** of constraint $k$: the exact marginal valuation of relaxing scarcity by one unit. If expanding resource $k$ costs less than $\lambda_k^*$, expand capacity!
+:::
+
+---
+
+## The General Envelope Theorem {.compact}
+
+Consider an objective and constraint depending on an arbitrary exogenous parameter $\theta$ (e.g., price, wage, or tax rate):
+
+$$\max_{\mathbf{x}} \; f(\mathbf{x}; \theta) \quad \text{s.t.} \quad g(\mathbf{x}; \theta) = c$$
+
+Let $V^*(\theta) = f(\mathbf{x}^*(\theta); \theta)$ be the optimized value function, and $\mathcal{L}(\mathbf{x}, \lambda; \theta) = f(\mathbf{x}; \theta) + \lambda[c - g(\mathbf{x}; \theta)]$.
+
+::: {.callout-note icon=false}
+## The General Envelope Theorem
+$$\frac{dV^*(\theta)}{d\theta} = \left. \frac{\partial \mathcal{L}}{\partial \theta} \right|_{\mathbf{x}^*(\theta), \lambda^*(\theta)}$$
+:::
+
+::: {.incremental}
+- **Why do indirect effects vanish?** By the chain rule, $\frac{dV^*}{d\theta} = \sum_i \frac{\partial f}{\partial x_i} \frac{dx_i^*}{d\theta} + \frac{\partial f}{\partial \theta}$. Because the FOCs set $\nabla_{\mathbf{x}} \mathcal{L} = \mathbf{0}$ at the optimum, the response of choices $\frac{d\mathbf{x}^*}{d\theta}$ has zero first-order impact on $V^*$.
+- **Recovering the Multiplier ($\theta = c_k$):** When $\theta$ is the resource bound $c_k$, $\frac{\partial \mathcal{L}}{\partial c_k} = \lambda_k^*$, recovering the shadow price.
+- **Preview for Topics 3 & 4:** 
+  - Firm cost minimization: $\frac{\partial C^*}{\partial w} = L^*$ (**Shephard's Lemma**)
+  - Firm profit maximization: $\frac{\partial \pi^*}{\partial p} = q^*$ (**Hotelling's Lemma**)
+  - Consumer welfare: $\frac{\partial V^*}{\partial p_i} = -\lambda^* x_i^*$ (**Roy's Identity**)
 :::
 
 ---
@@ -1214,6 +1233,43 @@ When approaching constrained optimization problems in economics:
   - Use economic intuition to rule out unlikely regimes before writing out full Lagrangians.
 - **4. Check Feasibility:**
   - If you solve dropping a constraint, always plug your candidate back in to verify it satisfies the omitted fence!
+:::
+
+---
+
+## Duality Preview: Two Sides of the Same Coin {.compact}
+
+Every constrained optimization problem has an intimately linked **dual** counterpart:
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.callout-note icon=false}
+## Primal Problem: Maximize Value
+$$\max_{c_1, c_2} \; u(c_1, c_2) \quad \text{s.t.} \quad p_1 c_1 + p_2 c_2 \le I$$
+
+- **Question:** *Given a budget $I$, what is the highest utility level $\bar{u}$ I can achieve?*
+- **Solution:** Optimal demand bundle $(c_1^*, c_2^*)$
+- **Value Function:** Indirect utility $V(p_1, p_2, I) = \bar{u}$
+- **Multiplier:** $\lambda^* = \frac{\partial V}{\partial I}$ (marginal utility of income)
+:::
+:::
+
+::: {.column width="50%"}
+::: {.callout-tip icon=false}
+## Dual Problem: Minimize Cost
+$$\min_{c_1, c_2} \; p_1 c_1 + p_2 c_2 \quad \text{s.t.} \quad u(c_1, c_2) \ge \bar{u}$$
+
+- **Question:** *To reach target utility $\bar{u}$, what is the minimum expenditure $I$ required?*
+- **Solution:** Compensated bundle $(c_1^c, c_2^c)$
+- **Value Function:** Expenditure function $E(p_1, p_2, \bar{u}) = I$
+- **Multiplier:** $\mu^* = \frac{\partial E}{\partial \bar{u}} = \frac{1}{\lambda^*}$ (marginal cost of utility)
+:::
+:::
+::::
+
+::: {.incremental}
+- **Symmetry:** Both problems produce the **identical optimal bundle** and tangency condition ($MRS = p_1/p_2$).
+- **Direct Application to Topic 3:** Next, we encounter the producer's dual problem: **minimizing cost** $wL + rK$ subject to an output quota $F(K, L) \ge \bar{q}$.
 :::
 
 ---

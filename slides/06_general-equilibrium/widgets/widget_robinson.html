@@ -1,0 +1,455 @@
+<div id="rc-root">
+  <style>
+    #rc-root {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-size: 13.5px;
+      line-height: 1.35;
+      color: #1c2430;
+      background: #fdfdfb;
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      box-sizing: border-box;
+      display: flex;
+      gap: 16px;
+      align-items: stretch;
+    }
+    #rc-root * { box-sizing: border-box; }
+    #rc-left {
+      flex: 0 0 34%;
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #rc-right {
+      flex: 1 1 66%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .rc-card {
+      background: #f7f6f2;
+      border: 1px solid #e5e9f0;
+      border-radius: 8px;
+      padding: 11px 13px;
+    }
+    .rc-card-white {
+      background: #ffffff;
+      border: 1px solid #e5e9f0;
+      border-radius: 8px;
+      padding: 10px 13px;
+      flex: 1;
+    }
+    .rc-slider-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+    .rc-label {
+      font-weight: 600;
+      color: #24325c;
+      font-size: 13.5px;
+    }
+    .rc-val-badge {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-weight: 700;
+      font-size: 15px;
+      color: #b8842a;
+      background: #fdfdfb;
+      border: 1px solid #e5e9f0;
+      border-radius: 4px;
+      padding: 1px 7px;
+    }
+    #rc-w-slider {
+      width: 100%;
+      accent-color: #b8842a;
+      cursor: pointer;
+      margin: 4px 0;
+    }
+    .rc-ticks {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #5a6578;
+      margin-bottom: 8px;
+    }
+    .rc-btns {
+      display: flex;
+      gap: 8px;
+    }
+    .rc-btn {
+      flex: 1;
+      padding: 6px 8px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 5px;
+      border: 1px solid #24325c;
+      background: #ffffff;
+      color: #24325c;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .rc-btn:hover {
+      background: #24325c;
+      color: #fdfdfb;
+    }
+    .rc-btn-accent {
+      border-color: #a04434;
+      color: #a04434;
+    }
+    .rc-btn-accent:hover {
+      background: #a04434;
+      color: #fdfdfb;
+    }
+    .rc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .rc-table td {
+      padding: 4.5px 2px;
+      border-bottom: 1px solid #eef1f6;
+      vertical-align: middle;
+    }
+    .rc-table tr:last-child td {
+      border-bottom: none;
+    }
+    .rc-table .rc-metric {
+      color: #5a6578;
+    }
+    .rc-table .rc-num {
+      text-align: right;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-weight: 600;
+      color: #24325c;
+    }
+    .rc-status-pill {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+      margin-top: 6px;
+    }
+    .rc-eq { background: rgba(45, 106, 79, 0.12); color: #2d6a4f; }
+    .rc-diseq { background: rgba(160, 68, 52, 0.12); color: #a04434; }
+    #rc-svg {
+      width: 100%;
+      height: auto;
+      max-height: 460px;
+      display: block;
+      background: #fdfdfb;
+      border: 1px solid #e5e9f0;
+      border-radius: 8px;
+    }
+  </style>
+
+  <div id="rc-left">
+    <div class="rc-card">
+      <div class="rc-slider-row">
+        <span class="rc-label">Market wage <em>w</em></span>
+        <span class="rc-val-badge" id="rc-w-val">0.75</span>
+      </div>
+      <input id="rc-w-slider" type="range" min="0.35" max="1.50" step="0.05" value="0.75" />
+      <div class="rc-ticks">
+        <span>0.35</span>
+        <span>w* = 0.75</span>
+        <span>1.50</span>
+      </div>
+      <div class="rc-btns">
+        <button type="button" class="rc-btn" id="rc-btn-eq">Snap to w* = 0.75</button>
+        <button type="button" class="rc-btn rc-btn-accent" id="rc-btn-low">Try w = 0.50</button>
+      </div>
+    </div>
+
+    <div class="rc-card-white">
+      <table class="rc-table">
+        <tr>
+          <td class="rc-metric">Market wage <em>w</em></td>
+          <td class="rc-num" id="rc-out-w">0.75</td>
+        </tr>
+        <tr>
+          <td class="rc-metric">Farm labor demand <em>L<sup>d</sup></em>(<em>w</em>)</td>
+          <td class="rc-num" id="rc-out-ld" style="color:#b8842a;">4.00</td>
+        </tr>
+        <tr>
+          <td class="rc-metric">Household labor supply <em>L<sup>s</sup></em>(<em>w</em>)</td>
+          <td class="rc-num" id="rc-out-ls" style="color:#2d6a4f;">4.00</td>
+        </tr>
+        <tr>
+          <td class="rc-metric">Excess labor demand <em>L<sup>d</sup> &minus; L<sup>s</sup></em></td>
+          <td class="rc-num" id="rc-out-ed">0.00</td>
+        </tr>
+        <tr>
+          <td class="rc-metric">Farm profit <em>&pi;</em>(<em>w</em>)</td>
+          <td class="rc-num" id="rc-out-pi">3.00</td>
+        </tr>
+        <tr>
+          <td class="rc-metric">Household bundle (<em>&ell;<sup>h</sup></em>, <em>c<sup>h</sup></em>)</td>
+          <td class="rc-num" id="rc-out-ch">(8.00, 6.00)</td>
+        </tr>
+      </table>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+        <span style="font-size:11px; color:#5a6578;">T = 12, c = 3&radic;L, U = ln c + ln &ell;</span>
+        <span id="rc-status" class="rc-status-pill rc-eq">Market Clears</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="rc-right">
+    <svg id="rc-svg" viewBox="0 0 560 410" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="rc-plot-clip">
+          <rect x="54" y="22" width="482" height="338" />
+        </clipPath>
+      </defs>
+
+      <!-- Grid & axes -->
+      <g id="rc-grid"></g>
+      <line x1="54" y1="360" x2="536" y2="360" stroke="#24325c" stroke-width="1.6" />
+      <line x1="54" y1="22" x2="54" y2="360" stroke="#24325c" stroke-width="1.6" />
+      <g id="rc-axes-labels"></g>
+
+      <!-- Clipped curves -->
+      <g clip-path="url(#rc-plot-clip)">
+        <path id="rc-ppf-fill" fill="rgba(36, 50, 92, 0.045)" stroke="none" />
+        <path id="rc-ppf" fill="none" stroke="#24325c" stroke-width="3" stroke-linecap="round" />
+        <line id="rc-budget" stroke="#b8842a" stroke-width="2.3" />
+        <path id="rc-ic" fill="none" stroke="#2d6a4f" stroke-width="2.3" />
+
+        <!-- Drop lines & excess demand indicator -->
+        <line id="rc-drop-farm" stroke="#b8842a" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.7" />
+        <line id="rc-drop-hh" stroke="#2d6a4f" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.7" />
+        <g id="rc-ed-bar"></g>
+      </g>
+
+      <!-- Planner optimum marker at (8, 6) -->
+      <g id="rc-planner-mark"></g>
+
+      <!-- Active points -->
+      <circle id="rc-pt-farm" r="5.5" fill="#b8842a" stroke="#fdfdfb" stroke-width="1.8" />
+      <circle id="rc-pt-hh" r="5.5" fill="#2d6a4f" stroke="#fdfdfb" stroke-width="1.8" />
+      <text id="rc-lbl-farm" font-size="12" font-weight="700" fill="#b8842a"></text>
+      <text id="rc-lbl-hh" font-size="12" font-weight="700" fill="#2d6a4f"></text>
+
+      <!-- Legend -->
+      <g transform="translate(342, 30)">
+        <rect x="0" y="0" width="186" height="80" rx="6" fill="#fdfdfb" fill-opacity="0.93" stroke="#e5e9f0" />
+        <line x1="10" y1="17" x2="28" y2="17" stroke="#24325c" stroke-width="3" />
+        <text x="34" y="21" font-size="11.5" fill="#24325c">PPF: c = 3&radic;(12 &minus; &ell;)</text>
+        <line x1="10" y1="36" x2="28" y2="36" stroke="#b8842a" stroke-width="2.3" />
+        <text x="34" y="40" font-size="11.5" fill="#1c2430">Budget / Isoprofit (F)</text>
+        <line x1="10" y1="55" x2="28" y2="55" stroke="#2d6a4f" stroke-width="2.3" />
+        <text x="34" y="59" font-size="11.5" fill="#1c2430">Indifference curve (H)</text>
+        <circle cx="19" cy="70" r="4.5" fill="none" stroke="#5a6578" stroke-width="1.4" />
+        <text x="34" y="74" font-size="11" fill="#5a6578">Planner E* = (8, 6)</text>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<script>
+(function () {
+  var X0 = 54, Y0 = 360, PW = 482, PH = 338;
+  var LMAX = 12, CMAX = 14;
+  var NS = "http://www.w3.org/2000/svg";
+
+  function sx(l) { return X0 + (l / LMAX) * PW; }
+  function sy(c) { return Y0 - (c / CMAX) * PH; }
+
+  function el(tag, attrs, parent) {
+    var node = document.createElementNS(NS, tag);
+    for (var k in attrs) node.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(node);
+    return node;
+  }
+
+  // Draw static grid & axes labels
+  var gridG = document.getElementById("rc-grid");
+  var lblG = document.getElementById("rc-axes-labels");
+
+  for (var l = 0; l <= 12; l += 2) {
+    var gx = sx(l);
+    if (l > 0) el("line", { x1: gx, y1: 22, x2: gx, y2: 360, stroke: "#e5e9f0", "stroke-width": 1 }, gridG);
+    el("line", { x1: gx, y1: 360, x2: gx, y2: 365, stroke: "#24325c", "stroke-width": 1.2 }, lblG);
+    var tx = el("text", { x: gx, y: 379, "text-anchor": "middle", "font-size": 11.5, fill: "#5a6578" }, lblG);
+    tx.textContent = l;
+  }
+  for (var c = 0; c <= 14; c += 2) {
+    var gy = sy(c);
+    if (c > 0) el("line", { x1: 54, y1: gy, x2: 536, y2: gy, stroke: "#e5e9f0", "stroke-width": 1 }, gridG);
+    el("line", { x1: 49, y1: gy, x2: 54, y2: gy, stroke: "#24325c", "stroke-width": 1.2 }, lblG);
+    var ty = el("text", { x: 44, y: gy + 4, "text-anchor": "end", "font-size": 11.5, fill: "#5a6578" }, lblG);
+    ty.textContent = c;
+  }
+
+  var xTitle = el("text", { x: X0 + PW / 2, y: 400, "text-anchor": "middle", "font-size": 13, "font-weight": 600, fill: "#24325c" }, lblG);
+  xTitle.textContent = "Leisure \u2113 (hours)   [Labor L = 12 \u2212 \u2113]";
+
+  var yTitle = el("text", { x: 16, y: 22 + PH / 2, "text-anchor": "middle", "font-size": 13, "font-weight": 600, fill: "#24325c", transform: "rotate(-90 16 " + (22 + PH / 2) + ")" }, lblG);
+  yTitle.textContent = "Consumption c";
+
+  // Static PPF curve c = 3 * sqrt(12 - l)
+  var ppfPts = [];
+  for (var i = 0; i <= 180; i++) {
+    var lv = (i / 180) * 12;
+    var cv = 3 * Math.sqrt(Math.max(0, 12 - lv));
+    ppfPts.push((i === 0 ? "M" : "L") + sx(lv).toFixed(2) + "," + sy(cv).toFixed(2));
+  }
+  document.getElementById("rc-ppf").setAttribute("d", ppfPts.join(" "));
+  document.getElementById("rc-ppf-fill").setAttribute("d", ppfPts.join(" ") + " L" + sx(12).toFixed(2) + "," + sy(0).toFixed(2) + " L" + sx(0).toFixed(2) + "," + sy(0).toFixed(2) + " Z");
+
+  // Planner optimum (8, 6)
+  var pG = document.getElementById("rc-planner-mark");
+  var px = sx(8), py = sy(6);
+  el("circle", { cx: px, cy: py, r: 9.5, fill: "none", stroke: "#5a6578", "stroke-width": 1.5, "stroke-dasharray": "3 2" }, pG);
+  el("line", { x1: px - 13, y1: py, x2: px + 13, y2: py, stroke: "#5a6578", "stroke-width": 1, opacity: 0.6 }, pG);
+  el("line", { x1: px, y1: py - 13, x2: px, y2: py + 13, stroke: "#5a6578", "stroke-width": 1, opacity: 0.6 }, pG);
+
+  var slider = document.getElementById("rc-w-slider");
+  var wVal = document.getElementById("rc-w-val");
+  var outW = document.getElementById("rc-out-w");
+  var outLd = document.getElementById("rc-out-ld");
+  var outLs = document.getElementById("rc-out-ls");
+  var outEd = document.getElementById("rc-out-ed");
+  var outPi = document.getElementById("rc-out-pi");
+  var outCh = document.getElementById("rc-out-ch");
+  var statusEl = document.getElementById("rc-status");
+
+  var budgetLine = document.getElementById("rc-budget");
+  var icPath = document.getElementById("rc-ic");
+  var dropFarm = document.getElementById("rc-drop-farm");
+  var dropHh = document.getElementById("rc-drop-hh");
+  var edBarG = document.getElementById("rc-ed-bar");
+  var ptFarm = document.getElementById("rc-pt-farm");
+  var ptHh = document.getElementById("rc-pt-hh");
+  var lblFarm = document.getElementById("rc-lbl-farm");
+  var lblHh = document.getElementById("rc-lbl-hh");
+
+  function update() {
+    var w = parseFloat(slider.value);
+    var Ld = Math.min(12, Math.max(0, Math.pow(1.5 / w, 2)));
+    var lFarm = 12 - Ld;
+    var cFarm = 3 * Math.sqrt(Ld);
+    var pi = cFarm - w * Ld;
+
+    var M = 12 * w + pi;
+    var lH = M / (2 * w);
+    var cH;
+    if (lH >= 12) {
+      lH = 12;
+      cH = pi;
+    } else {
+      cH = M / 2;
+    }
+    var Ls = 12 - lH;
+    var ed = Ld - Ls;
+
+    // Update readouts
+    wVal.textContent = w.toFixed(2);
+    outW.textContent = w.toFixed(2);
+    outLd.textContent = Ld.toFixed(2);
+    outLs.textContent = Ls.toFixed(2);
+    outPi.textContent = pi.toFixed(2);
+    outCh.textContent = "(" + lH.toFixed(2) + ", " + cH.toFixed(2) + ")";
+
+    var isEq = Math.abs(ed) < 0.01;
+    outEd.textContent = isEq ? "0.00" : (ed > 0 ? "+" : "") + ed.toFixed(2);
+    outEd.style.color = isEq ? "#2d6a4f" : "#a04434";
+
+    if (isEq) {
+      statusEl.textContent = "Market Clears (GE)";
+      statusEl.className = "rc-status-pill rc-eq";
+    } else if (ed > 0) {
+      statusEl.textContent = "Excess Labor Demand";
+      statusEl.className = "rc-status-pill rc-diseq";
+    } else {
+      statusEl.textContent = "Excess Labor Supply";
+      statusEl.className = "rc-status-pill rc-diseq";
+    }
+
+    // Budget line: c(l) = pi + w*(12 - l), from l=0 to l=12
+    budgetLine.setAttribute("x1", sx(0).toFixed(2));
+    budgetLine.setAttribute("y1", sy(pi + 12 * w).toFixed(2));
+    budgetLine.setAttribute("x2", sx(12).toFixed(2));
+    budgetLine.setAttribute("y2", sy(pi).toFixed(2));
+
+    // Indifference curve: c = (cH * lH) / l
+    var Uval = cH * lH;
+    var icPts = [];
+    for (var i = 1; i <= 200; i++) {
+      var lv = 0.08 + (i / 200) * (12 - 0.08);
+      var cv = Uval / lv;
+      if (cv <= CMAX + 2) {
+        icPts.push((icPts.length === 0 ? "M" : "L") + sx(lv).toFixed(2) + "," + sy(cv).toFixed(2));
+      }
+    }
+    icPath.setAttribute("d", icPts.join(" "));
+
+    // Points & drop lines
+    var fx = sx(lFarm), fy = sy(cFarm);
+    var hx = sx(lH), hy = sy(cH);
+    ptFarm.setAttribute("cx", fx.toFixed(2));
+    ptFarm.setAttribute("cy", fy.toFixed(2));
+    ptHh.setAttribute("cx", hx.toFixed(2));
+    ptHh.setAttribute("cy", hy.toFixed(2));
+
+    dropFarm.setAttribute("x1", fx.toFixed(2));
+    dropFarm.setAttribute("y1", fy.toFixed(2));
+    dropFarm.setAttribute("x2", fx.toFixed(2));
+    dropFarm.setAttribute("y2", Y0);
+
+    dropHh.setAttribute("x1", hx.toFixed(2));
+    dropHh.setAttribute("y1", hy.toFixed(2));
+    dropHh.setAttribute("x2", hx.toFixed(2));
+    dropHh.setAttribute("y2", Y0);
+
+    // Excess demand bracket along bottom inside plot
+    while (edBarG.firstChild) edBarG.removeChild(edBarG.firstChild);
+    if (!isEq) {
+      var barY = Y0 - 14;
+      var xMin = Math.min(fx, hx), xMax = Math.max(fx, hx);
+      el("line", { x1: xMin, y1: barY, x2: xMax, y2: barY, stroke: "#a04434", "stroke-width": 2.4 }, edBarG);
+      el("line", { x1: xMin, y1: barY - 4, x2: xMin, y2: barY + 4, stroke: "#a04434", "stroke-width": 1.8 }, edBarG);
+      el("line", { x1: xMax, y1: barY - 4, x2: xMax, y2: barY + 4, stroke: "#a04434", "stroke-width": 1.8 }, edBarG);
+      var edLbl = el("text", { x: (xMin + xMax) / 2, y: barY - 6, "text-anchor": "middle", "font-size": 11, "font-weight": 700, fill: "#a04434" }, edBarG);
+      edLbl.textContent = (ed > 0 ? "L\u1d48 \u2212 L\u02e2 = +" : "L\u1d48 \u2212 L\u02e2 = ") + ed.toFixed(2);
+    }
+
+    // Labels for F and H
+    if (isEq) {
+      lblFarm.textContent = "F = H = E* (8, 6)";
+      lblFarm.setAttribute("x", (fx + 12).toFixed(2));
+      lblFarm.setAttribute("y", (fy - 10).toFixed(2));
+      lblFarm.setAttribute("text-anchor", "start");
+      lblFarm.setAttribute("fill", "#24325c");
+      lblHh.textContent = "";
+    } else {
+      lblFarm.setAttribute("fill", "#b8842a");
+      lblFarm.textContent = "F (" + lFarm.toFixed(1) + ", " + cFarm.toFixed(1) + ")";
+      lblFarm.setAttribute("x", (lFarm < 1.5 ? fx + 9 : fx - 8).toFixed(2));
+      lblFarm.setAttribute("y", (fy - 10).toFixed(2));
+      lblFarm.setAttribute("text-anchor", lFarm < 1.5 ? "start" : "end");
+
+      lblHh.textContent = "H (" + lH.toFixed(1) + ", " + cH.toFixed(1) + ")";
+      lblHh.setAttribute("x", (lH > 10.2 ? hx - 9 : hx + 9).toFixed(2));
+      lblHh.setAttribute("y", (hy - 10).toFixed(2));
+      lblHh.setAttribute("text-anchor", lH > 10.2 ? "end" : "start");
+    }
+  }
+
+  slider.addEventListener("input", update);
+  document.getElementById("rc-btn-eq").addEventListener("click", function () {
+    slider.value = "0.75";
+    update();
+  });
+  document.getElementById("rc-btn-low").addEventListener("click", function () {
+    slider.value = "0.50";
+    update();
+  });
+
+  update();
+})();
+</script>

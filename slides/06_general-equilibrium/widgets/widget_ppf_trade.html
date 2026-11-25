@@ -1,0 +1,536 @@
+<div id="tr-root">
+  <style>
+    #tr-root {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-size: 13.5px;
+      line-height: 1.35;
+      color: #1c2430;
+      background: #fdfdfb;
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      box-sizing: border-box;
+      display: flex;
+      gap: 16px;
+      align-items: stretch;
+    }
+    #tr-root * { box-sizing: border-box; }
+    #tr-left {
+      flex: 0 0 34%;
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #tr-right {
+      flex: 1 1 66%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tr-card {
+      background: #f7f6f2;
+      border: 1px solid #e5e9f0;
+      border-radius: 8px;
+      padding: 10px 13px;
+    }
+    .tr-card-white {
+      background: #ffffff;
+      border: 1px solid #e5e9f0;
+      border-radius: 8px;
+      padding: 10px 13px;
+      flex: 1;
+    }
+    .tr-toggle {
+      display: flex;
+      border: 1px solid #24325c;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .tr-toggle button {
+      flex: 1;
+      padding: 6px 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      border: none;
+      background: #ffffff;
+      color: #24325c;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .tr-toggle button.tr-active {
+      background: #24325c;
+      color: #fdfdfb;
+    }
+    .tr-ctrl {
+      margin-bottom: 7px;
+    }
+    .tr-ctrl:last-child {
+      margin-bottom: 0;
+    }
+    .tr-ctrl.tr-dim {
+      opacity: 0.42;
+    }
+    .tr-slider-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+    .tr-label {
+      font-weight: 600;
+      color: #24325c;
+      font-size: 13px;
+    }
+    .tr-val {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-weight: 700;
+      font-size: 13.5px;
+      color: #b8842a;
+      background: #fdfdfb;
+      border: 1px solid #e5e9f0;
+      border-radius: 4px;
+      padding: 0 6px;
+    }
+    .tr-range {
+      width: 100%;
+      accent-color: #b8842a;
+      cursor: pointer;
+      margin: 2px 0;
+    }
+    .tr-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.8px;
+    }
+    .tr-table td {
+      padding: 4px 2px;
+      border-bottom: 1px solid #eef1f6;
+    }
+    .tr-table tr:last-child td {
+      border-bottom: none;
+    }
+    .tr-metric { color: #5a6578; }
+    .tr-num {
+      text-align: right;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-weight: 600;
+      color: #24325c;
+    }
+    #tr-svg {
+      width: 100%;
+      height: auto;
+      max-height: 460px;
+      display: block;
+      background: #fdfdfb;
+      border: 1px solid #e5e9f0;
+      border-radius: 8px;
+    }
+  </style>
+
+  <div id="tr-left">
+    <div class="tr-card">
+      <div class="tr-toggle">
+        <button type="button" id="tr-btn-aut">Autarky</button>
+        <button type="button" id="tr-btn-open" class="tr-active">Open to Trade</button>
+      </div>
+
+      <div class="tr-ctrl" id="tr-p-wrap">
+        <div class="tr-slider-row">
+          <span class="tr-label">World price <em>p</em> = <em>p<sub>x</sub>/p<sub>y</sub></em></span>
+          <span class="tr-val" id="tr-p-val">0.50</span>
+        </div>
+        <input id="tr-p-slider" class="tr-range" type="range" min="0.35" max="2.50" step="0.05" value="0.50" />
+      </div>
+
+      <div class="tr-ctrl">
+        <div class="tr-slider-row">
+          <span class="tr-label">Technology <em>A<sub>x</sub></em></span>
+          <span class="tr-val" id="tr-ax-val" style="color:#24325c;">1.0</span>
+        </div>
+        <input id="tr-ax-slider" class="tr-range" type="range" min="0.8" max="1.6" step="0.1" value="1.0" style="accent-color:#24325c;" />
+      </div>
+    </div>
+
+    <div class="tr-card-white">
+      <table class="tr-table">
+        <tr>
+          <td class="tr-metric">Autarky price (<em>p<sub>x</sub>/p<sub>y</sub></em>)<sub>aut</sub></td>
+          <td class="tr-num" id="tr-out-paut">1.00</td>
+        </tr>
+        <tr>
+          <td class="tr-metric">World price <em>p</em></td>
+          <td class="tr-num" id="tr-out-p" style="color:#b8842a;">0.50</td>
+        </tr>
+        <tr>
+          <td class="tr-metric">Autarky utility <em>U</em><sub>aut</sub></td>
+          <td class="tr-num" id="tr-out-uaut" style="color:#5a6578;">7.07</td>
+        </tr>
+        <tr>
+          <td class="tr-metric">Trade utility <em>U</em><sub>trade</sub></td>
+          <td class="tr-num" id="tr-out-utr" style="color:#2d6a4f;">7.91</td>
+        </tr>
+        <tr>
+          <td class="tr-metric">Gains from trade &Delta;<em>U</em></td>
+          <td class="tr-num" id="tr-out-du" style="color:#2d6a4f;">+0.83</td>
+        </tr>
+        <tr>
+          <td class="tr-metric">Exports</td>
+          <td class="tr-num" id="tr-out-exp" style="color:#a04434;">3.35 y</td>
+        </tr>
+        <tr>
+          <td class="tr-metric">Imports</td>
+          <td class="tr-num" id="tr-out-imp" style="color:#2d6a4f;">6.71 x</td>
+        </tr>
+      </table>
+      <div style="font-size:11px; color:#5a6578; margin-top:5px;">
+        PPF: (<em>x/A<sub>x</sub></em>)&sup2; + <em>y</em>&sup2; = 100 &nbsp;|&nbsp; <em>U</em> = <em>x</em><sup>0.5</sup><em>y</em><sup>0.5</sup>
+      </div>
+    </div>
+  </div>
+
+  <div id="tr-right">
+    <svg id="tr-svg" viewBox="0 0 560 410" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="tr-plot-clip">
+          <rect x="52" y="22" width="484" height="338" />
+        </clipPath>
+      </defs>
+
+      <g id="tr-grid"></g>
+      <line x1="52" y1="360" x2="536" y2="360" stroke="#24325c" stroke-width="1.6" />
+      <line x1="52" y1="22" x2="52" y2="360" stroke="#24325c" stroke-width="1.6" />
+      <g id="tr-axes-labels"></g>
+
+      <g clip-path="url(#tr-plot-clip)">
+        <path id="tr-ppf-fill" fill="rgba(36, 50, 92, 0.045)" stroke="none" />
+        <path id="tr-ppf" fill="none" stroke="#24325c" stroke-width="3" stroke-linecap="round" />
+
+        <!-- Autarky IC & tangent -->
+        <path id="tr-ic-aut" fill="none" stroke="#5a6578" stroke-width="2" stroke-dasharray="6 4" />
+        <line id="tr-p-aut-line" stroke="#5a6578" stroke-width="1.6" stroke-dasharray="4 3" opacity="0.8" />
+
+        <!-- Trade layer -->
+        <g id="tr-trade-layer">
+          <polygon id="tr-tri" fill="rgba(184, 132, 42, 0.14)" stroke="none" />
+          <line id="tr-tri-exp" stroke="#a04434" stroke-width="2" stroke-dasharray="4 2" />
+          <line id="tr-tri-imp" stroke="#2d6a4f" stroke-width="2" stroke-dasharray="4 2" />
+          <line id="tr-p-world" stroke="#b8842a" stroke-width="2.3" />
+          <path id="tr-ic-trade" fill="none" stroke="#2d6a4f" stroke-width="2.4" />
+        </g>
+      </g>
+
+      <!-- Points & labels -->
+      <circle id="tr-pt-e" r="5" fill="#5a6578" stroke="#fdfdfb" stroke-width="1.6" />
+      <text id="tr-lbl-e" font-size="12" font-weight="700" fill="#5a6578"></text>
+
+      <g id="tr-trade-pts">
+        <circle id="tr-pt-a" r="5.5" fill="#b8842a" stroke="#fdfdfb" stroke-width="1.8" />
+        <circle id="tr-pt-b" r="5.5" fill="#2d6a4f" stroke="#fdfdfb" stroke-width="1.8" />
+        <text id="tr-lbl-a" font-size="12" font-weight="700" fill="#b8842a"></text>
+        <text id="tr-lbl-b" font-size="12" font-weight="700" fill="#2d6a4f"></text>
+        <text id="tr-lbl-exp" font-size="10.8" font-weight="700" fill="#a04434"></text>
+        <text id="tr-lbl-imp" font-size="10.8" font-weight="700" fill="#2d6a4f"></text>
+      </g>
+
+      <!-- Legend -->
+      <g transform="translate(362, 28)">
+        <rect x="0" y="0" width="166" height="82" rx="6" fill="#fdfdfb" fill-opacity="0.93" stroke="#e5e9f0" />
+        <line x1="10" y1="16" x2="28" y2="16" stroke="#24325c" stroke-width="3" />
+        <text x="34" y="20" font-size="11.5" fill="#24325c">PPF</text>
+        <line x1="10" y1="35" x2="28" y2="35" stroke="#5a6578" stroke-width="2" stroke-dasharray="5 3" />
+        <text x="34" y="39" font-size="11.5" fill="#5a6578">Autarky E &amp; U<tspan dy="2" font-size="9">E</tspan></text>
+        <line x1="10" y1="54" x2="28" y2="54" stroke="#b8842a" stroke-width="2.3" />
+        <text x="34" y="58" font-size="11.5" fill="#1c2430">World price (A &rarr; B)</text>
+        <line x1="10" y1="72" x2="28" y2="72" stroke="#2d6a4f" stroke-width="2.4" />
+        <text x="34" y="76" font-size="11.5" fill="#1c2430">Trade IC U<tspan dy="2" font-size="9">B</tspan></text>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<script>
+(function () {
+  var X0 = 52, Y0 = 360, PW = 484, PH = 338;
+  var XMAX = 18, YMAX = 18;
+  var NS = "http://www.w3.org/2000/svg";
+
+  function sx(x) { return X0 + (x / XMAX) * PW; }
+  function sy(y) { return Y0 - (y / YMAX) * PH; }
+
+  function el(tag, attrs, parent) {
+    var node = document.createElementNS(NS, tag);
+    for (var k in attrs) node.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(node);
+    return node;
+  }
+
+  var gridG = document.getElementById("tr-grid");
+  var lblG = document.getElementById("tr-axes-labels");
+
+  for (var v = 0; v <= 18; v += 3) {
+    var gx = sx(v);
+    if (v > 0) el("line", { x1: gx, y1: 22, x2: gx, y2: 360, stroke: "#e5e9f0", "stroke-width": 1 }, gridG);
+    el("line", { x1: gx, y1: 360, x2: gx, y2: 365, stroke: "#24325c", "stroke-width": 1.2 }, lblG);
+    var tx = el("text", { x: gx, y: 379, "text-anchor": "middle", "font-size": 11.5, fill: "#5a6578" }, lblG);
+    tx.textContent = v;
+
+    var gy = sy(v);
+    if (v > 0) el("line", { x1: 52, y1: gy, x2: 536, y2: gy, stroke: "#e5e9f0", "stroke-width": 1 }, gridG);
+    el("line", { x1: 47, y1: gy, x2: 52, y2: gy, stroke: "#24325c", "stroke-width": 1.2 }, lblG);
+    var ty = el("text", { x: 42, y: gy + 4, "text-anchor": "end", "font-size": 11.5, fill: "#5a6578" }, lblG);
+    ty.textContent = v;
+  }
+
+  var xTitle = el("text", { x: X0 + PW / 2, y: 400, "text-anchor": "middle", "font-size": 13, "font-weight": 600, fill: "#24325c" }, lblG);
+  xTitle.textContent = "Good x";
+  var yTitle = el("text", { x: 16, y: 22 + PH / 2, "text-anchor": "middle", "font-size": 13, "font-weight": 600, fill: "#24325c", transform: "rotate(-90 16 " + (22 + PH / 2) + ")" }, lblG);
+  yTitle.textContent = "Good y";
+
+  var isOpen = true;
+  var btnAut = document.getElementById("tr-btn-aut");
+  var btnOpen = document.getElementById("tr-btn-open");
+  var pWrap = document.getElementById("tr-p-wrap");
+  var pSlider = document.getElementById("tr-p-slider");
+  var axSlider = document.getElementById("tr-ax-slider");
+
+  var pVal = document.getElementById("tr-p-val");
+  var axVal = document.getElementById("tr-ax-val");
+  var outPaut = document.getElementById("tr-out-paut");
+  var outP = document.getElementById("tr-out-p");
+  var outUaut = document.getElementById("tr-out-uaut");
+  var outUtr = document.getElementById("tr-out-utr");
+  var outDu = document.getElementById("tr-out-du");
+  var outExp = document.getElementById("tr-out-exp");
+  var outImp = document.getElementById("tr-out-imp");
+
+  var ppfPath = document.getElementById("tr-ppf");
+  var ppfFill = document.getElementById("tr-ppf-fill");
+  var icAut = document.getElementById("tr-ic-aut");
+  var pAutLine = document.getElementById("tr-p-aut-line");
+  var tradeLayer = document.getElementById("tr-trade-layer");
+  var tradePts = document.getElementById("tr-trade-pts");
+  var triPoly = document.getElementById("tr-tri");
+  var triExp = document.getElementById("tr-tri-exp");
+  var triImp = document.getElementById("tr-tri-imp");
+  var pWorld = document.getElementById("tr-p-world");
+  var icTrade = document.getElementById("tr-ic-trade");
+
+  var ptE = document.getElementById("tr-pt-e");
+  var lblE = document.getElementById("tr-lbl-e");
+  var ptA = document.getElementById("tr-pt-a");
+  var ptB = document.getElementById("tr-pt-b");
+  var lblA = document.getElementById("tr-lbl-a");
+  var lblB = document.getElementById("tr-lbl-b");
+  var lblExp = document.getElementById("tr-lbl-exp");
+  var lblImp = document.getElementById("tr-lbl-imp");
+
+  function buildIC(U) {
+    var U2 = U * U;
+    var pts = [];
+    for (var i = 1; i <= 200; i++) {
+      var xv = 0.2 + (i / 200) * (XMAX - 0.2);
+      var yv = U2 / xv;
+      if (yv <= YMAX + 2) {
+        pts.push((pts.length === 0 ? "M" : "L") + sx(xv).toFixed(2) + "," + sy(yv).toFixed(2));
+      }
+    }
+    return pts.join(" ");
+  }
+
+  function update() {
+    var p = parseFloat(pSlider.value);
+    var Ax = parseFloat(axSlider.value);
+
+    pVal.textContent = p.toFixed(2);
+    axVal.textContent = Ax.toFixed(1);
+
+    // PPF: x = Ax * 10 * cos(t), y = 10 * sin(t)
+    var ppfPts = [];
+    for (var i = 0; i <= 140; i++) {
+      var t = (i / 140) * (Math.PI / 2);
+      var xv = Ax * 10 * Math.cos(t);
+      var yv = 10 * Math.sin(t);
+      ppfPts.push((i === 0 ? "M" : "L") + sx(xv).toFixed(2) + "," + sy(yv).toFixed(2));
+    }
+    ppfPath.setAttribute("d", ppfPts.join(" "));
+    ppfFill.setAttribute("d", ppfPts.join(" ") + " L" + sx(0).toFixed(2) + "," + sy(0).toFixed(2) + " Z");
+
+    // Autarky equilibrium E
+    var xE = Ax * Math.sqrt(50);
+    var yE = Math.sqrt(50);
+    var pAut = 1 / Ax;
+    var Uaut = Math.sqrt(xE * yE);
+
+    icAut.setAttribute("d", buildIC(Uaut));
+    ptE.setAttribute("cx", sx(xE).toFixed(2));
+    ptE.setAttribute("cy", sy(yE).toFixed(2));
+    lblE.setAttribute("x", (sx(xE) + 8).toFixed(2));
+    lblE.setAttribute("y", (sy(yE) - 8).toFixed(2));
+    lblE.textContent = "E";
+
+    // Autarky price line: y = (pAut * xE + yE) - pAut * x
+    var Iaut = pAut * xE + yE;
+    pAutLine.setAttribute("x1", sx(0).toFixed(2));
+    pAutLine.setAttribute("y1", sy(Iaut).toFixed(2));
+    pAutLine.setAttribute("x2", sx(Iaut / pAut).toFixed(2));
+    pAutLine.setAttribute("y2", sy(0).toFixed(2));
+    pAutLine.style.display = isOpen ? "none" : "inline";
+
+    outPaut.textContent = pAut.toFixed(2);
+    outUaut.textContent = Uaut.toFixed(2);
+
+    if (!isOpen) {
+      tradeLayer.style.display = "none";
+      tradePts.style.display = "none";
+      pWrap.classList.add("tr-dim");
+      outP.textContent = "\u2014";
+      outUtr.textContent = "\u2014";
+      outDu.textContent = "0.00";
+      outExp.textContent = "None";
+      outImp.textContent = "None";
+      return;
+    }
+
+    tradeLayer.style.display = "inline";
+    tradePts.style.display = "inline";
+    pWrap.classList.remove("tr-dim");
+
+    // Open to trade
+    var denom = Math.sqrt(1 + p * p * Ax * Ax);
+    var xA = (10 * p * Ax * Ax) / denom;
+    var yA = 10 / denom;
+    var I = p * xA + yA;
+    var xB = (0.5 * I) / p;
+    var yB = 0.5 * I;
+    var Utr = Math.sqrt(xB * yB);
+    var dU = Utr - Uaut;
+
+    outP.textContent = p.toFixed(2);
+    outUtr.textContent = Utr.toFixed(2);
+    outDu.textContent = (dU >= 0.005 ? "+" : "") + dU.toFixed(2);
+
+    // World price line: y = I - p * x
+    pWorld.setAttribute("x1", sx(0).toFixed(2));
+    pWorld.setAttribute("y1", sy(I).toFixed(2));
+    pWorld.setAttribute("x2", sx(I / p).toFixed(2));
+    pWorld.setAttribute("y2", sy(0).toFixed(2));
+
+    icTrade.setAttribute("d", buildIC(Utr));
+
+    var axp = sx(xA), ayp = sy(yA);
+    var bxp = sx(xB), byp = sy(yB);
+    ptA.setAttribute("cx", axp.toFixed(2));
+    ptA.setAttribute("cy", ayp.toFixed(2));
+    ptB.setAttribute("cx", bxp.toFixed(2));
+    ptB.setAttribute("cy", byp.toFixed(2));
+
+    var dx = xB - xA;
+    var dy = yB - yA;
+    var noTrade = Math.abs(dx) < 0.08 && Math.abs(dy) < 0.08;
+
+    if (noTrade) {
+      triPoly.setAttribute("points", "");
+      triExp.setAttribute("x1", 0); triExp.setAttribute("y1", 0); triExp.setAttribute("x2", 0); triExp.setAttribute("y2", 0);
+      triImp.setAttribute("x1", 0); triImp.setAttribute("y1", 0); triImp.setAttribute("x2", 0); triImp.setAttribute("y2", 0);
+      lblExp.textContent = "";
+      lblImp.textContent = "";
+      outExp.textContent = "0.00";
+      outImp.textContent = "0.00";
+      lblA.setAttribute("x", (axp - 10).toFixed(2));
+      lblA.setAttribute("y", (ayp - 10).toFixed(2));
+      lblA.setAttribute("text-anchor", "end");
+      lblA.textContent = "A = B = E";
+      lblB.textContent = "";
+      lblE.textContent = "";
+    } else if (dx > 0) {
+      // Exports y, imports x; corner C = (xA, yB)
+      var cxp = axp, cyp = byp;
+      triPoly.setAttribute("points", axp.toFixed(2) + "," + ayp.toFixed(2) + " " + cxp.toFixed(2) + "," + cyp.toFixed(2) + " " + bxp.toFixed(2) + "," + byp.toFixed(2));
+      triExp.setAttribute("x1", axp.toFixed(2)); triExp.setAttribute("y1", ayp.toFixed(2));
+      triExp.setAttribute("x2", cxp.toFixed(2)); triExp.setAttribute("y2", cyp.toFixed(2));
+      triImp.setAttribute("x1", cxp.toFixed(2)); triImp.setAttribute("y1", cyp.toFixed(2));
+      triImp.setAttribute("x2", bxp.toFixed(2)); triImp.setAttribute("y2", byp.toFixed(2));
+
+      lblExp.setAttribute("x", (cxp - 6).toFixed(2));
+      lblExp.setAttribute("y", ((ayp + cyp) / 2 + 4).toFixed(2));
+      lblExp.setAttribute("text-anchor", "end");
+      lblExp.textContent = "Exp y";
+
+      lblImp.setAttribute("x", ((cxp + bxp) / 2).toFixed(2));
+      lblImp.setAttribute("y", (cyp + 14).toFixed(2));
+      lblImp.setAttribute("text-anchor", "middle");
+      lblImp.textContent = "Imp x";
+
+      outExp.textContent = (-dy).toFixed(2) + " y";
+      outImp.textContent = dx.toFixed(2) + " x";
+
+      lblA.setAttribute("x", (axp + 8).toFixed(2));
+      lblA.setAttribute("y", (ayp - 8).toFixed(2));
+      lblA.setAttribute("text-anchor", "start");
+      lblA.textContent = "A (prod)";
+
+      lblB.setAttribute("x", (bxp + 8).toFixed(2));
+      lblB.setAttribute("y", (byp - 8).toFixed(2));
+      lblB.setAttribute("text-anchor", "start");
+      lblB.textContent = "B (cons)";
+    } else {
+      // Exports x, imports y; corner C = (xB, yA)
+      var cxp2 = bxp, cyp2 = ayp;
+      triPoly.setAttribute("points", axp.toFixed(2) + "," + ayp.toFixed(2) + " " + cxp2.toFixed(2) + "," + cyp2.toFixed(2) + " " + bxp.toFixed(2) + "," + byp.toFixed(2));
+      triExp.setAttribute("x1", axp.toFixed(2)); triExp.setAttribute("y1", ayp.toFixed(2));
+      triExp.setAttribute("x2", cxp2.toFixed(2)); triExp.setAttribute("y2", cyp2.toFixed(2));
+      triImp.setAttribute("x1", cxp2.toFixed(2)); triImp.setAttribute("y1", cyp2.toFixed(2));
+      triImp.setAttribute("x2", bxp.toFixed(2)); triImp.setAttribute("y2", byp.toFixed(2));
+
+      lblExp.setAttribute("x", ((axp + cxp2) / 2).toFixed(2));
+      lblExp.setAttribute("y", (cyp2 + 14).toFixed(2));
+      lblExp.setAttribute("text-anchor", "middle");
+      lblExp.textContent = "Exp x";
+
+      lblImp.setAttribute("x", (cxp2 - 6).toFixed(2));
+      lblImp.setAttribute("y", ((byp + cyp2) / 2 + 4).toFixed(2));
+      lblImp.setAttribute("text-anchor", "end");
+      lblImp.textContent = "Imp y";
+
+      outExp.textContent = (-dx).toFixed(2) + " x";
+      outImp.textContent = dy.toFixed(2) + " y";
+
+      lblA.setAttribute("x", (axp + 8).toFixed(2));
+      lblA.setAttribute("y", (ayp - 6).toFixed(2));
+      lblA.setAttribute("text-anchor", "start");
+      lblA.textContent = "A (prod)";
+
+      lblB.setAttribute("x", (bxp + 8).toFixed(2));
+      lblB.setAttribute("y", Math.max(36, byp - 8).toFixed(2));
+      lblB.setAttribute("text-anchor", "start");
+      lblB.textContent = "B (cons)";
+    }
+  }
+
+  btnAut.addEventListener("click", function () {
+    isOpen = false;
+    btnAut.classList.add("tr-active");
+    btnOpen.classList.remove("tr-active");
+    update();
+  });
+  btnOpen.addEventListener("click", function () {
+    isOpen = true;
+    btnOpen.classList.add("tr-active");
+    btnAut.classList.remove("tr-active");
+    update();
+  });
+  pSlider.addEventListener("input", function () {
+    if (!isOpen) {
+      isOpen = true;
+      btnOpen.classList.add("tr-active");
+      btnAut.classList.remove("tr-active");
+    }
+    update();
+  });
+  axSlider.addEventListener("input", update);
+
+  update();
+})();
+</script>

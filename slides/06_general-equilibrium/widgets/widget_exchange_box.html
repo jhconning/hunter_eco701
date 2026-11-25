@@ -1,0 +1,1061 @@
+<style>
+  #eb-root {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    background: #fdfdfb;
+    color: #24325c;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 6px 4px;
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  #eb-root *, #eb-root *::before, #eb-root *::after {
+    box-sizing: border-box;
+  }
+  .eb-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 14px;
+    align-items: stretch;
+  }
+  .eb-left {
+    flex: 0 0 38%;
+    min-width: 310px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .eb-right {
+    flex: 1 1 62%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fdfdfb;
+    border: 1px solid #e5e9f0;
+    border-radius: 8px;
+    padding: 4px 6px 2px 6px;
+  }
+  .eb-modes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .eb-mode-btn {
+    appearance: none;
+    border: 1.5px solid #24325c;
+    background: #fdfdfb;
+    color: #24325c;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+    text-align: center;
+    letter-spacing: 0.01em;
+  }
+  .eb-mode-btn:hover {
+    background: #eef1f7;
+  }
+  .eb-mode-btn.eb-active {
+    background: #24325c;
+    color: #fdfdfb;
+  }
+  .eb-panel {
+    background: #f7f8fa;
+    border: 1px solid #e5e9f0;
+    border-radius: 7px;
+    padding: 8px 10px;
+  }
+  .eb-sliders-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  .eb-section-title {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #5a6578;
+  }
+  .eb-reset-btn {
+    appearance: none;
+    border: 1px solid #cbd3e0;
+    background: #fdfdfb;
+    color: #5a6578;
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .eb-reset-btn:hover {
+    border-color: #24325c;
+    color: #24325c;
+  }
+  .eb-slider-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px 10px;
+  }
+  .eb-slider-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .eb-slider-row.eb-full {
+    grid-column: 1 / -1;
+    margin-top: 3px;
+    padding-top: 5px;
+    border-top: 1px dashed #d8dee9;
+  }
+  .eb-slider-row.eb-disabled {
+    opacity: 0.45;
+  }
+  .eb-slider-row.eb-highlight {
+    background: rgba(184, 132, 42, 0.10);
+    border: 1px solid rgba(184, 132, 42, 0.45);
+    border-radius: 5px;
+    padding: 4px 6px;
+    margin: 3px -4px -2px -4px;
+  }
+  .eb-slider-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11.5px;
+    color: #24325c;
+  }
+  .eb-slider-val {
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    color: #24325c;
+  }
+  .eb-slider-row.eb-highlight .eb-slider-val {
+    color: #b8842a;
+  }
+  #eb-root input[type="range"] {
+    width: 100%;
+    height: 4px;
+    accent-color: #24325c;
+    cursor: pointer;
+    margin: 2px 0;
+  }
+  .eb-slider-row.eb-highlight input[type="range"] {
+    accent-color: #b8842a;
+  }
+  .eb-readout {
+    background: #fdfdfb;
+    border: 1px solid #e5e9f0;
+    border-radius: 7px;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .eb-status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+  }
+  .eb-badge {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+    color: #fdfdfb;
+  }
+  .eb-badge-eff {
+    background: #2d6a4f;
+  }
+  .eb-badge-ineff {
+    background: #a04434;
+  }
+  .eb-price-pill {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #b8842a;
+    font-variant-numeric: tabular-nums;
+  }
+  .eb-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 8px;
+    font-size: 11.5px;
+    padding: 4px 0;
+    border-top: 1px solid #e5e9f0;
+    border-bottom: 1px solid #e5e9f0;
+  }
+  .eb-metric-item {
+    display: flex;
+    justify-content: space-between;
+    color: #5a6578;
+  }
+  .eb-metric-item strong {
+    color: #24325c;
+    font-variant-numeric: tabular-nums;
+  }
+  .eb-rents {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .eb-rent-row {
+    display: grid;
+    grid-template-columns: 62px 1fr 56px;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+  }
+  .eb-rent-name {
+    font-weight: 600;
+    color: #24325c;
+  }
+  .eb-rent-track {
+    height: 8px;
+    background: #e5e9f0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .eb-rent-fill-a {
+    height: 100%;
+    background: #24325c;
+    border-radius: 4px;
+    transition: width 0.12s ease;
+  }
+  .eb-rent-fill-b {
+    height: 100%;
+    background: #a04434;
+    border-radius: 4px;
+    transition: width 0.12s ease;
+  }
+  .eb-rent-num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    color: #24325c;
+  }
+  .eb-note {
+    font-size: 11px;
+    color: #5a6578;
+    line-height: 1.28;
+    min-height: 28px;
+  }
+  #eb-svg {
+    width: 100%;
+    max-height: 468px;
+    height: auto;
+    display: block;
+  }
+</style>
+
+<div id="eb-root">
+  <div class="eb-layout">
+    <div class="eb-left">
+      <div class="eb-modes" role="group" aria-label="Exchange regime">
+        <button type="button" class="eb-mode-btn eb-active" id="eb-btn-walrasian" data-mode="walrasian">Walrasian</button>
+        <button type="button" class="eb-mode-btn" id="eb-btn-auctioneer" data-mode="auctioneer">Auctioneer</button>
+        <button type="button" class="eb-mode-btn" id="eb-btn-tioli" data-mode="tioli">TIOLI (PC)</button>
+        <button type="button" class="eb-mode-btn" id="eb-btn-setter" data-mode="setter">Price-Setter (ICC)</button>
+      </div>
+
+      <div class="eb-panel">
+        <div class="eb-sliders-header">
+          <span class="eb-section-title">Endowment &amp; Preferences</span>
+          <button type="button" class="eb-reset-btn" id="eb-reset">Reset</button>
+        </div>
+        <div class="eb-slider-grid">
+          <div class="eb-slider-row">
+            <div class="eb-slider-label"><span>A's coffee <i>x<sub>E</sub></i></span><span class="eb-slider-val" id="eb-val-xe">9.00</span></div>
+            <input type="range" id="eb-xe" min="1" max="9.5" step="0.25" value="9">
+          </div>
+          <div class="eb-slider-row">
+            <div class="eb-slider-label"><span>A's data <i>y<sub>E</sub></i></span><span class="eb-slider-val" id="eb-val-ye">1.00</span></div>
+            <input type="range" id="eb-ye" min="0.5" max="14" step="0.25" value="1">
+          </div>
+          <div class="eb-slider-row">
+            <div class="eb-slider-label"><span>A's pref <i>&alpha;<sub>A</sub></i></span><span class="eb-slider-val" id="eb-val-aa">0.50</span></div>
+            <input type="range" id="eb-aa" min="0.25" max="0.75" step="0.05" value="0.5">
+          </div>
+          <div class="eb-slider-row">
+            <div class="eb-slider-label"><span>B's pref <i>&alpha;<sub>B</sub></i></span><span class="eb-slider-val" id="eb-val-ab">0.50</span></div>
+            <input type="range" id="eb-ab" min="0.25" max="0.75" step="0.05" value="0.5">
+          </div>
+          <div class="eb-slider-row eb-full eb-disabled" id="eb-p-wrap">
+            <div class="eb-slider-label">
+              <span id="eb-p-label">Auctioneer price <i>p = p<sub>x</sub>/p<sub>y</sub></i></span>
+              <span class="eb-slider-val" id="eb-val-p">1.50</span>
+            </div>
+            <input type="range" id="eb-p" min="0.3" max="6.0" step="0.05" value="2.5" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="eb-readout">
+        <div class="eb-status-bar">
+          <span class="eb-badge eb-badge-eff" id="eb-badge">Pareto Efficient</span>
+          <span class="eb-price-pill" id="eb-price-pill">p* = 1.50</span>
+        </div>
+
+        <div class="eb-metrics">
+          <div class="eb-metric-item"><span>A: (<i>x<sub>A</sub>, y<sub>A</sub></i>)</span><strong id="eb-alloc-a">(4.83, 7.25)</strong></div>
+          <div class="eb-metric-item"><span>B: (<i>x<sub>B</sub>, y<sub>B</sub></i>)</span><strong id="eb-alloc-b">(5.17, 7.75)</strong></div>
+          <div class="eb-metric-item"><span><i>u<sub>A</sub></i> (vs <i>u<sub>A</sub>(E)</i>)</span><strong id="eb-ua">5.92</strong></div>
+          <div class="eb-metric-item"><span><i>u<sub>B</sub></i> (vs <i>u<sub>B</sub>(E)</i>)</span><strong id="eb-ub">6.33</strong></div>
+        </div>
+
+        <div class="eb-rents">
+          <div class="eb-rent-row">
+            <span class="eb-rent-name">Rent &Delta;<i>u<sub>A</sub></i></span>
+            <div class="eb-rent-track"><div class="eb-rent-fill-a" id="eb-bar-a" style="width:50%"></div></div>
+            <span class="eb-rent-num" id="eb-rent-a">+2.92</span>
+          </div>
+          <div class="eb-rent-row">
+            <span class="eb-rent-name">Rent &Delta;<i>u<sub>B</sub></i></span>
+            <div class="eb-rent-track"><div class="eb-rent-fill-b" id="eb-bar-b" style="width:45%"></div></div>
+            <span class="eb-rent-num" id="eb-rent-b">+2.59</span>
+          </div>
+        </div>
+
+        <div class="eb-note" id="eb-note"></div>
+      </div>
+    </div>
+
+    <div class="eb-right">
+      <svg id="eb-svg" viewBox="0 0 540 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Edgeworth Exchange Box">
+        <defs>
+          <clipPath id="eb-box-clip">
+            <rect x="56" y="46" width="428" height="328"/>
+          </clipPath>
+        </defs>
+
+        <!-- Background & Box -->
+        <rect x="0" y="0" width="540" height="430" fill="#fdfdfb"/>
+        <rect x="56" y="46" width="428" height="328" fill="#ffffff" stroke="#24325c" stroke-width="1.5"/>
+
+        <!-- Static gridlines & ticks container -->
+        <g id="eb-grid"></g>
+
+        <!-- Clipped interior graphics -->
+        <g clip-path="url(#eb-box-clip)">
+          <!-- Initial Pareto-improving lens from E -->
+          <path id="eb-lens-e" fill="#b8842a" fill-opacity="0.11" stroke="none"/>
+          <!-- Remaining DWL / unexploited Pareto lens from R or M -->
+          <path id="eb-lens-dwl" fill="#a04434" fill-opacity="0.22" stroke="#a04434" stroke-width="0.9" stroke-opacity="0.45"/>
+
+          <!-- Endowment ICs (PC curves) -->
+          <path id="eb-ica-e" fill="none" stroke="#24325c" stroke-width="1.15" stroke-dasharray="4,3" opacity="0.55"/>
+          <path id="eb-icb-e" fill="none" stroke="#a04434" stroke-width="1.15" stroke-dasharray="4,3" opacity="0.55"/>
+
+          <!-- Contract curve & Core highlight -->
+          <path id="eb-cc" fill="none" stroke="#24325c" stroke-width="1.8" opacity="0.72"/>
+          <path id="eb-core" fill="none" stroke="#2d6a4f" stroke-width="3.6" stroke-linecap="round" opacity="0.88"/>
+
+          <!-- Offer curves -->
+          <path id="eb-offer-a" fill="none" stroke="#24325c" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.65"/>
+          <path id="eb-offer-b" fill="none" stroke="#a04434" stroke-width="1.6" stroke-dasharray="6,4" opacity="0.72"/>
+
+          <!-- Budget / Price line -->
+          <line id="eb-budget" stroke="#b8842a" stroke-width="1.9" opacity="0.95"/>
+
+          <!-- Active allocation ICs -->
+          <path id="eb-ica-act" fill="none" stroke="#24325c" stroke-width="2.1"/>
+          <path id="eb-icb-act" fill="none" stroke="#a04434" stroke-width="2.1"/>
+
+          <!-- Auctioneer desired points (hollow rings) -->
+          <circle id="eb-des-a" r="5" fill="#fdfdfb" stroke="#24325c" stroke-width="2" visibility="hidden"/>
+          <circle id="eb-des-b" r="5" fill="#fdfdfb" stroke="#a04434" stroke-width="2" visibility="hidden"/>
+
+          <!-- DWL text label inside/near lens -->
+          <text id="eb-dwl-txt" font-size="10.5" font-weight="700" fill="#a04434" text-anchor="middle" visibility="hidden">DWL</text>
+        </g>
+
+        <!-- Key points & labels (unclipped so labels stay crisp) -->
+        <g id="eb-points">
+          <circle id="eb-pt-e" r="5.2" fill="#b8842a" stroke="#fdfdfb" stroke-width="1.8"/>
+          <text id="eb-lbl-e" font-size="11.5" font-weight="700" fill="#b8842a">E</text>
+
+          <circle id="eb-pt-act" r="6" fill="#24325c" stroke="#fdfdfb" stroke-width="2"/>
+          <text id="eb-lbl-act" font-size="12" font-weight="700" fill="#24325c">W</text>
+
+          <text id="eb-lbl-da" font-size="10.5" font-weight="700" fill="#24325c" visibility="hidden">D<tspan dy="2.5" font-size="7.5">A</tspan></text>
+          <text id="eb-lbl-db" font-size="10.5" font-weight="700" fill="#a04434" visibility="hidden">D<tspan dy="2.5" font-size="7.5">B</tspan></text>
+        </g>
+
+        <!-- Axis Titles & Origins -->
+        <text x="270" y="404" font-size="11.5" font-weight="700" fill="#24325c" text-anchor="middle">A's Coffee (x<tspan dy="2.5" font-size="8.5">A</tspan><tspan dy="-2.5">)</tspan></text>
+        <text x="270" y="16" font-size="11.5" font-weight="700" fill="#a04434" text-anchor="middle">B's Coffee (x<tspan dy="2.5" font-size="8.5">B</tspan><tspan dy="-2.5"> = 10 &minus; x</tspan><tspan dy="2.5" font-size="8.5">A</tspan><tspan dy="-2.5">)</tspan></text>
+        <text x="15" y="210" font-size="11.5" font-weight="700" fill="#24325c" text-anchor="middle" transform="rotate(-90 15 210)">A's Data (y<tspan dy="2.5" font-size="8.5">A</tspan><tspan dy="-2.5">)</tspan></text>
+        <text x="526" y="210" font-size="11.5" font-weight="700" fill="#a04434" text-anchor="middle" transform="rotate(90 526 210)">B's Data (y<tspan dy="2.5" font-size="8.5">B</tspan><tspan dy="-2.5"> = 15 &minus; y</tspan><tspan dy="2.5" font-size="8.5">A</tspan><tspan dy="-2.5">)</tspan></text>
+
+        <text x="48" y="388" font-size="11" font-weight="700" fill="#24325c" text-anchor="end">O<tspan dy="2.5" font-size="8">A</tspan></text>
+        <text x="492" y="41" font-size="11" font-weight="700" fill="#a04434" text-anchor="start">O<tspan dy="2.5" font-size="8">B</tspan></text>
+
+        <!-- Compact legend row at bottom -->
+        <g transform="translate(56, 421)" font-size="9.8" fill="#5a6578">
+          <line x1="0" y1="-3" x2="14" y2="-3" stroke="#24325c" stroke-width="1.8"/>
+          <text x="18" y="0">Contract Curve</text>
+
+          <line x1="96" y1="-3" x2="110" y2="-3" stroke="#2d6a4f" stroke-width="3.2" stroke-linecap="round"/>
+          <text x="114" y="0">Core</text>
+
+          <line x1="146" y1="-3" x2="160" y2="-3" stroke="#b8842a" stroke-width="1.9"/>
+          <text x="164" y="0">Price Line</text>
+
+          <line x1="219" y1="-3" x2="233" y2="-3" stroke="#24325c" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <text x="237" y="0">A's IC/OC</text>
+
+          <line x1="292" y1="-3" x2="306" y2="-3" stroke="#a04434" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <text x="310" y="0">B's IC/ICC</text>
+
+          <rect x="366" y="-8" width="10" height="8" fill="#a04434" fill-opacity="0.25" stroke="#a04434" stroke-width="0.7"/>
+          <text x="380" y="0">Pareto Lens</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const X = 10.0;
+  const Y = 15.0;
+  const padL = 56, padT = 46, boxW = 428, boxH = 328;
+
+  const sx = (x) => padL + (x / X) * boxW;
+  const sy = (y) => padT + boxH - (y / Y) * boxH;
+
+  // Build static gridlines & ticks
+  const gridG = document.getElementById('eb-grid');
+  const svgNS = 'http://www.w3.org/2000/svg';
+  function addEl(parent, tag, attrs, text) {
+    const el = document.createElementNS(svgNS, tag);
+    for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+    if (text !== undefined) el.textContent = text;
+    parent.appendChild(el);
+    return el;
+  }
+
+  for (let gx = 0; gx <= 10; gx += 2) {
+    const px = sx(gx);
+    if (gx > 0 && gx < 10) {
+      addEl(gridG, 'line', { x1: px, y1: padT, x2: px, y2: padT + boxH, stroke: '#e5e9f0', 'stroke-width': 1 });
+    }
+    // Bottom ticks (A's x)
+    addEl(gridG, 'line', { x1: px, y1: padT + boxH, x2: px, y2: padT + boxH + 4, stroke: '#24325c', 'stroke-width': 1 });
+    addEl(gridG, 'text', { x: px, y: padT + boxH + 15, 'font-size': '10', fill: '#5a6578', 'text-anchor': 'middle' }, String(gx));
+    // Top ticks (B's x = 10 - gx)
+    addEl(gridG, 'line', { x1: px, y1: padT - 4, x2: px, y2: padT, stroke: '#a04434', 'stroke-width': 1 });
+    addEl(gridG, 'text', { x: px, y: padT - 8, 'font-size': '10', fill: '#a04434', 'text-anchor': 'middle', opacity: '0.85' }, String(10 - gx));
+  }
+  for (let gy = 0; gy <= 15; gy += 3) {
+    const py = sy(gy);
+    if (gy > 0 && gy < 15) {
+      addEl(gridG, 'line', { x1: padL, y1: py, x2: padL + boxW, y2: py, stroke: '#e5e9f0', 'stroke-width': 1 });
+    }
+    // Left ticks (A's y)
+    addEl(gridG, 'line', { x1: padL - 4, y1: py, x2: padL, y2: py, stroke: '#24325c', 'stroke-width': 1 });
+    addEl(gridG, 'text', { x: padL - 8, y: py + 3.5, 'font-size': '10', fill: '#5a6578', 'text-anchor': 'end' }, String(gy));
+    // Right ticks (B's y = 15 - gy)
+    addEl(gridG, 'line', { x1: padL + boxW, y1: py, x2: padL + boxW + 4, y2: py, stroke: '#a04434', 'stroke-width': 1 });
+    addEl(gridG, 'text', { x: padL + boxW + 8, y: py + 3.5, 'font-size': '10', fill: '#a04434', 'text-anchor': 'start', opacity: '0.85' }, String(15 - gy));
+  }
+
+  // State
+  let mode = 'walrasian';
+  const elXe = document.getElementById('eb-xe');
+  const elYe = document.getElementById('eb-ye');
+  const elAa = document.getElementById('eb-aa');
+  const elAb = document.getElementById('eb-ab');
+  const elP  = document.getElementById('eb-p');
+  const elPWrap = document.getElementById('eb-p-wrap');
+
+  const valXe = document.getElementById('eb-val-xe');
+  const valYe = document.getElementById('eb-val-ye');
+  const valAa = document.getElementById('eb-val-aa');
+  const valAb = document.getElementById('eb-val-ab');
+  const valP  = document.getElementById('eb-val-p');
+
+  const elBadge = document.getElementById('eb-badge');
+  const elPricePill = document.getElementById('eb-price-pill');
+  const elAllocA = document.getElementById('eb-alloc-a');
+  const elAllocB = document.getElementById('eb-alloc-b');
+  const elUa = document.getElementById('eb-ua');
+  const elUb = document.getElementById('eb-ub');
+  const elBarA = document.getElementById('eb-bar-a');
+  const elBarB = document.getElementById('eb-bar-b');
+  const elRentA = document.getElementById('eb-rent-a');
+  const elRentB = document.getElementById('eb-rent-b');
+  const elNote = document.getElementById('eb-note');
+
+  const pathLensE = document.getElementById('eb-lens-e');
+  const pathLensDwl = document.getElementById('eb-lens-dwl');
+  const pathIcAE = document.getElementById('eb-ica-e');
+  const pathIcBE = document.getElementById('eb-icb-e');
+  const pathCC = document.getElementById('eb-cc');
+  const pathCore = document.getElementById('eb-core');
+  const pathOfferA = document.getElementById('eb-offer-a');
+  const pathOfferB = document.getElementById('eb-offer-b');
+  const lineBudget = document.getElementById('eb-budget');
+  const pathIcAAct = document.getElementById('eb-ica-act');
+  const pathIcBAct = document.getElementById('eb-icb-act');
+  const desA = document.getElementById('eb-des-a');
+  const desB = document.getElementById('eb-des-b');
+  const dwlTxt = document.getElementById('eb-dwl-txt');
+  const ptE = document.getElementById('eb-pt-e');
+  const lblE = document.getElementById('eb-lbl-e');
+  const ptAct = document.getElementById('eb-pt-act');
+  const lblAct = document.getElementById('eb-lbl-act');
+  const lblDa = document.getElementById('eb-lbl-da');
+  const lblDb = document.getElementById('eb-lbl-db');
+
+  // Math helpers
+  function uA(x, y, aA) {
+    if (x <= 0 || y <= 0) return 0;
+    return Math.pow(x, aA) * Math.pow(y, 1 - aA);
+  }
+  function uB(x, y, aB) {
+    const xb = X - x, yb = Y - y;
+    if (xb <= 0 || yb <= 0) return 0;
+    return Math.pow(xb, aB) * Math.pow(yb, 1 - aB);
+  }
+  function mrsA(x, y, aA) {
+    return (aA / (1 - aA)) * (y / Math.max(x, 1e-9));
+  }
+  function mrsB(x, y, aB) {
+    return (aB / (1 - aB)) * ((Y - y) / Math.max(X - x, 1e-9));
+  }
+  function yCC(x, aA, aB) {
+    const c = (aB * (1 - aA)) / (aA * (1 - aB));
+    return (c * Y * x) / (X + (c - 1) * x);
+  }
+  function yIcA(x, u, aA) {
+    if (x <= 1e-9 || u <= 0) return Infinity;
+    return Math.pow(u / Math.pow(x, aA), 1 / (1 - aA));
+  }
+  function yIcB(x, u, aB) {
+    const xb = X - x;
+    if (xb <= 1e-9 || u <= 0) return -Infinity;
+    return Y - Math.pow(u / Math.pow(xb, aB), 1 / (1 - aB));
+  }
+  function demandA(p, xE, yE, aA) {
+    const W = p * xE + yE;
+    return { x: (aA * W) / p, y: (1 - aA) * W };
+  }
+  function demandB_inA(p, xE, yE, aB) {
+    const W = p * (X - xE) + (Y - yE);
+    const xb = (aB * W) / p;
+    const yb = (1 - aB) * W;
+    return { x: X - xb, y: Y - yb };
+  }
+
+  function buildPath(pts) {
+    if (!pts.length) return '';
+    let d = `M ${sx(pts[0][0]).toFixed(2)} ${sy(pts[0][1]).toFixed(2)}`;
+    for (let i = 1; i < pts.length; i++) {
+      d += ` L ${sx(pts[i][0]).toFixed(2)} ${sy(pts[i][1]).toFixed(2)}`;
+    }
+    return d;
+  }
+
+  function pathForIcA(u, aA) {
+    if (u <= 0) return '';
+    const xMin = Math.max(0.015, Math.pow(u / Math.pow(Y, 1 - aA), 1 / aA));
+    if (xMin >= X - 0.01) return '';
+    const pts = [];
+    const N = 80;
+    for (let i = 0; i <= N; i++) {
+      const t = i / N;
+      const x = xMin + (X - xMin) * (t * t * 0.55 + t * 0.45);
+      const y = yIcA(x, u, aA);
+      if (isFinite(y)) pts.push([x, Math.min(Y + 0.5, y)]);
+    }
+    return buildPath(pts);
+  }
+
+  function pathForIcB(u, aB) {
+    if (u <= 0) return '';
+    const xbMin = Math.pow(u / Math.pow(Y, 1 - aB), 1 / aB);
+    const xMax = Math.min(X - 0.015, X - xbMin);
+    if (xMax <= 0.01) return '';
+    const pts = [];
+    const N = 80;
+    for (let i = 0; i <= N; i++) {
+      const t = i / N;
+      const x = xMax * (1 - (t * t * 0.55 + t * 0.45));
+      const y = yIcB(x, u, aB);
+      if (isFinite(y)) pts.push([x, Math.max(-0.5, y)]);
+    }
+    return buildPath(pts);
+  }
+
+  // Exact Pareto-improving lens through (x0, y0)
+  function computeLens(x0, y0, aA, aB) {
+    const u0A = uA(x0, y0, aA);
+    const u0B = uB(x0, y0, aB);
+    const mA = mrsA(x0, y0, aA);
+    const mB = mrsB(x0, y0, aB);
+    if (Math.abs(mA - mB) / Math.max(mA, mB, 1e-6) < 0.008) {
+      return { path: '', cx: x0, cy: y0, area: 0 };
+    }
+    const h = (x) => yIcB(x, u0B, aB) - yIcA(x, u0A, aA);
+    let xL, xR;
+    if (mA < mB) {
+      // h'(x0) < 0 -> lens is to the LEFT of x0
+      xR = x0;
+      // Scan left from x0 to find where h turns negative
+      let xPos = x0;
+      let xNeg = 1e-5;
+      const steps = 160;
+      for (let i = 1; i <= steps; i++) {
+        const x = x0 - (x0 - 1e-5) * (i / steps);
+        const val = h(x);
+        if (val > 0) {
+          xPos = x;
+        } else {
+          xNeg = x;
+          break;
+        }
+      }
+      if (xPos === x0) return { path: '', cx: x0, cy: y0, area: 0 };
+      let lo = xNeg, hi = xPos;
+      for (let k = 0; k < 36; k++) {
+        const mid = 0.5 * (lo + hi);
+        if (h(mid) > 0) hi = mid; else lo = mid;
+      }
+      xL = 0.5 * (lo + hi);
+    } else {
+      // h'(x0) > 0 -> lens is to the RIGHT of x0
+      xL = x0;
+      let xPos = x0;
+      let xNeg = X - 1e-5;
+      const steps = 160;
+      for (let i = 1; i <= steps; i++) {
+        const x = x0 + (X - 1e-5 - x0) * (i / steps);
+        const val = h(x);
+        if (val > 0) {
+          xPos = x;
+        } else {
+          xNeg = x;
+          break;
+        }
+      }
+      if (xPos === x0) return { path: '', cx: x0, cy: y0, area: 0 };
+      let lo = xPos, hi = xNeg;
+      for (let k = 0; k < 36; k++) {
+        const mid = 0.5 * (lo + hi);
+        if (h(mid) > 0) lo = mid; else hi = mid;
+      }
+      xR = 0.5 * (lo + hi);
+    }
+
+    const M = 56;
+    const upper = [], lower = [];
+    let area = 0, cx = 0, cy = 0, wSum = 0;
+    const dx = (xR - xL) / M;
+    for (let i = 0; i <= M; i++) {
+      const x = xL + i * dx;
+      const yTop = Math.min(Y, Math.max(0, yIcB(x, u0B, aB)));
+      const yBot = Math.min(Y, Math.max(0, yIcA(x, u0A, aA)));
+      upper.push([x, yTop]);
+      lower.push([x, yBot]);
+      const gap = Math.max(0, yTop - yBot);
+      area += gap * dx;
+      cx += x * gap;
+      cy += 0.5 * (yTop + yBot) * gap;
+      wSum += gap;
+    }
+    const allPts = upper.concat(lower.reverse());
+    const path = buildPath(allPts) + ' Z';
+    return {
+      path,
+      cx: wSum > 0 ? cx / wSum : 0.5 * (xL + xR),
+      cy: wSum > 0 ? cy / wSum : y0,
+      area
+    };
+  }
+
+  // Clip line through (x0, y0) with slope -p to box [0, X] x [0, Y]
+  function clipBudgetLine(x0, y0, p) {
+    const pts = [];
+    const addIfValid = (x, y) => {
+      if (x >= -1e-6 && x <= X + 1e-6 && y >= -1e-6 && y <= Y + 1e-6) {
+        const cx = Math.max(0, Math.min(X, x));
+        const cy = Math.max(0, Math.min(Y, y));
+        if (!pts.some(q => Math.hypot(q[0] - cx, q[1] - cy) < 1e-4)) {
+          pts.push([cx, cy]);
+        }
+      }
+    };
+    addIfValid(0, y0 + p * x0);
+    addIfValid(X, y0 - p * (X - x0));
+    if (p > 1e-9) {
+      addIfValid(x0 + y0 / p, 0);
+      addIfValid(x0 - (Y - y0) / p, Y);
+    }
+    return pts.length >= 2 ? [pts[0], pts[1]] : [[x0, y0], [x0, y0]];
+  }
+
+  // Bisection on contract curve for TIOLI endpoints
+  function solveCoreEndpoints(xE, yE, aA, aB) {
+    const uAE = uA(xE, yE, aA);
+    const uBE = uB(xE, yE, aB);
+
+    // T_B: uA(x, yCC(x)) = uAE (increasing in x)
+    let lo = 1e-6, hi = X - 1e-6;
+    for (let i = 0; i < 48; i++) {
+      const mid = 0.5 * (lo + hi);
+      if (uA(mid, yCC(mid, aA, aB), aA) < uAE) lo = mid; else hi = mid;
+    }
+    const xTB = 0.5 * (lo + hi);
+
+    // T_A: uB(x, yCC(x)) = uBE (decreasing in x)
+    lo = 1e-6; hi = X - 1e-6;
+    for (let i = 0; i < 48; i++) {
+      const mid = 0.5 * (lo + hi);
+      if (uB(mid, yCC(mid, aA, aB), aB) > uBE) lo = mid; else hi = mid;
+    }
+    const xTA = 0.5 * (lo + hi);
+
+    return {
+      xTB, yTB: yCC(xTB, aA, aB),
+      xTA, yTA: yCC(xTA, aA, aB)
+    };
+  }
+
+  // Exact Price-Setter optimum: A chooses p to maximize uA(X - xB^d(p), Y - yB^d(p))
+  function solvePriceSetter(xE, yE, aA, aB) {
+    const pMin = (aB * (Y - yE)) / ((1 - aB) * X + aB * xE);
+    const pMax = (aB * Y + (1 - aB) * yE) / ((1 - aB) * (X - xE));
+    const eps = 1e-5 * (pMax - pMin);
+    const obj = (p) => {
+      const pt = demandB_inA(p, xE, yE, aB);
+      return uA(pt.x, pt.y, aA);
+    };
+    const N = 220;
+    let bestI = 0, bestV = -1;
+    const grid = [];
+    for (let i = 0; i <= N; i++) {
+      const t = i / N;
+      // Log-spaced grid for high accuracy across wide p ranges
+      const p = (pMin + eps) * Math.pow((pMax - eps) / (pMin + eps), t);
+      grid.push(p);
+      const v = obj(p);
+      if (v > bestV) { bestV = v; bestI = i; }
+    }
+    let a = grid[Math.max(0, bestI - 1)];
+    let b = grid[Math.min(N, bestI + 1)];
+    const gr = (Math.sqrt(5) - 1) / 2;
+    for (let k = 0; k < 44; k++) {
+      const c1 = b - gr * (b - a);
+      const c2 = a + gr * (b - a);
+      if (obj(c1) > obj(c2)) b = c2; else a = c1;
+    }
+    const pM = 0.5 * (a + b);
+    const pt = demandB_inA(pM, xE, yE, aB);
+    return { pM, xM: pt.x, yM: pt.y };
+  }
+
+  function placeLabel(el, x, y, dx, dy) {
+    let px = sx(x) + dx;
+    let py = sy(y) + dy;
+    px = Math.max(padL + 10, Math.min(padL + boxW - 14, px));
+    py = Math.max(padT + 14, Math.min(padT + boxH - 6, py));
+    el.setAttribute('x', px.toFixed(1));
+    el.setAttribute('y', py.toFixed(1));
+  }
+
+  function render() {
+    const xE = parseFloat(elXe.value);
+    const yE = parseFloat(elYe.value);
+    const aA = parseFloat(elAa.value);
+    const aB = parseFloat(elAb.value);
+
+    valXe.textContent = xE.toFixed(2);
+    valYe.textContent = yE.toFixed(2);
+    valAa.textContent = aA.toFixed(2);
+    valAb.textContent = aB.toFixed(2);
+
+    const uAE = uA(xE, yE, aA);
+    const uBE = uB(xE, yE, aB);
+
+    // 1. Walrasian Equilibrium
+    const pStar = (aA * yE + aB * (Y - yE)) / ((1 - aA) * xE + (1 - aB) * (X - xE));
+    const wPt = demandA(pStar, xE, yE, aA);
+
+    // 2. Contract curve & Core
+    const ccPts = [];
+    for (let i = 0; i <= 80; i++) {
+      const x = (i / 80) * X;
+      ccPts.push([x, yCC(x, aA, aB)]);
+    }
+    pathCC.setAttribute('d', buildPath(ccPts));
+
+    const core = solveCoreEndpoints(xE, yE, aA, aB);
+    const corePts = [];
+    const xStart = Math.min(core.xTB, core.xTA);
+    const xEnd = Math.max(core.xTB, core.xTA);
+    for (let i = 0; i <= 40; i++) {
+      const x = xStart + (i / 40) * (xEnd - xStart);
+      corePts.push([x, yCC(x, aA, aB)]);
+    }
+    pathCore.setAttribute('d', buildPath(corePts));
+
+    // 3. Endowment lens & ICs
+    const lensE = computeLens(xE, yE, aA, aB);
+    pathLensE.setAttribute('d', lensE.path);
+    pathIcAE.setAttribute('d', pathForIcA(uAE, aA));
+    pathIcBE.setAttribute('d', pathForIcB(uBE, aB));
+
+    // 4. Offer curves
+    const ocAPts = [];
+    for (let i = 0; i <= 140; i++) {
+      const p = 0.03 * Math.pow(60 / 0.03, i / 140);
+      const pt = demandA(p, xE, yE, aA);
+      if (pt.x >= -1 && pt.x <= X + 1 && pt.y >= -1 && pt.y <= Y + 1) {
+        ocAPts.push([pt.x, pt.y]);
+      }
+    }
+    pathOfferA.setAttribute('d', buildPath(ocAPts));
+
+    const pMinB = (aB * (Y - yE)) / ((1 - aB) * X + aB * xE);
+    const pMaxB = (aB * Y + (1 - aB) * yE) / ((1 - aB) * (X - xE));
+    const ocBPts = [];
+    for (let i = 0; i <= 140; i++) {
+      const p = pMinB * Math.pow(pMaxB / pMinB, i / 140);
+      const pt = demandB_inA(p, xE, yE, aB);
+      ocBPts.push([pt.x, pt.y]);
+    }
+    pathOfferB.setAttribute('d', buildPath(ocBPts));
+
+    // Determine active allocation & styling by regime
+    let xAct, yAct, pShow, priceLabel, dotLabel, noteHtml;
+    let showOfferA = false, showOfferB = false, boldOfferB = false;
+    let showDwl = false, showDesired = false;
+    let budgetSlope = pStar, budgetThroughAct = false;
+    let boldPcB = false;
+
+    if (mode === 'walrasian') {
+      xAct = wPt.x; yAct = wPt.y;
+      pShow = pStar;
+      priceLabel = `p* = ${pStar.toFixed(2)}`;
+      dotLabel = 'W';
+      showOfferA = true; showOfferB = true;
+      budgetSlope = pStar;
+      noteHtml = 'Price-taking equilibrium where offer curves intersect on the contract curve (MRS<sub>A</sub> = MRS<sub>B</sub> = p*).';
+    } else if (mode === 'auctioneer') {
+      const pMan = parseFloat(elP.value);
+      pShow = pMan;
+      priceLabel = `p = ${pMan.toFixed(2)} (p* = ${pStar.toFixed(2)})`;
+      dotLabel = 'R';
+      showOfferA = true; showOfferB = true; showDesired = true;
+      budgetSlope = pMan;
+
+      const dA = demandA(pMan, xE, yE, aA);
+      const dB = demandB_inA(pMan, xE, yE, aB);
+      const dxA = dA.x - xE;
+      const dxB_A = dB.x - xE;
+
+      let dxR = 0, shortSide = 'No mutually voluntary trade';
+      if (dxA * dxB_A > 0) {
+        if (Math.abs(dxA) <= Math.abs(dxB_A)) {
+          dxR = dxA;
+          shortSide = 'A is short side (rationing B)';
+        } else {
+          dxR = dxB_A;
+          shortSide = 'B is short side (rationing A)';
+        }
+      }
+      xAct = xE + dxR;
+      yAct = yE - pMan * dxR;
+
+      // Show desired markers if inside box
+      const inBox = (pt) => pt.x >= 0 && pt.x <= X && pt.y >= 0 && pt.y <= Y;
+      if (inBox(dA)) {
+        desA.setAttribute('cx', sx(dA.x).toFixed(1));
+        desA.setAttribute('cy', sy(dA.y).toFixed(1));
+        desA.setAttribute('visibility', 'visible');
+        placeLabel(lblDa, dA.x, dA.y, 7, -6);
+        lblDa.setAttribute('visibility', 'visible');
+      } else {
+        desA.setAttribute('visibility', 'hidden');
+        lblDa.setAttribute('visibility', 'hidden');
+      }
+      if (inBox(dB)) {
+        desB.setAttribute('cx', sx(dB.x).toFixed(1));
+        desB.setAttribute('cy', sy(dB.y).toFixed(1));
+        desB.setAttribute('visibility', 'visible');
+        placeLabel(lblDb, dB.x, dB.y, -24, 13);
+        lblDb.setAttribute('visibility', 'visible');
+      } else {
+        desB.setAttribute('visibility', 'hidden');
+        lblDb.setAttribute('visibility', 'hidden');
+      }
+
+      showDwl = true;
+      if (Math.abs(pMan - pStar) < 0.03) {
+        noteHtml = 'Market clears at p &approx; p*: desired trades match and the Pareto lens vanishes.';
+      } else {
+        noteHtml = `Short-side rule: <strong>${shortSide}</strong>. Shaded lens shows unexploited gains from trade.`;
+      }
+    } else if (mode === 'tioli') {
+      xAct = core.xTA; yAct = core.yTA;
+      const mrsT = mrsA(xAct, yAct, aA);
+      pShow = mrsT;
+      priceLabel = `MRS = ${mrsT.toFixed(2)}`;
+      dotLabel = 'T_A';
+      boldPcB = true;
+      budgetSlope = mrsT;
+      budgetThroughAct = true;
+      noteHtml = 'A makes a take-it-or-leave-it offer on B\'s participation constraint (PC) &amp; contract curve: efficient, 100% surplus to A.';
+    } else {
+      // Price-Setter (ICC)
+      const sol = solvePriceSetter(xE, yE, aA, aB);
+      xAct = sol.xM; yAct = sol.yM;
+      pShow = sol.pM;
+      priceLabel = `p<sub>M</sub> = ${sol.pM.toFixed(2)} (p* = ${pStar.toFixed(2)})`;
+      dotLabel = 'M';
+      showOfferB = true; boldOfferB = true;
+      budgetSlope = sol.pM;
+      showDwl = true;
+      const mA = mrsA(xAct, yAct, aA);
+      const mB = mrsB(xAct, yAct, aB);
+      noteHtml = `A posts monopoly price <strong>p<sub>M</sub> = ${sol.pM.toFixed(2)}</strong> on B's ICC: MRS<sub>A</sub> (${mA.toFixed(2)}) &ne; MRS<sub>B</sub> (${mB.toFixed(2)}) &rArr; unexploited gains.`;
+    }
+
+    // Price slider UI state
+    if (mode === 'auctioneer') {
+      elP.disabled = false;
+      elPWrap.classList.remove('eb-disabled');
+      elPWrap.classList.add('eb-highlight');
+      valP.textContent = parseFloat(elP.value).toFixed(2);
+    } else {
+      elP.disabled = true;
+      elPWrap.classList.add('eb-disabled');
+      elPWrap.classList.remove('eb-highlight');
+      valP.textContent = pShow.toFixed(2);
+    }
+
+    if (!showDesired) {
+      desA.setAttribute('visibility', 'hidden');
+      desB.setAttribute('visibility', 'hidden');
+      lblDa.setAttribute('visibility', 'hidden');
+      lblDb.setAttribute('visibility', 'hidden');
+    }
+
+    // Offer curve visibility & emphasis
+    pathOfferA.setAttribute('visibility', showOfferA ? 'visible' : 'hidden');
+    pathOfferB.setAttribute('visibility', showOfferB ? 'visible' : 'hidden');
+    pathOfferB.setAttribute('stroke-width', boldOfferB ? '2.4' : '1.6');
+    pathOfferB.setAttribute('stroke-dasharray', boldOfferB ? 'none' : '6,4');
+    pathOfferB.setAttribute('opacity', boldOfferB ? '0.92' : '0.70');
+
+    // B's PC emphasis in TIOLI
+    pathIcBE.setAttribute('stroke-width', boldPcB ? '2.4' : '1.15');
+    pathIcBE.setAttribute('stroke-dasharray', boldPcB ? 'none' : '4,3');
+    pathIcBE.setAttribute('opacity', boldPcB ? '0.95' : '0.55');
+
+    // Budget / tangent line
+    const [b1, b2] = budgetThroughAct
+      ? clipBudgetLine(xAct, yAct, budgetSlope)
+      : clipBudgetLine(xE, yE, budgetSlope);
+    lineBudget.setAttribute('x1', sx(b1[0]).toFixed(1));
+    lineBudget.setAttribute('y1', sy(b1[1]).toFixed(1));
+    lineBudget.setAttribute('x2', sx(b2[0]).toFixed(1));
+    lineBudget.setAttribute('y2', sy(b2[1]).toFixed(1));
+    lineBudget.setAttribute('stroke-dasharray', budgetThroughAct ? '5,4' : 'none');
+    lineBudget.setAttribute('opacity', budgetThroughAct ? '0.65' : '0.95');
+
+    // Active ICs
+    const uAAct = uA(xAct, yAct, aA);
+    const uBAct = uB(xAct, yAct, aB);
+    pathIcAAct.setAttribute('d', pathForIcA(uAAct, aA));
+    pathIcBAct.setAttribute('d', boldPcB ? '' : pathForIcB(uBAct, aB));
+
+    // DWL lens
+    const mActA = mrsA(xAct, yAct, aA);
+    const mActB = mrsB(xAct, yAct, aB);
+    const isEfficient = Math.abs(mActA - mActB) / Math.max(mActA, mActB, 1e-6) < 0.02;
+
+    if (showDwl && !isEfficient) {
+      const lensD = computeLens(xAct, yAct, aA, aB);
+      pathLensDwl.setAttribute('d', lensD.path);
+      dwlTxt.setAttribute('visibility', 'hidden');
+    } else {
+      pathLensDwl.setAttribute('d', '');
+      dwlTxt.setAttribute('visibility', 'hidden');
+    }
+
+    // Points & labels
+    ptE.setAttribute('cx', sx(xE).toFixed(1));
+    ptE.setAttribute('cy', sy(yE).toFixed(1));
+    placeLabel(lblE, xE, yE, xE > 8 ? -16 : 9, yE < 2 ? -8 : 14);
+
+    ptAct.setAttribute('cx', sx(xAct).toFixed(1));
+    ptAct.setAttribute('cy', sy(yAct).toFixed(1));
+    ptAct.setAttribute('fill', isEfficient ? '#2d6a4f' : '#a04434');
+    if (dotLabel === 'T_A') {
+      lblAct.innerHTML = 'T<tspan dy="2.5" font-size="8.5">A</tspan>';
+    } else {
+      lblAct.textContent = dotLabel;
+    }
+    lblAct.setAttribute('fill', isEfficient ? '#2d6a4f' : '#a04434');
+    placeLabel(lblAct, xAct, yAct, 9, -8);
+
+    // Readout card
+    elBadge.textContent = isEfficient ? 'Pareto Efficient' : 'Pareto Inefficient';
+    elBadge.className = 'eb-badge ' + (isEfficient ? 'eb-badge-eff' : 'eb-badge-ineff');
+    elPricePill.innerHTML = priceLabel;
+    elAllocA.textContent = `(${xAct.toFixed(2)}, ${yAct.toFixed(2)})`;
+    elAllocB.textContent = `(${(X - xAct).toFixed(2)}, ${(Y - yAct).toFixed(2)})`;
+    elUa.textContent = `${uAAct.toFixed(2)} (${uAE.toFixed(2)})`;
+    elUb.textContent = `${uBAct.toFixed(2)} (${uBE.toFixed(2)})`;
+
+    const rentA = uAAct - uAE;
+    const rentB = uBAct - uBE;
+    const maxRentA = Math.max(0.25, uA(core.xTA, core.yTA, aA) - uAE);
+    const maxRentB = Math.max(0.25, uB(core.xTB, core.yTB, aB) - uBE);
+    const scaleMax = Math.max(maxRentA, maxRentB);
+
+    const pctA = Math.max(0, Math.min(100, (rentA / scaleMax) * 100));
+    const pctB = Math.max(0, Math.min(100, (rentB / scaleMax) * 100));
+    elBarA.style.width = `${pctA.toFixed(1)}%`;
+    elBarB.style.width = `${pctB.toFixed(1)}%`;
+    elRentA.textContent = (rentA >= 0 ? '+' : '') + rentA.toFixed(2);
+    elRentB.textContent = (rentB >= 0 ? '+' : '') + rentB.toFixed(2);
+    elNote.innerHTML = noteHtml;
+  }
+
+  // Event listeners
+  document.querySelectorAll('#eb-root .eb-mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#eb-root .eb-mode-btn').forEach(b => b.classList.remove('eb-active'));
+      btn.classList.add('eb-active');
+      mode = btn.getAttribute('data-mode');
+      render();
+    });
+  });
+
+  [elXe, elYe, elAa, elAb, elP].forEach(el => {
+    el.addEventListener('input', render);
+  });
+
+  document.getElementById('eb-reset').addEventListener('click', () => {
+    elXe.value = '9';
+    elYe.value = '1';
+    elAa.value = '0.5';
+    elAb.value = '0.5';
+    elP.value = '2.5';
+    render();
+  });
+
+  render();
+})();
+</script>
